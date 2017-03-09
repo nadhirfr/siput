@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -50,10 +51,15 @@ public class LoginSiputController implements Initializable {
    public void Login (ActionEvent event) throws Exception{
        if (usernametext.getText().equals("user") && passtext.getText().equals("pass")) {
             statustext.setText("Login Sukses");
+            //agar jendela login tertutup setelah berhasil login
+            ((Node)(event.getSource())).getScene().getWindow().hide();
+            //memanggil jendela menu admins
             Stage primaryStage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenuA.fxml"));
-            Scene scene = new Scene(root,400,400);
+            Scene scene = new Scene(root);
             primaryStage.setScene(scene);
+            primaryStage.setMaximized(true);
+            primaryStage.setTitle("Menu Admin");
             primaryStage.show();
        } else {
             statustext.setText("akun atau sandi salah");

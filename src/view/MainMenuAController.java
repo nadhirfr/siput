@@ -27,10 +27,11 @@ public class MainMenuAController implements Initializable {
     private AnchorPane anchorPane;
     
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenuA.fxml"));
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setMaximized(true);
-        primaryStage.show();
+
+//        Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenuA.fxml"));
+//        primaryStage.setScene(new Scene(root));
+//        primaryStage.setMaximized(true);
+//        primaryStage.show();
     }
     
     @Override
