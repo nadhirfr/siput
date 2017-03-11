@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -21,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import koneksi.Koneksi;
 
 /**
  * FXML Controller class
@@ -28,6 +29,7 @@ import javafx.stage.Stage;
  * @author rheza
  */
 public class LoginSiputController implements Initializable {
+    
 
     /**
      * Initializes the controller class.
@@ -49,7 +51,7 @@ public class LoginSiputController implements Initializable {
    private JFXButton btlbtn;
    
    public void Login (ActionEvent event) throws Exception{
-       if (usernametext.getText().equals("user") && passtext.getText().equals("pass")) {
+       if(Koneksi.isLogin(usernametext.getText(),passtext.getText()) == true){
             statustext.setText("Login Sukses");
             //agar jendela login tertutup setelah berhasil login
             ((Node)(event.getSource())).getScene().getWindow().hide();

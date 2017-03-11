@@ -1,30 +1,13 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/view/MainMenuAController.java</file>
-            <file>file:/D:/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/view/LoginSiput.fxml</file>
-            <file>file:/D:/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/view/MainClass.java</file>
-            <file>file:/D:/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/view/LoginSiputController.java</file>
+            <file>file:/Volumes/DATA/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/dao/DAOKoleksiBuku.java</file>
+            <file>file:/Volumes/DATA/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/controller/LoginSiputController.java</file>
+            <file>file:/Volumes/DATA/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/view/MainClass.java</file>
+            <file>file:/Volumes/DATA/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/koneksi/Koneksi.java</file>
+            <file>file:/Volumes/DATA/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/dao/implementKoleksiBuku.java</file>
         </group>
     </open-files>
 </project-private>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/rheza/Documents/NetBeansProjects/SiputLogin/src/view/LoginSiput.fxml</file>
-            <file>file:/C:/Users/rheza/Documents/NetBeansProjects/SiputLogin/src/view/MainMenuA.fxml</file>
-            <file>file:/C:/Users/rheza/Documents/NetBeansProjects/SiputLogin/src/view/MainClass.java</file>
-            <file>file:/C:/Users/rheza/Documents/NetBeansProjects/SiputLogin/src/view/LoginSiputController.java</file>
-            <file>file:/C:/Users/rheza/Documents/NetBeansProjects/SiputLogin/src/view/MainMenuAController.java</file>
-            <file>file:/C:/Users/rheza/Documents/NetBeansProjects/SiputLogin/src/view/mainmenua.css</file>
-            <file>file:/C:/Users/rheza/Documents/NetBeansProjects/SiputLogin/src/view/loginsiput.css</file>
-        </group>
-    </open-files>
-</project-private>
->>>>>>> master
