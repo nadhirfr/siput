@@ -110,9 +110,10 @@ public class MainMenuAController implements Initializable {
         // TODO
     }    
     
-    public void setUserName(String username, String displayname){
+    public void setUserName(String username, String displayname,String role){
         this.lblFullName.setText(displayname);
         this.lblUsrName.setText(username);
         this.lblUsrNamePopOver.setText(username);
+        this.lblRoleAs.setText(role);
     }
 }
