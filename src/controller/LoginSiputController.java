@@ -69,7 +69,7 @@ public class LoginSiputController implements Initializable {
             loader.setLocation(getClass().getResource("/view/MainMenuA.fxml"));
             loader.load();
             MainMenuAController aController = loader.getController();
-            aController.setUserName(loggedIn_user.getUser_displayname());
+            aController.setUserName(loggedIn_user.getUser_username(),loggedIn_user.getUser_displayname());
             Parent parent = loader.getRoot();
             Stage primaryStage = new Stage();
 //            Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenuA.fxml"));
