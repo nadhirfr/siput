@@ -5,6 +5,7 @@
  */
 package controller;
 
+import controller.user.EmployeController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,13 +33,14 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+
 /**
  * FXML Controller class
  *
  * @author rheza
  */
 public class MainMenuAController implements Initializable {
-    
+
     @FXML
     private AnchorPane acMain;
     @FXML
@@ -101,11 +103,44 @@ public class MainMenuAController implements Initializable {
     private Label lblUserId;
     @FXML
     private StackPane acContent;
-    
+
     Image menuImage = new Image("/icon/menu.png");
     Image menuImageRed = new Image("/icon/menuRed.png");
     Image image;
-    
+    Image home = new Image("/icon/home.png");
+    Image homeRed = new Image("/icon/homeRed.png");
+    Image stock = new Image("/icon/stock.png");
+    Image stockRed = new Image("/icon/stockRed.png");
+    Image sell = new Image("/icon/sell2.png");
+    Image sellRed = new Image("/icon/sell2Red.png");
+    Image employee = new Image("/icon/employe.png");
+    Image employeeRed = new Image("/icon/employeRed.png");
+    Image setting = new Image("/icon/settings.png");
+    Image settingRed = new Image("/icon/settingsRed.png");
+    Image about = new Image("/icon/about.png");
+    Image aboutRed = new Image("/icon/aboutRed.png");
+
+    String defaultStyle = "-fx-border-width: 0px 0px 0px 5px;"
+            + "-fx-border-color:none";
+
+    String activeStyle = "-fx-border-width: 0px 0px 0px 5px;"
+            + "-fx-border-color:#FF4E3C";
+
+    private void employeeActive() {
+        imgHomeBtn.setImage(home);
+        imgStoreBtn.setImage(stock);
+        imgSellBtn.setImage(sell);
+        imgEmployeBtn.setImage(employeeRed);
+        imgSettingsBtn.setImage(setting);
+        imgAboutBtn.setImage(about);
+        btnHome.setStyle(defaultStyle);
+        btnStore.setStyle(defaultStyle);
+        btnSell.setStyle(defaultStyle);
+        btnEmplopye.setStyle(activeStyle);
+        btnSettings.setStyle(defaultStyle);
+        btnAbout.setStyle(defaultStyle);
+    }
+
     public void start(Stage primaryStage) throws IOException {
 
 //        Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenuA.fxml"));
@@ -113,7 +148,7 @@ public class MainMenuAController implements Initializable {
 //        primaryStage.setMaximized(true);
 //        primaryStage.show();
     }
-      
+
     @FXML
     private void sideMenuToogleBtnOnCLick(ActionEvent event) throws IOException {
         if (sideMenuToogleBtn.isSelected()) {
@@ -130,16 +165,36 @@ public class MainMenuAController implements Initializable {
             acDashBord.getChildren().add(leftSideBarScroolPan);
         }
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
-    public void setUserName(String username, String displayname,String role){
+    }
+
+    public void setUserName(String username, String displayname, String role) {
         this.lblFullName.setText(displayname);
         this.lblUsrName.setText(username);
         this.lblUsrNamePopOver.setText(username);
         this.lblRoleAs.setText(role);
+    }
+
+    @FXML
+    private void btnEmplopyeOnClick(ActionEvent event) throws IOException {
+       employeeActive();
+//        EmployeController ec = new EmployeController();
+//        userNameMedia nm = new userNameMedia();
+        FXMLLoader fXMLLoader = new FXMLLoader();
+        fXMLLoader.load(getClass().getResource("/view/Employe.fxml").openStream());
+//        nm.setId(id);
+        EmployeController employeController = fXMLLoader.getController();
+        employeController.bpContent.getStylesheets().add("/style/MainStyle.css");
+//        employeController.setNameMedia(usrNameMedia);
+//        employeController.btnViewEmployeeOnAction(event);
+
+        AnchorPane acPane = fXMLLoader.getRoot();
+        acContent.getChildren().clear();
+
+        acContent.getChildren().add(acPane);
+
     }
 }
