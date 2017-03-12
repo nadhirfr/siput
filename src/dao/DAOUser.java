@@ -98,7 +98,7 @@ public class DAOUser implements implementUser {
                 model_User b = new model_User();
                 b.setUser_id(Integer.parseInt(rs.getString("user_id")));
                 b.setUser_username(rs.getString("user_username"));
-                b.setUser_displayname(rs.getString("user_username"));
+                b.setUser_displayname(rs.getString("user_displayname"));
                 b.setUser_password(rs.getString("user_password"));
                 b.setUser_tipe(rs.getString("user_tipe"));
                 lb.add(b);
@@ -121,7 +121,7 @@ public class DAOUser implements implementUser {
                 model_User b = new model_User();
                 b.setUser_id(Integer.parseInt(rs.getString("user_id")));
                 b.setUser_username(rs.getString("user_username"));
-                b.setUser_displayname(rs.getString("user_username"));
+                b.setUser_displayname(rs.getString("user_displayname"));
                 b.setUser_password(rs.getString("user_password"));
                 b.setUser_tipe(rs.getString("user_tipe"));
                 lb.add(b);
@@ -143,7 +143,7 @@ public class DAOUser implements implementUser {
             while (rs.next()) {
                user.setUser_id(Integer.parseInt(rs.getString("user_id")));
                user.setUser_username(rs.getString("user_username"));
-               user.setUser_displayname(rs.getString("user_username"));
+               user.setUser_displayname(rs.getString("user_displayname"));
                user.setUser_password(rs.getString("user_password"));
                user.setUser_tipe(rs.getString("user_tipe"));
             }

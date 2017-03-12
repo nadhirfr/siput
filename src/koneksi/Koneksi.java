@@ -14,7 +14,7 @@ public class Koneksi {
     private final static String DB_NAME = "siput";
     private final static String DB_USER = "root";
     private final static String DB_PASS = "";
-
+ 
     public static Connection connection() {
         if (con == null) {
             MysqlDataSource data = new MysqlDataSource();
@@ -29,28 +29,29 @@ public class Koneksi {
         }
         return con;
     }
-
-    public static boolean isLogin(String user, String pass) {
+    
+    public static int isLogin(String user, String pass) {
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
-            Connection conn = DriverManager.
-                                getConnection("jdbc:mysql://"+DB_HOST+":3306/"
-                                        +DB_NAME+"?"
-                                        +"user="+DB_USER
-                                        +"&password="+DB_PASS);
-            PreparedStatement pst = conn.prepareStatement("select * from user where user_username=? and user_password=?");
+//            Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+//            Connection conn = DriverManager.
+//                                getConnection("jdbc:mysql://"+DB_HOST+":3306/"
+//                                        +DB_NAME+"?"
+//                                        +"user="+DB_USER
+//                                        +"&password="+DB_PASS);
+            con = Koneksi.connection();
+            PreparedStatement pst = con.prepareStatement("select * from user where user_username=? and user_password=?");
             pst.setString(1, user);
             pst.setString(2, pass);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return true;
+                return rs.getInt("user_id");
             } else {
-                return false;
+                return 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return 0;
         }
 
     }

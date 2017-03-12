@@ -8,8 +8,13 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import dao.DAOUser;
+import dao.implementUser;
+import factory.DAOFactory;
+import factory.MySQLDAOFactory;
 import javafx.scene.control.Label;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import koneksi.Koneksi;
+import model.model_User;
 
 /**
  * FXML Controller class
@@ -50,14 +56,24 @@ public class LoginSiputController implements Initializable {
    private JFXButton btlbtn;
    
    public void Login (ActionEvent event) throws Exception{
-       if(Koneksi.isLogin(usernametext.getText(),passtext.getText()) == true){
+       int loggedIn_user_id = Koneksi.isLogin(usernametext.getText(),passtext.getText());
+       if(loggedIn_user_id != 0){
             statustext.setText("Login Sukses");
             //agar jendela login tertutup setelah berhasil login
             ((Node)(event.getSource())).getScene().getWindow().hide();
+            DAOFactory user = DAOFactory.getFactory(0);
+            implementUser dAOUser = user.getUserDAO();
+            model_User loggedIn_user = dAOUser.getUser(Integer.toString(loggedIn_user_id));            
             //memanggil jendela menu admins
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/MainMenuA.fxml"));
+            loader.load();
+            MainMenuAController aController = loader.getController();
+            aController.setUserName(loggedIn_user.getUser_displayname());
+            Parent parent = loader.getRoot();
             Stage primaryStage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenuA.fxml"));
-            Scene scene = new Scene(root);
+//            Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenuA.fxml"));
+            Scene scene = new Scene(parent);
             primaryStage.setScene(scene);
             primaryStage.setMaximized(true);
             primaryStage.setTitle("Menu Admin");
