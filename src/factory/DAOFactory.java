@@ -7,7 +7,8 @@ package factory;
 //pattern MVC selanjutnya adalah packages model
 //dimana nantinya dalam packages ini kita mengetahui cara memisahkan data
 
-import dao.PersonDAO;
+import dao.*;
+import dao.implementUser;
 
 
 
@@ -20,11 +21,11 @@ public abstract class DAOFactory {
     //setiap kode dipisah berdasarkan fungsinya masing2
     //sehingga kode lain diatasnya tidak perlu tahu cara pengaksesan
     //ke sumber data yang diimplementasikan.
-    public static final int MYSQL = 0;
-    public abstract PersonDAO getPersonDAO();
+    public static final int user = 0;
+    public abstract implementUser getUserDAO();
     public static DAOFactory getFactory ( int type){
         switch (type){
-            case MYSQL: 
+            case user: 
                 return new MySQLDAOFactory();
             default:
                 return null;

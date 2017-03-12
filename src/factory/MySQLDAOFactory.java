@@ -5,17 +5,17 @@
  */
 package factory;
 
-import dao.MySQLPersonDAO;
-import dao.PersonDAO;
-import factory.DAOFactory;
+import dao.DAOUser;
+import dao.implementUser;
 
 /**
  *
  * @author Komputer 03
  */
 public class MySQLDAOFactory extends DAOFactory{
-    public PersonDAO getPersonDAO(){
-        return new MySQLPersonDAO();
-    }
     
+    @Override
+    public implementUser getUserDAO() {
+        return new DAOUser();
+    }
 }

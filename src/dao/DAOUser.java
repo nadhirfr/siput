@@ -19,6 +19,7 @@ public class DAOUser implements implementUser {
     final String update = "UPDATE user SET user_username=?, user_displayname=?, user_password=?, user_tipe=? WHERE user_id=?;";
     final String delete = "DELETE FROM user WHERE user_id=?;";
     final String select = "SELECT * FROM user;";
+    final String get = "SELECT * FROM user WHERE user_id=?;";
     final String cari = "SELECT * FROM user WHERE user_displayname LIKE ?;";
 
     public DAOUser() {
@@ -129,5 +130,32 @@ public class DAOUser implements implementUser {
             Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lb;
+    }
+
+    @Override
+    public model_User getUser(String user_id) {
+    PreparedStatement statement = null;
+    model_User user = new model_User();
+        try {
+            statement = connection.prepareStatement(get);
+            statement.setString(1, user_id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+               user.setUser_id(Integer.parseInt(rs.getString("user_id")));
+               user.setUser_username(rs.getString("user_username"));
+               user.setUser_displayname(rs.getString("user_username"));
+               user.setUser_password(rs.getString("user_password"));
+               user.setUser_tipe(rs.getString("user_tipe"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                statement.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }    
+        return user;
     }
 }
