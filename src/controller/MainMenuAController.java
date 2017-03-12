@@ -8,6 +8,8 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,12 +22,15 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -97,12 +102,33 @@ public class MainMenuAController implements Initializable {
     @FXML
     private StackPane acContent;
     
+    Image menuImage = new Image("/icon/menu.png");
+    Image menuImageRed = new Image("/icon/menuRed.png");
+    Image image;
+    
     public void start(Stage primaryStage) throws IOException {
 
 //        Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenuA.fxml"));
 //        primaryStage.setScene(new Scene(root));
 //        primaryStage.setMaximized(true);
 //        primaryStage.show();
+    }
+      
+    @FXML
+    private void sideMenuToogleBtnOnCLick(ActionEvent event) throws IOException {
+        if (sideMenuToogleBtn.isSelected()) {
+            imgMenuBtn.setImage(menuImageRed);
+            TranslateTransition sideMenu = new TranslateTransition(Duration.millis(200.0), acDashBord);
+            sideMenu.setByX(-130);
+            sideMenu.play();
+            acDashBord.getChildren().clear();
+        } else {
+            imgMenuBtn.setImage(menuImage);
+            TranslateTransition sideMenu = new TranslateTransition(Duration.millis(200.0), acDashBord);
+            sideMenu.setByX(130);
+            sideMenu.play();
+            acDashBord.getChildren().add(leftSideBarScroolPan);
+        }
     }
     
     @Override
