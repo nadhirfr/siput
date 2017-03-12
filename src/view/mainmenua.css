@@ -5,3 +5,7 @@
 .mainFxmlClass {
 
 }
+
+.separator:horizontal .line {
+    -fx-border-color: #212427 transparent transparent transparent;
+}
