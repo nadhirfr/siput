@@ -74,7 +74,7 @@ public class EmployeController implements Initializable {
 //        userNameMedia media = new userNameMedia();
         
         FXMLLoader fXMLLoader = new FXMLLoader();
-        fXMLLoader.load(getClass().getResource("/view/application/employe/ViewEmploye.fxml").openStream());
+        fXMLLoader.load(getClass().getResource("/view/ViewEmploye.fxml").openStream());
 //        media.setId(userId);
         
         ViewEmployeController viewEmployeController = fXMLLoader.getController();
