@@ -6,6 +6,9 @@
 package controller;
 
 import controller.user.EmployeController;
+import controller.application.beranda.berandaController;
+import dao.implementUser;
+import factory.DAOFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,6 +35,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.model_User;
 
 /**
  * FXML Controller class
@@ -104,16 +108,16 @@ public class MainMenuAController implements Initializable {
     private StackPane acContent;
 
     Image menuImage = new Image("/icon/menu.png");
-    Image menuImageRed = new Image("/icon/menuRed.png");
+    Image menuImageBlue = new Image("/icon/menuBlue.png");
     Image image;
     Image home = new Image("/icon/home.png");
-    Image homeRed = new Image("/icon/homeRed.png");
+    Image homeBlue = new Image("/icon/homeBlue.png");
     Image stock = new Image("/icon/stock.png");
     Image stockRed = new Image("/icon/stockRed.png");
     Image sell = new Image("/icon/sell2.png");
     Image sellRed = new Image("/icon/sell2Red.png");
     Image employee = new Image("/icon/employe.png");
-    Image employeeRed = new Image("/icon/employeRed.png");
+    Image employeeBlue = new Image("/icon/employeBlue.png");
     Image setting = new Image("/icon/settings.png");
     Image settingRed = new Image("/icon/settingsRed.png");
     Image about = new Image("/icon/about.png");
@@ -123,13 +127,28 @@ public class MainMenuAController implements Initializable {
             + "-fx-border-color:none";
 
     String activeStyle = "-fx-border-width: 0px 0px 0px 5px;"
-            + "-fx-border-color:#FF4E3C";
+            + "-fx-border-color:#3498db";
+
+    private void homeActive() {
+        imgHomeBtn.setImage(homeBlue);
+        imgStoreBtn.setImage(stock);
+        imgSellBtn.setImage(sell);
+        imgEmployeBtn.setImage(employee);
+        imgSettingsBtn.setImage(setting);
+        imgAboutBtn.setImage(about);
+        btnHome.setStyle(activeStyle);
+        btnStore.setStyle(defaultStyle);
+        btnSell.setStyle(defaultStyle);
+        btnEmplopye.setStyle(defaultStyle);
+        btnSettings.setStyle(defaultStyle);
+        btnAbout.setStyle(defaultStyle);
+    }
 
     private void employeeActive() {
         imgHomeBtn.setImage(home);
         imgStoreBtn.setImage(stock);
         imgSellBtn.setImage(sell);
-        imgEmployeBtn.setImage(employeeRed);
+        imgEmployeBtn.setImage(employeeBlue);
         imgSettingsBtn.setImage(setting);
         imgAboutBtn.setImage(about);
         btnHome.setStyle(defaultStyle);
@@ -151,7 +170,7 @@ public class MainMenuAController implements Initializable {
     @FXML
     private void sideMenuToogleBtnOnCLick(ActionEvent event) throws IOException {
         if (sideMenuToogleBtn.isSelected()) {
-            imgMenuBtn.setImage(menuImageRed);
+            imgMenuBtn.setImage(menuImageBlue);
             TranslateTransition sideMenu = new TranslateTransition(Duration.millis(200.0), acDashBord);
             sideMenu.setByX(-130);
             sideMenu.play();
@@ -195,21 +214,6 @@ public class MainMenuAController implements Initializable {
 
         acContent.getChildren().add(acPane);
 
-    }
-
-    private void homeActive() {
-        imgHomeBtn.setImage(homeRed);
-        imgStoreBtn.setImage(stock);
-        imgSellBtn.setImage(sell);
-        imgEmployeBtn.setImage(employee);
-        imgSettingsBtn.setImage(setting);
-        imgAboutBtn.setImage(about);
-        btnHome.setStyle(activeStyle);
-        btnStore.setStyle(defaultStyle);
-        btnSell.setStyle(defaultStyle);
-        btnEmplopye.setStyle(defaultStyle);
-        btnSettings.setStyle(defaultStyle);
-        btnAbout.setStyle(defaultStyle);
     }
 
     @FXML

@@ -44,6 +44,10 @@ public class berandaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
+    public void setUserName(String displayname) {
+        this.lblOrgName.setText(displayname);
+    }
+
 }
