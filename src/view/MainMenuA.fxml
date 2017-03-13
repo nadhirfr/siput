@@ -44,7 +44,7 @@
                                           <Image url="@../icon/btnBreak.png" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="btnHome" contentDisplay="TOP" layoutY="42.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="127.0" text="Home">
+                                    <Button fx:id="btnHome" contentDisplay="TOP" layoutY="42.0" mnemonicParsing="false" onAction="#btnHomeOnClick" prefHeight="78.0" prefWidth="127.0" text="Home">
                                        <graphic>
                                           <ImageView fx:id="imgHomeBtn" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>

@@ -33,7 +33,6 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-
 /**
  * FXML Controller class
  *
@@ -180,7 +179,7 @@ public class MainMenuAController implements Initializable {
 
     @FXML
     private void btnEmplopyeOnClick(ActionEvent event) throws IOException {
-       employeeActive();
+        employeeActive();
 //        EmployeController ec = new EmployeController();
 //        userNameMedia nm = new userNameMedia();
         FXMLLoader fXMLLoader = new FXMLLoader();
@@ -195,6 +194,39 @@ public class MainMenuAController implements Initializable {
         acContent.getChildren().clear();
 
         acContent.getChildren().add(acPane);
+
+    }
+
+    private void homeActive() {
+        imgHomeBtn.setImage(homeRed);
+        imgStoreBtn.setImage(stock);
+        imgSellBtn.setImage(sell);
+        imgEmployeBtn.setImage(employee);
+        imgSettingsBtn.setImage(setting);
+        imgAboutBtn.setImage(about);
+        btnHome.setStyle(activeStyle);
+        btnStore.setStyle(defaultStyle);
+        btnSell.setStyle(defaultStyle);
+        btnEmplopye.setStyle(defaultStyle);
+        btnSettings.setStyle(defaultStyle);
+        btnAbout.setStyle(defaultStyle);
+    }
+
+    @FXML
+    public void btnHomeOnClick(ActionEvent event) {
+        homeActive();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        try {
+            fxmlLoader.load(getClass().getResource("/view/beranda.fxml").openStream());
+        } catch (IOException e) {
+
+        }
+        AnchorPane root = fxmlLoader.getRoot();
+        acContent.getChildren().clear();
+        acContent.getChildren().add(root);
+
+        System.out.println(lblUsrName.getText());
+        System.out.println(lblUserId.getText());
 
     }
 }
