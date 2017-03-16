@@ -67,7 +67,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btnEmplopye" contentDisplay="TOP" layoutY="316.0" mnemonicParsing="false" onAction="#btnEmplopyeOnClick" prefHeight="78.0" prefWidth="127.0" text="Employe">
+                                    <Button fx:id="btnEmplopye" contentDisplay="TOP" layoutY="316.0" mnemonicParsing="false" onAction="#btnEmployeOnClick" prefHeight="78.0" prefWidth="127.0" text="Employe">
                                        <graphic>
                                           <ImageView fx:id="imgEmployeBtn" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>

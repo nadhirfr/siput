@@ -28,6 +28,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -168,6 +170,14 @@ public class MainMenuAController implements Initializable {
     }
 
     @FXML
+    private void acMain(KeyEvent event) {
+        if (event.getCode() == KeyCode.F11) {
+            Stage stage = (Stage) acMain.getScene().getWindow();
+            stage.setFullScreen(true);
+        }
+    }
+
+    @FXML
     private void sideMenuToogleBtnOnCLick(ActionEvent event) throws IOException {
         if (sideMenuToogleBtn.isSelected()) {
             imgMenuBtn.setImage(menuImageBlue);
@@ -196,8 +206,9 @@ public class MainMenuAController implements Initializable {
         this.lblRoleAs.setText(role);
     }
 
+ 
     @FXML
-    private void btnEmplopyeOnClick(ActionEvent event) throws IOException {
+    private void btnEmployeOnClick(ActionEvent event) throws IOException {
         employeeActive();
 //        EmployeController ec = new EmployeController();
 //        userNameMedia nm = new userNameMedia();
@@ -207,7 +218,7 @@ public class MainMenuAController implements Initializable {
         EmployeController employeController = fXMLLoader.getController();
         employeController.bpContent.getStylesheets().add("/style/MainStyle.css");
 //        employeController.setNameMedia(usrNameMedia);
-//        employeController.btnViewEmployeeOnAction(event);
+        employeController.btnViewEmployeeOnAction(event);
 
         AnchorPane acPane = fXMLLoader.getRoot();
         acContent.getChildren().clear();

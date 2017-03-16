@@ -11,6 +11,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
+import controller.MainMenuAController;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import koneksi.Koneksi;
+
 
 /**
  * FXML Controller class
@@ -37,6 +46,10 @@ public class berandaController implements Initializable {
     private Label lblTotalSell;
     @FXML
     private Label lblSellValue;
+    Koneksi dbCon = new Koneksi();
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
 
     /**
      * Initializes the controller class.
@@ -49,5 +62,5 @@ public class berandaController implements Initializable {
     public void setUserName(String displayname) {
         this.lblOrgName.setText(displayname);
     }
-
+    
 }

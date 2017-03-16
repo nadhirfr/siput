@@ -73,6 +73,7 @@ public class LoginSiputController implements Initializable {
                                     loggedIn_user.getUser_displayname(),
                                     loggedIn_user.getUser_tipe());
             Parent parent = loader.getRoot();
+            aController.btnHomeOnClick(event);
             Stage primaryStage = new Stage();
 //            Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenuA.fxml"));
             Scene scene = new Scene(parent);
