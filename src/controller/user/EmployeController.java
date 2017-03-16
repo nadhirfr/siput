@@ -100,18 +100,19 @@ public class EmployeController implements Initializable {
         AddEmployeController vec = new AddEmployeController();
 //        userNameMedia media = new userNameMedia();
         
-        FXMLLoader fXMLLoader = new FXMLLoader();
-        fXMLLoader.load(getClass().getResource("/view/application/employe/AddEmploye.fxml").openStream());
+        FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("/view/application/employe/AddEmploye.fxml"));
+        fXMLLoader.load();
 //        media.setId(userId);
         
         AddEmployeController addEmployeController = fXMLLoader.getController();
 //        addEmployeController.setNameMedia(nameMedia);
-        addEmployeController.btnClrEmail.getStylesheets().add("/style/btnOnText.css");
-        addEmployeController.btnClrFullName.getStylesheets().add("/style/btnOnText.css");
-        addEmployeController.btnClrPassword.getStylesheets().add("/style/btnOnText.css");
-        addEmployeController.btnClrPhone.getStylesheets().add("/style/btnOnText.css");
-        addEmployeController.btnClrSalary.getStylesheets().add("/style/btnOnText.css");
-        addEmployeController.btnClrUsrName.getStylesheets().add("/style/btnOnText.css");
+        String css = this.getClass().getResource("/style/btnOnText.css").toExternalForm();
+        addEmployeController.btnClrEmail.getStylesheets().add(css);
+        addEmployeController.btnClrFullName.getStylesheets().add(css);
+        addEmployeController.btnClrPassword.getStylesheets().add(css);
+        addEmployeController.btnClrPhone.getStylesheets().add(css);
+        addEmployeController.btnClrSalary.getStylesheets().add(css);
+        addEmployeController.btnClrUsrName.getStylesheets().add(css);
 //        addEmployeController.showDetails();
         
         AnchorPane acPane = fXMLLoader.getRoot();

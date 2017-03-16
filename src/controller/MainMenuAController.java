@@ -210,33 +210,23 @@ public class MainMenuAController implements Initializable {
     @FXML
     private void btnEmployeOnClick(ActionEvent event) throws IOException {
         employeeActive();
-//        EmployeController ec = new EmployeController();
-//        userNameMedia nm = new userNameMedia();
-        FXMLLoader fXMLLoader = new FXMLLoader();
-        fXMLLoader.load(getClass().getResource("/view/Employe.fxml").openStream());
-//        nm.setId(id);
+        FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("/view/Employe.fxml"));
+        fXMLLoader.load();
+        
         EmployeController employeController = fXMLLoader.getController();
         employeController.bpContent.getStylesheets().add("/style/MainStyle.css");
-//        employeController.setNameMedia(usrNameMedia);
         employeController.btnViewEmployeeOnAction(event);
-
+        
         AnchorPane acPane = fXMLLoader.getRoot();
         acContent.getChildren().clear();
-
         acContent.getChildren().add(acPane);
 
     }
 
     @FXML
-    public void btnHomeOnClick(ActionEvent event) {
+    public void btnHomeOnClick(ActionEvent event) throws IOException {
         homeActive();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        try {
-            fxmlLoader.load(getClass().getResource("/view/beranda.fxml").openStream());
-        } catch (IOException e) {
-
-        }
-        AnchorPane root = fxmlLoader.getRoot();
+        AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/beranda.fxml"));
         acContent.getChildren().clear();
         acContent.getChildren().add(root);
 
