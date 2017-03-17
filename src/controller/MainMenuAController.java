@@ -5,6 +5,9 @@
  */
 package controller;
 
+import controller.application.PemasukanController;
+import controller.application.PengeluaranController;
+import controller.application.PengaturanController;
 import controller.user.EmployeController;
 import controller.application.beranda.berandaController;
 import dao.implementUser;
@@ -12,6 +15,8 @@ import factory.DAOFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,17 +62,17 @@ public class MainMenuAController implements Initializable {
     @FXML
     private ImageView imgHomeBtn;
     @FXML
-    private Button btnStore;
+    private Button btnCashin;
     @FXML
-    private ImageView imgStoreBtn;
+    private ImageView imgCashinBtn;
     @FXML
     private Button btnEmplopye;
     @FXML
     private ImageView imgEmployeBtn;
     @FXML
-    private Button btnSell;
+    private Button btnCashout;
     @FXML
-    private ImageView imgSellBtn;
+    private ImageView imgCashoutBtn;
     @FXML
     private Button btnSettings;
     @FXML
@@ -114,52 +119,22 @@ public class MainMenuAController implements Initializable {
     Image image;
     Image home = new Image("/icon/home.png");
     Image homeBlue = new Image("/icon/homeBlue.png");
-    Image stock = new Image("/icon/stock.png");
-    Image stockRed = new Image("/icon/stockRed.png");
-    Image sell = new Image("/icon/sell2.png");
-    Image sellRed = new Image("/icon/sell2Red.png");
+    Image cashin = new Image("/icon/cash-in.png");
+    Image cashinBlue = new Image("/icon/cash-inBlue.png");
+    Image cashout = new Image("/icon/cash-out.png");
+    Image cashoutBlue = new Image("/icon/cash-outBlue.png");
     Image employee = new Image("/icon/employe.png");
     Image employeeBlue = new Image("/icon/employeBlue.png");
     Image setting = new Image("/icon/settings.png");
-    Image settingRed = new Image("/icon/settingsRed.png");
+    Image settingBlue = new Image("/icon/settingsBlue.png");
     Image about = new Image("/icon/about.png");
-    Image aboutRed = new Image("/icon/aboutRed.png");
+    Image aboutBlue = new Image("/icon/aboutBlue.png");
 
     String defaultStyle = "-fx-border-width: 0px 0px 0px 5px;"
             + "-fx-border-color:none";
 
     String activeStyle = "-fx-border-width: 0px 0px 0px 5px;"
             + "-fx-border-color:#3498db";
-
-    private void homeActive() {
-        imgHomeBtn.setImage(homeBlue);
-        imgStoreBtn.setImage(stock);
-        imgSellBtn.setImage(sell);
-        imgEmployeBtn.setImage(employee);
-        imgSettingsBtn.setImage(setting);
-        imgAboutBtn.setImage(about);
-        btnHome.setStyle(activeStyle);
-        btnStore.setStyle(defaultStyle);
-        btnSell.setStyle(defaultStyle);
-        btnEmplopye.setStyle(defaultStyle);
-        btnSettings.setStyle(defaultStyle);
-        btnAbout.setStyle(defaultStyle);
-    }
-
-    private void employeeActive() {
-        imgHomeBtn.setImage(home);
-        imgStoreBtn.setImage(stock);
-        imgSellBtn.setImage(sell);
-        imgEmployeBtn.setImage(employeeBlue);
-        imgSettingsBtn.setImage(setting);
-        imgAboutBtn.setImage(about);
-        btnHome.setStyle(defaultStyle);
-        btnStore.setStyle(defaultStyle);
-        btnSell.setStyle(defaultStyle);
-        btnEmplopye.setStyle(activeStyle);
-        btnSettings.setStyle(defaultStyle);
-        btnAbout.setStyle(defaultStyle);
-    }
 
     public void start(Stage primaryStage) throws IOException {
 
@@ -168,14 +143,14 @@ public class MainMenuAController implements Initializable {
 //        primaryStage.setMaximized(true);
 //        primaryStage.show();
     }
-
-    @FXML
-    private void acMain(KeyEvent event) {
-        if (event.getCode() == KeyCode.F11) {
-            Stage stage = (Stage) acMain.getScene().getWindow();
-            stage.setFullScreen(true);
-        }
-    }
+//
+//    @FXML
+//    private void acMain(KeyEvent event) {
+//        if (event.getCode() == KeyCode.F11) {
+//            Stage stage = (Stage) acMain.getScene().getWindow();
+//            stage.setFullScreen(true);
+//        }
+//    }
 
     @FXML
     private void sideMenuToogleBtnOnCLick(ActionEvent event) throws IOException {
@@ -206,23 +181,6 @@ public class MainMenuAController implements Initializable {
         this.lblRoleAs.setText(role);
     }
 
- 
-    @FXML
-    private void btnEmployeOnClick(ActionEvent event) throws IOException {
-        employeeActive();
-        FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("/view/Employe.fxml"));
-        fXMLLoader.load();
-        
-        EmployeController employeController = fXMLLoader.getController();
-        employeController.bpContent.getStylesheets().add("/style/MainStyle.css");
-        employeController.btnViewEmployeeOnAction(event);
-        
-        AnchorPane acPane = fXMLLoader.getRoot();
-        acContent.getChildren().clear();
-        acContent.getChildren().add(acPane);
-
-    }
-
     @FXML
     public void btnHomeOnClick(ActionEvent event) throws IOException {
         homeActive();
@@ -233,5 +191,199 @@ public class MainMenuAController implements Initializable {
         System.out.println(lblUsrName.getText());
         System.out.println(lblUserId.getText());
 
+    }
+
+    @FXML
+    private void btnCashInOnClick(ActionEvent event) throws IOException {
+        CIActive();
+        PemasukanController sc = new PemasukanController();
+        //userNameMedia nm = new userNameMedia();
+        FXMLLoader fXMLLoader = new FXMLLoader();
+        fXMLLoader.load(getClass().getResource("/view/Pemasukan.fxml").openStream());
+        //nm.setId(id);
+        PemasukanController pemasukanController = fXMLLoader.getController();
+        pemasukanController.bpStore.getStylesheets().add("/style/MainStyle.css");
+        //stockController.setUserId(usrNameMedia);
+        pemasukanController.btnStockOnAction(event);
+        //pemasukanController.settingPermission();
+        AnchorPane acPane = fXMLLoader.getRoot();
+
+        acContent.getChildren().clear();
+
+        acContent.getChildren().add(acPane);
+    }
+
+    @FXML
+    private void btnCashOutOnClick(ActionEvent event) {
+        COActive();
+        PengeluaranController controller = new PengeluaranController();
+        //userNameMedia nm = new userNameMedia();
+        try {
+
+            FXMLLoader fXMLLoader = new FXMLLoader();
+            fXMLLoader.load(getClass().getResource("/view/Pengeluaran.fxml").openStream());
+            //nm.setId(id);
+            PengeluaranController pengeluaranController = fXMLLoader.getController();
+            //sellController.setNameMedia(usrNameMedia);
+            pengeluaranController.acMainSells.getStylesheets().add("/style/MainStyle.css");
+            pengeluaranController.tbtnSellOnAction(event);
+            AnchorPane anchorPane = fXMLLoader.getRoot();
+            acContent.getChildren().clear();
+            acContent.getChildren().add(anchorPane);
+        } catch (IOException ex) {
+            Logger.getLogger(MainMenuAController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    private void btnEmployeOnClick(ActionEvent event) throws IOException {
+        userActive();
+        FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("/view/Employe.fxml"));
+        fXMLLoader.load();
+
+        EmployeController employeController = fXMLLoader.getController();
+        employeController.bpContent.getStylesheets().add("/style/MainStyle.css");
+        employeController.btnViewEmployeeOnAction(event);
+
+        AnchorPane acPane = fXMLLoader.getRoot();
+        acContent.getChildren().clear();
+        acContent.getChildren().add(acPane);
+
+    }
+
+    @FXML
+    private void btnSettingsOnClick(ActionEvent event) throws IOException {
+        SettActive();
+        //inithilize Setting Controller
+        PengaturanController pengaturanController = new PengaturanController();
+        //inithilize UserNameMedia
+        //userNameMedia usrMedia = new userNameMedia();
+        // Define a loader to inithilize Settings.fxml controller
+        FXMLLoader settingLoader = new FXMLLoader();
+        //set the location of Settings.fxml by fxmlloader
+        settingLoader.load(getClass().getResource("/view/Pengaturan.fxml").openStream());
+
+        //Send id to userMedia
+        //usrMedia.setId(id);
+        //take control of settingController elements or node
+        PengaturanController pengaturanControl = settingLoader.getController();
+        pengaturanControl.bpSettings.getStylesheets().add("/style/MainStyle.css");
+
+        //pengaturanControl.setUsrMedia(usrMedia);
+        pengaturanControl.miMyASccountOnClick(event);
+        //pengaturanControl.settingPermission();
+
+        AnchorPane acPane = settingLoader.getRoot();
+        //acContent clear and make useul for add next node
+        acContent.getChildren().clear();
+        //add a node call "acPane" to acContent
+        acContent.getChildren().add(acPane);
+
+    }
+
+    @FXML
+    private void btnAboutOnClick(ActionEvent event) {
+
+        try {
+            AboutActive();
+            FXMLLoader fXMLLoader = new FXMLLoader();
+            fXMLLoader.load(getClass().getResource("/view/Tentang.fxml").openStream());
+            AnchorPane anchorPane = fXMLLoader.getRoot();
+            acContent.getChildren().clear();
+            acContent.getChildren().add(anchorPane);
+        } catch (IOException ex) {
+            Logger.getLogger(MainMenuAController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void homeActive() {
+        imgHomeBtn.setImage(homeBlue);
+        imgCashinBtn.setImage(cashin);
+        imgCashoutBtn.setImage(cashout);
+        imgEmployeBtn.setImage(employee);
+        imgSettingsBtn.setImage(setting);
+        imgAboutBtn.setImage(about);
+        btnHome.setStyle(activeStyle);
+        btnCashin.setStyle(defaultStyle);
+        btnCashout.setStyle(defaultStyle);
+        btnEmplopye.setStyle(defaultStyle);
+        btnSettings.setStyle(defaultStyle);
+        btnAbout.setStyle(defaultStyle);
+    }
+
+    private void CIActive() {
+        imgHomeBtn.setImage(home);
+        imgCashinBtn.setImage(cashinBlue);
+        imgCashoutBtn.setImage(cashout);
+        imgEmployeBtn.setImage(employee);
+        imgSettingsBtn.setImage(setting);
+        imgAboutBtn.setImage(about);
+        btnHome.setStyle(defaultStyle);
+        btnCashin.setStyle(activeStyle);
+        btnCashout.setStyle(defaultStyle);
+        btnEmplopye.setStyle(defaultStyle);
+        btnSettings.setStyle(defaultStyle);
+        btnAbout.setStyle(defaultStyle);
+    }
+
+    private void COActive() {
+        imgHomeBtn.setImage(home);
+        imgCashinBtn.setImage(cashin);
+        imgCashoutBtn.setImage(cashoutBlue);
+        imgEmployeBtn.setImage(employee);
+        imgSettingsBtn.setImage(setting);
+        imgAboutBtn.setImage(about);
+        btnHome.setStyle(defaultStyle);
+        btnCashin.setStyle(defaultStyle);
+        btnCashout.setStyle(activeStyle);
+        btnEmplopye.setStyle(defaultStyle);
+        btnSettings.setStyle(defaultStyle);
+        btnAbout.setStyle(defaultStyle);
+    }
+
+    private void userActive() {
+        imgHomeBtn.setImage(home);
+        imgCashinBtn.setImage(cashin);
+        imgCashoutBtn.setImage(cashout);
+        imgEmployeBtn.setImage(employeeBlue);
+        imgSettingsBtn.setImage(setting);
+        imgAboutBtn.setImage(about);
+        btnHome.setStyle(defaultStyle);
+        btnCashin.setStyle(defaultStyle);
+        btnCashout.setStyle(defaultStyle);
+        btnEmplopye.setStyle(activeStyle);
+        btnSettings.setStyle(defaultStyle);
+        btnAbout.setStyle(defaultStyle);
+    }
+
+    private void SettActive() {
+        imgHomeBtn.setImage(home);
+        imgCashinBtn.setImage(cashin);
+        imgCashoutBtn.setImage(cashout);
+        imgEmployeBtn.setImage(employee);
+        imgSettingsBtn.setImage(settingBlue);
+        imgAboutBtn.setImage(about);
+        btnHome.setStyle(defaultStyle);
+        btnCashin.setStyle(defaultStyle);
+        btnCashout.setStyle(defaultStyle);
+        btnEmplopye.setStyle(defaultStyle);
+        btnSettings.setStyle(activeStyle);
+        btnAbout.setStyle(defaultStyle);
+    }
+
+    private void AboutActive() {
+        imgHomeBtn.setImage(home);
+        imgCashinBtn.setImage(cashin);
+        imgCashoutBtn.setImage(cashout);
+        imgEmployeBtn.setImage(employee);
+        imgSettingsBtn.setImage(setting);
+        imgAboutBtn.setImage(aboutBlue);
+        btnHome.setStyle(defaultStyle);
+        btnCashin.setStyle(defaultStyle);
+        btnCashout.setStyle(defaultStyle);
+        btnEmplopye.setStyle(defaultStyle);
+        btnSettings.setStyle(defaultStyle);
+        btnAbout.setStyle(activeStyle);
     }
 }

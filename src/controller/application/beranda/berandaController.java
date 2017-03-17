@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
-import controller.MainMenuAController;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +28,7 @@ import koneksi.Koneksi;
 public class berandaController implements Initializable {
 
     @FXML
-    private Label lblOrgName;
+    private Label lblDisplayName;
     @FXML
     private Text txtOrgAddress;
     @FXML
@@ -60,7 +59,7 @@ public class berandaController implements Initializable {
     }
 
     public void setUserName(String displayname) {
-        this.lblOrgName.setText(displayname);
+        this.lblDisplayName.setText(displayname);
     }
     
 }

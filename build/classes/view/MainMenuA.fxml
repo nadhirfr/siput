@@ -34,7 +34,7 @@
                            <content>
                               <AnchorPane BorderPane.alignment="CENTER">
                                  <children>
-                                    <Text fill="#cc3535" layoutX="8.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DashBord">
+                                    <Text fill="#3498db" layoutX="8.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DashBoard">
                                        <font>
                                           <Font name="System Bold Italic" size="21.0" />
                                        </font>
@@ -44,7 +44,7 @@
                                           <Image url="@../icon/btnBreak.png" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="btnHome" contentDisplay="TOP" layoutY="42.0" mnemonicParsing="false" onAction="#btnHomeOnClick" prefHeight="78.0" prefWidth="127.0" text="Home">
+                                    <Button fx:id="btnHome" contentDisplay="TOP" layoutY="42.0" mnemonicParsing="false" onAction="#btnHomeOnClick" prefHeight="78.0" prefWidth="127.0" text="Beranda">
                                        <graphic>
                                           <ImageView fx:id="imgHomeBtn" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -58,16 +58,16 @@
                                           <Image url="@../icon/btnBreak.png" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="btnStore" contentDisplay="TOP" layoutY="133.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="127.0" text="Store">
+                                    <Button fx:id="btnCashin" contentDisplay="TOP" layoutY="133.0" mnemonicParsing="false" onAction="#btnCashInOnClick" prefHeight="78.0" prefWidth="127.0" text="Pemasukan">
                                        <graphic>
-                                          <ImageView fx:id="imgStoreBtn" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="imgCashinBtn" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../icon/stock.png" />
+                                                <Image url="@../icon/cash-in.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btnEmplopye" contentDisplay="TOP" layoutY="316.0" mnemonicParsing="false" onAction="#btnEmployeOnClick" prefHeight="78.0" prefWidth="127.0" text="Employe">
+                                    <Button fx:id="btnEmplopye" contentDisplay="TOP" layoutY="316.0" mnemonicParsing="false" onAction="#btnEmployeOnClick" prefHeight="78.0" prefWidth="127.0" text="Pengguna">
                                        <graphic>
                                           <ImageView fx:id="imgEmployeBtn" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -86,11 +86,11 @@
                                           <Image url="@../icon/btnBreak.png" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="btnSell" contentDisplay="TOP" layoutY="225.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="127.0" text="Sell">
+                                    <Button fx:id="btnCashout" contentDisplay="TOP" layoutY="225.0" mnemonicParsing="false" onAction="#btnCashOutOnClick" prefHeight="78.0" prefWidth="127.0" text="Pengeluaran">
                                        <graphic>
-                                          <ImageView fx:id="imgSellBtn" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="imgCashoutBtn" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../icon/sell2.png" />
+                                                <Image url="@../icon/cash-out.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -100,7 +100,7 @@
                                           <Image url="@../icon/btnBreak.png" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="btnSettings" contentDisplay="TOP" layoutY="405.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="127.0" text="Settings">
+                                    <Button fx:id="btnSettings" contentDisplay="TOP" layoutY="405.0" mnemonicParsing="false" onAction="#btnSettingsOnClick" prefHeight="78.0" prefWidth="127.0" text="Pengaturan">
                                        <graphic>
                                           <ImageView fx:id="imgSettingsBtn" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -114,7 +114,7 @@
                                           <Image url="@../icon/btnBreak.png" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="btnAbout" contentDisplay="TOP" layoutY="496.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="127.0" text="About">
+                                    <Button fx:id="btnAbout" contentDisplay="TOP" layoutY="496.0" mnemonicParsing="false" onAction="#btnAboutOnClick" prefHeight="78.0" prefWidth="127.0" text="Tentang">
                                        <graphic>
                                           <ImageView fx:id="imgAboutBtn" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
