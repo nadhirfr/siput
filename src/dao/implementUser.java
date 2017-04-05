@@ -16,4 +16,6 @@ public interface implementUser {
     public List<model_User> getAll();
 
     public List<model_User> getCari(String displayname);
+    
+    public int getCount();
 }

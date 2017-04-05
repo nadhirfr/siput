@@ -10,12 +10,6 @@ package factory;
 import dao.*;
 import dao.implementUser;
 
-
-
-/**
- *
- * @author Komputer 03
- */
 public abstract class DAOFactory {
     //class ini adalah abstract interface dari DAO dimana disini nantinya
     //setiap kode dipisah berdasarkan fungsinya masing2

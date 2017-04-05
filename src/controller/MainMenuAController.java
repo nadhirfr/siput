@@ -5,8 +5,8 @@
  */
 package controller;
 
-import controller.application.PemasukanController;
-import controller.application.PengeluaranController;
+import controller.application.MPemasukanController;
+import controller.application.MPengeluaranController;
 import controller.application.PengaturanController;
 import controller.user.EmployeController;
 import controller.application.beranda.berandaController;
@@ -14,6 +14,7 @@ import dao.implementUser;
 import factory.DAOFactory;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -184,7 +185,16 @@ public class MainMenuAController implements Initializable {
     @FXML
     public void btnHomeOnClick(ActionEvent event) throws IOException {
         homeActive();
-        AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/beranda.fxml"));
+        DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
+        implementUser dAOUser = user.getUserDAO();
+        int totalUser = dAOUser.getCount();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/beranda.fxml"));
+        loader.load();
+        berandaController Berandacontroller = loader.getController();
+        Berandacontroller.setLbBerandaTotalUser(totalUser);
+
+        AnchorPane root = loader.getRoot();
         acContent.getChildren().clear();
         acContent.getChildren().add(root);
 
@@ -196,15 +206,15 @@ public class MainMenuAController implements Initializable {
     @FXML
     private void btnCashInOnClick(ActionEvent event) throws IOException {
         CIActive();
-        PemasukanController sc = new PemasukanController();
+        //MPemasukanController sc = new MPemasukanController();
         //userNameMedia nm = new userNameMedia();
         FXMLLoader fXMLLoader = new FXMLLoader();
-        fXMLLoader.load(getClass().getResource("/view/Pemasukan.fxml").openStream());
+        fXMLLoader.load(getClass().getResource("/view/mPemasukan.fxml").openStream());
         //nm.setId(id);
-        PemasukanController pemasukanController = fXMLLoader.getController();
-        pemasukanController.bpStore.getStylesheets().add("/style/MainStyle.css");
+        MPemasukanController pemasukanController = fXMLLoader.getController();
+        //pemasukanController.bpPemasukan.getStylesheets().add("/style/MainStyle.css");
         //stockController.setUserId(usrNameMedia);
-        pemasukanController.btnStockOnAction(event);
+        //pemasukanController.btnStockOnAction(event);
         //pemasukanController.settingPermission();
         AnchorPane acPane = fXMLLoader.getRoot();
 
@@ -216,17 +226,17 @@ public class MainMenuAController implements Initializable {
     @FXML
     private void btnCashOutOnClick(ActionEvent event) {
         COActive();
-        PengeluaranController controller = new PengeluaranController();
+        MPengeluaranController controller = new MPengeluaranController();
         //userNameMedia nm = new userNameMedia();
         try {
 
             FXMLLoader fXMLLoader = new FXMLLoader();
-            fXMLLoader.load(getClass().getResource("/view/Pengeluaran.fxml").openStream());
+            fXMLLoader.load(getClass().getResource("/view/mPengeluaran.fxml").openStream());
             //nm.setId(id);
-            PengeluaranController pengeluaranController = fXMLLoader.getController();
+            MPengeluaranController pengeluaranController = fXMLLoader.getController();
             //sellController.setNameMedia(usrNameMedia);
-            pengeluaranController.acMainSells.getStylesheets().add("/style/MainStyle.css");
-            pengeluaranController.tbtnSellOnAction(event);
+            //pengeluaranController.acMainSells.getStylesheets().add("/style/MainStyle.css");
+            //pengeluaranController.tbtnSellOnAction(event);
             AnchorPane anchorPane = fXMLLoader.getRoot();
             acContent.getChildren().clear();
             acContent.getChildren().add(anchorPane);
@@ -239,6 +249,14 @@ public class MainMenuAController implements Initializable {
     @FXML
     private void btnEmployeOnClick(ActionEvent event) throws IOException {
         userActive();
+        
+        DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
+        implementUser dAOUser = user.getUserDAO();
+        List<model_User> UserList = dAOUser.getAll();
+        
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/beranda.fxml"));
+        loader.load();
         FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("/view/Employe.fxml"));
         fXMLLoader.load();
 

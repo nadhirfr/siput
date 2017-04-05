@@ -49,6 +49,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import javax.imageio.ImageIO;
+import model.model_User;
 
 //import List.ListEmployee;
 //
@@ -136,8 +137,8 @@ public class ViewEmployeController implements Initializable {
     private Hyperlink hlChangePassword;
     @FXML
     private Hyperlink hlViewPermission;
-//    @FXML
-//    private TableView<ListEmployee> tblEmoyeeList;
+    @FXML
+    private TableView<model_User> tblEmoyeeList;
     @FXML
     private TableColumn<Object, Object> clmEmployeId;
     @FXML

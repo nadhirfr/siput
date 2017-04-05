@@ -29,26 +29,18 @@ public class berandaController implements Initializable {
 
     @FXML
     private Label lblDisplayName;
-    @FXML
-    private Text txtOrgAddress;
-    @FXML
-    private Text txtorgPhoneNumber;
-    @FXML
-    private Label lblTotalItem;
-    @FXML
-    private Label lblStockValue;
-    @FXML
-    private Label lblTotalSupplyer;
-    @FXML
-    private Label lblTotalEmployee;
-    @FXML
-    private Label lblTotalSell;
-    @FXML
-    private Label lblSellValue;
     Koneksi dbCon = new Koneksi();
     Connection con;
     PreparedStatement pst;
     ResultSet rs;
+    @FXML
+    private Label lblOrgName1;
+    @FXML
+    private Label lbBerandaTotalUser;
+    @FXML
+    private Label lbBerandaTotalPemasukan;
+    @FXML
+    private Label lbBerandaTotalPengeluaran;
 
     /**
      * Initializes the controller class.
@@ -60,6 +52,14 @@ public class berandaController implements Initializable {
 
     public void setUserName(String displayname) {
         this.lblDisplayName.setText(displayname);
+    }
+
+    public Label getLbBerandaTotalUser() {
+        return lbBerandaTotalUser;
+    }
+
+    public void setLbBerandaTotalUser(int totaluser) {
+        this.lbBerandaTotalUser.setText(String.valueOf(totaluser));
     }
     
 }

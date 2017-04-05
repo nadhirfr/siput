@@ -61,9 +61,12 @@ public class LoginSiputController implements Initializable {
             statustext.setText("Login Sukses");
             //agar jendela login tertutup setelah berhasil login
             ((Node)(event.getSource())).getScene().getWindow().hide();
+            
+            //ini mengambil data dengan DAOFactory user
             DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
             implementUser dAOUser = user.getUserDAO();
-            model_User loggedIn_user = dAOUser.getUser(Integer.toString(loggedIn_user_id));            
+            model_User loggedIn_user = dAOUser.getUser(Integer.toString(loggedIn_user_id));    
+            
             //memanggil jendela menu admins
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/MainMenuA.fxml"));

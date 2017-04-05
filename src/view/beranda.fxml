@@ -61,7 +61,7 @@
                         </AnchorPane>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutY="146.0" prefHeight="254.0" prefWidth="831.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="150.0">
+                  <HBox alignment="CENTER" layoutY="331.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="235.0" prefWidth="831.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="150.0">
                      <children>
                         <TilePane prefHeight="190.0" prefWidth="200.0" style="-fx-background-color: #e74c3c;">
                            <children>
@@ -73,11 +73,13 @@
                                     <Insets left="60.0" top="20.0" />
                                  </TilePane.margin>
                               </ImageView>
-                              <Label prefHeight="17.0" prefWidth="68.0" text="Total User :" textFill="WHITE">
+                              <Label fx:id="lbBerandaTotalUser" text="Label">
+                                 <graphic>
+                                    <Label prefHeight="17.0" prefWidth="68.0" text="Total User :" textFill="WHITE" />
+                                 </graphic>
                                  <TilePane.margin>
-                                    <Insets />
-                                 </TilePane.margin>
-                              </Label>
+                                    <Insets left="25.0" top="35.0" />
+                                 </TilePane.margin></Label>
                            </children>
                         </TilePane>
                         <TilePane prefHeight="196.0" prefWidth="200.0" style="-fx-background-color: #3498db;">
@@ -90,9 +92,12 @@
                                     <Insets left="40.0" />
                                  </TilePane.margin>
                               </ImageView>
-                              <Label prefHeight="17.0" prefWidth="99.0" text="Total Pemasukan :" textFill="WHITE">
+                              <Label fx:id="lbBerandaTotalPemasukan" text="Label">
+                                 <graphic>
+                                    <Label prefHeight="17.0" prefWidth="99.0" text="Total Pemasukan :" textFill="WHITE" />
+                                 </graphic>
                                  <TilePane.margin>
-                                    <Insets top="-30.0" />
+                                    <Insets left="25.0" />
                                  </TilePane.margin>
                               </Label>
                            </children>
@@ -107,9 +112,12 @@
                                     <Insets left="40.0" />
                                  </TilePane.margin>
                               </ImageView>
-                              <Label prefHeight="17.0" prefWidth="105.0" text="Total Pengeluaran :" textFill="WHITE">
+                              <Label fx:id="lbBerandaTotalPengeluaran" text="Label">
+                                 <graphic>
+                                    <Label prefHeight="17.0" prefWidth="105.0" text="Total Pengeluaran :" textFill="WHITE" />
+                                 </graphic>
                                  <TilePane.margin>
-                                    <Insets top="-30.0" />
+                                    <Insets left="25.0" />
                                  </TilePane.margin>
                               </Label>
                            </children>

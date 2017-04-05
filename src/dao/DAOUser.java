@@ -158,4 +158,18 @@ public class DAOUser implements implementUser {
         }    
         return user;
     }
+
+    @Override
+    public int getCount() {
+        int lb = 0;
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(select);
+            rs.last();
+            lb = rs.getRow();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lb;
+    }
 }

@@ -69,7 +69,7 @@ public class EmployeController implements Initializable {
 
     @FXML
     public void btnViewEmployeeOnAction(ActionEvent event) throws IOException {
-        lblView.setText("Employee");
+        lblView.setText("Pengguna");
         ViewEmployeController vec = new ViewEmployeController();
 //        userNameMedia media = new userNameMedia();
         
@@ -96,7 +96,7 @@ public class EmployeController implements Initializable {
 
     @FXML
     private void btnAddEmployeeOnClick(ActionEvent event) throws IOException {
-        lblView.setText("Add Employee");
+        lblView.setText("Add Pengguna");
         AddEmployeController vec = new AddEmployeController();
 //        userNameMedia media = new userNameMedia();
         
