@@ -9,6 +9,7 @@ import controller.application.MPemasukanController;
 import controller.application.MPengeluaranController;
 import controller.application.PengaturanController;
 import controller.user.EmployeController;
+import controller.application.TmbhItemIuranController;
 import controller.application.beranda.berandaController;
 import dao.implementUser;
 import factory.DAOFactory;
@@ -274,22 +275,22 @@ public class MainMenuAController implements Initializable {
     private void btnSettingsOnClick(ActionEvent event) throws IOException {
         SettActive();
         //inithilize Setting Controller
-        PengaturanController pengaturanController = new PengaturanController();
+        TmbhItemIuranController pengaturanController = new TmbhItemIuranController();
         //inithilize UserNameMedia
         //userNameMedia usrMedia = new userNameMedia();
         // Define a loader to inithilize Settings.fxml controller
         FXMLLoader settingLoader = new FXMLLoader();
         //set the location of Settings.fxml by fxmlloader
-        settingLoader.load(getClass().getResource("/view/Pengaturan.fxml").openStream());
+        settingLoader.load(getClass().getResource("/view/TmbhItemIuran.fxml").openStream());
 
         //Send id to userMedia
         //usrMedia.setId(id);
         //take control of settingController elements or node
-        PengaturanController pengaturanControl = settingLoader.getController();
-        pengaturanControl.bpSettings.getStylesheets().add("/style/MainStyle.css");
+        TmbhItemIuranController pengaturanControl = settingLoader.getController();
+        //pengaturanControl.bpSettings.getStylesheets().add("/style/MainStyle.css");
 
         //pengaturanControl.setUsrMedia(usrMedia);
-        pengaturanControl.miMyASccountOnClick(event);
+        //pengaturanControl.miMyASccountOnClick(event);
         //pengaturanControl.settingPermission();
 
         AnchorPane acPane = settingLoader.getRoot();

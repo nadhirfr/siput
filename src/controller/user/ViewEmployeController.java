@@ -8,6 +8,8 @@ package controller.user;
 //import Getway.UsersGetway;
 //import dataBase.DBConnection;
 
+import dao.implementUser;
+import factory.DAOFactory;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,6 +36,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Blob;
+import java.util.List;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
@@ -174,6 +177,17 @@ public class ViewEmployeController implements Initializable {
 //
 //        cTf.numaricTextfield(tfSalary);
 //
+DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
+        implementUser dAOUser = user.getUserDAO();
+        List<model_User> listUser = dAOUser.getAll();
+
+        
+        tblEmoyeeList = new TableView<>();
+        for (int i = 0; i < listUser.size() ; i++) {
+            tblEmoyeeList.getItems().add(new model_User(i, listUser.get(i).getUser_username(), 
+                    listUser.get(i).getUser_displayname(), listUser.get(i).getUser_password(), 
+                    listUser.get(i).getUser_tipe()));
+        }
     }
 
     @FXML

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="15.0" layoutY="123.0" prefHeight="464.0" prefWidth="222.0" style="-fx-background-color: #95a5a6;">
+         <children>
+            <JFXListView layoutY="-3.0" prefHeight="470.0" prefWidth="222.0" />
+         </children>
+      </Pane>
+      <Label layoutX="300.0" layoutY="122.0" text="Pilih Kategori :">
+         <font>
+            <Font name="Gadugi" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="300.0" layoutY="140.0" prefHeight="34.0" prefWidth="362.0" style="-fx-background-radius: 5;" />
+      <Label layoutX="300.0" layoutY="187.0" text="Pilih Jenis :">
+         <font>
+            <Font name="Gadugi" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="300.0" layoutY="205.0" prefHeight="34.0" prefWidth="368.0" style="-fx-background-radius: 5;" />
+      <Label layoutX="302.0" layoutY="254.0" text="Nama :">
+         <font>
+            <Font name="Gadugi" size="12.0" />
+         </font>
+      </Label>
+      <TextField layoutX="299.0" layoutY="270.0" prefHeight="34.0" prefWidth="368.0" promptText="Nama" style="-fx-background-radius: 5;" />
+      <Label layoutX="303.0" layoutY="318.0" text="Keterangan :">
+         <font>
+            <Font name="Gadugi" size="12.0" />
+         </font>
+      </Label>
+      <TextField layoutX="302.0" layoutY="337.0" prefHeight="34.0" prefWidth="368.0" promptText="Keterangan" style="-fx-background-radius: 5;">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </TextField>
+      <Label layoutX="307.0" layoutY="389.0" text="Nomilnal :">
+         <font>
+            <Font name="Gadugi" size="12.0" />
+         </font>
+      </Label>
+      <TextField layoutX="301.0" layoutY="408.0" prefHeight="34.0" prefWidth="374.0" promptText="Nominal" style="-fx-background-radius: 5;" />
+      <Button layoutX="333.0" layoutY="508.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" />
+      <Button layoutX="495.0" layoutY="508.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Batal" textFill="WHITE" />
+      <Label layoutX="13.0" layoutY="15.0" text="Tambah Item Pengeluaran">
+         <font>
+            <Font name="Segoe UI Semibold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
