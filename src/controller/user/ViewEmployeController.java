@@ -110,8 +110,8 @@ public class ViewEmployeController implements Initializable {
     public static String Column0MapKey = "id";
 
 
-    DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
-    implementUser dAOUser = user.getUserDAO();
+    DAOFactory user = DAOFactory.getFactory(DAOFactory.MySQL);
+    implementUser dAOUser = user.getUserMySQL();
     List<model_User> listUser = dAOUser.getAll();
     @FXML
     private TextField tfPassword;

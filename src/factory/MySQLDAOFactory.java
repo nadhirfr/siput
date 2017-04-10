@@ -5,7 +5,13 @@
  */
 package factory;
 
-import dao.DAOUser;
+import dao.DAOMySQLDeposit;
+import dao.DAOMySQLIuran;
+import dao.DAOMySQLIuranUser;
+import dao.DAOMySQLUser;
+import dao.implementDeposit;
+import dao.implementIuran;
+import dao.implementIuranUser;
 import dao.implementUser;
 
 /**
@@ -15,7 +21,24 @@ import dao.implementUser;
 public class MySQLDAOFactory extends DAOFactory{
     
     @Override
-    public implementUser getUserDAO() {
-        return new DAOUser();
+    public implementUser getUserMySQL() {
+        return new DAOMySQLUser();
     }
+
+    @Override
+    public implementIuran getIuranMySQL() {
+       return new DAOMySQLIuran();
+    }
+
+    @Override
+    public implementDeposit getDepositMySQL() {
+        return new DAOMySQLDeposit();
+    }
+
+    @Override
+    public implementIuranUser getIuranUserMySQL() {
+        return new DAOMySQLIuranUser();
+    }
+
+    
 }

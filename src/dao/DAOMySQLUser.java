@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DAOUser implements implementUser {
+public class DAOMySQLUser implements implementUser {
 
     Connection connection;
     final String insert = "INSERT INTO user (user_id,user_username,user_displayname,user_password,user_tipe) VALUES (NULL,?,?,?,?);";
@@ -22,7 +22,7 @@ public class DAOUser implements implementUser {
     final String get = "SELECT * FROM user WHERE user_id=?;";
     final String cari = "SELECT * FROM user WHERE user_displayname LIKE ?;";
 
-    public DAOUser() {
+    public DAOMySQLUser() {
         connection = Koneksi.connection();
     }
 
@@ -104,7 +104,7 @@ public class DAOUser implements implementUser {
                 lb.add(b);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOMySQLUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lb;
     }
@@ -127,7 +127,7 @@ public class DAOUser implements implementUser {
                 lb.add(b);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOMySQLUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lb;
     }
@@ -168,7 +168,7 @@ public class DAOUser implements implementUser {
             rs.last();
             lb = rs.getRow();
         } catch (SQLException ex) {
-            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOMySQLUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lb;
     }

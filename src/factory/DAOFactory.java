@@ -15,12 +15,17 @@ public abstract class DAOFactory {
     //setiap kode dipisah berdasarkan fungsinya masing2
     //sehingga kode lain diatasnya tidak perlu tahu cara pengaksesan
     //ke sumber data yang diimplementasikan.
-    public static final int user = 0;
-    public abstract implementUser getUserDAO();
+    public static final int MySQL = 0;
+    public abstract implementUser getUserMySQL();
+    public abstract implementIuran getIuranMySQL();
+    public abstract implementIuranUser getIuranUserMySQL();
+    public abstract implementDeposit getDepositMySQL();
     public static DAOFactory getFactory ( int type){
         switch (type){
-            case user: 
+            case MySQL: 
                 return new MySQLDAOFactory();
+//            case MySQL_iuran: 
+//                return new MySQLDAOFactory();
             default:
                 return null;
         }

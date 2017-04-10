@@ -8,7 +8,7 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import dao.DAOUser;
+import dao.DAOMySQLUser;
 import dao.implementUser;
 import factory.DAOFactory;
 import factory.MySQLDAOFactory;
@@ -63,8 +63,8 @@ public class LoginSiputController implements Initializable {
             ((Node)(event.getSource())).getScene().getWindow().hide();
             
             //ini mengambil data dengan DAOFactory user
-            DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
-            implementUser dAOUser = user.getUserDAO();
+            DAOFactory user = DAOFactory.getFactory(DAOFactory.MySQL);
+            implementUser dAOUser = user.getUserMySQL();
             model_User loggedIn_user = dAOUser.getUser(Integer.toString(loggedIn_user_id));    
             
             //memanggil jendela menu admins

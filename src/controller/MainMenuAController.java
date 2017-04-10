@@ -187,8 +187,8 @@ public class MainMenuAController implements Initializable {
     @FXML
     public void btnHomeOnClick(ActionEvent event) throws IOException {
         homeActive();
-        DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
-        implementUser dAOUser = user.getUserDAO();
+        DAOFactory user = DAOFactory.getFactory(DAOFactory.MySQL);
+        implementUser dAOUser = user.getUserMySQL();
         int totalUser = dAOUser.getCount();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/beranda.fxml"));
@@ -252,8 +252,8 @@ public class MainMenuAController implements Initializable {
     private void btnEmployeOnClick(ActionEvent event) throws IOException {
         userActive();
         
-        DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
-        implementUser dAOUser = user.getUserDAO();
+        DAOFactory user = DAOFactory.getFactory(DAOFactory.MySQL);
+        implementUser dAOUser = user.getUserMySQL();
         List<model_User> UserList = dAOUser.getAll();
         
         FXMLLoader loader = new FXMLLoader();
