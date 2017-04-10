@@ -11,13 +11,9 @@ package controller.user;
 import dao.implementUser;
 import factory.DAOFactory;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 //import dataBase.SQL;
 import javafx.event.ActionEvent;
@@ -33,23 +29,19 @@ import javafx.scene.shape.Rectangle;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Blob;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import javafx.embed.swing.SwingFXUtils;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import javax.imageio.ImageIO;
 import model.model_User;
@@ -67,17 +59,6 @@ import model.model_User;
  * @author rifat
  */
 public class ViewEmployeController implements Initializable {
-
-//    CustomPf cPf = new CustomPf();
-//    CustomTf cTf = new CustomTf();
-//    Users users = new Users();
-//    UsersGetway usersGetway = new UsersGetway();
-//    SQL sql = new SQL();
-//    DBConnection dbCon = new DBConnection();
-//    
-//    
-//    DBProperties dBProperties = new DBProperties();
-//    String db = dBProperties.loadPropertiesFile();
 
     private File file;
     private BufferedImage bufferedImage;
@@ -101,27 +82,13 @@ public class ViewEmployeController implements Initializable {
     @FXML
     private TextField tfFullName;
     @FXML
-    private TextField tfEmailAddress;
-    @FXML
-    private TextField tfPhoneNumber;
-    @FXML
     private TextField tfSearch;
-    @FXML
-    private Rectangle recUsrImage;
-    @FXML
-    private Button btnAttachImage;
     @FXML
     private Button btnUpdate;
     @FXML
     private Button btnDelete;
     @FXML
-    private TextField tfSalary;
-    @FXML
-    private TextField tfDateofJoin;
-    @FXML
     private TextField tfCreatedBy;
-    @FXML
-    private TextArea taAddress;
     @FXML
     public Button btnClrFulNametf;
     @FXML
@@ -131,63 +98,57 @@ public class ViewEmployeController implements Initializable {
     @FXML
     public Button btnClrSalarytf;
     @FXML
-    public Button btnClrDatestf;
+    private TableView<Map> tblEmoyeeList;
     @FXML
-    public Button btnClrCreatortf;
+    private TableColumn<Map, ?> clmEmployeId;
     @FXML
-    private CheckBox cbStatus;
-    @FXML
-    private Hyperlink hlChangePassword;
-    @FXML
-    private Hyperlink hlViewPermission;
-    @FXML
-    private TableView<model_User> tblEmoyeeList;
-    @FXML
-    private TableColumn<Object, Object> clmEmployeId;
-    @FXML
-    private TableColumn<Object, Object> clmEmployeName;
-    @FXML
-    private Label lblCreator;
+    private TableColumn<Map, ?> clmEmployeName;
 
     Image usrImg = new Image("/img/siput-logo.png");
+    
+    public static String Column1MapKey = "nama";
+    public static String Column0MapKey = "id";
 
-//    public userNameMedia getNameMedia() {
-//        return nameMedia;
-//    }
 
-//    public void setNameMedia(userNameMedia nameMedia) {
-//        userId = nameMedia.getId();
-//        name = nameMedia.getUsrName();
-//        this.nameMedia = nameMedia;
-//    }
-
+    DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
+    implementUser dAOUser = user.getUserDAO();
+    List<model_User> listUser = dAOUser.getAll();
+    @FXML
+    private TextField tfPassword;
+    @FXML
+    private TextField tfTipeUser;
+    @FXML
+    private TextField tfSaldo;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 //        // TODO
-////        apMotherContent.getStylesheets().add(ViewEmployeController.class.getResource("/style/MainStyle.css").toExternalForm());
-//        cTf.clearTextFieldByButton(tfFullName, btnClrFulNametf);
-//        cTf.clearTextFieldByButton(tfEmailAddress, btnClrEmailtf);
-//        cTf.clearTextFieldByButton(tfPhoneNumber, btnClrPhonetf);
-//        cTf.clearTextFieldByButton(tfDateofJoin, btnClrDatestf);
-//        cTf.clearTextFieldByButton(tfCreatedBy, btnClrCreatortf);
-//        cTf.clearTextFieldByButton(tfSalary, btnClrSalarytf);
-//
-//        cTf.numaricTextfield(tfSalary);
-//
-DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
-        implementUser dAOUser = user.getUserDAO();
-        List<model_User> listUser = dAOUser.getAll();
 
+        clmEmployeId.setCellValueFactory(new MapValueFactory(Column0MapKey));
+        clmEmployeId.setMaxWidth(0);
+        clmEmployeName.setCellValueFactory(new MapValueFactory(Column1MapKey));
+        clmEmployeName.setMinWidth(160);
         
-        tblEmoyeeList = new TableView<>();
-        for (int i = 0; i < listUser.size() ; i++) {
-            tblEmoyeeList.getItems().add(new model_User(i, listUser.get(i).getUser_username(), 
-                    listUser.get(i).getUser_displayname(), listUser.get(i).getUser_password(), 
-                    listUser.get(i).getUser_tipe()));
+        tblEmoyeeList.setItems(generateDataInMap());
+        tblEmoyeeList.setEditable(true);
+        tblEmoyeeList.getSelectionModel().setCellSelectionEnabled(true);
+        tblEmoyeeList.getColumns().setAll(clmEmployeName);
+        
+    }
+    
+    private ObservableList<Map> generateDataInMap() {
+        ObservableList<Map> allData = FXCollections.observableArrayList();
+        for (int i = 0; i < listUser.size(); i++) {
+            Map<String, String> dataRow = new HashMap<>();
+            String value0 = String.valueOf(listUser.get(i).getUser_id());
+            String value1 = listUser.get(i).getUser_displayname();
+            dataRow.put(Column1MapKey, value1);
+            dataRow.put(Column0MapKey, value0);
+            allData.add(dataRow);
         }
+        return allData;
     }
 
     @FXML
@@ -195,7 +156,6 @@ DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
 
     }
 
-    @FXML
     private void btnAttachImageOnAction(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
@@ -212,7 +172,7 @@ DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
             System.out.println(file);
             bufferedImage = ImageIO.read(file);
             image = SwingFXUtils.toFXImage(bufferedImage, null);
-            recUsrImage.setFill(new ImagePattern(image));
+//            recUsrImage.setFill(new ImagePattern(image));
             imagePath = file.getAbsolutePath();
         }
 
@@ -227,106 +187,27 @@ DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
         }
     }
 
+    @FXML
     public void tblEmloyeOnClick(Event event) {
         setselectedView();
     }
 
-//    @FXML
-//    private void btnUpdateOnAction(ActionEvent event) throws FileNotFoundException {
-//
-//        users.userName = tfUserName.getText();
-//        users.fullName = tfFullName.getText();
-//        users.emailAddress = tfEmailAddress.getText();
-//        users.contactNumber = tfPhoneNumber.getText();
-//        users.salary = tfSalary.getText();
-//        users.address = taAddress.getText();
-//        users.image = usrImg;
-//        if (cbStatus.isSelected()) {
-//            users.status = "1";
-//        } else {
-//            users.status = "0";
-//        }
-//        users.imagePath = imagePath;
-//        users.creatorId = userId;
-//        usersGetway.update(users);
-//    }
 
-    @FXML
-    private void btnDeleteOnAction(ActionEvent event) {
-//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//        alert.setTitle("Delete Employee");
-//        alert.setHeaderText("Are You sure ?");
-//        alert.setContentText("Are you sure to remove this employee \n Click OK to confirm");
-//        alert.initStyle(StageStyle.UNDECORATED);
-//        Optional<ButtonType> result = alert.showAndWait();
-//        if (result.isPresent() && result.get() == ButtonType.OK) {
-//            usersGetway.selectedView(users);
-//            usersGetway.delete(users);
-//        }
-//        
-//        tblEmoyeeList.getItems().clear();
-//        showDetails();
+ 
 
-    }
-
-    @FXML
-    private void cbOnAction(ActionEvent event) {
-        if (cbStatus.isSelected()) {
-            cbStatus.setText("Active");
-        } else {
-            cbStatus.setText("Deactive");
-        }
-    }
-
-    @FXML
-    private void hlChangePasswordOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void hlViewPermissionOnAction(ActionEvent event) throws IOException {
-//        usersGetway.selectedView(users);
-//        id = users.id;
-//
-//        EmployeePermissionController pcc = new EmployeePermissionController();
-//        userNameMedia usrID = new userNameMedia();
-//        FXMLLoader loader = new FXMLLoader();
-//        System.out.println(id);
-//        loader.setLocation(getClass().getResource("/view/application/employe/EmployeePermission.fxml"));
-//        loader.load();
-//        Parent root = loader.getRoot();
-//        Scene scene = new Scene(root);
-//        scene.setFill(new Color(0, 0, 0, 0));
-//        EmployeePermissionController PermissionController = loader.getController();
-//        nameMedia.setId(id);
-//        PermissionController.setMedia(nameMedia);
-//        PermissionController.checqPermission();
-//        Stage nStage = new Stage();
-//        nStage.setScene(scene);
-//        nStage.initModality(Modality.APPLICATION_MODAL);
-//        nStage.initStyle(StageStyle.TRANSPARENT);
-//        nStage.show();
-    }
-
-    @FXML
-    private void hlViewUpdateHistory(ActionEvent event) throws IOException {
-//        String emp = "Employee";
-//        History history = new History();
-//        history.viewText(emp, tfUserName.getText(), name);
-//        System.out.println("view");
-    }
 
     public void setselectedView() {
-//        clearAll();
-//        ListEmployee employeeList = tblEmoyeeList.getSelectionModel().getSelectedItem();
-//        if (employeeList != null) {
-//            users.id = employeeList.getEmployeeId();
-//            usersGetway.selectedView(users);
-//            id = users.id;
-//            tfUserName.setText(users.userName);
-//            tfFullName.setText(users.fullName);
-//            tfPhoneNumber.setText(users.contactNumber);
-//            tfEmailAddress.setText(users.emailAddress);
+        clearAll();
+        Map employeeList = tblEmoyeeList.getSelectionModel().getSelectedItem();
+        model_User user = new model_User();
+        if (employeeList != null) {
+            user = dAOUser.getUser(employeeList.get(Column0MapKey).toString());
+            //usersGetway.selectedView(users);
+            id = String.valueOf(user.getUser_id());
+            tfUserName.setText(user.getUser_username());
+            tfFullName.setText(user.getUser_displayname());
+            tfPassword.setText(user.getUser_password());
+            tfTipeUser.setText(user.getUser_tipe());
 //            tfSalary.setText(users.salary);
 //            tfDateofJoin.setText(users.date);
 //            creatorId = users.creatorId;
@@ -353,8 +234,8 @@ DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
 //                hlChangePassword.setVisible(true);
 //                hlViewPermission.setVisible(true);
 //            }
-//
-//        }
+
+        }
     }
 
     public void showDetails() {
@@ -362,7 +243,6 @@ DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
 //        clmEmployeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
 //        clmEmployeName.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
 //        usersGetway.view(users);
-
     }
 
     public void checqPermission() {
@@ -386,10 +266,5 @@ DAOFactory user = DAOFactory.getFactory(DAOFactory.user);
         tfUserName.clear();
         tfFullName.clear();
         tfCreatedBy.clear();
-        tfSalary.clear();
-        tfEmailAddress.clear();
-        tfDateofJoin.clear();
-        tfPhoneNumber.clear();
-        taAddress.clear();
     }
 }

@@ -1,0 +1,77 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller.application;
+
+import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import controller.application.TmbhItemIuranController;
+import controller.application.TmbhItemPengeluaranController;
+
+/**
+ * FXML Controller class
+ *
+ * @author rheza
+ */
+public class TmbhItemController implements Initializable {
+
+    @FXML
+    private AnchorPane acMainItem;
+    @FXML
+    private JFXButton btn_iuran;
+    @FXML
+    private JFXButton btn_pengeluaran;
+    @FXML
+    private StackPane spMainItem;
+
+    /**
+     * Initializes the controller class.
+     */
+    @FXML
+    public void btn_iuranOnAction(ActionEvent event) throws IOException {
+        //lblPathInfo.setText("Sells");
+        TmbhItemIuranController tmbhitem = new TmbhItemIuranController();
+        //userNameMedia media = new userNameMedia();
+        FXMLLoader fXMLLoader = new FXMLLoader();
+        fXMLLoader.load(getClass().getResource("/view/TmbhItemIuran.fxml").openStream());
+        //media.setId(userId);
+        TmbhItemIuranController controller = fXMLLoader.getController();
+        //controller.setNameMedia(nameMedia);
+        //controller.viewDetails();
+//        controller.viewDetails();
+        spMainItem.getChildren().clear();
+        spMainItem.getChildren().add(fXMLLoader.getRoot());
+    }
+
+    @FXML
+    public void btn_pengeluaranOnAction(ActionEvent event) throws IOException {
+        //lblPathInfo.setText("Sells");
+        TmbhItemPengeluaranController tmbhitemP = new TmbhItemPengeluaranController();
+        //userNameMedia media = new userNameMedia();
+        FXMLLoader fXMLLoader = new FXMLLoader();
+        fXMLLoader.load(getClass().getResource("/view/TmbhItemPengeluaran.fxml").openStream());
+        //media.setId(userId);
+        TmbhItemPengeluaranController controller = fXMLLoader.getController();
+        //controller.setNameMedia(nameMedia);
+        //controller.viewDetails();
+//        controller.viewDetails();
+        spMainItem.getChildren().clear();
+        spMainItem.getChildren().add(fXMLLoader.getRoot());
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }
+
+}

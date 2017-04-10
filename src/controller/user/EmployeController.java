@@ -80,7 +80,6 @@ public class EmployeController implements Initializable {
         ViewEmployeController viewEmployeController = fXMLLoader.getController();
 //        viewEmployeController.setNameMedia(nameMedia);
         viewEmployeController.showDetails();
-        viewEmployeController.btnClrCreatortf.getStylesheets().add("/style/btnOnText.css");
         viewEmployeController.btnClrEmailtf.getStylesheets().add("/style/btnOnText.css");
         viewEmployeController.btnClrFulNametf.getStylesheets().add("/style/btnOnText.css");
         viewEmployeController.btnClrSalarytf.getStylesheets().add("/style/btnOnText.css");

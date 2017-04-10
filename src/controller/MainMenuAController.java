@@ -8,6 +8,7 @@ package controller;
 import controller.application.MPemasukanController;
 import controller.application.MPengeluaranController;
 import controller.application.PengaturanController;
+import controller.application.TmbhItemController;
 import controller.user.EmployeController;
 import controller.application.TmbhItemIuranController;
 import controller.application.beranda.berandaController;
@@ -273,7 +274,7 @@ public class MainMenuAController implements Initializable {
 
     @FXML
     private void btnSettingsOnClick(ActionEvent event) throws IOException {
-        SettActive();
+         SettActive();
         //inithilize Setting Controller
         TmbhItemIuranController pengaturanController = new TmbhItemIuranController();
         //inithilize UserNameMedia
@@ -281,12 +282,12 @@ public class MainMenuAController implements Initializable {
         // Define a loader to inithilize Settings.fxml controller
         FXMLLoader settingLoader = new FXMLLoader();
         //set the location of Settings.fxml by fxmlloader
-        settingLoader.load(getClass().getResource("/view/TmbhItemIuran.fxml").openStream());
+        settingLoader.load(getClass().getResource("/view/TmbhItem.fxml").openStream());
 
         //Send id to userMedia
         //usrMedia.setId(id);
         //take control of settingController elements or node
-        TmbhItemIuranController pengaturanControl = settingLoader.getController();
+         TmbhItemController pengaturanControl = settingLoader.getController();
         //pengaturanControl.bpSettings.getStylesheets().add("/style/MainStyle.css");
 
         //pengaturanControl.setUsrMedia(usrMedia);
