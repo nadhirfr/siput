@@ -75,7 +75,6 @@ public class MPemasukanController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        cb_Pembayaran.setPromptText("Pilih Pembayaran");
         cb_namaAnggota.setItems(generateDataUserInMap());
         cb_namaAnggota.setConverter(converter_cbAnggota);
         cb_namaAnggota.setCellFactory(callback_cbAnggota);
@@ -223,6 +222,7 @@ public class MPemasukanController implements Initializable {
         return allData;
     }
     
+    //gajadi dipake
     private ObservableList<model_Iuran> generateDataIuranInMap() {
         ObservableList<model_Iuran> allData = FXCollections.observableArrayList();
         for (int i = 0; i < listIuran.size(); i++) {

@@ -55,7 +55,7 @@
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <CheckComboBox layoutX="301.0" layoutY="428.0" prefHeight="25.0" prefWidth="374.0" />
+      <CheckComboBox layoutX="301.0" layoutY="428.0" prefHeight="35.0" prefWidth="374.0" />
       <Button layoutX="333.0" layoutY="542.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" />
       <Button layoutX="495.0" layoutY="542.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Batal" textFill="WHITE" />
       <Label layoutX="24.0" layoutY="14.0" text="Tambah Item Iuran">
