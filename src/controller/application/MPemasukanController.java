@@ -75,6 +75,7 @@ public class MPemasukanController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        cb_Pembayaran.setPromptText("Pilih Pembayaran");
         cb_namaAnggota.setItems(generateDataUserInMap());
         cb_namaAnggota.setConverter(converter_cbAnggota);
         cb_namaAnggota.setCellFactory(callback_cbAnggota);
@@ -83,7 +84,18 @@ public class MPemasukanController implements Initializable {
             public void changed(ObservableValue<? extends model_User> observable, model_User oldValue, model_User newValue) {
                 if(newValue != null){
                     lbSisaSaldo.setText("Sisa saldo : "+String.valueOf(deposit.getByUser(newValue).getDepositJumlah()));
-                    cb_Pembayaran.setItems(generateDataIuranInMap());
+                    //cb_Pembayaran.setItems(generateDataIuranInMap());
+                    System.out.println("Selected : "+newValue.getUser_displayname());
+                    cb_Pembayaran.getItems().clear();
+                    for (int i = 0; i < listIuranUser.size();i++){
+                        if (listIuranUser.get(i).getUserId() == newValue.getUser_id()){
+                            cb_Pembayaran.getItems().add(listIuran.get(listIuranUser.get(i).getIuranId()));
+                            cb_Pembayaran.setPromptText("Pilih Pembayaran");
+                        } else {
+                            cb_Pembayaran.setPromptText("Pilih Pembayaran");
+                        }
+                    }
+                  
                     cb_Pembayaran.setConverter(converter_cbIuran);
                     cb_Pembayaran.setCellFactory(callback_cbIuran);
                     cb_Pembayaran.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<model_Iuran>() {
@@ -192,21 +204,7 @@ public class MPemasukanController implements Initializable {
                             public void updateItem(model_Iuran item, boolean empty) {
                               super.updateItem(item, empty);
                               if (item != null) {
-                                  //logicnya belum bener
-//                                  model_User user = cb_namaAnggota.getSelectionModel().getSelectedItem();
-//                                  for (int i = 0; i < listIuranUser.size();i++){
-//                                    if (listIuranUser.get(i).getUserId() == user.getUser_id()
-//                                            || listIuranUser.get(i).getIuranId() == item.getIuranId()) 
-//                                        {
-//                                            setText(item.getIuranNama());
-//                                      
-//                                        }
-//                                  }
-                                  
-                                            setText(item.getIuranNama());
-//                                  if(item.getUser_tipe().equals("admin")) setTextFill(Color.GREEN);
-//                                  if(item.getUser_tipe().equals("operator")) setTextFill(Color.YELLOW);
-
+                                  setText(item.getIuranNama());
                               } else {
                                 setText(null);
                               }
