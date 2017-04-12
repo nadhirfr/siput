@@ -22,7 +22,7 @@
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <ComboBox layoutX="302.0" layoutY="94.0" prefHeight="34.0" prefWidth="362.0" style="-fx-background-radius: 5;" />
+      <ComboBox layoutX="302.0" layoutY="94.0" prefHeight="34.0" prefWidth="368.0" style="-fx-background-radius: 5;" />
       <Label layoutX="302.0" layoutY="141.0" text="Pilih Jenis :">
          <font>
             <Font name="Gadugi" size="12.0" />
@@ -49,13 +49,13 @@
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <TextField layoutX="301.0" layoutY="362.0" prefHeight="34.0" prefWidth="374.0" promptText="Nominal" style="-fx-background-radius: 5;" />
+      <TextField layoutX="301.0" layoutY="362.0" prefHeight="34.0" prefWidth="368.0" promptText="Nominal" style="-fx-background-radius: 5;" />
       <Label layoutX="305.0" layoutY="410.0" text="Pilih User :">
          <font>
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <CheckComboBox layoutX="301.0" layoutY="428.0" prefHeight="35.0" prefWidth="374.0" />
+      <CheckComboBox layoutX="301.0" layoutY="428.0" prefHeight="35.0" prefWidth="368.0" />
       <Button layoutX="333.0" layoutY="542.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" />
       <Button layoutX="495.0" layoutY="542.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Batal" textFill="WHITE" />
       <Label layoutX="24.0" layoutY="14.0" text="Tambah Item Iuran">
