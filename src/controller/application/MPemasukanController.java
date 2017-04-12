@@ -69,12 +69,15 @@ public class MPemasukanController implements Initializable {
     private Label lbSisaSaldo;
     @FXML
     private JFXComboBox<model_Iuran> cb_Pembayaran;
+    @FXML
+    private Label lbStatus;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        nom_saldo_DP.setText("0");
         cb_namaAnggota.setItems(generateDataUserInMap());
         cb_namaAnggota.setConverter(converter_cbAnggota);
         cb_namaAnggota.setCellFactory(callback_cbAnggota);
@@ -82,7 +85,7 @@ public class MPemasukanController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends model_User> observable, model_User oldValue, model_User newValue) {
                 if(newValue != null){
-                    lbSisaSaldo.setText("Sisa saldo : "+String.valueOf(deposit.getByUser(newValue).getDepositJumlah()));
+                    lbSisaSaldo.setText(String.valueOf(deposit.getByUser(newValue).getDepositJumlah()));
                     //cb_Pembayaran.setItems(generateDataIuranInMap());
                     System.out.println("Selected : "+newValue.getUser_displayname());
                     cb_Pembayaran.getItems().clear();
@@ -110,6 +113,38 @@ public class MPemasukanController implements Initializable {
             }
         });
         cb_namaAnggota.setEditable(true);
+        
+        nom_pembayaranP.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                int kurang;
+                if (nom_pembayaranP.getText().equals("")) {
+                    nom_pembayaranP.setText("0");
+                } 
+                kurang = Integer.valueOf(nom_jns_pembayaranP.getText()) - 
+                        (Integer.valueOf(newValue) );
+                
+                lbStatus.setText(String.valueOf(kurang));
+            }
+        });
+        nom_saldo_DP.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            if (!nom_saldo_DP.getText().equals("")) {
+                int value = deposit.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
+                        .getDepositJumlah() - Integer.valueOf(newValue);
+                lbSisaSaldo.setText(String.valueOf(value));
+                
+                int kurang = Integer.valueOf(nom_jns_pembayaranP.getText()) - 
+                        (Integer.valueOf(newValue) + Integer.valueOf(nom_saldo_DP.getText()));
+                lbStatus.setText(String.valueOf(kurang));
+            } else{
+                lbSisaSaldo.setText(String.valueOf(deposit.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
+                        .getDepositJumlah()));
+                
+            }
+            }
+        });
    }
     
     private StringConverter<model_User> converter_cbAnggota = 

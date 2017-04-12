@@ -22,7 +22,7 @@ public interface implementTransaksi {
 
     public void update(model_Transaksi b);
 
-    public void delete(String IuranId);
+    public void delete(String transaksiId);
 
     public List<model_Transaksi> getAll();
 

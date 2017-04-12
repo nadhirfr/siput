@@ -12,20 +12,20 @@ package model;
 public class model_Pengeluaran {
 
     private int pengeluaran_id, pengeluaran_jenis_id, pengeluaran_kategori_id;
-    private char pengeluaran_nama;
+    private String pengeluaran_nama;
 
     public model_Pengeluaran() {
 
     }
 
-    public model_Pengeluaran(int pengeluaran_id, char pengeluaran_nama, int pengeluaran_jenis_id, int pengeluaran_kategori_id) {
+    public model_Pengeluaran(int pengeluaran_id, String pengeluaran_nama, int pengeluaran_jenis_id, int pengeluaran_kategori_id) {
         this.pengeluaran_id = pengeluaran_id;
         this.pengeluaran_nama = pengeluaran_nama;
         this.pengeluaran_jenis_id = pengeluaran_jenis_id;
         this.pengeluaran_kategori_id = pengeluaran_kategori_id;
     }
 
-    public model_Pengeluaran(char pengeluaran_nama, int pengeluaran_jenis_id, int pengeluaran_kategori_id) {
+    public model_Pengeluaran(String pengeluaran_nama, int pengeluaran_jenis_id, int pengeluaran_kategori_id) {
         this.pengeluaran_nama = pengeluaran_nama;
         this.pengeluaran_jenis_id = pengeluaran_jenis_id;
         this.pengeluaran_kategori_id = pengeluaran_kategori_id;
@@ -55,11 +55,11 @@ public class model_Pengeluaran {
         this.pengeluaran_kategori_id = pengeluaran_kategori_id;
     }
 
-    public char getPengeluaran_nama() {
+    public String getPengeluaran_nama() {
         return pengeluaran_nama;
     }
 
-    public void setPengeluaran_nama(char pengeluaran_nama) {
+    public void setPengeluaran_nama(String pengeluaran_nama) {
         this.pengeluaran_nama = pengeluaran_nama;
     }
     
