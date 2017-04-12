@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -16,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="599.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.application.MPemasukanController">
+<AnchorPane id="AnchorPane" prefHeight="599.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.application.MPemasukanController">
    <children>
       <BorderPane fx:id="bpPemasukan" prefHeight="599.0" prefWidth="965.0">
          <top>
@@ -49,7 +44,7 @@
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <JFXComboBox fx:id="cb_namaAnggota" layoutX="90.0" layoutY="38.0" prefHeight="25.0" prefWidth="252.0" promptText="Nama Anggota" />
-                  <JFXComboBox fx:id="cb_Pembayaran" layoutX="90.0" layoutY="101.0" prefHeight="25.0" prefWidth="252.0" promptText="Pilih Pembayaran" />
+                  <JFXComboBox fx:id="cb_Pembayaran" editable="true" labelFloat="true" layoutX="90.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="252.0" promptText="Pilih Pembayaran " unFocusColor="#363434" />
                   <JFXTextField fx:id="nom_jns_pembayaranP" disable="true" layoutX="90.0" layoutY="166.0" prefHeight="25.0" prefWidth="253.0" promptText="Masukan Nominal (ex : 2000)" text="Nominal Jenis Pembayaran" />
                   <Label fx:id="lbSisaSaldo" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="447.0" layoutY="41.0" prefHeight="17.0" prefWidth="174.0" style="-fx-border-color: black;" text="Jumlah Saldo" textAlignment="CENTER" />
                   <JFXTextField fx:id="nom_saldo_DP" layoutX="90.0" layoutY="286.0" prefHeight="25.0" prefWidth="253.0" promptText="Nominal Saldo yang diambil" />
