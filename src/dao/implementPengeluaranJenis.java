@@ -5,10 +5,25 @@
  */
 package dao;
 
+import java.util.List;
+import model.model_PengeluaranJenis;
+
 /**
  *
  * @author rheza
  */
 public interface implementPengeluaranJenis {
+        public void insert(model_PengeluaranJenis b);
     
+    public model_PengeluaranJenis get(String PengeluaranJenisId);
+
+    public void update(model_PengeluaranJenis b);
+
+    public void delete(String PengeluaranJenisId);
+
+    public List<model_PengeluaranJenis> getAll();
+
+    public List<model_PengeluaranJenis> getCari(String PengeluaranNama);
+    
+    public int getCount();
 }
