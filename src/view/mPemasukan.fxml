@@ -43,15 +43,15 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXComboBox fx:id="cb_namaAnggota" layoutX="90.0" layoutY="38.0" prefHeight="25.0" prefWidth="252.0" promptText="Nama Anggota" />
-                  <JFXComboBox fx:id="cb_Pembayaran" editable="true" labelFloat="true" layoutX="90.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="252.0" promptText="Pilih Pembayaran " unFocusColor="#363434" />
-                  <JFXTextField fx:id="nom_jns_pembayaranP" disable="true" layoutX="90.0" layoutY="166.0" prefHeight="25.0" prefWidth="253.0" promptText="Masukan Nominal (ex : 2000)" text="Nominal Jenis Pembayaran" />
                   <Label fx:id="lbSisaSaldo" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="447.0" layoutY="41.0" prefHeight="17.0" prefWidth="174.0" style="-fx-border-color: black;" text="Jumlah Saldo" textAlignment="CENTER" />
-                  <JFXTextField fx:id="nom_saldo_DP" layoutX="90.0" layoutY="286.0" prefHeight="25.0" prefWidth="253.0" promptText="Nominal Saldo yang diambil" />
                   <Label fx:id="lbStatus" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="447.0" layoutY="166.0" prefHeight="151.0" prefWidth="174.0" style="-fx-border-color: black;" text="Status" textAlignment="CENTER" />
+                  <JFXComboBox fx:id="cb_namaAnggota" editable="true" labelFloat="true" layoutX="90.0" layoutY="38.0" prefHeight="25.0" prefWidth="252.0" promptText="Nama Anggota" />
+                  <JFXComboBox fx:id="cb_Pembayaran" editable="true" labelFloat="true" layoutX="90.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="252.0" promptText="Pilih Pembayaran " unFocusColor="#363434" />
+                  <JFXTextField fx:id="nom_jns_pembayaranP" disable="true" labelFloat="true" layoutX="90.0" layoutY="166.0" prefHeight="25.0" prefWidth="253.0" promptText="Nominal Jenis Pembayaran" />
+                  <JFXTextField fx:id="nom_pembayaranP" labelFloat="true" layoutX="90.0" layoutY="229.0" prefHeight="25.0" prefWidth="253.0" promptText="Masukan Nominal (ex : 2000)" />
+                  <JFXTextField fx:id="nom_saldo_DP" labelFloat="true" layoutX="90.0" layoutY="286.0" prefHeight="25.0" prefWidth="253.0" promptText="Nominal Saldo yang diambil" />
                   <JFXButton fx:id="btnSimpanP" layoutX="91.0" layoutY="359.0" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" />
                   <JFXButton fx:id="btnBatalP" layoutX="229.0" layoutY="359.0" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #3498db;" text="Batal" textFill="WHITE" />
-                  <JFXTextField fx:id="nom_pembayaranP" layoutX="90.0" layoutY="229.0" prefHeight="25.0" prefWidth="253.0" promptText="Masukan Nominal (ex : 2000)" />
                </children>
             </AnchorPane>
          </center>

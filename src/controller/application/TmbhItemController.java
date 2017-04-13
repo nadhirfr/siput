@@ -43,7 +43,7 @@ public class TmbhItemController implements Initializable {
         TmbhItemIuranController tmbhitem = new TmbhItemIuranController();
         //userNameMedia media = new userNameMedia();
         FXMLLoader fXMLLoader = new FXMLLoader();
-        fXMLLoader.load(getClass().getResource("/view/TmbhItemIuran.fxml").openStream());
+        fXMLLoader.load(getClass().getResource("/view/Pengaturan/TmbhItemIuran.fxml").openStream());
         //media.setId(userId);
         TmbhItemIuranController controller = fXMLLoader.getController();
         //controller.setNameMedia(nameMedia);
@@ -59,7 +59,7 @@ public class TmbhItemController implements Initializable {
         TmbhItemPengeluaranController tmbhitemP = new TmbhItemPengeluaranController();
         //userNameMedia media = new userNameMedia();
         FXMLLoader fXMLLoader = new FXMLLoader();
-        fXMLLoader.load(getClass().getResource("/view/TmbhItemPengeluaran.fxml").openStream());
+        fXMLLoader.load(getClass().getResource("/view/Pengaturan/TmbhItemPengeluaran.fxml").openStream());
         //media.setId(userId);
         TmbhItemPengeluaranController controller = fXMLLoader.getController();
         //controller.setNameMedia(nameMedia);
