@@ -20,22 +20,18 @@ import dao.implementUser;
  */
 public class MySQLDAOFactory extends DAOFactory{
     
-    @Override
     public implementUser getUserMySQL() {
         return new DAOMySQLUser();
     }
 
-    @Override
     public implementIuran getIuranMySQL() {
        return new DAOMySQLIuran();
     }
 
-    @Override
     public implementDeposit getDepositMySQL() {
         return new DAOMySQLDeposit();
     }
 
-    @Override
     public implementIuranUser getIuranUserMySQL() {
         return new DAOMySQLIuranUser();
     }

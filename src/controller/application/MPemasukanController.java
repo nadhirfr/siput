@@ -13,6 +13,7 @@ import dao.implementIuran;
 import dao.implementIuranUser;
 import dao.implementUser;
 import factory.DAOFactory;
+import factory.MySQLDAOFactory;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,14 +28,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-import model.model_Deposit;
+import model.Deposit;
 import model.model_Iuran;
 import model.model_IuranUser;
-import model.model_User;
+import model.User;
 
 /**
  * FXML Controller class
@@ -56,7 +58,7 @@ public class MPemasukanController implements Initializable {
     @FXML
     private JFXTextField nom_pembayaranP;
     @FXML
-    private JFXComboBox<model_User> cb_namaAnggota;
+    private JFXComboBox<User> cb_namaAnggota;
     @FXML
     private Label lbSisaSaldo;
     @FXML
@@ -64,16 +66,15 @@ public class MPemasukanController implements Initializable {
     @FXML
     private Label lbStatus;
 
-    DAOFactory daoMySQL = DAOFactory.getFactory(DAOFactory.MySQL);
+    MySQLDAOFactory daoMySQL = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
     implementUser dAOUser = daoMySQL.getUserMySQL();
     implementDeposit deposit = daoMySQL.getDepositMySQL();
     implementIuran iuran = daoMySQL.getIuranMySQL();
     implementIuranUser iuranUser = daoMySQL.getIuranUserMySQL();
-    List<model_User> listUser = dAOUser.getAll();
-    List<model_Deposit> listDeposit = deposit.getAll();
+    List<User> listUser = dAOUser.getAll();
+    List<Deposit> listDeposit = deposit.getAll();
     List<model_Iuran> listIuran = iuran.getAll();
     List<model_IuranUser> listIuranUser = iuranUser.getAll();
-    
 
     /**
      * Initializes the controller class.
@@ -85,9 +86,9 @@ public class MPemasukanController implements Initializable {
         cb_namaAnggota.setItems(generateDataUserInMap());
         cb_namaAnggota.setConverter(converter_cbAnggota);
         cb_namaAnggota.setCellFactory(callback_cbAnggota);
-        cb_namaAnggota.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<model_User>() {
+        cb_namaAnggota.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
             @Override
-            public void changed(ObservableValue<? extends model_User> observable, model_User oldValue, model_User newValue) {
+            public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
                 if (newValue != null) {
                     lbSisaSaldo.setText(String.valueOf(deposit.getByUser(newValue).getDepositJumlah()));
                     //cb_Pembayaran.setItems(generateDataIuranInMap());
@@ -140,6 +141,16 @@ public class MPemasukanController implements Initializable {
                 lbStatus.setText(String.valueOf(kurang));
             }
         });
+        nom_pembayaranP.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (nom_pembayaranP.getText().equals("0")) {
+                    nom_pembayaranP.requestFocus(); // get focus first
+                    nom_pembayaranP.positionCaret(0);
+                    nom_pembayaranP.selectNextWord();
+                }
+            }
+        });
         nom_saldo_DP.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -166,7 +177,17 @@ public class MPemasukanController implements Initializable {
                 lbStatus.setText(String.valueOf(kurang));
             }
         });
-        
+        nom_saldo_DP.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (nom_saldo_DP.getText().equals("0")) {
+
+                    nom_saldo_DP.requestFocus(); // get focus first
+                    nom_saldo_DP.positionCaret(0);
+                    nom_saldo_DP.selectNextWord();
+                }
+            }
+        });
         btnSimpanP.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -175,10 +196,10 @@ public class MPemasukanController implements Initializable {
         });
     }
 
-    private StringConverter<model_User> converter_cbAnggota
-            = new StringConverter<model_User>() {
+    private StringConverter<User> converter_cbAnggota
+            = new StringConverter<User>() {
         @Override
-        public String toString(model_User object) {
+        public String toString(User object) {
             if (object != null) {
                 return object.getUser_displayname();
             } else {
@@ -188,9 +209,9 @@ public class MPemasukanController implements Initializable {
         }
 
         @Override
-        public model_User fromString(String string) {
-            model_User user = new model_User();
-            for (model_User _user : cb_namaAnggota.getItems()) {
+        public User fromString(String string) {
+            User user = new User();
+            for (User _user : cb_namaAnggota.getItems()) {
                 if (_user.getUser_displayname().equals(string)) {
                     user = _user;
                     break;
@@ -227,17 +248,17 @@ public class MPemasukanController implements Initializable {
         }
     };
 
-    private Callback<ListView<model_User>, ListCell<model_User>> callback_cbAnggota
-            = new Callback<ListView<model_User>, ListCell<model_User>>() {
+    private Callback<ListView<User>, ListCell<User>> callback_cbAnggota
+            = new Callback<ListView<User>, ListCell<User>>() {
         @Override
-        public ListCell<model_User> call(ListView<model_User> param) {
-            final ListCell<model_User> cell = new ListCell<model_User>() {
+        public ListCell<User> call(ListView<User> param) {
+            final ListCell<User> cell = new ListCell<User>() {
                 {
                     super.setPrefWidth(100);
                 }
 
                 @Override
-                public void updateItem(model_User item, boolean empty) {
+                public void updateItem(User item, boolean empty) {
                     super.updateItem(item, empty);
                     if (item != null) {
                         if (item.getUser_tipe().equals("admin")) {
@@ -280,20 +301,10 @@ public class MPemasukanController implements Initializable {
         }
     };
 
-    private ObservableList<model_User> generateDataUserInMap() {
-        ObservableList<model_User> allData = FXCollections.observableArrayList();
+    private ObservableList<User> generateDataUserInMap() {
+        ObservableList<User> allData = FXCollections.observableArrayList();
         for (int i = 0; i < listUser.size(); i++) {
-            model_User dataRow = listUser.get(i);
-            allData.add(dataRow);
-        }
-        return allData;
-    }
-
-    //gajadi dipake
-    private ObservableList<model_Iuran> generateDataIuranInMap() {
-        ObservableList<model_Iuran> allData = FXCollections.observableArrayList();
-        for (int i = 0; i < listIuran.size(); i++) {
-            model_Iuran dataRow = listIuran.get(i);
+            User dataRow = listUser.get(i);
             allData.add(dataRow);
         }
         return allData;

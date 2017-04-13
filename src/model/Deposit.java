@@ -9,19 +9,19 @@ package model;
  *
  * @author fachrul
  */
-public class model_Deposit {
+public class Deposit {
     private int depositId,userId,depositJumlah;
 
-    public model_Deposit() {
+    public Deposit() {
     }
 
-    public model_Deposit(int depositId, int userId, int depositJumlah) {
+    public Deposit(int depositId, int userId, int depositJumlah) {
         this.depositId = depositId;
         this.userId = userId;
         this.depositJumlah = depositJumlah;
     }
 
-    public model_Deposit(int userId, int depositJumlah) {
+    public Deposit(int userId, int depositJumlah) {
         this.userId = userId;
         this.depositJumlah = depositJumlah;
     }

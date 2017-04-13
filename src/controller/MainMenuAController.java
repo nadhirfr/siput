@@ -14,6 +14,8 @@ import controller.application.TmbhItemIuranController;
 import controller.application.beranda.berandaController;
 import dao.implementUser;
 import factory.DAOFactory;
+import factory.MySQLDAOFactory;
+import factory.RESTDAOFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -45,7 +47,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.model_User;
+import model.User;
 
 /**
  * FXML Controller class
@@ -187,8 +189,8 @@ public class MainMenuAController implements Initializable {
     @FXML
     public void btnHomeOnClick(ActionEvent event) throws IOException {
         homeActive();
-        DAOFactory user = DAOFactory.getFactory(DAOFactory.MySQL);
-        implementUser dAOUser = user.getUserMySQL();
+        RESTDAOFactory user = (RESTDAOFactory) DAOFactory.getFactory(DAOFactory.REST);
+        implementUser dAOUser = user.getUserREST();
         int totalUser = dAOUser.getCount();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/beranda.fxml"));
@@ -252,9 +254,9 @@ public class MainMenuAController implements Initializable {
     private void btnEmployeOnClick(ActionEvent event) throws IOException {
         userActive();
         
-        DAOFactory user = DAOFactory.getFactory(DAOFactory.MySQL);
+        MySQLDAOFactory user = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
         implementUser dAOUser = user.getUserMySQL();
-        List<model_User> UserList = dAOUser.getAll();
+        List<User> UserList = dAOUser.getAll();
         
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/beranda.fxml"));

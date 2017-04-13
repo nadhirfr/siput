@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import koneksi.Koneksi;
-import model.model_Deposit;
-import model.model_User;
+import model.Deposit;
+import model.User;
 
 /**
  *
@@ -39,7 +39,7 @@ public class DAOMySQLDeposit implements implementDeposit{
     }
 
     @Override
-    public void insert(model_Deposit b) {
+    public void insert(Deposit b) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(insert);
@@ -58,9 +58,9 @@ public class DAOMySQLDeposit implements implementDeposit{
     }
 
     @Override
-    public model_Deposit get(String depositId) {
+    public Deposit get(String depositId) {
         PreparedStatement statement = null;
-        model_Deposit deposit = new model_Deposit();
+        Deposit deposit = new Deposit();
         try {
             statement = connection.prepareStatement(get);
             statement.setString(1, depositId);
@@ -83,7 +83,7 @@ public class DAOMySQLDeposit implements implementDeposit{
     }
 
     @Override
-    public void update(model_Deposit b) {
+    public void update(Deposit b) {
     PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(update);
@@ -119,14 +119,14 @@ public class DAOMySQLDeposit implements implementDeposit{
         }}
 
     @Override
-    public List<model_Deposit> getAll() {
-    List<model_Deposit> lb = null;
+    public List<Deposit> getAll() {
+    List<Deposit> lb = null;
         try {
-            lb = new ArrayList<model_Deposit>();
+            lb = new ArrayList<Deposit>();
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(select);
             while (rs.next()) {
-                model_Deposit b = new model_Deposit();
+                Deposit b = new Deposit();
                 b.setDepositId(rs.getInt("deposit_id"));
                b.setUserId(rs.getInt("user_id"));
                b.setDepositJumlah(rs.getInt("deposit_jumlah"));
@@ -138,14 +138,14 @@ public class DAOMySQLDeposit implements implementDeposit{
         return lb;}
 
     @Override
-    public List<model_Deposit> getCari(String userDisplayname) {
+    public List<Deposit> getCari(String userDisplayname) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public model_User getUser(model_Deposit b) {
+    public User getUser(Deposit b) {
     PreparedStatement statement = null;
-        model_User user = new model_User();
+        User user = new User();
         try {
             statement = connection.prepareStatement(get);
             statement.setInt(1, b.getUserId());
@@ -185,9 +185,9 @@ public class DAOMySQLDeposit implements implementDeposit{
     }
 
     @Override
-    public model_Deposit getByUser(model_User b) {
+    public Deposit getByUser(User b) {
     PreparedStatement statement = null;
-        model_Deposit deposit = new model_Deposit();
+        Deposit deposit = new Deposit();
         try {
             statement = connection.prepareStatement(get);
             statement.setInt(1, b.getUser_id());

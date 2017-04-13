@@ -6,29 +6,29 @@
 package dao;
 
 import java.util.List;
-import model.model_Deposit;
-import model.model_User;
+import model.Deposit;
+import model.User;
 
 /**
  *
  * @author fachrul
  */
 public interface implementDeposit {
-    public void insert(model_Deposit b);
+    public void insert(Deposit b);
     
-    public model_Deposit get(String depositId);
+    public Deposit get(String depositId);
     
-    public model_Deposit getByUser(model_User b);
+    public Deposit getByUser(User b);
 
-    public void update(model_Deposit b);
+    public void update(Deposit b);
 
     public void delete(String depositId);
 
-    public List<model_Deposit> getAll();
+    public List<Deposit> getAll();
     
-    public List<model_Deposit> getCari(String userDisplayname);
+    public List<Deposit> getCari(String userDisplayname);
     
-    public model_User getUser(model_Deposit b);
+    public User getUser(Deposit b);
     
     public int getCount();
 }

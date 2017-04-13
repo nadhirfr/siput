@@ -1,7 +1,7 @@
 package dao;
 
 import koneksi.Koneksi;
-import model.model_User;
+import model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +27,7 @@ public class DAOMySQLUser implements implementUser {
     }
 
     @Override
-    public void insert(model_User b) {
+    public void insert(User b) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(insert);
@@ -48,7 +48,7 @@ public class DAOMySQLUser implements implementUser {
     }
     
     @Override
-    public void update(model_User b) {
+    public void update(User b) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(update);
@@ -88,14 +88,14 @@ public class DAOMySQLUser implements implementUser {
     }
 
     @Override
-    public List<model_User> getAll() {
-        List<model_User> lb = null;
+    public List<User> getAll() {
+        List<User> lb = null;
         try {
-            lb = new ArrayList<model_User>();
+            lb = new ArrayList<User>();
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(select);
             while (rs.next()) {
-                model_User b = new model_User();
+                User b = new User();
                 b.setUser_id(Integer.parseInt(rs.getString("user_id")));
                 b.setUser_username(rs.getString("user_username"));
                 b.setUser_displayname(rs.getString("user_displayname"));
@@ -110,15 +110,15 @@ public class DAOMySQLUser implements implementUser {
     }
 
     @Override
-    public List<model_User> getCari(String displayname) {
-        List<model_User> lb = null;
+    public List<User> getCari(String displayname) {
+        List<User> lb = null;
         try {
-            lb = new ArrayList<model_User>();
+            lb = new ArrayList<User>();
             PreparedStatement st = connection.prepareStatement(cari);
             st.setString(1, "%" + displayname + "%");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                model_User b = new model_User();
+                User b = new User();
                 b.setUser_id(Integer.parseInt(rs.getString("user_id")));
                 b.setUser_username(rs.getString("user_username"));
                 b.setUser_displayname(rs.getString("user_displayname"));
@@ -133,9 +133,9 @@ public class DAOMySQLUser implements implementUser {
     }
 
     @Override
-    public model_User getUser(String user_id) {
+    public User getUser(String user_id) {
     PreparedStatement statement = null;
-    model_User user = new model_User();
+    User user = new User();
         try {
             statement = connection.prepareStatement(get);
             statement.setString(1, user_id);

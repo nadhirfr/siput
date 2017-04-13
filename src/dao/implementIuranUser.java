@@ -9,7 +9,7 @@ import java.util.List;
 import model.model_Iuran;
 import model.model_IuranUser;
 import model.model_Transaksi;
-import model.model_User;
+import model.User;
 
 /**
  *
@@ -28,7 +28,7 @@ public interface implementIuranUser {
 
     public List<model_IuranUser> getCari(int userId);
     
-    public model_User getUser(model_IuranUser b);
+    public User getUser(model_IuranUser b);
     
     public model_Iuran getIuran(model_IuranUser b);
     

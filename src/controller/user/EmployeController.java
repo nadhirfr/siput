@@ -70,7 +70,6 @@ public class EmployeController implements Initializable {
     @FXML
     public void btnViewEmployeeOnAction(ActionEvent event) throws IOException {
         lblView.setText("Pengguna");
-        ViewEmployeController vec = new ViewEmployeController();
 //        userNameMedia media = new userNameMedia();
         
         FXMLLoader fXMLLoader = new FXMLLoader();
@@ -79,7 +78,6 @@ public class EmployeController implements Initializable {
         
         ViewEmployeController viewEmployeController = fXMLLoader.getController();
 //        viewEmployeController.setNameMedia(nameMedia);
-        viewEmployeController.showDetails();
         viewEmployeController.btnClrEmailtf.getStylesheets().add("/style/btnOnText.css");
         viewEmployeController.btnClrFulNametf.getStylesheets().add("/style/btnOnText.css");
         viewEmployeController.btnClrSalarytf.getStylesheets().add("/style/btnOnText.css");
