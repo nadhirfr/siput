@@ -1,6 +1,6 @@
 package model;
 
-public class model_User {
+public class User {
 
     private int user_id;
     private String user_username;
@@ -8,11 +8,11 @@ public class model_User {
     private String user_password;
     private String user_tipe;
 
-    public model_User() {
+    public User() {
     }
 
     
-    public model_User(int user_id, String user_username, String user_displayname, String user_password, String user_tipe) {
+    public User(int user_id, String user_username, String user_displayname, String user_password, String user_tipe) {
         this.user_id = user_id;
         this.user_username = user_username;
         this.user_displayname = user_displayname;

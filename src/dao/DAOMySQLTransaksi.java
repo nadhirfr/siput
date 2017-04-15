@@ -18,7 +18,7 @@ import koneksi.Koneksi;
 import model.model_Iuran;
 import model.model_Pengeluaran;
 import model.model_Transaksi;
-import model.model_User;
+import model.User;
 
 /**
  *
@@ -189,9 +189,9 @@ public class DAOMySQLTransaksi implements implementTransaksi{
         return lb;}
 
     @Override
-    public model_User getUser(model_Transaksi b) {
+    public User getUser(model_Transaksi b) {
     PreparedStatement statement = null;
-        model_User user = new model_User();
+        User user = new User();
         try {
             statement = connection.prepareStatement(getUser);
             statement.setInt(1, b.getUserId());

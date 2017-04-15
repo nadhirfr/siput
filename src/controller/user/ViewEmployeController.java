@@ -8,8 +8,11 @@ package controller.user;
 //import Getway.UsersGetway;
 //import dataBase.DBConnection;
 
+import dao.implementDeposit;
 import dao.implementUser;
 import factory.DAOFactory;
+import factory.MySQLDAOFactory;
+import factory.RESTDAOFactory;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,13 +41,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.FileChooser;
 
 import javax.imageio.ImageIO;
-import model.model_User;
+import model.Deposit;
+import model.DepositModel;
+import model.User;
+import model.UserModel;
 
 //import List.ListEmployee;
 //
@@ -110,9 +118,10 @@ public class ViewEmployeController implements Initializable {
     public static String Column0MapKey = "id";
 
 
-    DAOFactory user = DAOFactory.getFactory(DAOFactory.MySQL);
-    implementUser dAOUser = user.getUserMySQL();
-    List<model_User> listUser = dAOUser.getAll();
+    UserModel userModel = new UserModel();
+    DepositModel depositModel = new DepositModel();
+    List<User> listUser;
+    
     @FXML
     private TextField tfPassword;
     @FXML
@@ -125,21 +134,65 @@ public class ViewEmployeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 //        // TODO
-
+        fillTable();
+        btnDelete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("Delete clicked");
+                Map employeeList = tblEmoyeeList.getSelectionModel().getSelectedItem();
+                if (employeeList != null) {
+                    User user = userModel.getUser(employeeList.get(Column0MapKey).toString());
+                    userModel.delete(String.valueOf(user.getUser_id()));
+                    System.out.println("Deleted user id: "+String.valueOf(user.getUser_id()));
+                    tblEmoyeeList.getSelectionModel().selectFirst();
+                    //ini harusnya direfresh tampilan tapi belum bisa
+                    fillTable();
+                }
+            }
+        });
+        
+        btnUpdate.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("Update clicked");
+                Map employeeList = tblEmoyeeList.getSelectionModel().getSelectedItem();
+                if (employeeList != null) {
+                    User user = userModel.getUser(employeeList.get(Column0MapKey).toString());
+                    userModel.update(new User(user.getUser_id(), 
+                            tfUserName.getText(), 
+                            tfFullName.getText(), 
+                            tfPassword.getText(), 
+                            tfTipeUser.getText()));
+                    System.out.println("Updated user id: "+String.valueOf(user.getUser_id()));
+                    tblEmoyeeList.getSelectionModel().selectFirst();
+                    //ini harusnya direfresh tampilan tapi belum bisa
+                    tblEmoyeeList.refresh();
+                    fillTable();
+                }
+            }
+        });
+    }
+    
+    private void fillTable(){
+        tblEmoyeeList.getItems().clear();
+        
         clmEmployeId.setCellValueFactory(new MapValueFactory(Column0MapKey));
         clmEmployeId.setMaxWidth(0);
         clmEmployeName.setCellValueFactory(new MapValueFactory(Column1MapKey));
         clmEmployeName.setMinWidth(160);
         
+        tblEmoyeeList.getItems().removeAll(generateDataInMap());
         tblEmoyeeList.setItems(generateDataInMap());
         tblEmoyeeList.setEditable(true);
         tblEmoyeeList.getSelectionModel().setCellSelectionEnabled(true);
         tblEmoyeeList.getColumns().setAll(clmEmployeName);
-        
+        tblEmoyeeList.refresh();
     }
     
     private ObservableList<Map> generateDataInMap() {
+        listUser = userModel.getAll();
         ObservableList<Map> allData = FXCollections.observableArrayList();
+        allData.removeAll(allData);
         for (int i = 0; i < listUser.size(); i++) {
             Map<String, String> dataRow = new HashMap<>();
             String value0 = String.valueOf(listUser.get(i).getUser_id());
@@ -156,27 +209,6 @@ public class ViewEmployeController implements Initializable {
 
     }
 
-    private void btnAttachImageOnAction(ActionEvent event) throws IOException {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("JPG (Joint Photographic Group)", "*.jpg"),
-                new FileChooser.ExtensionFilter("JPEG (Joint Photographic Experts Group)", "*.jpeg"),
-                new FileChooser.ExtensionFilter("PNG (Portable Network Graphics)", "*.png")
-        );
-
-        fileChooser.setTitle("Choise a Image File");
-
-        file = fileChooser.showOpenDialog(null);
-
-        if (file != null) {
-            System.out.println(file);
-            bufferedImage = ImageIO.read(file);
-            image = SwingFXUtils.toFXImage(bufferedImage, null);
-//            recUsrImage.setFill(new ImagePattern(image));
-            imagePath = file.getAbsolutePath();
-        }
-
-    }
 
     @FXML
     private void tblViewOnClick(KeyEvent event) {
@@ -199,67 +231,18 @@ public class ViewEmployeController implements Initializable {
     public void setselectedView() {
         clearAll();
         Map employeeList = tblEmoyeeList.getSelectionModel().getSelectedItem();
-        model_User user = new model_User();
+        User user = null;
         if (employeeList != null) {
-            user = dAOUser.getUser(employeeList.get(Column0MapKey).toString());
+            user = userModel.getUser(employeeList.get(Column0MapKey).toString());
             //usersGetway.selectedView(users);
             id = String.valueOf(user.getUser_id());
             tfUserName.setText(user.getUser_username());
             tfFullName.setText(user.getUser_displayname());
             tfPassword.setText(user.getUser_password());
             tfTipeUser.setText(user.getUser_tipe());
-//            tfSalary.setText(users.salary);
-//            tfDateofJoin.setText(users.date);
-//            creatorId = users.creatorId;
-//            taAddress.setText(users.address);
-//            image = users.image;
-//            recUsrImage.setFill(new ImagePattern(image));
-//            sql.creatorNameFindar(creatorId, lblCreator);
-//            tfCreatedBy.setText(lblCreator.getText());
-//            if (users.status.matches("1")) {
-//                cbStatus.setSelected(true);
-//                cbStatus.setText("Active");
-//            } else if (users.status.matches("0")) {
-//                cbStatus.setSelected(false);
-//                cbStatus.setText("Deactive");
-//            }
-//            if (users.id.matches("1")) {
-//                btnUpdate.setVisible(false);
-//                btnDelete.setVisible(false);
-//                hlChangePassword.setVisible(false);
-//                hlViewPermission.setVisible(false);
-//            } else {
-//                btnUpdate.setVisible(true);
-//                btnDelete.setVisible(true);
-//                hlChangePassword.setVisible(true);
-//                hlViewPermission.setVisible(true);
-//            }
+            tfSaldo.setText(String.valueOf(depositModel.getByUser(user).getDepositJumlah()));
 
         }
-    }
-
-    public void showDetails() {
-//        tblEmoyeeList.setItems(users.employeeLists);
-//        clmEmployeId.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
-//        clmEmployeName.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
-//        usersGetway.view(users);
-    }
-
-    public void checqPermission() {
-//        try {
-//            pst = con.prepareStatement("select * from "+db+".UserPermission where UserId=?");
-//            pst.setString(1, userId);
-//            rs = pst.executeQuery();
-//            while (rs.next()) {
-//                if (rs.getInt(13) != 1) {
-//                    hlChangePassword.setDisable(true);
-//                } else {
-//                    hlChangePassword.setDisable(false);
-//                }
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ViewEmployeController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }
 
     private void clearAll() {

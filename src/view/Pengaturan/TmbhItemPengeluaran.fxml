@@ -11,51 +11,46 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="14.0" layoutY="83.0" prefHeight="464.0" prefWidth="222.0" style="-fx-background-color: #95a5a6;">
+      <Pane prefHeight="525.0" prefWidth="222.0" style="-fx-background-color: #95a5a6;">
          <children>
-            <JFXListView layoutY="-3.0" prefHeight="470.0" prefWidth="222.0" />
+            <JFXListView layoutY="1.0" prefHeight="525.0" prefWidth="222.0" />
          </children>
       </Pane>
-      <Label layoutX="290.0" layoutY="90.0" text="Pilih Kategori :">
+      <Label layoutX="287.0" layoutY="7.0" text="Pilih Kategori :">
          <font>
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <ComboBox layoutX="290.0" layoutY="108.0" prefHeight="34.0" prefWidth="368.0" style="-fx-background-radius: 5;" />
-      <Label layoutX="290.0" layoutY="155.0" text="Pilih Jenis :">
+      <ComboBox layoutX="287.0" layoutY="25.0" prefHeight="34.0" prefWidth="368.0" style="-fx-background-radius: 5;" />
+      <Label layoutX="287.0" layoutY="72.0" text="Pilih Jenis :">
          <font>
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <ComboBox layoutX="290.0" layoutY="173.0" prefHeight="34.0" prefWidth="368.0" style="-fx-background-radius: 5;" />
-      <Label layoutX="292.0" layoutY="222.0" text="Nama :">
+      <ComboBox layoutX="287.0" layoutY="90.0" prefHeight="34.0" prefWidth="368.0" style="-fx-background-radius: 5;" />
+      <Label layoutX="287.0" layoutY="139.0" text="Nama :">
          <font>
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <TextField layoutX="289.0" layoutY="238.0" prefHeight="34.0" prefWidth="368.0" promptText="Nama" style="-fx-background-radius: 5;" />
-      <Label layoutX="293.0" layoutY="286.0" text="Keterangan :">
+      <TextField layoutX="287.0" layoutY="155.0" prefHeight="34.0" prefWidth="368.0" promptText="Nama" style="-fx-background-radius: 5;" />
+      <Label layoutX="287.0" layoutY="203.0" text="Keterangan :">
          <font>
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <TextField layoutX="292.0" layoutY="305.0" prefHeight="34.0" prefWidth="368.0" promptText="Keterangan" style="-fx-background-radius: 5;">
+      <TextField layoutX="287.0" layoutY="222.0" prefHeight="34.0" prefWidth="368.0" promptText="Keterangan" style="-fx-background-radius: 5;">
          <font>
             <Font size="11.0" />
          </font>
       </TextField>
-      <Label layoutX="297.0" layoutY="357.0" text="Nominal :">
+      <Label layoutX="287.0" layoutY="274.0" text="Nominal :">
          <font>
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <TextField layoutX="291.0" layoutY="376.0" prefHeight="34.0" prefWidth="368.0" promptText="Nominal" style="-fx-background-radius: 5;" />
-      <Button layoutX="323.0" layoutY="476.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" />
-      <Button layoutX="485.0" layoutY="476.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Batal" textFill="WHITE" />
-      <Label layoutX="13.0" layoutY="15.0" text="Tambah Item Pengeluaran">
-         <font>
-            <Font name="Segoe UI Semibold" size="24.0" />
-         </font>
-      </Label>
+      <TextField layoutX="287.0" layoutY="293.0" prefHeight="34.0" prefWidth="368.0" promptText="Nominal" style="-fx-background-radius: 5;" />
+      <Button layoutX="319.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" />
+      <Button layoutX="480.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Batal" textFill="WHITE" />
    </children>
 </AnchorPane>

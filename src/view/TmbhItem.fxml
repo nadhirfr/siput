@@ -14,7 +14,7 @@
    <children>
       <BorderPane prefHeight="699.0" prefWidth="955.0">
          <top>
-            <AnchorPane maxWidth="1.7976931348623157E308" prefHeight="93.0" style="-fx-border-color: #3498db;" BorderPane.alignment="CENTER">
+            <AnchorPane maxWidth="1.7976931348623157E308" prefHeight="93.0" BorderPane.alignment="CENTER">
                <children>
                   <GridPane prefHeight="105.0" prefWidth="955.0">
                     <columnConstraints>
@@ -27,7 +27,7 @@
                      <children>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="108.0" layoutY="34.0" text="Tambah Item">
+                              <Label fx:id="lblView" layoutX="108.0" layoutY="34.0" text="Tambah Item">
                                  <font>
                                     <Font name="Segoe UI Semibold" size="26.0" />
                                  </font>
