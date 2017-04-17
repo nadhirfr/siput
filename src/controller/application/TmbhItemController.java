@@ -17,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import controller.application.TmbhItemIuranController;
 import controller.application.TmbhItemPengeluaranController;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -33,6 +34,8 @@ public class TmbhItemController implements Initializable {
     private JFXButton btn_pengeluaran;
     @FXML
     private StackPane spMainItem;
+    @FXML
+    private Label lblView;
 
     /**
      * Initializes the controller class.
@@ -40,6 +43,7 @@ public class TmbhItemController implements Initializable {
     @FXML
     public void btn_iuranOnAction(ActionEvent event) throws IOException {
         //lblPathInfo.setText("Sells");
+        lblView.setText("Tambah Item Iuran");
         TmbhItemIuranController tmbhitem = new TmbhItemIuranController();
         //userNameMedia media = new userNameMedia();
         FXMLLoader fXMLLoader = new FXMLLoader();
@@ -56,6 +60,7 @@ public class TmbhItemController implements Initializable {
     @FXML
     public void btn_pengeluaranOnAction(ActionEvent event) throws IOException {
         //lblPathInfo.setText("Sells");
+        lblView.setText("Tambah Item Pengeluaran");
         TmbhItemPengeluaranController tmbhitemP = new TmbhItemPengeluaranController();
         //userNameMedia media = new userNameMedia();
         FXMLLoader fXMLLoader = new FXMLLoader();

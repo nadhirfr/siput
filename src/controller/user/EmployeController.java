@@ -21,12 +21,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.control.Button;
 //import media.userNameMedia;
 
 /**
  * FXML Controller class
  *
- * @author rifat
+ * @author 
  */
 public class EmployeController implements Initializable {
     @FXML
@@ -43,8 +44,8 @@ public class EmployeController implements Initializable {
     public BorderPane bpContent;
     @FXML
     private Label lblView;
-    @FXML
-    private ImageView ivEmployeIcon;
+    //@FXML
+    //private ImageView ivEmployeIcon;
     
     Image image = new Image("/icon/d.png");
 
@@ -64,16 +65,16 @@ public class EmployeController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ivEmployeIcon.setImage(image);
+        //ivEmployeIcon.setImage(image);
     }    
 
     @FXML
-    public void btnViewEmployeeOnAction(ActionEvent event) throws IOException {
+    public void btnViewUser(ActionEvent event) throws IOException {
         lblView.setText("Pengguna");
 //        userNameMedia media = new userNameMedia();
         
         FXMLLoader fXMLLoader = new FXMLLoader();
-        fXMLLoader.load(getClass().getResource("/view/ViewEmploye.fxml").openStream());
+        fXMLLoader.load(getClass().getResource("/view/User/LihatUser.fxml").openStream());
 //        media.setId(userId);
         
         ViewEmployeController viewEmployeController = fXMLLoader.getController();
@@ -92,26 +93,18 @@ public class EmployeController implements Initializable {
     }
 
     @FXML
-    private void btnAddEmployeeOnClick(ActionEvent event) throws IOException {
+    public void btnAddUser(ActionEvent event) throws IOException {
         lblView.setText("Add Pengguna");
-        AddEmployeController vec = new AddEmployeController();
+        TambahUserController vec = new TambahUserController();
 //        userNameMedia media = new userNameMedia();
+        FXMLLoader fXMLLoader = new FXMLLoader();
+        fXMLLoader.load(getClass().getResource("/view/User/TambahUser.fxml").openStream());
         
-        FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("/view/application/employe/AddEmploye.fxml"));
-        fXMLLoader.load();
+ //       FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("/view/User/TambahUser.fxml"));
+ //       fXMLLoader.load();
 //        media.setId(userId);
         
-        AddEmployeController addEmployeController = fXMLLoader.getController();
-//        addEmployeController.setNameMedia(nameMedia);
-        String css = this.getClass().getResource("/style/btnOnText.css").toExternalForm();
-        addEmployeController.btnClrEmail.getStylesheets().add(css);
-        addEmployeController.btnClrFullName.getStylesheets().add(css);
-        addEmployeController.btnClrPassword.getStylesheets().add(css);
-        addEmployeController.btnClrPhone.getStylesheets().add(css);
-        addEmployeController.btnClrSalary.getStylesheets().add(css);
-        addEmployeController.btnClrUsrName.getStylesheets().add(css);
-//        addEmployeController.showDetails();
-        
+        TambahUserController tambahUserController = fXMLLoader.getController();      
         AnchorPane acPane = fXMLLoader.getRoot();
         
         spEmployeContent.getChildren().clear();

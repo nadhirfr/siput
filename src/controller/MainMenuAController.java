@@ -251,7 +251,7 @@ public class MainMenuAController implements Initializable {
     }
 
     @FXML
-    private void btnEmployeOnClick(ActionEvent event) throws IOException {
+    private void btnUserOnClick(ActionEvent event) throws IOException {
         userActive();
         
         MySQLDAOFactory user = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
@@ -261,12 +261,12 @@ public class MainMenuAController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/beranda.fxml"));
         loader.load();
-        FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("/view/Employe.fxml"));
+        FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("/view/User.fxml"));
         fXMLLoader.load();
 
         EmployeController employeController = fXMLLoader.getController();
         employeController.bpContent.getStylesheets().add("/style/MainStyle.css");
-        employeController.btnViewEmployeeOnAction(event);
+        employeController.btnViewUser(event);
 
         AnchorPane acPane = fXMLLoader.getRoot();
         acContent.getChildren().clear();
@@ -285,7 +285,7 @@ public class MainMenuAController implements Initializable {
         FXMLLoader settingLoader = new FXMLLoader();
         //set the location of Settings.fxml by fxmlloader
         settingLoader.load(getClass().getResource("/view/TmbhItem.fxml").openStream());
-
+        //TmbhItemController.btn_iuranOnAction(event);
         //Send id to userMedia
         //usrMedia.setId(id);
         //take control of settingController elements or node
