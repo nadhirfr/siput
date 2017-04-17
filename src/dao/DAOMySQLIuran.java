@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import koneksi.Koneksi;
-import model.model_Iuran;
-import model.model_JenisIuran;
-import model.model_KategoriIuran;
+import model.Iuran;
+import model.JenisIuran;
+import model.KategoriIuran;
 
 /**
  *
@@ -39,7 +39,7 @@ public class DAOMySQLIuran implements implementIuran{
     }
 
     @Override
-    public void insert(model_Iuran b) {
+    public void insert(Iuran b) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(insert);
@@ -60,9 +60,9 @@ public class DAOMySQLIuran implements implementIuran{
     }
 
     @Override
-    public model_Iuran get(String IuranId) {
+    public Iuran get(String IuranId) {
         PreparedStatement statement = null;
-        model_Iuran iuran = new model_Iuran();
+        Iuran iuran = new Iuran();
         try {
             statement = connection.prepareStatement(get);
             statement.setString(1, IuranId);
@@ -88,7 +88,7 @@ public class DAOMySQLIuran implements implementIuran{
     }
 
     @Override
-    public void update(model_Iuran b) {
+    public void update(Iuran b) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(update);
@@ -129,14 +129,14 @@ public class DAOMySQLIuran implements implementIuran{
     }
 
     @Override
-    public List<model_Iuran> getAll() {
-        List<model_Iuran> lb = null;
+    public List<Iuran> getAll() {
+        List<Iuran> lb = null;
         try {
-            lb = new ArrayList<model_Iuran>();
+            lb = new ArrayList<Iuran>();
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(select);
             while (rs.next()) {
-                model_Iuran b = new model_Iuran();
+                Iuran b = new Iuran();
                 b.setIuranId(rs.getInt("iuran_id"));
                 b.setIuranNama(rs.getString("iuran_nama"));
                 b.setIuranNominal(rs.getInt("iuran_nominal"));
@@ -151,15 +151,15 @@ public class DAOMySQLIuran implements implementIuran{
     }
 
     @Override
-    public List<model_Iuran> getCari(String IuranNama) {
-        List<model_Iuran> lb = null;
+    public List<Iuran> getCari(String IuranNama) {
+        List<Iuran> lb = null;
         try {
             lb = new ArrayList<>();
             PreparedStatement st = connection.prepareStatement(cari);
             st.setString(1, "%" + IuranNama + "%");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                model_Iuran b = new model_Iuran();
+                Iuran b = new Iuran();
                 b.setIuranId(rs.getInt("iuran_id"));
                 b.setIuranNama(rs.getString("iuran_nama"));
                 b.setIuranNominal(rs.getInt("iuran_nominal"));
@@ -188,9 +188,9 @@ public class DAOMySQLIuran implements implementIuran{
     }
 
     @Override
-    public model_JenisIuran getJenisIuran(model_Iuran b) {
+    public JenisIuran getJenisIuran(Iuran b) {
         PreparedStatement statement = null;
-        model_JenisIuran jenisIuran = new model_JenisIuran();
+        JenisIuran jenisIuran = new JenisIuran();
         try {
             statement = connection.prepareStatement(get);
             statement.setInt(1, b.getIuranJenisId());
@@ -213,9 +213,9 @@ public class DAOMySQLIuran implements implementIuran{
     }
 
     @Override
-    public model_KategoriIuran getKategoriIuran(model_Iuran b) {
+    public KategoriIuran getKategoriIuran(Iuran b) {
         PreparedStatement statement = null;
-        model_KategoriIuran kategoriIuran = new model_KategoriIuran();
+        KategoriIuran kategoriIuran = new KategoriIuran();
         try {
             statement = connection.prepareStatement(get);
             statement.setInt(1, b.getIuranJenisId());

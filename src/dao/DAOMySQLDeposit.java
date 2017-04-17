@@ -88,7 +88,7 @@ public class DAOMySQLDeposit implements implementDeposit{
         try {
             statement = connection.prepareStatement(update);
             statement.setInt(1, b.getUserId());
-            statement.setInt(2, b.getDepositId());
+            statement.setInt(2, b.getDepositJumlah());
             statement.setInt(3, b.getDepositId());
             statement.executeUpdate();
         } catch (SQLException ex) {
@@ -189,7 +189,7 @@ public class DAOMySQLDeposit implements implementDeposit{
     PreparedStatement statement = null;
         Deposit deposit = new Deposit();
         try {
-            statement = connection.prepareStatement(get);
+            statement = connection.prepareStatement(getbyUser);
             statement.setInt(1, b.getUser_id());
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {

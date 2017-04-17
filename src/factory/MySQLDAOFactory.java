@@ -8,10 +8,12 @@ package factory;
 import dao.DAOMySQLDeposit;
 import dao.DAOMySQLIuran;
 import dao.DAOMySQLIuranUser;
+import dao.DAOMySQLTransaksi;
 import dao.DAOMySQLUser;
 import dao.implementDeposit;
 import dao.implementIuran;
 import dao.implementIuranUser;
+import dao.implementTransaksi;
 import dao.implementUser;
 
 /**
@@ -35,6 +37,9 @@ public class MySQLDAOFactory extends DAOFactory{
     public implementIuranUser getIuranUserMySQL() {
         return new DAOMySQLIuranUser();
     }
-
     
+    public implementTransaksi getTransaksiMySQL() {
+        return new DAOMySQLTransaksi();
+    }
+
 }

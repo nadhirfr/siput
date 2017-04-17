@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import koneksi.Koneksi;
-import model.model_KategoriIuran;
+import model.KategoriIuran;
 
 /**
  *
@@ -35,7 +35,7 @@ public class DAOMySQLKategoriIuran implements implementKategoriIuran{
         connection = Koneksi.connection();
     }
     @Override
-    public void insert(model_KategoriIuran b) {
+    public void insert(KategoriIuran b) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(insert);
@@ -54,9 +54,9 @@ public class DAOMySQLKategoriIuran implements implementKategoriIuran{
     }
 
     @Override
-    public model_KategoriIuran get(String KategoriIuranId) {
+    public KategoriIuran get(String KategoriIuranId) {
         PreparedStatement statement = null;
-        model_KategoriIuran kategoriIuran = new model_KategoriIuran();
+        KategoriIuran kategoriIuran = new KategoriIuran();
         try {
             statement = connection.prepareStatement(get);
             statement.setString(1, KategoriIuranId);
@@ -79,7 +79,7 @@ public class DAOMySQLKategoriIuran implements implementKategoriIuran{
     }
 
     @Override
-    public void update(model_KategoriIuran b) {
+    public void update(KategoriIuran b) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(update);
@@ -117,14 +117,14 @@ public class DAOMySQLKategoriIuran implements implementKategoriIuran{
     }
 
     @Override
-    public List<model_KategoriIuran> getAll() {
-        List<model_KategoriIuran> lb = null;
+    public List<KategoriIuran> getAll() {
+        List<KategoriIuran> lb = null;
         try {
-            lb = new ArrayList<model_KategoriIuran>();
+            lb = new ArrayList<KategoriIuran>();
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(select);
             while (rs.next()) {
-                model_KategoriIuran b = new model_KategoriIuran();
+                KategoriIuran b = new KategoriIuran();
                 b.setIuranKategoriId(rs.getInt("iuran_kategori_id"));
                 b.setIuranKategoriNama(rs.getString("iuran_kategori_nama"));
                 b.setIuranKategoriInterval(rs.getInt("iuran_kategori_interval"));
@@ -137,15 +137,15 @@ public class DAOMySQLKategoriIuran implements implementKategoriIuran{
     }
 
     @Override
-    public List<model_KategoriIuran> getCari(String KategoriIuranNama) {
-        List<model_KategoriIuran> lb = null;
+    public List<KategoriIuran> getCari(String KategoriIuranNama) {
+        List<KategoriIuran> lb = null;
         try {
             lb = new ArrayList<>();
             PreparedStatement st = connection.prepareStatement(cari);
             st.setString(1, "%" + KategoriIuranNama + "%");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                model_KategoriIuran b = new model_KategoriIuran();
+                KategoriIuran b = new KategoriIuran();
                 b.setIuranKategoriId(rs.getInt("iuran_kategori_id"));
                 b.setIuranKategoriNama(rs.getString("iuran_kategori_nama"));
                 b.setIuranKategoriInterval(rs.getInt("iuran_kategori_interval"));

@@ -9,14 +9,13 @@ package model;
  *
  * @author fachrul
  */
-public class model_IuranUser {
-    private int IuranUserId, UserId, IuranId, TransaksiId;
-    private boolean IuranUserStatus;
+public class IuranUser {
+    private int IuranUserId, UserId, IuranId, TransaksiId,IuranUserStatus;
 
-    public model_IuranUser() {
+    public IuranUser() {
     }
 
-    public model_IuranUser(int UserId, int IuranId, int TransaksiId, boolean IuranUserStatus) {
+    public IuranUser(int UserId, int IuranId, int TransaksiId, int IuranUserStatus) {
         this.UserId = UserId;
         this.IuranId = IuranId;
         this.TransaksiId = TransaksiId;
@@ -55,11 +54,11 @@ public class model_IuranUser {
         this.TransaksiId = TransaksiId;
     }
 
-    public boolean isIuranUserStatus() {
+    public int isIuranUserStatus() {
         return IuranUserStatus;
     }
 
-    public void setIuranUserStatus(boolean IuranUserStatus) {
+    public void setIuranUserStatus(int IuranUserStatus) {
         this.IuranUserStatus = IuranUserStatus;
     }
     

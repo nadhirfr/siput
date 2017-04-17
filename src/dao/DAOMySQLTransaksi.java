@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import koneksi.Koneksi;
-import model.model_Iuran;
+import model.Iuran;
 import model.model_Pengeluaran;
-import model.model_Transaksi;
+import model.Transaksi;
 import model.User;
 
 /**
@@ -44,7 +44,7 @@ public class DAOMySQLTransaksi implements implementTransaksi{
         connection = Koneksi.connection();
     }
     @Override
-    public void insert(model_Transaksi b) {
+    public void insert(Transaksi b) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(insert);
@@ -53,8 +53,8 @@ public class DAOMySQLTransaksi implements implementTransaksi{
             statement.setInt(3, b.getTransaksiNominal());
             statement.setInt(4, b.getUserId());
             statement.setString(5, b.getTransaksiTipe());
-            statement.setInt(6, b.getIuranId());
-            statement.setInt(7, b.getPengeluaranId());
+            statement.setString(6, b.getIuranId());
+            statement.setString(7, b.getPengeluaranId());
             statement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -68,22 +68,22 @@ public class DAOMySQLTransaksi implements implementTransaksi{
     }
 
     @Override
-    public model_Transaksi get(String transaksiId) {
+    public Transaksi get(String transaksiId) {
         PreparedStatement statement = null;
-        model_Transaksi transaksi = new model_Transaksi();
+        Transaksi transaksi = new Transaksi();
         try {
             statement = connection.prepareStatement(get);
             statement.setString(1, transaksiId);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                transaksi.setTransaksiId(rs.getInt("transaksi_id"));
-               transaksi.setTransaksiDate(rs.getDate("transaksi_date"));
+               transaksi.setTransaksiDate(rs.getString("transaksi_date"));
                transaksi.setTransaksiNama(rs.getString("transaksi_nama"));
                transaksi.setTransaksiNominal(rs.getInt("transaksi_nominal"));
                transaksi.setUserId(rs.getInt("user_id"));
                transaksi.setTransaksiTipe(rs.getString("transaksi_tipe"));
-               transaksi.setIuranId(rs.getInt("iuran_id"));
-               transaksi.setPengeluaranId(rs.getInt("pengeluaran_id"));
+               transaksi.setIuranId(rs.getString("iuran_id"));
+               transaksi.setPengeluaranId(rs.getString("pengeluaran_id"));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -99,7 +99,7 @@ public class DAOMySQLTransaksi implements implementTransaksi{
     }
 
     @Override
-    public void update(model_Transaksi b) {
+    public void update(Transaksi b) {
     PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(update);
@@ -108,8 +108,8 @@ public class DAOMySQLTransaksi implements implementTransaksi{
             statement.setInt(3, b.getTransaksiNominal());
             statement.setInt(4, b.getUserId());
             statement.setString(5, b.getTransaksiTipe());
-            statement.setInt(6, b.getIuranId());
-            statement.setInt(7, b.getPengeluaranId());
+            statement.setString(6, b.getIuranId());
+            statement.setString(7, b.getPengeluaranId());
             statement.setInt(8, b.getTransaksiId());
             statement.executeUpdate();
         } catch (SQLException ex) {
@@ -140,22 +140,22 @@ public class DAOMySQLTransaksi implements implementTransaksi{
         }}
 
     @Override
-    public List<model_Transaksi> getAll() {
-    List<model_Transaksi> lb = null;
+    public List<Transaksi> getAll() {
+    List<Transaksi> lb = null;
         try {
-            lb = new ArrayList<model_Transaksi>();
+            lb = new ArrayList<Transaksi>();
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(select);
             while (rs.next()) {
-                model_Transaksi b = new model_Transaksi();
+                Transaksi b = new Transaksi();
                  b.setTransaksiId(rs.getInt("transaksi_id"));
-               b.setTransaksiDate(rs.getDate("transaksi_date"));
+               b.setTransaksiDate(rs.getString("transaksi_date"));
                b.setTransaksiNama(rs.getString("transaksi_nama"));
                b.setTransaksiNominal(rs.getInt("transaksi_nominal"));
                b.setUserId(rs.getInt("user_id"));
                b.setTransaksiTipe(rs.getString("transaksi_tipe"));
-               b.setIuranId(rs.getInt("iuran_id"));
-               b.setPengeluaranId(rs.getInt("pengeluaran_id"));
+               b.setIuranId(rs.getString("iuran_id"));
+               b.setPengeluaranId(rs.getString("pengeluaran_id"));
                 lb.add(b);
             }
         } catch (SQLException ex) {
@@ -164,23 +164,23 @@ public class DAOMySQLTransaksi implements implementTransaksi{
         return lb;}
 
     @Override
-    public List<model_Transaksi> getCari(String IuranNama) {
-    List<model_Transaksi> lb = null;
+    public List<Transaksi> getCari(String IuranNama) {
+    List<Transaksi> lb = null;
         try {
             lb = new ArrayList<>();
             PreparedStatement st = connection.prepareStatement(cari);
             st.setString(1, "%" + IuranNama + "%");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                model_Transaksi b = new model_Transaksi();
+                Transaksi b = new Transaksi();
                 b.setTransaksiId(rs.getInt("transaksi_id"));
-               b.setTransaksiDate(rs.getDate("transaksi_date"));
+               b.setTransaksiDate(rs.getString("transaksi_date"));
                b.setTransaksiNama(rs.getString("transaksi_nama"));
                b.setTransaksiNominal(rs.getInt("transaksi_nominal"));
                b.setUserId(rs.getInt("user_id"));
                b.setTransaksiTipe(rs.getString("transaksi_tipe"));
-               b.setIuranId(rs.getInt("iuran_id"));
-               b.setPengeluaranId(rs.getInt("pengeluaran_id"));
+               b.setIuranId(rs.getString("iuran_id"));
+               b.setPengeluaranId(rs.getString("pengeluaran_id"));
                 lb.add(b);
             }
         } catch (SQLException ex) {
@@ -189,7 +189,7 @@ public class DAOMySQLTransaksi implements implementTransaksi{
         return lb;}
 
     @Override
-    public User getUser(model_Transaksi b) {
+    public User getUser(Transaksi b) {
     PreparedStatement statement = null;
         User user = new User();
         try {
@@ -216,12 +216,12 @@ public class DAOMySQLTransaksi implements implementTransaksi{
     }
 
     @Override
-    public model_Iuran getIuran(model_Transaksi b) {
+    public Iuran getIuran(Transaksi b) {
         PreparedStatement statement = null;
-        model_Iuran iuran = new model_Iuran();
+        Iuran iuran = new Iuran();
         try {
             statement = connection.prepareStatement(getIuran);
-            statement.setInt(1, b.getIuranId());
+            statement.setString(1, b.getIuranId());
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                iuran.setIuranId(Integer.parseInt(rs.getString("iuran_id")));
@@ -243,12 +243,12 @@ public class DAOMySQLTransaksi implements implementTransaksi{
     }
 
     @Override
-    public model_Pengeluaran getPengeluaran(model_Transaksi b) {
+    public model_Pengeluaran getPengeluaran(Transaksi b) {
     PreparedStatement statement = null;
         model_Pengeluaran pengeluaran = new model_Pengeluaran();
         try {
             statement = connection.prepareStatement(getPengeluaran);
-            statement.setInt(1, b.getPengeluaranId());
+            statement.setString(1, b.getPengeluaranId());
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                pengeluaran.setPengeluaran_id(rs.getInt("pengeluaran_id"));

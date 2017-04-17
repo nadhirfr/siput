@@ -9,14 +9,14 @@ package model;
  *
  * @author fachrul
  */
-public class model_Iuran {
+public class Iuran {
     private int IuranId,IuranJenisId,IuranKategoriId, IuranNominal;
     private String IuranNama;
 
-    public model_Iuran() {
+    public Iuran() {
     }
 
-    public model_Iuran(int IuranId, int IuranJenisId, int IuranKategoriId, String IuranNama, int IuranNominal) {
+    public Iuran(int IuranId, int IuranJenisId, int IuranKategoriId, String IuranNama, int IuranNominal) {
         this.IuranId = IuranId;
         this.IuranJenisId = IuranJenisId;
         this.IuranKategoriId = IuranKategoriId;
@@ -24,7 +24,7 @@ public class model_Iuran {
         this.IuranNominal = IuranNominal;
     }
 
-    public model_Iuran(int IuranJenisId, int IuranKategoriId, String IuranNama, int IuranNominal) {
+    public Iuran(int IuranJenisId, int IuranKategoriId, String IuranNama, int IuranNominal) {
         this.IuranJenisId = IuranJenisId;
         this.IuranKategoriId = IuranKategoriId;
         this.IuranNama = IuranNama;

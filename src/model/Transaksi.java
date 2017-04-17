@@ -11,16 +11,15 @@ import java.util.Date;
  *
  * @author fachrul
  */
-public class model_Transaksi {
+public class Transaksi {
     private int transaksiId, transaksiNominal,
-            userId, iuranId, pengeluaranId;
-    private Date transaksiDate;
-    private String transaksiNama, transaksiTipe;
+            userId;
+    private String transaksiNama, transaksiTipe,transaksiDate,iuranId,pengeluaranId;
 
-    public model_Transaksi() {
+    public Transaksi() {
     }
 
-    public model_Transaksi(int transaksiNominal, int userId, int iuranId, int pengeluaranId, Date transaksiDate, String transaksiNama, String transaksiTipe) {
+    public Transaksi(int transaksiNominal, int userId, String iuranId, String pengeluaranId, String transaksiDate, String transaksiNama, String transaksiTipe) {
         this.transaksiNominal = transaksiNominal;
         this.userId = userId;
         this.iuranId = iuranId;
@@ -30,7 +29,7 @@ public class model_Transaksi {
         this.transaksiTipe = transaksiTipe;
     }
 
-    public model_Transaksi(int transaksiId, int transaksiNominal, int userId, int iuranId, int pengeluaranId, Date transaksiDate, String transaksiNama, String transaksiTipe) {
+    public Transaksi(int transaksiId, int transaksiNominal, int userId, String iuranId, String pengeluaranId, String transaksiDate, String transaksiNama, String transaksiTipe) {
         this.transaksiId = transaksiId;
         this.transaksiNominal = transaksiNominal;
         this.userId = userId;
@@ -65,27 +64,27 @@ public class model_Transaksi {
         this.userId = userId;
     }
 
-    public int getIuranId() {
+    public String getIuranId() {
         return iuranId;
     }
 
-    public void setIuranId(int iuranId) {
+    public void setIuranId(String iuranId) {
         this.iuranId = iuranId;
     }
 
-    public int getPengeluaranId() {
+    public String getPengeluaranId() {
         return pengeluaranId;
     }
 
-    public void setPengeluaranId(int pengeluaranId) {
+    public void setPengeluaranId(String pengeluaranId) {
         this.pengeluaranId = pengeluaranId;
     }
 
-    public Date getTransaksiDate() {
+    public String getTransaksiDate() {
         return transaksiDate;
     }
 
-    public void setTransaksiDate(Date transaksiDate) {
+    public void setTransaksiDate(String transaksiDate) {
         this.transaksiDate = transaksiDate;
     }
 

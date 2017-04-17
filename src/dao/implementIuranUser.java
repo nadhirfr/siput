@@ -6,9 +6,9 @@
 package dao;
 
 import java.util.List;
-import model.model_Iuran;
-import model.model_IuranUser;
-import model.model_Transaksi;
+import model.Iuran;
+import model.IuranUser;
+import model.Transaksi;
 import model.User;
 
 /**
@@ -16,23 +16,23 @@ import model.User;
  * @author fachrul
  */
 public interface implementIuranUser {
-        public void insert(model_IuranUser b);
+        public void insert(IuranUser b);
     
-    public model_IuranUser get(String IuranIuranUserId);
+    public IuranUser get(String IuranIuranUserId);
+    
+    public IuranUser getByUserAndIuran(User u, Iuran i);
 
-    public void update(model_IuranUser b);
+    public void update(IuranUser b);
  
     public void delete(String IuranUserId);
 
-    public List<model_IuranUser> getAll();
+    public List<IuranUser> getAll();
 
-    public List<model_IuranUser> getCari(int userId);
+    public List<IuranUser> getCari(int userId);
     
-    public User getUser(model_IuranUser b);
+    public User getUser(IuranUser b);
     
-    public model_Iuran getIuran(model_IuranUser b);
-    
-    public model_Transaksi getTransaksi(model_IuranUser b);
-    
+    public Iuran getIuran(IuranUser b);
+        
     public int getCount();
 }

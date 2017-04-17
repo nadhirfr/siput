@@ -9,7 +9,7 @@ package model;
  *
  * @author fachrul
  */
-public class model_KategoriIuran {
+public class KategoriIuran {
     private int IuranKategoriId, IuranKategoriInterval;
     private String IuranKategoriNama ;
 
@@ -37,17 +37,17 @@ public class model_KategoriIuran {
         this.IuranKategoriInterval = IuranKategoriInterval;
     }
 
-    public model_KategoriIuran(int IuranKategoriId, String IuranKategoriNama, int IuranKategoriInterval) {
+    public KategoriIuran(int IuranKategoriId, String IuranKategoriNama, int IuranKategoriInterval) {
         this.IuranKategoriId = IuranKategoriId;
         this.IuranKategoriNama = IuranKategoriNama;
         this.IuranKategoriInterval = IuranKategoriInterval;
     }
 
-    public model_KategoriIuran(String IuranKategoriNama, int IuranKategoriInterval) {
+    public KategoriIuran(String IuranKategoriNama, int IuranKategoriInterval) {
         this.IuranKategoriNama = IuranKategoriNama;
         this.IuranKategoriInterval = IuranKategoriInterval;
     }
 
-    public model_KategoriIuran() {
+    public KategoriIuran() {
     }
 }

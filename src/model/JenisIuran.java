@@ -9,7 +9,7 @@ package model;
  *
  * @author fachrul
  */
-public class model_JenisIuran {
+public class JenisIuran {
     private int IuranJenisId;
     private String IuranJenisNama, IuranJenisKeterangan;
 
@@ -37,17 +37,17 @@ public class model_JenisIuran {
         this.IuranJenisKeterangan = IuranJenisKeterangan;
     }
 
-    public model_JenisIuran(String IuranJenisNama, String IuranJenisKeterangan) {
+    public JenisIuran(String IuranJenisNama, String IuranJenisKeterangan) {
         this.IuranJenisNama = IuranJenisNama;
         this.IuranJenisKeterangan = IuranJenisKeterangan;
     }
 
-    public model_JenisIuran(int IuranJenisId, String IuranJenisNama, String IuranJenisKeterangan) {
+    public JenisIuran(int IuranJenisId, String IuranJenisNama, String IuranJenisKeterangan) {
         this.IuranJenisId = IuranJenisId;
         this.IuranJenisNama = IuranJenisNama;
         this.IuranJenisKeterangan = IuranJenisKeterangan;
     }
 
-    public model_JenisIuran() {
+    public JenisIuran() {
     }
 }

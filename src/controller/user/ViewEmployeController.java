@@ -158,12 +158,17 @@ public class ViewEmployeController implements Initializable {
                 Map employeeList = tblEmoyeeList.getSelectionModel().getSelectedItem();
                 if (employeeList != null) {
                     User user = userModel.getUser(employeeList.get(Column0MapKey).toString());
+                    Deposit deposit = depositModel.getByUser(user);
                     userModel.update(new User(user.getUser_id(), 
                             tfUserName.getText(), 
                             tfFullName.getText(), 
                             tfPassword.getText(), 
                             tfTipeUser.getText()));
+                    depositModel.update(new Deposit(deposit.getDepositId(),
+                            deposit.getUserId(),
+                            Integer.valueOf(tfSaldo.getText())));
                     System.out.println("Updated user id: "+String.valueOf(user.getUser_id()));
+                    System.out.println("Updated deposit id: "+String.valueOf(deposit.getDepositId()));
                     tblEmoyeeList.getSelectionModel().selectFirst();
                     //ini harusnya direfresh tampilan tapi belum bisa
                     tblEmoyeeList.refresh();

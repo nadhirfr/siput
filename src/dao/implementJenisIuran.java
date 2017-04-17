@@ -6,24 +6,24 @@
 package dao;
 
 import java.util.List;
-import model.model_JenisIuran;
+import model.JenisIuran;
 
 /**
  *
  * @author fachrul
  */
 public interface implementJenisIuran {
-    public void insert(model_JenisIuran b);
+    public void insert(JenisIuran b);
     
-    public model_JenisIuran get(String JenisIuranId);
+    public JenisIuran get(String JenisIuranId);
 
-    public void update(model_JenisIuran b);
+    public void update(JenisIuran b);
 
     public void delete(String JenisIuranId);
 
-    public List<model_JenisIuran> getAll();
+    public List<JenisIuran> getAll();
 
-    public List<model_JenisIuran> getCari(String JenisIuranNama);
+    public List<JenisIuran> getCari(String JenisIuranNama);
     
     public int getCount();
 }

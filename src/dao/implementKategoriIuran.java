@@ -6,24 +6,24 @@
 package dao;
 
 import java.util.List;
-import model.model_KategoriIuran;
+import model.KategoriIuran;
 
 /**
  *
  * @author fachrul
  */
 public interface implementKategoriIuran {
-     public void insert(model_KategoriIuran b);
+     public void insert(KategoriIuran b);
     
-    public model_KategoriIuran get(String KategoriIuranId);
+    public KategoriIuran get(String KategoriIuranId);
 
-    public void update(model_KategoriIuran b);
+    public void update(KategoriIuran b);
 
     public void delete(String KategoriIuranId);
 
-    public List<model_KategoriIuran> getAll();
+    public List<KategoriIuran> getAll();
 
-    public List<model_KategoriIuran> getCari(String KategoriIuranNama);
+    public List<KategoriIuran> getCari(String KategoriIuranNama);
     
     public int getCount();
 }
