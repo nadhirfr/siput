@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="604.0" prefWidth="877.0" stylesheets="@../../style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.user.ViewEmployeController">
+<AnchorPane id="AnchorPane" prefHeight="604.0" prefWidth="877.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.user.ViewEmployeController">
    <children>
       <BorderPane layoutX="294.0" layoutY="147.0" prefHeight="604.0" prefWidth="877.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -53,10 +53,6 @@
                               <TextField fx:id="tfSaldo" GridPane.columnSpan="2" GridPane.rowIndex="9" />
                               <TextField fx:id="tfCreatedBy" disable="true" editable="false" visible="false" GridPane.columnSpan="2" GridPane.rowIndex="13" />
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowSpan="6" />
-                              <Button fx:id="btnClrFulNametf" layoutX="167.0" layoutY="43.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="35.0" stylesheets="@../../style/btnOnText.css" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                              <Button fx:id="btnClrPhonetf" layoutX="10.0" layoutY="103.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="35.0" stylesheets="@../../style/btnOnText.css" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-                              <Button fx:id="btnClrEmailtf" layoutX="10.0" layoutY="163.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="35.0" stylesheets="@../../style/btnOnText.css" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
-                              <Button fx:id="btnClrSalarytf" layoutX="10.0" layoutY="223.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="35.0" stylesheets="@../../style/btnOnText.css" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="14" GridPane.rowSpan="3">
                                  <children>
                                     <Button fx:id="btnUpdate" layoutX="16.0" layoutY="19.0" mnemonicParsing="false" text="Update" />

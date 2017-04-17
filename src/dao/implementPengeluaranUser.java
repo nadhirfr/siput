@@ -6,24 +6,24 @@
 package dao;
 
 import java.util.List;
-import model.model_PengeluaranUser;
+import model.PengeluaranUser;
 
 /**
  *
  * @author rheza
  */
 public interface implementPengeluaranUser {
-        public void insert(model_PengeluaranUser b);
+        public void insert(PengeluaranUser b);
     
-    public model_PengeluaranUser get(String PengeluaranUserId);
+    public PengeluaranUser get(String PengeluaranUserId);
 
-    public void update(model_PengeluaranUser b);
+    public void update(PengeluaranUser b);
 
     public void delete(String PengeluaranUserId);
 
-    public List<model_PengeluaranUser> getAll();
+    public List<PengeluaranUser> getAll();
 
-    public List<model_PengeluaranUser> getCari(String PengeluaranUserNama);
+    public List<PengeluaranUser> getCari(String PengeluaranUserNama);
     
     public int getCount();
 }
