@@ -97,14 +97,14 @@ public class ViewEmployeController implements Initializable {
     private Button btnDelete;
     @FXML
     private TextField tfCreatedBy;
-    @FXML
-    public Button btnClrFulNametf;
-    @FXML
-    public Button btnClrEmailtf;
-    @FXML
-    public Button btnClrPhonetf;
-    @FXML
-    public Button btnClrSalarytf;
+//    @FXML
+//    public Button btnClrFulNametf;
+//    @FXML
+//    public Button btnClrEmailtf;
+//    @FXML
+//    public Button btnClrPhonetf;
+//    @FXML
+//    public Button btnClrSalarytf;
     @FXML
     private TableView<Map> tblEmoyeeList;
     @FXML

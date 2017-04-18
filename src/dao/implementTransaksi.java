@@ -7,7 +7,7 @@ package dao;
 
 import java.util.List;
 import model.Iuran;
-import model.model_Pengeluaran;
+import model.Pengeluaran;
 import model.Transaksi;
 import model.User;
 
@@ -32,7 +32,7 @@ public interface implementTransaksi {
     
     public Iuran getIuran(Transaksi b);
     
-    public model_Pengeluaran getPengeluaran(Transaksi b);
+    public Pengeluaran getPengeluaran(Transaksi b);
     
     public int getCount();
 }

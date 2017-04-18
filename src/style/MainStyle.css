@@ -57,15 +57,16 @@ and open the template in the editor.
     -fx-border-color: #ACACAC;
     -fx-border-radius: 50px;
     -fx-background-radius: 50px;
-    -fx-background-color: white;
+    -fx-background-color: #3498db;
     -fx-font-size: 12px; 
     -fx-padding: 8px 25px;
     -fx-font-weight:700;
+    -fx-text-fill: white;
     -fx-font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
 }
 .button:hover{
     -fx-background-color: #EA5444;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 
 }
 .button:focused{
@@ -149,8 +150,8 @@ AnchorPane{
     -fx-background-position: center center;
 }
 .scroll-pane{
-    -fx-padding: 0;
-    -fx-background:none;
+    padding: 0;
+    -fx-background:#f4f4f4;
 }
 AnchorPane{
 

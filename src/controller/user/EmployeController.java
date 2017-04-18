@@ -79,10 +79,10 @@ public class EmployeController implements Initializable {
         
         ViewEmployeController viewEmployeController = fXMLLoader.getController();
 //        viewEmployeController.setNameMedia(nameMedia);
-        viewEmployeController.btnClrEmailtf.getStylesheets().add("/style/btnOnText.css");
-        viewEmployeController.btnClrFulNametf.getStylesheets().add("/style/btnOnText.css");
-        viewEmployeController.btnClrSalarytf.getStylesheets().add("/style/btnOnText.css");
-        viewEmployeController.btnClrPhonetf.getStylesheets().add("/style/btnOnText.css");
+//        viewEmployeController.btnClrEmailtf.getStylesheets().add("/style/btnOnText.css");
+//        viewEmployeController.btnClrFulNametf.getStylesheets().add("/style/btnOnText.css");
+//        viewEmployeController.btnClrSalarytf.getStylesheets().add("/style/btnOnText.css");
+//        viewEmployeController.btnClrPhonetf.getStylesheets().add("/style/btnOnText.css");
 //        viewEmployeController.checqPermission();
         
         AnchorPane acPane = fXMLLoader.getRoot();

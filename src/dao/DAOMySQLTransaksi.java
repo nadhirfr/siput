@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import koneksi.Koneksi;
 import model.Iuran;
-import model.model_Pengeluaran;
+import model.Pengeluaran;
 import model.Transaksi;
 import model.User;
 
@@ -243,9 +243,9 @@ public class DAOMySQLTransaksi implements implementTransaksi{
     }
 
     @Override
-    public model_Pengeluaran getPengeluaran(Transaksi b) {
+    public Pengeluaran getPengeluaran(Transaksi b) {
     PreparedStatement statement = null;
-        model_Pengeluaran pengeluaran = new model_Pengeluaran();
+        Pengeluaran pengeluaran = new Pengeluaran();
         try {
             statement = connection.prepareStatement(getPengeluaran);
             statement.setString(1, b.getPengeluaranId());

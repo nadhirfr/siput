@@ -67,7 +67,7 @@ public class TransaksiModel implements implementTransaksi{
     }
 
     @Override
-    public model_Pengeluaran getPengeluaran(Transaksi b) {
+    public Pengeluaran getPengeluaran(Transaksi b) {
         return dAOTransaksi.getPengeluaran(b);
     }
 

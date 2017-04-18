@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package dao;
-import model.model_Pengeluaran;
+import model.Pengeluaran;
 import java.util.List;
 
 /**
@@ -12,17 +12,17 @@ import java.util.List;
  * @author rheza
  */
 public interface implementPengeluaran {
-    public void insert(model_Pengeluaran b);
+    public void insert(Pengeluaran b);
     
-    public model_Pengeluaran get(String PengeluaranId);
+    public Pengeluaran get(String PengeluaranId);
 
-    public void update(model_Pengeluaran b);
+    public void update(Pengeluaran b);
 
     public void delete(String PengeluaranId);
 
-    public List<model_Pengeluaran> getAll();
+    public List<Pengeluaran> getAll();
 
-    public List<model_Pengeluaran> getCari(String PengeluaranNama);
+    public List<Pengeluaran> getCari(String PengeluaranNama);
     
     public int getCount();
 }

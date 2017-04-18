@@ -18,7 +18,7 @@
          <children>
             <AnchorPane prefHeight="560.0" prefWidth="559.0">
                <children>
-                  <ScrollPane layoutX="64.0" layoutY="57.0" prefHeight="560.0" prefWidth="559.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <ScrollPane layoutX="64.0" layoutY="57.0" pannable="true" prefHeight="560.0" prefWidth="559.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <content>
                       <AnchorPane prefHeight="514.0" prefWidth="557.0">
                            <children>
@@ -70,9 +70,6 @@
                                     <TextField fx:id="tfFullName" GridPane.columnSpan="3" GridPane.rowIndex="3" />
                                     <TextField fx:id="tfPassword" GridPane.columnSpan="3" GridPane.rowIndex="5" />
                                     <JFXComboBox focusColor="WHITE" prefHeight="25.0" prefWidth="334.0" unFocusColor="#f5efef" GridPane.columnSpan="3" GridPane.rowIndex="7" />
-                                    <Button fx:id="btnClrUsrName" mnemonicParsing="false" prefHeight="25.0" prefWidth="35.0" stylesheets="@../../style/btnOnText.css" GridPane.columnSpan="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                                    <Button fx:id="btnClrFullName" mnemonicParsing="false" prefHeight="25.0" prefWidth="35.0" stylesheets="@../../style/btnOnText.css" GridPane.columnSpan="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                                    <Button fx:id="btnClrEmail" mnemonicParsing="false" prefHeight="25.0" prefWidth="35.0" stylesheets="@../../style/btnOnText.css" GridPane.columnSpan="3" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
                                  </children>
                               </GridPane>
                            </children>
