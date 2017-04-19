@@ -25,6 +25,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -78,14 +81,16 @@ public class MPemasukanController implements Initializable {
     IuranModel iuranModel = new IuranModel();
     IuranUserModel iuranUserModel = new IuranUserModel();
     TransaksiModel transaksiModel = new TransaksiModel();
+    User selectedUser;
+    Iuran selectedIuran;
 
-    List<User> listUser = userModel.getAll();
-    List<Deposit> listDeposit = depositModel.getAll();
-    List<Iuran> listIuran = iuranModel.getAll();
-    List<IuranUser> listIuranUser = iuranUserModel.getAll();
-    List<Transaksi> listTransaksi = transaksiModel.getAll();
-     int saldo = 0;
-     int kurang = 0;
+    List<User> listUser;
+    List<Deposit> listDeposit;
+    List<Iuran> listIuran;
+    List<IuranUser> listIuranUser;
+    List<Transaksi> listTransaksi;
+    int saldo = 0;
+    int kurang = 0;
 
     /**
      * Initializes the controller class.
@@ -106,12 +111,11 @@ public void initialize(URL url, ResourceBundle rb) {
                     //cb_Pembayaran.setItems(generateDataIuranInMap());
                     System.out.println("Selected : " + newValue.getUser_displayname());
                     cb_Pembayaran.getItems().clear();
+                    listIuranUser = iuranUserModel.getAll();
                     for (int i = 0; i < listIuranUser.size(); i++) {
-                        if (listIuranUser.get(i).getUserId() == cb_namaAnggota.getValue().getUser_id()) {
+                        if (listIuranUser.get(i).isIuranUserStatus() == 0
+                                && listIuranUser.get(i).getUserId() == cb_namaAnggota.getValue().getUser_id()) {
                             cb_Pembayaran.getItems().add(iuranModel.get(String.valueOf(listIuranUser.get(i).getIuranId())));
-                            cb_Pembayaran.setPromptText("Pilih Pembayaran");
-                        } else {
-                            cb_Pembayaran.setPromptText("Pilih Pembayaran");
                         }
                     }
 
@@ -120,32 +124,35 @@ public void initialize(URL url, ResourceBundle rb) {
                     cb_Pembayaran.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Iuran>() {
                         @Override
                         public void changed(ObservableValue<? extends Iuran> observable, Iuran oldValue, Iuran newValue) {
-                            User selectedUser = cb_namaAnggota.getSelectionModel().getSelectedItem();
+                            selectedUser = cb_namaAnggota.getSelectionModel().getSelectedItem();
 //                            Iuran selectedIuran = cb_Pembayaran.getValue();
 //                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                             if (newValue != null) {
 //                                if (iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).isIuranUserStatus()) {
 //                                    lbStatus.setText("Lunas");
 //                                } else {
-                                    listTransaksi = transaksiModel.getAll();
-                                    int total = 0;
-                                    for (Transaksi transaksi : listTransaksi) {
+                                listTransaksi = transaksiModel.getAll();
+                                int total = 0;
+
+                                //ngecek setiap transaksi, jika ditabel transaksi ada pembayaran yg telah dibayar maka nominal dikurangi dgn yg telah dibayar
+                                for (Transaksi transaksi : listTransaksi) {
 //                                        System.out.println(transaksi.getUserId()+":"+selectedUser.getUser_id());
-                                        System.out.println(transaksi.getUserId()+":"+  iuranUserModel.getByUserAndIuran(cb_namaAnggota.getValue(), cb_Pembayaran.getValue()).getUserId());
-                                        if (transaksi.getUserId() == iuranUserModel.getByUserAndIuran(selectedUser, newValue).getUserId()
-                                                && Integer.valueOf(transaksi.getIuranId()) == iuranUserModel.getByUserAndIuran(selectedUser, newValue).getIuranId()) {
-                                            total = total + transaksi.getTransaksiNominal();
-                                        }
+                                    System.out.println(transaksi.getUserId() + ":" + iuranUserModel.getByUserAndIuran(cb_namaAnggota.getValue(), cb_Pembayaran.getValue()).getUserId());
+                                    if (transaksi.getUserId() == iuranUserModel.getByUserAndIuran(selectedUser, newValue).getUserId()
+                                            && Integer.valueOf(transaksi.getIuranId()) == iuranUserModel.getByUserAndIuran(selectedUser, newValue).getIuranId()) {
+                                        total = total + transaksi.getTransaksiNominal();
+//                                            pr biikin yg iuran rutin
                                     }
-                                    
-                                    System.out.println("selected user :"+selectedUser.getUser_id());
-                                    System.out.println("selected iuran :"+cb_Pembayaran.getValue().getIuranId());
-                                    System.out.println(iuranUserModel.getByUserAndIuran(selectedUser, cb_Pembayaran.getValue()).getUserId());
-                                    System.out.println("total : " +total);
+                                }
+
+//                                    System.out.println("selected user :"+selectedUser.getUser_id());
+//                                    System.out.println("selected iuran :"+cb_Pembayaran.getValue().getIuranId());
+                                System.out.println(iuranUserModel.getByUserAndIuran(selectedUser, cb_Pembayaran.getValue()).getUserId());
+//                                    System.out.println("total : " +total);
 //                                int transaksi_total
-                                    nom_jns_pembayaranP.setText(String.valueOf(newValue.getIuranNominal() - total));
-                                    nom_pembayaranP.setText("0");
-                                    nom_saldo_DP.setText("0");
+                                nom_jns_pembayaranP.setText(String.valueOf(newValue.getIuranNominal() - total));
+                                nom_pembayaranP.setText("0");
+                                nom_saldo_DP.setText("0");
 //                                }
                             }
                         }
@@ -158,33 +165,34 @@ public void initialize(URL url, ResourceBundle rb) {
         nom_pembayaranP.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//                int kurang;
+                int status;
                 if (nom_pembayaranP.getText().equals("")) {
                     nom_pembayaranP.setText("0");
                 }
-                
+
                 if (nom_saldo_DP.getText().equals("") || nom_saldo_DP.getText().equals("0")) {
-//                    lbStatus.setText(String.valueOf(Integer.valueOf(nom_jns_pembayaranP.getText()) - Integer.valueOf(nom_pembayaranP.getText())));
                     kurang = Integer.valueOf(nom_jns_pembayaranP.getText())
                             - (Integer.valueOf(nom_pembayaranP.getText()));
-                    //jika jumlah yg harus dibayar dikurangi jumlah yang dimasukkan pada kolom nominal pemasukkan lebih
+
                     // besar dari nominal yang harus dibayarkan maka sisanya akan masuk ke deposit
-                    if(kurang < 0){
+                    if (kurang < 0) {
+                        status = 0;
                         saldo = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
-                            .getDepositJumlah() + (Math.abs(kurang)-Integer.valueOf(nom_jns_pembayaranP.getText()));
-                        System.out.println("saldo : "+saldo);
+                                .getDepositJumlah() + (Math.abs(kurang));
+                        System.out.println("saldo nambah: " + saldo);
+                    } else {
+                        status = kurang;
+                        saldo = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
+                                .getDepositJumlah();
                     }
                 } else {
+                    status = kurang;
                     kurang = Integer.valueOf(nom_jns_pembayaranP.getText())
                             - (Integer.valueOf(nom_pembayaranP.getText()) + Integer.valueOf(nom_saldo_DP.getText()));
-                    if(kurang < 0){
-                        saldo = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
-                            .getDepositJumlah() + (kurang-Integer.valueOf(nom_jns_pembayaranP.getText()));
-                    }
                 }
-                System.out.println("Kurang = "+kurang);
+                System.out.println("Kurang = " + kurang);
                 lbSisaSaldo.setText(String.valueOf(saldo));
-                lbStatus.setText(String.valueOf(kurang));
+                lbStatus.setText(String.valueOf(status));
             }
         });
         nom_pembayaranP.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -200,26 +208,41 @@ public void initialize(URL url, ResourceBundle rb) {
         nom_saldo_DP.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-               
-                if (nom_saldo_DP.getText().equals("") || nom_saldo_DP.getText().equals("0")) {
+                if (nom_saldo_DP.getText().equals("")) {
                     nom_saldo_DP.setText("0");
-                    saldo = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
-                            .getDepositJumlah();
-                    kurang = Integer.valueOf(nom_jns_pembayaranP.getText()) - Integer.valueOf(nom_pembayaranP.getText());
-//                
-                } else if (nom_pembayaranP.getText().equals("0")
-                        || nom_pembayaranP.getText().equals("")) {
-                    kurang = Integer.valueOf(nom_jns_pembayaranP.getText()) - Integer.valueOf(nom_saldo_DP.getText());
-                    saldo = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
-                            .getDepositJumlah() - Integer.valueOf(nom_saldo_DP.getText());
-
-                } else {
-                    kurang = Integer.valueOf(nom_jns_pembayaranP.getText()) - (Integer.valueOf(nom_pembayaranP.getText()) + Integer.valueOf(newValue));
-                    saldo = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
-                            .getDepositJumlah() - Integer.valueOf(newValue);
                 }
-                lbSisaSaldo.setText(String.valueOf(saldo));
-                lbStatus.setText(String.valueOf(kurang));
+
+                if (depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
+                        .getDepositJumlah() == 0) {
+                    Alert alert = new Alert(AlertType.WARNING, "Saldo kosong !", ButtonType.OK);
+                    alert.showAndWait();
+
+                    //kalau mau dikasih action
+//                    if (alert.getResult() == ButtonType.YES) {
+//                        //do stuff
+//                    }
+                }
+                if (Integer.valueOf(nom_pembayaranP.getText()) < Integer.valueOf(nom_jns_pembayaranP.getText())) {
+                    if (nom_saldo_DP.getText().equals("") || nom_saldo_DP.getText().equals("0")) {
+                        saldo = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
+                                .getDepositJumlah();
+                        kurang = Integer.valueOf(nom_jns_pembayaranP.getText()) - Integer.valueOf(nom_pembayaranP.getText());
+//                
+                    } else if (nom_pembayaranP.getText().equals("0")
+                            || nom_pembayaranP.getText().equals("")) {
+                        kurang = Integer.valueOf(nom_jns_pembayaranP.getText()) - Integer.valueOf(nom_saldo_DP.getText());
+                        saldo = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
+                                .getDepositJumlah() - Integer.valueOf(nom_saldo_DP.getText());
+
+                    } else {
+                        kurang = Integer.valueOf(nom_jns_pembayaranP.getText()) - (Integer.valueOf(nom_pembayaranP.getText()) + Integer.valueOf(newValue));
+                        saldo = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
+                                .getDepositJumlah() - Integer.valueOf(newValue);
+                    }
+                    lbSisaSaldo.setText(String.valueOf(saldo));
+                    lbStatus.setText(String.valueOf(kurang));
+                }
+
             }
         });
         nom_saldo_DP.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -233,64 +256,94 @@ public void initialize(URL url, ResourceBundle rb) {
                 }
             }
         });
-        
+
         btnSimpanP.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                User selectedUser = cb_namaAnggota.getValue();
-                Iuran selectedIuran = cb_Pembayaran.getValue();
+                selectedUser = cb_namaAnggota.getValue();
+                selectedIuran = cb_Pembayaran.getValue();
                 Deposit deposit = depositModel.getByUser(selectedUser);
                 IuranUser iuran_user = iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran);
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String toString = dateFormat.format(new Date());
 
                 int total = 0;
-                for (Transaksi transaksi : listTransaksi) {
-                    System.out.println(iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getUserId());
-                        if (transaksi.getUserId() == iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getUserId()
-                                && Integer.valueOf(transaksi.getIuranId()) == iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getIuranId()) {
-                            total = total + transaksi.getTransaksiNominal();
-                        }
-                }
-                    
+                int jumlahTransaksiIuran = 0;
+
                 if (!nom_jns_pembayaranP.getText().equals("0")) {
-                    int jumlahTransaksi = Integer.valueOf(nom_pembayaranP.getText())
-                            + Integer.valueOf(nom_saldo_DP.getText());
-                    transaksiModel.insert(new Transaksi(jumlahTransaksi,
+                    if (Integer.valueOf(nom_pembayaranP.getText()) > Integer.valueOf(nom_jns_pembayaranP.getText())) {
+                        jumlahTransaksiIuran = Integer.valueOf(nom_jns_pembayaranP.getText());
+                        System.out.println("true lebih besar");
+                    } else {
+                        System.out.println("true lebih besar");
+                        jumlahTransaksiIuran = Integer.valueOf(nom_pembayaranP.getText())
+                                + Integer.valueOf(nom_saldo_DP.getText());
+                    }
+                    //insert ke transaksi bahwa ada iuran baru
+                    transaksiModel.insert(new Transaksi(jumlahTransaksiIuran,
                             selectedUser.getUser_id(),
                             String.valueOf(selectedIuran.getIuranId()),
                             null,
                             toString,
                             selectedIuran.getIuranNama(),
                             "iuran"));
+                    //mengubah jumlah deposit
                     depositModel.update(new Deposit(deposit.getDepositId(),
                             selectedUser.getUser_id(),
                             Integer.valueOf(lbSisaSaldo.getText())));
+                    transaksiModel = new TransaksiModel();
                     listTransaksi = transaksiModel.getAll();
-                    
-                    //System.out.println(total);
+                    //menghitung total transaksi yang dibayarkan (dicek pada tabel transaksi)
+                    for (Transaksi transaksi : listTransaksi) {
+                        System.out.println(iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getUserId());
+                        if (transaksi.getUserId() == iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getUserId()
+                                && Integer.valueOf(transaksi.getIuranId()) == iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getIuranId()) {
+                            total = total + transaksi.getTransaksiNominal();
+                        }
+                    }
+                    System.out.println("Total : " + total);
+                    //ketika jumlah total lebih dari sama dengan nominal iuran yang dibayarkan maka mengubah statusnya menjadi 1 (artinya sudah lunas)
+                    System.out.println("Sebelum : " + iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus());
                     if (total >= selectedIuran.getIuranNominal()) {
                         System.out.println(iuran_user.getIuranId());
                         iuran_user.setIuranUserStatus(1);
                         iuranUserModel.update(iuran_user);
                     }
+                    if (iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus() == 1) {
+                        Alert alert = new Alert(AlertType.INFORMATION, "Data tersimpan !", ButtonType.OK);
+                        alert.showAndWait();
+                        if (alert.getResult() == ButtonType.OK) {
+                            //keneki diisii nek sukses
+                        }
+                    }
+
+                    System.out.println("Sesudah : " + iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus());
                 } else {
-                    System.out.println("Sebelum : "+iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus());
+                    transaksiModel = new TransaksiModel();
+                    listTransaksi = transaksiModel.getAll();
+                    //menghitung total transaksi yang dibayarkan (dicek pada tabel transaksi)
+                    for (Transaksi transaksi : listTransaksi) {
+                        System.out.println(iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getUserId());
+                        if (transaksi.getUserId() == iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getUserId()
+                                && Integer.valueOf(transaksi.getIuranId()) == iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getIuranId()) {
+                            total = total + transaksi.getTransaksiNominal();
+                        }
+                    }
+                    System.out.println("Total : " + total);
+                    System.out.println("Sebelum : " + iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus());
                     if (total >= selectedIuran.getIuranNominal()) {
-                        System.out.println("iuran user id :"+iuran_user.getIuranId());
+                        System.out.println("iuran user id :" + iuran_user.getIuranId());
                         iuran_user.setIuranUserStatus(1);
                         iuranUserModel.update(iuran_user);
                     }
-                    System.out.println("Sesudah : "+iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus());
+                    System.out.println("Sesudah : " + iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus());
                 }
                    batalBtnOnClick(event);
             }
+
         });
     }
 
-    private void validationCheck(){
-        
-    }
     private StringConverter<User> converter_cbAnggota
             = new StringConverter<User>() {
         @Override
@@ -397,6 +450,7 @@ public void initialize(URL url, ResourceBundle rb) {
     };
 
     private ObservableList<User> generateDataUserInMap() {
+        listUser = userModel.getAll();
         ObservableList<User> allData = FXCollections.observableArrayList();
         for (int i = 0; i < listUser.size(); i++) {
             User dataRow = listUser.get(i);
