@@ -50,8 +50,8 @@
                   <JFXTextField fx:id="nom_jns_pembayaranP" disable="true" labelFloat="true" layoutX="90.0" layoutY="166.0" prefHeight="25.0" prefWidth="253.0" promptText="Nominal Jenis Pembayaran" />
                   <JFXTextField fx:id="nom_pembayaranP" labelFloat="true" layoutX="90.0" layoutY="229.0" prefHeight="25.0" prefWidth="253.0" promptText="Masukan Nominal (ex : 2000)" />
                   <JFXTextField fx:id="nom_saldo_DP" labelFloat="true" layoutX="90.0" layoutY="286.0" prefHeight="25.0" prefWidth="253.0" promptText="Nominal Saldo yang diambil" />
-                  <JFXButton fx:id="btnSimpanP" layoutX="91.0" layoutY="359.0" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" />
-                  <JFXButton fx:id="btnBatalP" layoutX="229.0" layoutY="359.0" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #3498db;" text="Batal" textFill="WHITE" />
+                  <JFXButton fx:id="btnSimpanP" layoutX="91.0" layoutY="359.0" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #3498db; -jfx-button-type: ok;" text="Simpan" textFill="WHITE" />
+                  <JFXButton fx:id="btnBatalP" layoutX="229.0" layoutY="359.0" onAction="#batalBtnOnClick" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #3498db;" text="Batal" textFill="WHITE" />
                </children>
             </AnchorPane>
          </center>

@@ -15,11 +15,11 @@ import java.util.List;
  * @author fachrul
  */
 public class TransaksiModel implements implementTransaksi{
-
+    private int transaksi_nominal;
     MySQLDAOFactory mysqlFactory;
     implementTransaksi dAOTransaksi;
     List<Transaksi> listTransaksi;
-    
+        
     public TransaksiModel() {
         mysqlFactory = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
         dAOTransaksi = mysqlFactory.getTransaksiMySQL();

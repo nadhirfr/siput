@@ -31,6 +31,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import model.Deposit;
@@ -90,7 +91,7 @@ public class MPemasukanController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+public void initialize(URL url, ResourceBundle rb) {
         // TODO
         //nom_saldo_DP.setText("0");
 
@@ -282,7 +283,7 @@ public class MPemasukanController implements Initializable {
                     }
                     System.out.println("Sesudah : "+iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus());
                 }
-
+                   batalBtnOnClick(event);
             }
         });
     }
@@ -403,5 +404,12 @@ public class MPemasukanController implements Initializable {
         }
         return allData;
     }
-
+    
+    @FXML
+    private void batalBtnOnClick(ActionEvent event){
+        cb_namaAnggota.valueProperty().set(null);
+        nom_pembayaranP.clear();
+        cb_Pembayaran.valueProperty().set(null);
+        nom_saldo_DP.clear();
+    }
 }

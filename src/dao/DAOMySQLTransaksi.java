@@ -39,6 +39,7 @@ public class DAOMySQLTransaksi implements implementTransaksi{
     final String getIuran = "SELECT * FROM iuran WHERE iuran_id=?;";
     final String getPengeluaran = "SELECT * FROM pengeluaran WHERE pengeluaran_id=?;";
     final String cari = "SELECT * FROM transaksi WHERE transaksi_nama LIKE ?;";
+    final String jumlahtransaksi = "SELECT sum(transaksi_nominal) FROM transaksi; ";
 
     public DAOMySQLTransaksi() {
         connection = Koneksi.connection();
@@ -280,5 +281,10 @@ public class DAOMySQLTransaksi implements implementTransaksi{
             Logger.getLogger(DAOMySQLUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lb;}
+    
+    
+    public int getIuranNominal(){
+        return 0;     
+    }
     
 }

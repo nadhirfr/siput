@@ -9,11 +9,16 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import model.Iuran;
+import model.IuranModel;
+import model.Transaksi;
+import model.TransaksiModel;
 
 /**
  * FXML Controller class
@@ -35,6 +40,11 @@ public class MPengeluaranController implements Initializable {
     @FXML
     private JFXButton bt_batal;
 
+    TransaksiModel transaksiModel = new TransaksiModel();
+    IuranModel iuranModel = new IuranModel();
+    
+    List<Transaksi> listTransaksi = transaksiModel.getAll();
+    List<Iuran> listIuran = iuranModel.getAll();
     /**
      * Initializes the controller class.
      */
