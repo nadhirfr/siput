@@ -138,14 +138,11 @@ public class MainMenuAController implements Initializable {
     Image settingBlue = new Image("/icon/settingsBlue.png");
     Image about = new Image("/icon/about.png");
     Image aboutBlue = new Image("/icon/aboutBlue.png");
-<<<<<<< HEAD
-    
+   
     UserModel userModel = new UserModel();
     TransaksiModel transaksiModel = new TransaksiModel();
     User logedinUser;
-=======
     int klikmenu;
->>>>>>> aed55d2d566d851ded0fb01764dd79f1e713ec96
 
     String defaultStyle = "-fx-border-width: 0px 0px 0px 5px;"
             + "-fx-border-color:none";
@@ -203,14 +200,8 @@ public class MainMenuAController implements Initializable {
     @FXML
     public void btnHomeOnClick(ActionEvent event) throws IOException {
         homeActive();
-<<<<<<< HEAD
         int totalUser = userModel.getCount();
-=======
         klikmenu=1;
-        RESTDAOFactory user = (RESTDAOFactory) DAOFactory.getFactory(DAOFactory.REST);
-        implementUser dAOUser = user.getUserREST();
-        int totalUser = dAOUser.getCount();
->>>>>>> aed55d2d566d851ded0fb01764dd79f1e713ec96
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/beranda.fxml"));
         loader.load();
@@ -278,15 +269,12 @@ public class MainMenuAController implements Initializable {
     @FXML
     private void btnUserOnClick(ActionEvent event) throws IOException {
         userActive();
-<<<<<<< HEAD
-             
-=======
+
         klikmenu=4;
         MySQLDAOFactory user = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
         implementUser dAOUser = user.getUserMySQL();
         List<User> UserList = dAOUser.getAll();
         
->>>>>>> aed55d2d566d851ded0fb01764dd79f1e713ec96
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/beranda.fxml"));
         loader.load();
