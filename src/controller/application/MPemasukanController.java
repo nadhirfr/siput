@@ -458,6 +458,19 @@ public void initialize(URL url, ResourceBundle rb) {
                 public void updateItem(Iuran item, boolean empty) {
                     super.updateItem(item, empty);
                     if (item != null) {
+                        if(item.getIuranJenisId() == 1 && item.getIuranKategoriId()==1){
+                            //wajib - rutin
+                            setTextFill(Color.DARKORANGE);
+                        } else if(item.getIuranJenisId() == 1 && item.getIuranKategoriId()==2){
+                            //wajib - insidental
+                            setTextFill(Color.DARKORCHID);
+                        } else if(item.getIuranJenisId() == 2 && item.getIuranKategoriId()==1){
+                            //tidak wajib - rutin
+                            setTextFill(Color.DARKRED);
+                        } else if(item.getIuranJenisId() == 2 && item.getIuranKategoriId()==2){
+                            //tidak wajib - insidental
+                            setTextFill(Color.DARKSEAGREEN);
+                        }
                         setText(item.getIuranNama());
                     } else {
                         setText(null);
