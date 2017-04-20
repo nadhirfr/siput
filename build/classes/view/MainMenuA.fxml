@@ -22,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="acMain" prefHeight="593.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuAController">
+<AnchorPane id="AnchorPane" fx:id="acMain" prefHeight="682.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuAController">
    <children>
       <StackPane layoutY="-9.0" prefHeight="593.0" prefWidth="767.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -32,7 +32,7 @@
                      <children>
                         <ScrollPane fx:id="leftSideBarScroolPan" prefHeight="678.0" prefViewportHeight="678.0" prefViewportWidth="128.0" prefWidth="128.0" translateX="1.0" translateY="1.0" translateZ="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
-                              <AnchorPane BorderPane.alignment="CENTER">
+                              <AnchorPane prefHeight="682.0" prefWidth="127.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <Text fill="#3498db" layoutX="8.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DashBoard">
                                        <font>
@@ -123,6 +123,20 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
+                                    <Button fx:id="btnRefresh" contentDisplay="TOP" layoutY="590.0" mnemonicParsing="false" onAction="#btnRefreshOnClick" prefHeight="78.0" prefWidth="127.0" text="Refresh">
+                                       <graphic>
+                                          <ImageView fx:id="imgAboutBtn1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icon/refresh1.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="45.0" layoutY="578.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icon/btnBreak.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                               </AnchorPane>
                            </content>
