@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="APMasuk" prefHeight="599.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.application.MPemasukanController">
@@ -44,7 +45,7 @@
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <Label fx:id="lbSisaSaldo" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="447.0" layoutY="41.0" prefHeight="17.0" prefWidth="174.0" style="-fx-border-color: black;" text="Jumlah Saldo" textAlignment="CENTER" />
-                  <Label fx:id="lbStatus" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="447.0" layoutY="166.0" prefHeight="151.0" prefWidth="174.0" style="-fx-border-color: black;" text="Status" textAlignment="CENTER" />
+                  <Label fx:id="lbStatus" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="447.0" layoutY="91.0" prefHeight="151.0" prefWidth="174.0" style="-fx-border-color: black;" text="Status" textAlignment="CENTER" />
                   <JFXComboBox fx:id="cb_namaAnggota" editable="true" labelFloat="true" layoutX="90.0" layoutY="38.0" prefHeight="25.0" prefWidth="252.0" promptText="Nama Anggota" />
                   <JFXComboBox fx:id="cb_Pembayaran" editable="true" labelFloat="true" layoutX="90.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="252.0" promptText="Pilih Pembayaran " unFocusColor="#363434" />
                   <JFXTextField fx:id="nom_jns_pembayaranP" disable="true" labelFloat="true" layoutX="90.0" layoutY="166.0" prefHeight="25.0" prefWidth="253.0" promptText="Nominal Jenis Pembayaran" />
@@ -52,6 +53,15 @@
                   <JFXTextField fx:id="nom_saldo_DP" labelFloat="true" layoutX="90.0" layoutY="286.0" prefHeight="25.0" prefWidth="253.0" promptText="Nominal Saldo yang diambil" />
                   <JFXButton fx:id="btnSimpanP" layoutX="91.0" layoutY="359.0" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #3498db; -jfx-button-type: ok;" text="Simpan" textFill="WHITE" />
                   <JFXButton fx:id="btnBatalP" layoutX="229.0" layoutY="359.0" onAction="#batalBtnOnClick" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #3498db;" text="Batal" textFill="WHITE" />
+                  <Label layoutX="448.0" layoutY="267.0" text="Keterangan" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DARKORANGE" height="15.0" layoutX="447.0" layoutY="294.0" stroke="DARKORANGE" strokeType="INSIDE" width="15.0" />
+                  <Label layoutX="473.0" layoutY="293.0" text="Iuran Wajib - Rutin" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DARKORCHID" height="15.0" layoutX="447.0" layoutY="319.0" stroke="DARKORCHID" strokeType="INSIDE" width="15.0" />
+                  <Label layoutX="473.0" layoutY="318.0" text="Iuran Wajib - Insidental" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DARKRED" height="15.0" layoutX="447.0" layoutY="344.0" stroke="DARKRED" strokeType="INSIDE" width="15.0" />
+                  <Label layoutX="473.0" layoutY="343.0" text="Iuran Tidak Wajib - Rutin" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DARKSEAGREEN" height="15.0" layoutX="447.0" layoutY="369.0" stroke="DARKSEAGREEN" strokeType="INSIDE" width="15.0" />
+                  <Label layoutX="473.0" layoutY="368.0" text="Iuran Tidak Wajib - Insidental" />
                </children>
             </AnchorPane>
          </center>

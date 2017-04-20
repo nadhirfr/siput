@@ -123,11 +123,11 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="btnRefresh" contentDisplay="TOP" layoutX="-1.0" layoutY="578.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="127.0" text="Refresh">
+                                    <Button fx:id="btnRefresh" contentDisplay="TOP" layoutY="590.0" mnemonicParsing="false" onAction="#btnRefreshOnClick" prefHeight="78.0" prefWidth="127.0" text="Refresh">
                                        <graphic>
                                           <ImageView fx:id="imgAboutBtn1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../icon/about.png" />
+                                                <Image url="@../icon/refresh1.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>

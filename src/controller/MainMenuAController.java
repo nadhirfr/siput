@@ -138,10 +138,14 @@ public class MainMenuAController implements Initializable {
     Image settingBlue = new Image("/icon/settingsBlue.png");
     Image about = new Image("/icon/about.png");
     Image aboutBlue = new Image("/icon/aboutBlue.png");
+<<<<<<< HEAD
     
     UserModel userModel = new UserModel();
     TransaksiModel transaksiModel = new TransaksiModel();
     User logedinUser;
+=======
+    int klikmenu;
+>>>>>>> aed55d2d566d851ded0fb01764dd79f1e713ec96
 
     String defaultStyle = "-fx-border-width: 0px 0px 0px 5px;"
             + "-fx-border-color:none";
@@ -199,7 +203,14 @@ public class MainMenuAController implements Initializable {
     @FXML
     public void btnHomeOnClick(ActionEvent event) throws IOException {
         homeActive();
+<<<<<<< HEAD
         int totalUser = userModel.getCount();
+=======
+        klikmenu=1;
+        RESTDAOFactory user = (RESTDAOFactory) DAOFactory.getFactory(DAOFactory.REST);
+        implementUser dAOUser = user.getUserREST();
+        int totalUser = dAOUser.getCount();
+>>>>>>> aed55d2d566d851ded0fb01764dd79f1e713ec96
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/beranda.fxml"));
         loader.load();
@@ -220,6 +231,7 @@ public class MainMenuAController implements Initializable {
     @FXML
     private void btnCashInOnClick(ActionEvent event) throws IOException {
         CIActive();
+        klikmenu=2;
         //MPemasukanController sc = new MPemasukanController();
         //userNameMedia nm = new userNameMedia();
         FXMLLoader fXMLLoader = new FXMLLoader();
@@ -240,6 +252,7 @@ public class MainMenuAController implements Initializable {
     @FXML
     private void btnCashOutOnClick(ActionEvent event) {
         COActive();
+        klikmenu=3;
         MPengeluaranController controller = new MPengeluaranController();
         //userNameMedia nm = new userNameMedia();
         try {
@@ -265,7 +278,15 @@ public class MainMenuAController implements Initializable {
     @FXML
     private void btnUserOnClick(ActionEvent event) throws IOException {
         userActive();
+<<<<<<< HEAD
              
+=======
+        klikmenu=4;
+        MySQLDAOFactory user = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
+        implementUser dAOUser = user.getUserMySQL();
+        List<User> UserList = dAOUser.getAll();
+        
+>>>>>>> aed55d2d566d851ded0fb01764dd79f1e713ec96
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/beranda.fxml"));
         loader.load();
@@ -285,6 +306,7 @@ public class MainMenuAController implements Initializable {
     @FXML
     private void btnSettingsOnClick(ActionEvent event) throws IOException {
          SettActive();
+         klikmenu=5;
         //inithilize Setting Controller
         TmbhItemIuranController pengaturanController = new TmbhItemIuranController();
         //inithilize UserNameMedia
@@ -314,7 +336,7 @@ public class MainMenuAController implements Initializable {
 
     @FXML
     private void btnAboutOnClick(ActionEvent event) {
-
+        klikmenu=6;
         try {
             AboutActive();
             FXMLLoader fXMLLoader = new FXMLLoader();
@@ -327,10 +349,27 @@ public class MainMenuAController implements Initializable {
         }
     }
     
-//    @FXML
-//    private void btnRefreshOnClick(ActionEvent event){
-//        if(AboutActive()
-//    }
+    @FXML
+    private void btnRefreshOnClick(ActionEvent event) throws IOException{
+        if(klikmenu==1){
+            btnHomeOnClick(event);
+        }
+        else if(klikmenu==2){
+            btnCashInOnClick(event);
+        }
+        else if(klikmenu==3){
+            btnCashOutOnClick(event);
+        }
+        else if(klikmenu==4){
+            btnUserOnClick(event);
+        }
+        else if(klikmenu==5){
+            btnSettingsOnClick(event);
+        }
+        else if(klikmenu==6){
+            btnAboutOnClick(event);
+        }        
+    }
 
     private void homeActive() {
         imgHomeBtn.setImage(homeBlue);
