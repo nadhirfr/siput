@@ -118,6 +118,8 @@ public class MainMenuAController implements Initializable {
     private Label lblUserId;
     @FXML
     private StackPane acContent;
+    @FXML
+    private Button btnRefresh;
 
     Image menuImage = new Image("/icon/menu.png");
     Image menuImageBlue = new Image("/icon/menuBlue.png");
@@ -140,6 +142,7 @@ public class MainMenuAController implements Initializable {
 
     String activeStyle = "-fx-border-width: 0px 0px 0px 5px;"
             + "-fx-border-color:#3498db";
+
 
     public void start(Stage primaryStage) throws IOException {
 
@@ -318,6 +321,11 @@ public class MainMenuAController implements Initializable {
             Logger.getLogger(MainMenuAController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+//    @FXML
+//    private void btnRefreshOnClick(ActionEvent event){
+//        if(AboutActive()
+//    }
 
     private void homeActive() {
         imgHomeBtn.setImage(homeBlue);

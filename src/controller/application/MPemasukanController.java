@@ -8,6 +8,8 @@ package controller.application;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import controller.MainMenuAController;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -24,6 +26,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -32,7 +35,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -55,6 +60,8 @@ import model.UserModel;
  */
 public class MPemasukanController implements Initializable {
 
+    @FXML
+    public AnchorPane APMasuk;
     @FXML
     public BorderPane bpPemasukan;
     @FXML
@@ -212,16 +219,16 @@ public void initialize(URL url, ResourceBundle rb) {
                     nom_saldo_DP.setText("0");
                 }
 
-                if (depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
-                        .getDepositJumlah() == 0) {
-                    Alert alert = new Alert(AlertType.WARNING, "Saldo kosong !", ButtonType.OK);
-                    alert.showAndWait();
+//                if (depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
+//                        .getDepositJumlah() == 0) {
+//                    Alert alert = new Alert(AlertType.WARNING, "Saldo kosong !", ButtonType.OK);
+//                    alert.showAndWait();
 
                     //kalau mau dikasih action
 //                    if (alert.getResult() == ButtonType.YES) {
 //                        //do stuff
 //                    }
-                }
+ //               }
                 if (Integer.valueOf(nom_pembayaranP.getText()) < Integer.valueOf(nom_jns_pembayaranP.getText())) {
                     if (nom_saldo_DP.getText().equals("") || nom_saldo_DP.getText().equals("0")) {
                         saldo = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
@@ -309,13 +316,25 @@ public void initialize(URL url, ResourceBundle rb) {
                         iuran_user.setIuranUserStatus(1);
                         iuranUserModel.update(iuran_user);
                     }
+                    
                     if (iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus() == 1) {
+                        Alert alert = new Alert(AlertType.INFORMATION, "Sudah Lunas", ButtonType.OK);
+                        alert.showAndWait();
+                        MainMenuAController am = new MainMenuAController();
+                        if (alert.getResult() == ButtonType.OK) {
+                            
+                                //keneki diisii nek sukses
+                                batalBtnOnClick(event);
+                                
+
+                        }
+                    }else{
                         Alert alert = new Alert(AlertType.INFORMATION, "Data tersimpan !", ButtonType.OK);
                         alert.showAndWait();
                         if (alert.getResult() == ButtonType.OK) {
                             //keneki diisii nek sukses
-                        }
-                    }
+                            batalBtnOnClick(event);
+                    }}
 
                     System.out.println("Sesudah : " + iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus());
                 } else {
@@ -465,5 +484,17 @@ public void initialize(URL url, ResourceBundle rb) {
         nom_pembayaranP.clear();
         cb_Pembayaran.valueProperty().set(null);
         nom_saldo_DP.clear();
+        cb_Pembayaran.valueProperty().setValue(null);
+        //cb_Pembayaran.getItems().remove(saldo);
+    }
+    
+    @FXML
+    private void refreshACT(ActionEvent event) throws IOException{
+        MainMenuAController am = new MainMenuAController();
+        FXMLLoader fXMLLoader = new FXMLLoader();
+        fXMLLoader.load(getClass().getResource("/view/mPemasukan.fxml").openStream());
+        AnchorPane acPane = fXMLLoader.getRoot();
+        //am.acContent.getChildren().clear();
+        APMasuk.getChildren().add(acPane);
     }
 }
