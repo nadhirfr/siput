@@ -1,4 +1,7 @@
 nbproject/*
+
 dist/*
+
 build/*
+
 *.swp
