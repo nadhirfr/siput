@@ -15,7 +15,6 @@ import java.util.List;
  * @author fachrul
  */
 public class TransaksiModel implements implementTransaksi{
-    private int transaksi_nominal;
     MySQLDAOFactory mysqlFactory;
     implementTransaksi dAOTransaksi;
     List<Transaksi> listTransaksi;
@@ -74,6 +73,26 @@ public class TransaksiModel implements implementTransaksi{
     @Override
     public int getCount() {
         return dAOTransaksi.getCount();
+    }
+
+    @Override
+    public int getJumlahKas() {
+        return dAOTransaksi.getJumlahKas();
+    }
+
+    @Override
+    public int getJumlahIuran() {
+        return dAOTransaksi.getJumlahIuran();
+    }
+
+    @Override
+    public int getJumlahPengeluaran() {
+        return dAOTransaksi.getJumlahPengeluaran();
+    }
+
+    @Override
+    public int getJumlahTransaksi() {
+        return dAOTransaksi.getJumlahTransaksi();
     }
     
 }

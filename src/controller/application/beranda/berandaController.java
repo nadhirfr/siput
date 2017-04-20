@@ -50,6 +50,14 @@ public class berandaController implements Initializable {
         // TODO
     }
 
+    public void setTotalPemasukkan(String total){
+        lbBerandaTotalPemasukan.setText(total);
+    }
+    
+    public void setTotalPengeluaran(String total){
+        lbBerandaTotalPengeluaran.setText(total);
+    }
+    
     public void setUserName(String displayname) {
         this.lblDisplayName.setText(displayname);
     }

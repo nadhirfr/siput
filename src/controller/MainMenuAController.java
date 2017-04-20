@@ -47,7 +47,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.User;
+import model.TransaksiModel;
+import model.User; 
+import model.UserModel;
 
 /**
  * FXML Controller class
@@ -136,6 +138,10 @@ public class MainMenuAController implements Initializable {
     Image settingBlue = new Image("/icon/settingsBlue.png");
     Image about = new Image("/icon/about.png");
     Image aboutBlue = new Image("/icon/aboutBlue.png");
+    
+    UserModel userModel = new UserModel();
+    TransaksiModel transaksiModel = new TransaksiModel();
+    User logedinUser;
 
     String defaultStyle = "-fx-border-width: 0px 0px 0px 5px;"
             + "-fx-border-color:none";
@@ -182,24 +188,25 @@ public class MainMenuAController implements Initializable {
         // TODO
     }
 
-    public void setUserName(String username, String displayname, String role) {
-        this.lblFullName.setText(displayname);
-        this.lblUsrName.setText(username);
-        this.lblUsrNamePopOver.setText(username);
-        this.lblRoleAs.setText(role);
+    public void setUserName(User loggedIn_user) {
+        this.logedinUser = loggedIn_user;
+        this.lblFullName.setText(this.logedinUser.getUser_displayname());
+        this.lblUsrName.setText(this.logedinUser.getUser_username());
+        this.lblUsrNamePopOver.setText(this.logedinUser.getUser_username());
+        this.lblRoleAs.setText(this.logedinUser.getUser_tipe());
     }
-
+    
     @FXML
     public void btnHomeOnClick(ActionEvent event) throws IOException {
         homeActive();
-        RESTDAOFactory user = (RESTDAOFactory) DAOFactory.getFactory(DAOFactory.REST);
-        implementUser dAOUser = user.getUserREST();
-        int totalUser = dAOUser.getCount();
+        int totalUser = userModel.getCount();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/beranda.fxml"));
         loader.load();
         berandaController Berandacontroller = loader.getController();
         Berandacontroller.setLbBerandaTotalUser(totalUser);
+        Berandacontroller.setTotalPemasukkan(String.valueOf(transaksiModel.getJumlahIuran()));
+        Berandacontroller.setTotalPengeluaran(String.valueOf(transaksiModel.getJumlahPengeluaran()));
 
         AnchorPane root = loader.getRoot();
         acContent.getChildren().clear();
@@ -241,6 +248,8 @@ public class MainMenuAController implements Initializable {
             fXMLLoader.load(getClass().getResource("/view/mPengeluaran.fxml").openStream());
             //nm.setId(id);
             MPengeluaranController pengeluaranController = fXMLLoader.getController();
+            pengeluaranController.setLoggedInUser(logedinUser);
+            pengeluaranController.setTotalSaldo(String.valueOf(transaksiModel.getJumlahKas()));
             //sellController.setNameMedia(usrNameMedia);
             //pengeluaranController.acMainSells.getStylesheets().add("/style/MainStyle.css");
             //pengeluaranController.tbtnSellOnAction(event);
@@ -256,11 +265,7 @@ public class MainMenuAController implements Initializable {
     @FXML
     private void btnUserOnClick(ActionEvent event) throws IOException {
         userActive();
-        
-        MySQLDAOFactory user = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
-        implementUser dAOUser = user.getUserMySQL();
-        List<User> UserList = dAOUser.getAll();
-        
+             
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/beranda.fxml"));
         loader.load();

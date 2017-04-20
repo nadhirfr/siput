@@ -5,34 +5,28 @@
  */
 package model;
 
-import java.sql.Time;
-import java.util.Date;
-
 /**
  *
  * @author rheza
  */
-public class model_Session {
+public class Session {
 
     private int session_id, user_id;
-    private Time session_time;
-    private boolean session_status;
+    private String session_time;
 
-    public model_Session() {
+    public Session() {
 
     }
 
-    public model_Session(int session_id, int user_id, Time session_time, boolean session_status) {
+    public Session(int session_id, int user_id, String session_time, boolean session_status) {
         this.session_id = session_id;
         this.user_id = user_id;
         this.session_time = session_time;
-        this.session_status = session_status;
     }
 
-    public model_Session(int user_id, Time session_time, boolean session_status) {
+    public Session(int user_id, String session_time, boolean session_status) {
         this.user_id = user_id;
         this.session_time = session_time;
-        this.session_status = session_status;
     }
 
     public int getSession_id() {
@@ -51,20 +45,11 @@ public class model_Session {
         this.user_id = user_id;
     }
 
-    public Time getSession_time() {
+    public String getSession_time() {
         return session_time;
     }
 
-    public void setSession_time(Time session_time) {
+    public void setSession_time(String session_time) {
         this.session_time = session_time;
     }
-
-    public boolean isSession_status() {
-        return session_status;
-    }
-
-    public void setSession_status(boolean session_status) {
-        this.session_status = session_status;
-    }
-
 }

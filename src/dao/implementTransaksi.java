@@ -34,5 +34,13 @@ public interface implementTransaksi {
     
     public Pengeluaran getPengeluaran(Transaksi b);
     
+    public int getJumlahKas();
+    
+    public int getJumlahIuran();
+    
+    public int getJumlahPengeluaran();
+    
+    public int getJumlahTransaksi();
+    
     public int getCount();
 }
