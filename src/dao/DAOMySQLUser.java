@@ -27,7 +27,7 @@ public class DAOMySQLUser implements implementUser {
     }
 
     @Override
-    public void insert(User b) {
+    public int insert(User b) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(insert);
@@ -45,6 +45,7 @@ public class DAOMySQLUser implements implementUser {
                 ex.printStackTrace();
             }
         }
+        return 1;
     }
     
     @Override

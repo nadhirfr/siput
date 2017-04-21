@@ -7,7 +7,6 @@ package controller;
 
 import controller.application.MPemasukanController;
 import controller.application.MPengeluaranController;
-import controller.application.PengaturanController;
 import controller.application.TmbhItemController;
 import controller.user.EmployeController;
 import controller.application.TmbhItemIuranController;

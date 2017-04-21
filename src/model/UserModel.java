@@ -27,8 +27,8 @@ public class UserModel implements implementUser{
     }
     
     @Override
-    public void insert(User b) {
-        dAOUser.insert(b);
+    public int insert(User b) {
+        return dAOUser.insert(b);
     }
 
     @Override
