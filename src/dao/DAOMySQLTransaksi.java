@@ -39,7 +39,10 @@ public class DAOMySQLTransaksi implements implementTransaksi{
     final String getIuran = "SELECT * FROM iuran WHERE iuran_id=?;";
     final String getPengeluaran = "SELECT * FROM pengeluaran WHERE pengeluaran_id=?;";
     final String cari = "SELECT * FROM transaksi WHERE transaksi_nama LIKE ?;";
-    final String jumlahtransaksi = "SELECT sum(transaksi_nominal) FROM transaksi; ";
+    final String jumlahtransaksi = "SELECT sum(transaksi_nominal) as Jumlah FROM transaksi;";
+    final String jumlahiuran = "SELECT sum(transaksi_nominal) as Jumlah FROM transaksi WHERE transaksi_tipe='iuran';";
+    final String jumlahpengeluaran = "SELECT sum(transaksi_nominal) as Jumlah FROM transaksi WHERE transaksi_tipe='pengeluaran';";
+    
 
     public DAOMySQLTransaksi() {
         connection = Koneksi.connection();
@@ -280,11 +283,57 @@ public class DAOMySQLTransaksi implements implementTransaksi{
         } catch (SQLException ex) {
             Logger.getLogger(DAOMySQLUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return lb;}
+        return lb;
+    }
     
     
-    public int getIuranNominal(){
-        return 0;     
+    @Override
+    public int getJumlahKas() {
+        return getJumlahIuran() - getJumlahPengeluaran();
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getJumlahIuran() {
+        int iuran = 0;
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(jumlahiuran);
+            rs.last();
+            iuran = rs.getInt("Jumlah");
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOMySQLUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return iuran;
+    }
+
+    @Override
+    public int getJumlahPengeluaran() {
+        int pengeluaran = 0;
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(jumlahpengeluaran);
+            rs.last();
+            pengeluaran = rs.getInt("Jumlah");
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOMySQLUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pengeluaran;
+    }
+
+    @Override
+    public int getJumlahTransaksi() {
+        int transaksi = 0;
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(jumlahtransaksi);
+            rs.last();
+            transaksi = rs.getInt("Jumlah");
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOMySQLUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return transaksi;
+        
     }
     
 }

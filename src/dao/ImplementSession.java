@@ -6,22 +6,22 @@
 package dao;
 
 import java.util.List;
-import model.model_Session;
+import model.Session;
 
 /**
  *
  * @author rheza
  */
 public interface ImplementSession {
-        public void insert(model_Session b);
+        public void insert(Session b);
 
-    public model_Session get(String SessionId);
+    public Session get(String SessionId);
 
-    public void update(model_Session b);
+    public void update(Session b);
 
     public void delete(String SessionId);
 
-    public List<model_Session> getAll();
+    public List<Session> getAll();
 
     public int getCount();
 }

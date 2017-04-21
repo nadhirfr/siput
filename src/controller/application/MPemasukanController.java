@@ -88,7 +88,7 @@ public class MPemasukanController implements Initializable {
     IuranModel iuranModel = new IuranModel();
     IuranUserModel iuranUserModel = new IuranUserModel();
     TransaksiModel transaksiModel = new TransaksiModel();
-    User selectedUser;
+    User selectedUser, logedinUser;
     Iuran selectedIuran;
 
     List<User> listUser;
@@ -219,16 +219,6 @@ public void initialize(URL url, ResourceBundle rb) {
                     nom_saldo_DP.setText("0");
                 }
 
-//                if (depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
-//                        .getDepositJumlah() == 0) {
-//                    Alert alert = new Alert(AlertType.WARNING, "Saldo kosong !", ButtonType.OK);
-//                    alert.showAndWait();
-
-                    //kalau mau dikasih action
-//                    if (alert.getResult() == ButtonType.YES) {
-//                        //do stuff
-//                    }
- //               }
                 if (Integer.valueOf(nom_pembayaranP.getText()) < Integer.valueOf(nom_jns_pembayaranP.getText())) {
                     if (nom_saldo_DP.getText().equals("") || nom_saldo_DP.getText().equals("0")) {
                         saldo = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
@@ -499,6 +489,10 @@ public void initialize(URL url, ResourceBundle rb) {
         nom_saldo_DP.clear();
         cb_Pembayaran.valueProperty().setValue(null);
         //cb_Pembayaran.getItems().remove(saldo);
+    }
+    
+    public void setLoggedInUser(User logedinUser){
+        this.logedinUser = logedinUser;
     }
     
     @FXML

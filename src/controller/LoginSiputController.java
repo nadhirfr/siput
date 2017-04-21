@@ -27,6 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import koneksi.Koneksi;
 import model.User;
+import model.UserModel;
 
 /**
  * FXML Controller class
@@ -54,6 +55,7 @@ public class LoginSiputController implements Initializable {
    
    @FXML
    private JFXButton btlbtn;
+    UserModel userModel = new UserModel();
    
    public void Login (ActionEvent event) throws Exception{
        int loggedIn_user_id = Koneksi.isLogin(usernametext.getText(),passtext.getText());
@@ -63,18 +65,17 @@ public class LoginSiputController implements Initializable {
             ((Node)(event.getSource())).getScene().getWindow().hide();
             
             //ini mengambil data dengan DAOFactory user
-            MySQLDAOFactory user = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
-            implementUser dAOUser = user.getUserMySQL();
-            User loggedIn_user = dAOUser.getUser(Integer.toString(loggedIn_user_id));    
+            User loggedIn_user = userModel.getUser(Integer.toString(loggedIn_user_id));    
             
             //memanggil jendela menu admins
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/MainMenuA.fxml"));
             loader.load();
             MainMenuAController aController = loader.getController();
-            aController.setUserName(loggedIn_user.getUser_username(),
-                                    loggedIn_user.getUser_displayname(),
-                                    loggedIn_user.getUser_tipe());
+//            aController.setUserName(loggedIn_user.getUser_username(),
+//                                    loggedIn_user.getUser_displayname(),
+//                                    loggedIn_user.getUser_tipe());
+            aController.setUserName(loggedIn_user);
             Parent parent = loader.getRoot();
             aController.btnHomeOnClick(event);
             Stage primaryStage = new Stage();
