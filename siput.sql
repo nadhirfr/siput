@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2017 at 03:13 PM
+-- Generation Time: Apr 21, 2017 at 11:55 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -139,13 +139,13 @@ CREATE TABLE `iuran_user` (
 --
 
 INSERT INTO `iuran_user` (`iuran_user_id`, `iuran_user_status`, `user_id`, `iuran_id`) VALUES
-(00001, 1, 00004, 00001),
+(00001, 0, 00004, 00001),
 (00002, 1, 00001, 00002),
-(00003, 1, 00001, 00003),
+(00003, 0, 00001, 00003),
 (00004, 1, 00001, 00003),
 (00005, 1, 00001, 00004),
-(00006, 0, 00001, 00005),
-(00007, 0, 00001, 00006);
+(00006, 1, 00001, 00005),
+(00007, 1, 00001, 00006);
 
 -- --------------------------------------------------------
 
@@ -228,28 +228,13 @@ CREATE TABLE `pengeluaran_perubahan` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengeluaran_user`
---
-
-CREATE TABLE `pengeluaran_user` (
-  `pengeluaran_user_id` int(5) UNSIGNED ZEROFILL NOT NULL,
-  `pengeluaran_user_status` tinyint(1) NOT NULL,
-  `user_id` int(5) UNSIGNED ZEROFILL NOT NULL,
-  `pengeluaran_id` int(5) UNSIGNED ZEROFILL NOT NULL,
-  `transaksi_id` int(5) UNSIGNED ZEROFILL NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `session`
 --
 
 CREATE TABLE `session` (
   `session_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `user_id` int(5) UNSIGNED ZEROFILL NOT NULL,
-  `session_time` time NOT NULL,
-  `session_status` tinyint(1) NOT NULL
+  `session_time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -274,15 +259,16 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`transaksi_id`, `transaksi_date`, `transaksi_nama`, `transaksi_nominal`, `user_id`, `transaksi_tipe`, `iuran_id`, `pengeluaran_id`) VALUES
-(00009, '2017-04-17', 'Iuran Pokok', 25000, 00001, 'iuran', 00002, NULL),
-(00010, '2017-04-17', 'Iuran Sampah', 10000, 00004, 'iuran', 00001, NULL),
-(00011, '2017-04-17', 'Iuran Sosial', 8000, 00001, 'iuran', 00003, NULL),
-(00012, '2017-04-17', 'Iuran Sosial', 2000, 00001, 'iuran', 00003, NULL),
-(00013, '2017-04-17', 'Pembangunan Infrastruktur', 0, 00001, 'iuran', 00006, NULL),
-(00014, '2017-04-17', 'Iuran Syawalan', 0, 00001, 'iuran', 00004, NULL),
-(00030, '2017-04-18', 'Iuran 17-an', 20000, 00001, 'iuran', 00005, NULL),
-(00031, '2017-04-18', 'Pembangunan Infrastruktur', 30000, 00001, 'iuran', 00006, NULL),
-(00032, '2017-04-18', 'Pembangunan Infrastruktur', 30000, 00001, 'iuran', 00006, NULL);
+(00034, '2017-04-20', 'Pembangunan Infrastruktur', 30000, 00001, 'iuran', 00006, NULL),
+(00035, '2017-04-20', 'Iuran Pokok', 20000, 00001, 'iuran', 00002, NULL),
+(00036, '2017-04-20', 'Iuran Pokok', 5000, 00001, 'iuran', 00002, NULL),
+(00037, '2017-04-20', 'Iuran Sosial', 10000, 00001, 'iuran', 00003, NULL),
+(00038, '2017-04-20', 'Iuran Syawalan', 20000, 00001, 'iuran', 00004, NULL),
+(00039, '2017-04-20', 'Iuran 17-an', 20000, 00001, 'iuran', 00005, NULL),
+(00040, '2017-04-20', 'Pembayaran Sampah', 10000, 00001, 'pengeluaran', NULL, 00001),
+(00041, '2017-04-20', 'Pembayaran Iuran RW', 10000, 00001, 'pengeluaran', NULL, 00002),
+(00042, '2017-04-21', 'Pembayaran Sampah', 20000, 00001, 'pengeluaran', NULL, 00001),
+(00043, '2017-04-21', 'Iuran Sampah', 5000, 00004, 'iuran', 00001, NULL);
 
 -- --------------------------------------------------------
 
@@ -305,7 +291,21 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `user_username`, `user_displayname`, `user_password`, `user_tipe`) VALUES
 (00001, 'admin', 'Administrator', 'admin', 'admin'),
 (00002, 'op1', 'Operator-1', 'op1', 'operator'),
-(00004, 'anggota1', 'Anggota 1', 'anggota1', 'anggota');
+(00004, 'anggota1', 'Anggota 1', 'anggota1', 'anggota'),
+(00005, 'kuda', 'kuda', 'kuda', 'anggota');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `utang`
+--
+
+CREATE TABLE `utang` (
+  `utang_id` int(5) UNSIGNED ZEROFILL NOT NULL,
+  `utang_nominal` int(10) NOT NULL,
+  `user_id` int(5) UNSIGNED ZEROFILL NOT NULL,
+  `iuran_id` int(5) UNSIGNED ZEROFILL NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -382,15 +382,6 @@ ALTER TABLE `pengeluaran_perubahan`
   ADD KEY `iuran_id` (`pengeluaran_id`);
 
 --
--- Indexes for table `pengeluaran_user`
---
-ALTER TABLE `pengeluaran_user`
-  ADD PRIMARY KEY (`pengeluaran_user_id`),
-  ADD KEY `user_id` (`user_id`,`pengeluaran_id`,`transaksi_id`),
-  ADD KEY `pengeluaran_user_iuran_id` (`pengeluaran_id`),
-  ADD KEY `pengeluaran_user_transaksi_id` (`transaksi_id`);
-
---
 -- Indexes for table `session`
 --
 ALTER TABLE `session`
@@ -411,6 +402,14 @@ ALTER TABLE `transaksi`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `utang`
+--
+ALTER TABLE `utang`
+  ADD PRIMARY KEY (`utang_id`),
+  ADD KEY `user_id` (`user_id`,`iuran_id`),
+  ADD KEY `utang_iuran_id` (`iuran_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -462,11 +461,6 @@ ALTER TABLE `pengeluaran_kategori`
 ALTER TABLE `pengeluaran_perubahan`
   MODIFY `pengeluaran_perubahan_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `pengeluaran_user`
---
-ALTER TABLE `pengeluaran_user`
-  MODIFY `pengeluaran_user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `session`
 --
 ALTER TABLE `session`
@@ -475,12 +469,17 @@ ALTER TABLE `session`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `transaksi_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `transaksi_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `utang`
+--
+ALTER TABLE `utang`
+  MODIFY `utang_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
@@ -525,14 +524,6 @@ ALTER TABLE `pengeluaran_perubahan`
   ADD CONSTRAINT `pengeluaran_perubahan_ibfk_1` FOREIGN KEY (`pengeluaran_id`) REFERENCES `pengeluaran` (`pengeluaran_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `pengeluaran_user`
---
-ALTER TABLE `pengeluaran_user`
-  ADD CONSTRAINT `pengeluaran_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pengeluaran_user_iuran_id` FOREIGN KEY (`pengeluaran_id`) REFERENCES `pengeluaran` (`pengeluaran_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pengeluaran_user_transaksi_id` FOREIGN KEY (`transaksi_id`) REFERENCES `transaksi` (`transaksi_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `session`
 --
 ALTER TABLE `session`
@@ -545,6 +536,13 @@ ALTER TABLE `transaksi`
   ADD CONSTRAINT `iuran_id_transaksi` FOREIGN KEY (`iuran_id`) REFERENCES `iuran` (`iuran_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pengeluaran_id_transaksi` FOREIGN KEY (`pengeluaran_id`) REFERENCES `pengeluaran` (`pengeluaran_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `user_id_` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `utang`
+--
+ALTER TABLE `utang`
+  ADD CONSTRAINT `utang_iuran_id` FOREIGN KEY (`iuran_id`) REFERENCES `iuran` (`iuran_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `utang_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
