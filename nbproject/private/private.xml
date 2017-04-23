@@ -5,11 +5,11 @@
         <group>
             <file>file:/D:/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/model/PengeluaranKategoriModel.java</file>
             <file>file:/D:/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/controller/MainMenuAController.java</file>
-            <file>file:/D:/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/model/PengeluaranJenisModel.java</file>
-            <file>file:/D:/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/factory/MySQLDAOFactory.java</file>
             <file>file:/D:/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/controller/application/TmbhItemPengeluaranController.java</file>
+            <file>file:/D:/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/view/Pengaturan/TmbhItemIuran.fxml</file>
+            <file>file:/D:/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/model/IuranUser.java</file>
             <file>file:/D:/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/controller/application/MPemasukanController.java</file>
-            <file>file:/D:/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/controller/application/TmbhItemController.java</file>
+            <file>file:/D:/KULIAH/Semester%204/Kerja%20Bengkel%201/Project/src/controller/application/TmbhItemIuranController.java</file>
         </group>
     </open-files>
 </project-private>

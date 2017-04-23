@@ -8,6 +8,8 @@ package factory;
 import dao.DAOMySQLDeposit;
 import dao.DAOMySQLIuran;
 import dao.DAOMySQLIuranUser;
+import dao.DAOMySQLJenisIuran;
+import dao.DAOMySQLKategoriIuran;
 import dao.DAOMySQLPengeluaran;
 import dao.DAOMySQLPengeluaranJenis;
 import dao.DAOMySQLPengeluaranKategori;
@@ -18,6 +20,8 @@ import dao.ImplementSession;
 import dao.implementDeposit;
 import dao.implementIuran;
 import dao.implementIuranUser;
+import dao.implementJenisIuran;
+import dao.implementKategoriIuran;
 import dao.implementPengeluaran;
 import dao.implementPengeluaranJenis;
 import dao.implementPengeluaranKategori;
@@ -60,6 +64,14 @@ public class MySQLDAOFactory extends DAOFactory{
     
     public implementPengeluaranJenis getPengeluaranJenisMySQL(){
         return new DAOMySQLPengeluaranJenis();
+    }
+    
+    public implementKategoriIuran getKategoriIuran(){
+        return new DAOMySQLKategoriIuran();
+    }
+    
+    public implementJenisIuran getJenisIuran(){
+        return new DAOMySQLJenisIuran();
     }
     
     public ImplementSession getSessionMySQL(){

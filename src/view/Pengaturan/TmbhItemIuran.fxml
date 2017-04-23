@@ -14,7 +14,7 @@
    <children>
       <Pane prefHeight="525.0" prefWidth="222.0" style="-fx-background-color: #95a5a6;">
          <children>
-            <JFXListView layoutX="1.0" layoutY="-1.0" prefHeight="525.0" prefWidth="222.0" />
+            <JFXListView layoutX="1.0" layoutY="-1.0" prefHeight="525.0" prefWidth="222.0" fx:id="lvIuran" />
          </children>
       </Pane>
       <Label layoutX="287.0" layoutY="8.0" text="Pilih Kategori :">
@@ -22,41 +22,32 @@
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <ComboBox layoutX="287.0" layoutY="26.0" prefHeight="34.0" prefWidth="368.0" style="-fx-background-radius: 5;" />
+      <ComboBox layoutX="287.0" layoutY="26.0" prefHeight="34.0" prefWidth="368.0" style="-fx-background-radius: 5;" fx:id="cbKategori" />
       <Label layoutX="287.0" layoutY="73.0" text="Pilih Jenis :">
          <font>
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <ComboBox layoutX="287.0" layoutY="91.0" prefHeight="34.0" prefWidth="368.0" style="-fx-background-radius: 5;" />
+      <ComboBox layoutX="287.0" layoutY="91.0" prefHeight="34.0" prefWidth="368.0" style="-fx-background-radius: 5;" fx:id="cbJenis" />
       <Label layoutX="289.0" layoutY="140.0" text="Nama :">
          <font>
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <TextField layoutX="287.0" layoutY="156.0" prefHeight="34.0" prefWidth="368.0" promptText="Nama" style="-fx-background-radius: 5;" />
-      <Label layoutX="287.0" layoutY="204.0" text="Keterangan :">
-         <font>
-            <Font name="Gadugi" size="12.0" />
-         </font>
-      </Label>
-      <TextField layoutX="287.0" layoutY="221.0" prefHeight="34.0" prefWidth="368.0" promptText="Keterangan" style="-fx-background-radius: 5;">
-         <font>
-            <Font size="11.0" />
-         </font></TextField>
+      <TextField layoutX="287.0" layoutY="156.0" prefHeight="34.0" prefWidth="368.0" promptText="Nama" style="-fx-background-radius: 5;" fx:id="tfNama" />
       <Label layoutX="290.0" layoutY="277.0" text="Nominal :">
          <font>
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <TextField layoutX="287.0" layoutY="294.0" prefHeight="34.0" prefWidth="368.0" promptText="Nominal" style="-fx-background-radius: 5;" />
+      <TextField layoutX="287.0" layoutY="294.0" prefHeight="34.0" prefWidth="368.0" promptText="Nominal" style="-fx-background-radius: 5;" fx:id="tfNominal" />
       <Label layoutX="290.0" layoutY="342.0" text="Pilih User :">
          <font>
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <CheckComboBox fx:id="ccbUser" layoutX="287.0" layoutY="360.0" prefHeight="35.0" prefWidth="368.0" />
-      <Button layoutX="318.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" />
-      <Button layoutX="480.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Batal" textFill="WHITE" />
+      <CheckComboBox fx:id="ccbUser" layoutX="287.0" layoutY="360.0" prefHeight="35.0" prefWidth="368.0"/>
+      <Button layoutX="318.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" fx:id="btSimpan" />
+      <Button layoutX="480.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Batal" textFill="WHITE" fx:id="btBatal" />
    </children>
 </AnchorPane>

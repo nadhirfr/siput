@@ -28,8 +28,8 @@ public class IuranModel implements implementIuran{
     }
 
     @Override
-    public void insert(Iuran b) {
-        dAOIuran.insert(b);
+    public int insert(Iuran b) {
+        return dAOIuran.insert(b);
     }
 
     @Override

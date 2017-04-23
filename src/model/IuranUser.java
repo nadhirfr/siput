@@ -10,15 +10,14 @@ package model;
  * @author fachrul
  */
 public class IuranUser {
-    private int IuranUserId, UserId, IuranId, TransaksiId,IuranUserStatus;
+    private int IuranUserId, UserId, IuranId, IuranUserStatus;
 
     public IuranUser() {
     }
 
-    public IuranUser(int UserId, int IuranId, int TransaksiId, int IuranUserStatus) {
+    public IuranUser(int UserId, int IuranId, int IuranUserStatus) {
         this.UserId = UserId;
         this.IuranId = IuranId;
-        this.TransaksiId = TransaksiId;
         this.IuranUserStatus = IuranUserStatus;
     }
 
@@ -45,15 +44,7 @@ public class IuranUser {
     public void setIuranId(int IuranId) {
         this.IuranId = IuranId;
     }
-
-    public int getTransaksiId() {
-        return TransaksiId;
-    }
-
-    public void setTransaksiId(int TransaksiId) {
-        this.TransaksiId = TransaksiId;
-    }
-
+    
     public int isIuranUserStatus() {
         return IuranUserStatus;
     }
