@@ -476,7 +476,10 @@ public void initialize(URL url, ResourceBundle rb) {
         ObservableList<User> allData = FXCollections.observableArrayList();
         for (int i = 0; i < listUser.size(); i++) {
             User dataRow = listUser.get(i);
-            allData.add(dataRow);
+//            if untuk menampilkan hanya anggota saja
+//            if (dataRow.getUser_tipe().equals("anggota")) {
+                allData.add(dataRow);
+//            }
         }
         return allData;
     }

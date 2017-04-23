@@ -25,8 +25,8 @@ import model.PengeluaranKategori;
  */
 public class DAOMySQLPengeluaran implements implementPengeluaran{
     Connection connection;
-    final String insert = "INSERT INTO pengeluaran (pengeluaran_id,pengeluaran_nama,pengeluaran_jenis_id,pengeluaran_kategori_id) VALUES (NULL,?,?,?);";
-    final String update = "UPDATE pengeluaran SET pengeluaran_nama=?, pengeluaran_jenis_id=?, pengeluaran_kategori_id=? WHERE pengeluaran_id=?;";
+    final String insert = "INSERT INTO pengeluaran (pengeluaran_id,pengeluaran_nama,pengeluaran_keterangan,pengeluaran_jenis_id,pengeluaran_kategori_id) VALUES (NULL,?,?,?,?);";
+    final String update = "UPDATE pengeluaran SET pengeluaran_nama=?, pengeluaran_keterangan=?, pengeluaran_jenis_id=?, pengeluaran_kategori_id=? WHERE pengeluaran_id=?;";
     final String delete = "DELETE FROM pengeluaran WHERE pengeluaran_id=?;";
     final String select = "SELECT * FROM pengeluaran;";
     final String get = "SELECT * FROM pengeluaran WHERE pengeluaran_id=?;";
@@ -44,6 +44,7 @@ public class DAOMySQLPengeluaran implements implementPengeluaran{
         try {
             statement = connection.prepareStatement(insert);
             statement.setString(1, b.getPengeluaran_nama());
+            statement.setString(2, b.getPengeluaran_keterangan());
             statement.setInt(3, b.getPengeluaran_jenis_id());
             statement.setInt(4, b.getPengeluaran_kategori_id());
             statement.executeUpdate();
@@ -69,6 +70,7 @@ public class DAOMySQLPengeluaran implements implementPengeluaran{
             while (rs.next()) {
                pengeluaran.setPengeluaran_id(Integer.parseInt(rs.getString("pengeluaran_id")));
                pengeluaran.setPengeluaran_nama(rs.getString("pengeluaran_nama"));
+               pengeluaran.setPengeluaran_nama(rs.getString("pengeluaran_keterangan"));
                pengeluaran.setPengeluaran_jenis_id(rs.getInt("pengeluaran_jenis_id"));
                pengeluaran.setPengeluaran_kategori_id(rs.getInt("pengeluaran_kategori_id"));
             }
@@ -91,6 +93,7 @@ public class DAOMySQLPengeluaran implements implementPengeluaran{
         try {
             statement = connection.prepareStatement(update);
             statement.setString(1, b.getPengeluaran_nama());
+            statement.setString(2, b.getPengeluaran_keterangan());
             statement.setInt(3, b.getPengeluaran_jenis_id());
             statement.setInt(4, b.getPengeluaran_kategori_id());
             statement.setString(5, Integer.toString(b.getPengeluaran_id()));
@@ -136,6 +139,7 @@ public class DAOMySQLPengeluaran implements implementPengeluaran{
                 Pengeluaran b = new Pengeluaran();
                 b.setPengeluaran_id(rs.getInt("pengeluaran_id"));
                 b.setPengeluaran_nama(rs.getString("pengeluaran_nama"));
+                b.setPengeluaran_keterangan(rs.getString("pengeluaran_keterangan"));
                 b.setPengeluaran_jenis_id(rs.getInt("pengeluaran_jenis_id"));
                 b.setPengeluaran_kategori_id(rs.getInt("pengeluaran_kategori_id"));
                 lb.add(b);
@@ -158,6 +162,7 @@ public class DAOMySQLPengeluaran implements implementPengeluaran{
                 Pengeluaran b = new Pengeluaran();
                 b.setPengeluaran_id(rs.getInt("pengeluaran_id"));
                 b.setPengeluaran_nama(rs.getString("pengeluaran_nama"));
+                b.setPengeluaran_keterangan(rs.getString("pengeluaran_keterangan"));
                 b.setPengeluaran_jenis_id(rs.getInt("pengeluaran_jenis_id"));
                 b.setPengeluaran_kategori_id(rs.getInt("pengeluaran_kategori_id"));
                 lb.add(b);

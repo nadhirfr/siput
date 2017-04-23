@@ -9,6 +9,8 @@ import dao.DAOMySQLDeposit;
 import dao.DAOMySQLIuran;
 import dao.DAOMySQLIuranUser;
 import dao.DAOMySQLPengeluaran;
+import dao.DAOMySQLPengeluaranJenis;
+import dao.DAOMySQLPengeluaranKategori;
 import dao.DAOMySQLSession;
 import dao.DAOMySQLTransaksi;
 import dao.DAOMySQLUser;
@@ -17,6 +19,8 @@ import dao.implementDeposit;
 import dao.implementIuran;
 import dao.implementIuranUser;
 import dao.implementPengeluaran;
+import dao.implementPengeluaranJenis;
+import dao.implementPengeluaranKategori;
 import dao.implementTransaksi;
 import dao.implementUser;
 
@@ -48,6 +52,14 @@ public class MySQLDAOFactory extends DAOFactory{
     
     public implementPengeluaran getPengeluaranMySQL(){
         return new DAOMySQLPengeluaran();
+    }
+    
+    public implementPengeluaranKategori getPengeluaranKategoriMySQL(){
+        return new DAOMySQLPengeluaranKategori();
+    }
+    
+    public implementPengeluaranJenis getPengeluaranJenisMySQL(){
+        return new DAOMySQLPengeluaranJenis();
     }
     
     public ImplementSession getSessionMySQL(){

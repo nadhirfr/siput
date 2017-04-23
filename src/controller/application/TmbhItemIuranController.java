@@ -12,11 +12,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Control;
 import org.controlsfx.control.CheckComboBox;
-import org.controlsfx.control.IndexedCheckModel;
-import javafx.scene.control.ListView;
-import org.controlsfx.control.CheckListView; 
 
 
 
