@@ -310,13 +310,9 @@ public void initialize(URL url, ResourceBundle rb) {
                     if (iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus() == 1) {
                         Alert alert = new Alert(AlertType.INFORMATION, "Sudah Lunas", ButtonType.OK);
                         alert.showAndWait();
-                        MainMenuAController am = new MainMenuAController();
                         if (alert.getResult() == ButtonType.OK) {
-                            
                                 //keneki diisii nek sukses
                                 batalBtnOnClick(event);
-                                
-
                         }
                     }else{
                         Alert alert = new Alert(AlertType.INFORMATION, "Data tersimpan !", ButtonType.OK);

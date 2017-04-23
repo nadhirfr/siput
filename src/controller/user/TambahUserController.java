@@ -8,7 +8,10 @@ package controller.user;
 import com.jfoenix.controls.JFXComboBox;
 import controller.MainMenuAController;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,11 +19,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.image.ImageView;
 import model.Deposit;
 import model.DepositModel;
+import model.Iuran;
+import model.IuranModel;
+import model.IuranUser;
+import model.IuranUserModel;
 import model.User;
 import model.UserModel;
+import org.controlsfx.control.CheckListView;
 
 /**
  * FXML Controller class
@@ -41,14 +50,17 @@ public class TambahUserController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    UserModel userModel;
-    DepositModel depositModel;
-    @FXML
-    private ImageView imvUsrImg;
+    UserModel userModel = new UserModel();
+    DepositModel depositModel = new DepositModel();
+    IuranModel iuranModel = new IuranModel();
+    IuranUserModel iuranUserModel = new IuranUserModel();
+    List<Iuran> listIuran;
     @FXML
     private JFXComboBox<String> cbTipeUser;
     @FXML
     private TextField tfSaldo;
+    @FXML
+    private CheckListView<Iuran> lvIuran;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -57,6 +69,26 @@ public class TambahUserController implements Initializable {
         cbTipeUser.getItems().add("admin");
         cbTipeUser.getItems().add("operator");
         cbTipeUser.getItems().add("anggota");
+
+        lvIuran.setItems(generateSelectedIuranData());
+        lvIuran.setCellFactory(lv -> new CheckBoxListCell<Iuran>(lvIuran::getItemBooleanProperty) {
+            @Override
+            public void updateItem(Iuran item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(item == null ? "" : item.getIuranNama());
+            }
+        });
+    }
+
+    private ObservableList<Iuran> generateSelectedIuranData() {
+        listIuran = iuranModel.getAll();
+        ObservableList<Iuran> allData = FXCollections.observableArrayList();
+        allData.removeAll(allData);
+        for (int i = 0; i < listIuran.size(); i++) {
+            Iuran dataRow = listIuran.get(i);
+            allData.add(dataRow);
+        }
+        return allData;
     }
 
     @FXML
@@ -69,7 +101,14 @@ public class TambahUserController implements Initializable {
         if (insert_id > 0) {
             depositModel = new DepositModel();
             depositModel.insert(new Deposit(insert_id, Integer.valueOf(tfSaldo.getText())));
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "User Baru Dibuat", ButtonType.OK);
+
+            for (Iuran iuran : lvIuran.getItems()) {
+                if (lvIuran.getCheckModel().isChecked(iuran)) {
+                    System.out.println("pertama true");
+                    iuranUserModel.insert(new IuranUser(insert_id, iuran.getIuranId(), 0));
+                }
+            }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "User Baru Dibuat!", ButtonType.OK);
             alert.showAndWait();
             MainMenuAController am = new MainMenuAController();
             if (alert.getResult() == ButtonType.OK) {
@@ -85,6 +124,7 @@ public class TambahUserController implements Initializable {
         tfPassword.setText("");
         cbTipeUser.getItems().clear();
         tfSaldo.setText("0");
+        lvIuran.getCheckModel().clearChecks();
     }
 
 }

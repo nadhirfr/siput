@@ -5,15 +5,8 @@
  */
 package controller.user;
 
-//import Getway.UsersGetway;
-//import dataBase.DBConnection;
-
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ResourceBundle;
-
-//import dataBase.SQL;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -21,26 +14,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-//import media.userNameMedia;
-//import custom.*;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.sql.Blob;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.event.EventHandler;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.util.Callback;
 import model.Deposit;
 import model.DepositModel;
 import model.Iuran;
@@ -51,34 +34,16 @@ import model.User;
 import model.UserModel;
 import org.controlsfx.control.CheckListView;
 
-//import List.ListEmployee;
-//
-//import DAL.Users;
-//import controller.RegistrationController;
-//import dataBase.DBProperties;
-//import java.util.Optional;
-
 /**
  * FXML Controller class
  *
- * @author rifat
+ * @author rheza
  */
 public class ViewEmployeController implements Initializable {
-
-    private File file;
-    private BufferedImage bufferedImage;
-    private String imagePath;
-    private Image image;
-    private Blob blobImage;
-
-//    Connection con = dbCon.geConnection();
-    PreparedStatement pst;
-    ResultSet rs;
-
+    
     private String userId;
     private String name;
     private String id;
-//    private userNameMedia nameMedia;
     private String creatorId;
     private String creatorName;
 
@@ -94,14 +59,6 @@ public class ViewEmployeController implements Initializable {
     private Button btnDelete;
     @FXML
     private TextField tfCreatedBy;
-//    @FXML
-//    public Button btnClrFulNametf;
-//    @FXML
-//    public Button btnClrEmailtf;
-//    @FXML
-//    public Button btnClrPhonetf;
-//    @FXML
-//    public Button btnClrSalarytf;
     @FXML
     private TableView<Map> tblEmoyeeList;
     @FXML

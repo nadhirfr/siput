@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import org.controlsfx.control.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -60,18 +61,16 @@
                                     <Label text="Password :" GridPane.rowIndex="4" />
                                     <Label text="Tipe User :" GridPane.rowIndex="6" />
                                     <Label text="Saldo" GridPane.rowIndex="8" />
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+                                    <AnchorPane prefHeight="456.0" prefWidth="252.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="10">
+                                       <children>
+                                          <CheckListView fx:id="lvIuran" layoutX="3.0" prefHeight="301.0" prefWidth="248.0" />
+                                       </children></AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="16">
                                        <children>
                                           <Button fx:id="btnSave" layoutX="75.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnSaveOnAction" text="Simpan" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="13" GridPane.rowSpan="2" />
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowSpan="5">
-                                       <children>
-                                          <ImageView fx:id="imvUsrImg" fitHeight="150.0" fitWidth="152.0" layoutX="48.0" pickOnBounds="true" />
-                                       </children>
-                                    </AnchorPane>
                                     <TextField fx:id="tfUserName" GridPane.columnSpan="3" GridPane.rowIndex="1" />
                                     <TextField fx:id="tfFullName" GridPane.columnSpan="3" GridPane.rowIndex="3" />
                                     <TextField fx:id="tfPassword" GridPane.columnSpan="3" GridPane.rowIndex="5" />
