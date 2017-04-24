@@ -42,5 +42,7 @@ public interface implementTransaksi {
     
     public int getJumlahTransaksi();
     
+    public Transaksi getTransaksiPertama(String user_id, String iuran_id);
+    
     public int getCount();
 }

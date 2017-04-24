@@ -14,7 +14,9 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -48,10 +50,14 @@ import model.Iuran;
 import model.IuranModel;
 import model.IuranUser;
 import model.IuranUserModel;
+import model.KategoriIuranModel;
 import model.Transaksi;
 import model.TransaksiModel;
 import model.User;
 import model.UserModel;
+import org.joda.time.DateTime;
+import org.joda.time.Months;
+import org.joda.time.Weeks;
 
 /**
  * FXML Controller class
@@ -86,6 +92,7 @@ public class MPemasukanController implements Initializable {
     UserModel userModel = new UserModel();
     DepositModel depositModel = new DepositModel();
     IuranModel iuranModel = new IuranModel();
+    KategoriIuranModel kategoriIuranModel = new KategoriIuranModel();
     IuranUserModel iuranUserModel = new IuranUserModel();
     TransaksiModel transaksiModel = new TransaksiModel();
     User selectedUser, logedinUser;
@@ -103,7 +110,7 @@ public class MPemasukanController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) {
         // TODO
         //nom_saldo_DP.setText("0");
 
@@ -135,29 +142,63 @@ public void initialize(URL url, ResourceBundle rb) {
 //                            Iuran selectedIuran = cb_Pembayaran.getValue();
 //                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                             if (newValue != null) {
-//                                if (iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).isIuranUserStatus()) {
-//                                    lbStatus.setText("Lunas");
-//                                } else {
+                                
                                 listTransaksi = transaksiModel.getAll();
                                 int total = 0;
-
-                                //ngecek setiap transaksi, jika ditabel transaksi ada pembayaran yg telah dibayar maka nominal dikurangi dgn yg telah dibayar
-                                for (Transaksi transaksi : listTransaksi) {
-//                                        System.out.println(transaksi.getUserId()+":"+selectedUser.getUser_id());
-                                    System.out.println(transaksi.getUserId() + ":" + iuranUserModel.getByUserAndIuran(cb_namaAnggota.getValue(), cb_Pembayaran.getValue()).getUserId());
-                                    if (transaksi.getUserId() == iuranUserModel.getByUserAndIuran(selectedUser, newValue).getUserId()
-                                            && Integer.valueOf(transaksi.getIuranId()) == iuranUserModel.getByUserAndIuran(selectedUser, newValue).getIuranId()) {
-                                        total = total + transaksi.getTransaksiNominal();
-//                                            pr biikin yg iuran rutin
-                                    }
+                                int tampilanKurang = 0;
+                                int iuranRutin = kategoriIuranModel.get(String.valueOf(newValue.getIuranKategoriId())).getIuranKategoriInterval();
+                                String firstDate = transaksiModel.getTransaksiPertama(String.valueOf(selectedUser.getUser_id()),
+                                        String.valueOf(newValue.getIuranId())).getTransaksiDate();
+                                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                int diffMonth = 0;
+                                int diffWeek = 0;
+                                int total_harus_bayar = 0;
+                                
+                                switch (iuranRutin) {
+                                    case 30:
+                                        try {
+                                            total = getTotal();
+                                            System.out.println(firstDate);
+                                            if (firstDate != null) {
+                                                DateTime startDate = new DateTime(dateFormat.parse(firstDate));
+                                                DateTime endDate = new DateTime(new Date());
+                                                diffMonth = Months.monthsBetween(startDate, endDate).getMonths();
+                                                System.out.println("Beda bulan : "+diffMonth);
+                                                total_harus_bayar = diffMonth * newValue.getIuranNominal();
+                                                tampilanKurang = total_harus_bayar - total;
+                                            } else {
+                                                tampilanKurang = newValue.getIuranNominal() - total;
+                                            }
+                                        } catch (ParseException ex) {
+                                            Logger.getLogger(MPemasukanController.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
+                                        break;
+                                    case 7:
+                                        try {
+                                            total = getTotal();
+                                            System.out.println(firstDate);
+                                            if (firstDate != null) {
+                                                DateTime startDate = new DateTime(dateFormat.parse(firstDate));
+                                                DateTime endDate = new DateTime(new Date());
+                                                diffWeek = Weeks.weeksBetween(startDate, endDate).getWeeks();
+                                                System.out.println("Beda minggu : "+diffWeek);
+                                                total_harus_bayar = diffWeek * newValue.getIuranNominal();
+                                                tampilanKurang = total_harus_bayar - total;
+                                            }  else {
+                                                tampilanKurang = newValue.getIuranNominal() - total;
+                                            }
+                                        } catch (ParseException ex) {
+                                            Logger.getLogger(MPemasukanController.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
+                                        break;
+                                    case 0:
+                                        total = getTotal();
+                                        tampilanKurang = newValue.getIuranNominal() - total;
+                                        break;
                                 }
-
-//                                    System.out.println("selected user :"+selectedUser.getUser_id());
-//                                    System.out.println("selected iuran :"+cb_Pembayaran.getValue().getIuranId());
                                 System.out.println(iuranUserModel.getByUserAndIuran(selectedUser, cb_Pembayaran.getValue()).getUserId());
-//                                    System.out.println("total : " +total);
-//                                int transaksi_total
-                                nom_jns_pembayaranP.setText(String.valueOf(newValue.getIuranNominal() - total));
+
+                                nom_jns_pembayaranP.setText(String.valueOf(tampilanKurang));
                                 nom_pembayaranP.setText("0");
                                 nom_saldo_DP.setText("0");
 //                                }
@@ -306,21 +347,22 @@ public void initialize(URL url, ResourceBundle rb) {
                         iuran_user.setIuranUserStatus(1);
                         iuranUserModel.update(iuran_user);
                     }
-                    
-                    if (iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus() == 1) {
+
+                    if (iuranUserModel.get(String.valueOf(iuran_user.getIuranUserId())).isIuranUserStatus() == 1) {
                         Alert alert = new Alert(AlertType.INFORMATION, "Sudah Lunas", ButtonType.OK);
                         alert.showAndWait();
                         if (alert.getResult() == ButtonType.OK) {
-                                //keneki diisii nek sukses
-                                batalBtnOnClick(event);
+                            //keneki diisii nek sukses
+                            batalBtnOnClick(event);
                         }
-                    }else{
+                    } else {
                         Alert alert = new Alert(AlertType.INFORMATION, "Data tersimpan !", ButtonType.OK);
                         alert.showAndWait();
                         if (alert.getResult() == ButtonType.OK) {
                             //keneki diisii nek sukses
                             batalBtnOnClick(event);
-                    }}
+                        }
+                    }
 
                     System.out.println("Sesudah : " + iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus());
                 } else {
@@ -343,10 +385,25 @@ public void initialize(URL url, ResourceBundle rb) {
                     }
                     System.out.println("Sesudah : " + iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus());
                 }
-                   batalBtnOnClick(event);
+                batalBtnOnClick(event);
             }
 
         });
+    }
+
+    private int getTotal() {
+        int total = 0;
+        //ngecek setiap transaksi, jika ditabel transaksi ada pembayaran yg telah dibayar maka nominal dikurangi dgn yg telah dibayar
+        for (Transaksi transaksi : listTransaksi) {
+//                                        System.out.println(transaksi.getUserId()+":"+selectedUser.getUser_id());
+            System.out.println(transaksi.getUserId() + ":" + iuranUserModel.getByUserAndIuran(cb_namaAnggota.getValue(), cb_Pembayaran.getValue()).getUserId());
+            if (transaksi.getUserId() == iuranUserModel.getByUserAndIuran(selectedUser, cb_Pembayaran.getValue()).getUserId()
+                    && Integer.valueOf(transaksi.getIuranId()) == iuranUserModel.getByUserAndIuran(selectedUser, cb_Pembayaran.getValue()).getIuranId()) {
+                total = total + transaksi.getTransaksiNominal();
+//                                            pr biikin yg iuran rutin
+            }
+        }
+        return total;
     }
 
     private StringConverter<User> converter_cbAnggota
@@ -444,16 +501,16 @@ public void initialize(URL url, ResourceBundle rb) {
                 public void updateItem(Iuran item, boolean empty) {
                     super.updateItem(item, empty);
                     if (item != null) {
-                        if(item.getIuranJenisId() == 1 && item.getIuranKategoriId()==1){
+                        if (item.getIuranJenisId() == 1 && kategoriIuranModel.get(String.valueOf(item.getIuranKategoriId())).getIuranKategoriInterval() != 0) {
                             //wajib - rutin
                             setTextFill(Color.DARKORANGE);
-                        } else if(item.getIuranJenisId() == 1 && item.getIuranKategoriId()==2){
+                        } else if (item.getIuranJenisId() == 1 && kategoriIuranModel.get(String.valueOf(item.getIuranKategoriId())).getIuranKategoriInterval() == 0) {
                             //wajib - insidental
                             setTextFill(Color.DARKORCHID);
-                        } else if(item.getIuranJenisId() == 2 && item.getIuranKategoriId()==1){
+                        } else if (item.getIuranJenisId() == 2 && kategoriIuranModel.get(String.valueOf(item.getIuranKategoriId())).getIuranKategoriInterval() != 0) {
                             //tidak wajib - rutin
                             setTextFill(Color.DARKRED);
-                        } else if(item.getIuranJenisId() == 2 && item.getIuranKategoriId()==2){
+                        } else if (item.getIuranJenisId() == 2 && kategoriIuranModel.get(String.valueOf(item.getIuranKategoriId())).getIuranKategoriInterval() == 0) {
                             //tidak wajib - insidental
                             setTextFill(Color.DARKSEAGREEN);
                         }
@@ -474,14 +531,14 @@ public void initialize(URL url, ResourceBundle rb) {
             User dataRow = listUser.get(i);
 //            if untuk menampilkan hanya anggota saja
 //            if (dataRow.getUser_tipe().equals("anggota")) {
-                allData.add(dataRow);
+            allData.add(dataRow);
 //            }
         }
         return allData;
     }
-    
+
     @FXML
-    private void batalBtnOnClick(ActionEvent event){
+    private void batalBtnOnClick(ActionEvent event) {
         cb_namaAnggota.valueProperty().set(null);
         nom_pembayaranP.clear();
         cb_Pembayaran.valueProperty().set(null);
@@ -489,13 +546,13 @@ public void initialize(URL url, ResourceBundle rb) {
         cb_Pembayaran.valueProperty().setValue(null);
         //cb_Pembayaran.getItems().remove(saldo);
     }
-    
-    public void setLoggedInUser(User logedinUser){
+
+    public void setLoggedInUser(User logedinUser) {
         this.logedinUser = logedinUser;
     }
-    
+
     @FXML
-    private void refreshACT(ActionEvent event) throws IOException{
+    private void refreshACT(ActionEvent event) throws IOException {
         MainMenuAController am = new MainMenuAController();
         FXMLLoader fXMLLoader = new FXMLLoader();
         fXMLLoader.load(getClass().getResource("/view/mPemasukan.fxml").openStream());

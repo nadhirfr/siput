@@ -42,6 +42,7 @@ public class DAOMySQLTransaksi implements implementTransaksi{
     final String jumlahtransaksi = "SELECT sum(transaksi_nominal) as Jumlah FROM transaksi;";
     final String jumlahiuran = "SELECT sum(transaksi_nominal) as Jumlah FROM transaksi WHERE transaksi_tipe='iuran';";
     final String jumlahpengeluaran = "SELECT sum(transaksi_nominal) as Jumlah FROM transaksi WHERE transaksi_tipe='pengeluaran';";
+    final String transaksiawal = "SELECT * FROM transaksi WHERE transaksi_date IN (SELECT MIN(transaksi_date) FROM transaksi WHERE user_id=? AND iuran_id=?) AND user_id=? AND iuran_id=?;";
     
 
     public DAOMySQLTransaksi() {
@@ -336,4 +337,36 @@ public class DAOMySQLTransaksi implements implementTransaksi{
         
     }
     
+    @Override
+    public Transaksi getTransaksiPertama(String user_id, String iuran_id){
+        PreparedStatement statement = null;
+        Transaksi transaksi = new Transaksi();
+        try {
+            statement = connection.prepareStatement(transaksiawal);
+            statement.setString(1, user_id);
+            statement.setString(2, iuran_id);
+            statement.setString(3, user_id);
+            statement.setString(4, iuran_id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+               transaksi.setTransaksiId(rs.getInt("transaksi_id"));
+               transaksi.setTransaksiDate(rs.getString("transaksi_date"));
+               transaksi.setTransaksiNama(rs.getString("transaksi_nama"));
+               transaksi.setTransaksiNominal(rs.getInt("transaksi_nominal"));
+               transaksi.setUserId(rs.getInt("user_id"));
+               transaksi.setTransaksiTipe(rs.getString("transaksi_tipe"));
+               transaksi.setIuranId(rs.getString("iuran_id"));
+               transaksi.setPengeluaranId(rs.getString("pengeluaran_id"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                statement.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }    
+        return transaksi;
+    }
 }
