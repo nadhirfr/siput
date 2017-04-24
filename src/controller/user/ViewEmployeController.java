@@ -5,20 +5,8 @@
  */
 package controller.user;
 
-//import Getway.UsersGetway;
-//import dataBase.DBConnection;
-
-import dao.implementDeposit;
-import dao.implementUser;
-import factory.DAOFactory;
-import factory.MySQLDAOFactory;
-import factory.RESTDAOFactory;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ResourceBundle;
-
-//import dataBase.SQL;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -26,33 +14,25 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.shape.Rectangle;
-//import media.userNameMedia;
-//import custom.*;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.sql.Blob;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
+import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.ImagePattern;
-import javafx.stage.FileChooser;
-
-import javax.imageio.ImageIO;
 import model.Deposit;
 import model.DepositModel;
+import model.Iuran;
+import model.IuranModel;
+import model.IuranUser;
+import model.IuranUserModel;
 import model.User;
 import model.UserModel;
+<<<<<<< HEAD
 import javafx.scene.control.cell.CheckBoxListCell;
 
 //import List.ListEmployee;
@@ -61,28 +41,20 @@ import javafx.scene.control.cell.CheckBoxListCell;
 //import controller.RegistrationController;
 //import dataBase.DBProperties;
 //import java.util.Optional;
+=======
+import org.controlsfx.control.CheckListView;
+>>>>>>> b985927debe4a2e6039505e2afcafa29ac9aa7c2
 
 /**
  * FXML Controller class
  *
- * @author rifat
+ * @author rheza
  */
 public class ViewEmployeController implements Initializable {
-
-    private File file;
-    private BufferedImage bufferedImage;
-    private String imagePath;
-    private Image image;
-    private Blob blobImage;
-
-//    Connection con = dbCon.geConnection();
-    PreparedStatement pst;
-    ResultSet rs;
-
+    
     private String userId;
     private String name;
     private String id;
-//    private userNameMedia nameMedia;
     private String creatorId;
     private String creatorName;
 
@@ -98,14 +70,6 @@ public class ViewEmployeController implements Initializable {
     private Button btnDelete;
     @FXML
     private TextField tfCreatedBy;
-//    @FXML
-//    public Button btnClrFulNametf;
-//    @FXML
-//    public Button btnClrEmailtf;
-//    @FXML
-//    public Button btnClrPhonetf;
-//    @FXML
-//    public Button btnClrSalarytf;
     @FXML
     private TableView<Map> tblEmoyeeList;
     @FXML
@@ -129,6 +93,10 @@ public class ViewEmployeController implements Initializable {
 
     UserModel userModel = new UserModel();
     DepositModel depositModel = new DepositModel();
+    IuranModel iuranModel = new IuranModel();
+    IuranUserModel iuranUserModel = new IuranUserModel();
+    List<Iuran> listIuran;
+    List<IuranUser> listIuranUser;
     List<User> listUser;
     
     @FXML
@@ -137,12 +105,25 @@ public class ViewEmployeController implements Initializable {
     private TextField tfTipeUser;
     @FXML
     private TextField tfSaldo;
+    @FXML
+    private CheckListView<Iuran> lvSelectedIuran;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 //        // TODO
+        lvSelectedIuran.setItems(generateSelectedIuranData());
+//        lvSelectedIuran.getCheckModel().checkAll();
+        lvSelectedIuran.setCellFactory(lv -> new CheckBoxListCell<Iuran>(lvSelectedIuran::getItemBooleanProperty) {
+            @Override
+            public void updateItem(Iuran item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(item == null ? "" : item.getIuranNama());
+            }
+            
+            
+        });
         fillTable();
         btnDelete.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -176,12 +157,25 @@ public class ViewEmployeController implements Initializable {
                     depositModel.update(new Deposit(deposit.getDepositId(),
                             deposit.getUserId(),
                             Integer.valueOf(tfSaldo.getText())));
+                    for (Iuran iuran : lvSelectedIuran.getItems()){
+                        if(iuranUserModel.getByUserAndIuran(user, iuran).getIuranUserId() == 0 &&
+                                lvSelectedIuran.getCheckModel().isChecked(iuran)){
+                            System.out.println("pertama true");
+                            iuranUserModel.insert(new IuranUser(user.getUser_id(), iuran.getIuranId(), 0));
+                        } else if(iuranUserModel.getByUserAndIuran(user, iuran).getIuranUserId() !=0 &&
+                                !lvSelectedIuran.getCheckModel().isChecked(iuran)){
+                            System.out.println("kedua true");
+                            iuranUserModel.delete(String.valueOf(iuranUserModel.getByUserAndIuran(user, iuran).getIuranUserId()));
+                        }
+                    }
                     System.out.println("Updated user id: "+String.valueOf(user.getUser_id()));
                     System.out.println("Updated deposit id: "+String.valueOf(deposit.getDepositId()));
                     tblEmoyeeList.getSelectionModel().selectFirst();
                     //ini harusnya direfresh tampilan tapi belum bisa
                     tblEmoyeeList.refresh();
                     fillTable();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Data telah di update!\nSilahkan klik refresh untuk memperbarui data!", ButtonType.OK);
+                    alert.showAndWait();
                 }
             }
         });
@@ -213,6 +207,17 @@ public class ViewEmployeController implements Initializable {
             String value1 = listUser.get(i).getUser_displayname();
             dataRow.put(Column1MapKey, value1);
             dataRow.put(Column0MapKey, value0);
+            allData.add(dataRow);
+        }
+        return allData;
+    }
+    
+    private ObservableList<Iuran> generateSelectedIuranData(){
+        listIuran = iuranModel.getAll();
+        ObservableList<Iuran> allData = FXCollections.observableArrayList();
+        allData.removeAll(allData);
+        for (int i = 0; i < listIuran.size(); i++) {
+            Iuran dataRow = listIuran.get(i);
             allData.add(dataRow);
         }
         return allData;
@@ -249,6 +254,14 @@ public class ViewEmployeController implements Initializable {
         if (employeeList != null) {
             user = userModel.getUser(employeeList.get(Column0MapKey).toString());
             //usersGetway.selectedView(users);
+            lvSelectedIuran.getCheckModel().clearChecks();
+            for (Iuran iuran : lvSelectedIuran.getItems()) {
+                if(iuranUserModel.getByUserAndIuran(user, iuran).getIuranId() == iuran.getIuranId()){
+                    lvSelectedIuran.getCheckModel().check(iuran);
+                } else{
+                    lvSelectedIuran.getCheckModel().clearCheck(iuran);
+                }
+            }
             id = String.valueOf(user.getUser_id());
             tfUserName.setText(user.getUser_username());
             tfFullName.setText(user.getUser_displayname());

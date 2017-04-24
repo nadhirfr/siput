@@ -27,7 +27,7 @@ public class DAOMySQLIuranUser implements implementIuranUser{
     Connection connection;
     final String insert = "INSERT INTO iuran_user (iuran_user_id,iuran_user_status,user_id,iuran_id) VALUES (NULL,?,?,?);";
     final String update = "UPDATE iuran_user SET iuran_user_status=?, user_id=?, iuran_id=? WHERE iuran_user_id=?;";
-    final String delete = "DELETE FROM iuran WHERE iuran_id=?;";
+    final String delete = "DELETE FROM iuran_user WHERE iuran_user_id=?;";
     final String select = "SELECT * FROM iuran_user;";
     final String get = "SELECT * FROM iuran_user WHERE iuran_user_id=?;";
     final String getByUserAndIuran = "SELECT * FROM iuran_user WHERE user_id=? AND iuran_id=?;";

@@ -39,15 +39,31 @@ public class DAOMySQLIuran implements implementIuran{
     }
 
     @Override
-    public void insert(Iuran b) {
+    public int insert(Iuran b) {
         PreparedStatement statement = null;
+        int inserted_id = 0;
         try {
-            statement = connection.prepareStatement(insert);
+            statement = connection.prepareStatement(insert,Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, b.getIuranNama());
             statement.setInt(2, b.getIuranNominal());
             statement.setInt(3, b.getIuranJenisId());
             statement.setInt(4, b.getIuranKategoriId());
-            statement.executeUpdate();
+            //statement.executeUpdate();
+            int affectedRows = statement.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating user failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    inserted_id = generatedKeys.getInt(1);
+                }
+                else {
+                    throw new SQLException("Creating user failed, no ID obtained.");
+                }
+            } 
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
@@ -57,6 +73,7 @@ public class DAOMySQLIuran implements implementIuran{
                 ex.printStackTrace();
             }
         }
+        return inserted_id;
     }
 
     @Override

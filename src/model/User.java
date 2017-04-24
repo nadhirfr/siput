@@ -11,6 +11,13 @@ public class User {
     public User() {
     }
 
+    public User(String user_username, String user_displayname, String user_password, String user_tipe) {
+        this.user_username = user_username;
+        this.user_displayname = user_displayname;
+        this.user_password = user_password;
+        this.user_tipe = user_tipe;
+    }
+
     
     public User(int user_id, String user_username, String user_displayname, String user_password, String user_tipe) {
         this.user_id = user_id;

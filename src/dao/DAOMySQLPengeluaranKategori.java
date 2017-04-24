@@ -63,8 +63,8 @@ public class DAOMySQLPengeluaranKategori implements implementPengeluaranKategori
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                kategoriIuran.setPengeluaran_kategori_id(rs.getInt("pengeluaran_kategori_id"));
-               kategoriIuran.setPengeluaran_kategori_nama(rs.getString("pengeluaran_nama"));
-               kategoriIuran.setPengeluaran_kategori_waktu(rs.getInt("pengeluaran_waktu"));
+               kategoriIuran.setPengeluaran_kategori_nama(rs.getString("pengeluaran_kategori_nama"));
+               kategoriIuran.setPengeluaran_kategori_waktu(rs.getInt("pengeluaran_kategori_waktu"));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -127,8 +127,8 @@ public class DAOMySQLPengeluaranKategori implements implementPengeluaranKategori
             while (rs.next()) {
                 PengeluaranKategori b = new PengeluaranKategori();
                 b.setPengeluaran_kategori_id(rs.getInt("pengeluaran_kategori_id"));
-                b.setPengeluaran_kategori_nama(rs.getString("pengeluaran_nama"));
-                b.setPengeluaran_kategori_waktu(rs.getInt("pengeluaran_waktu"));
+                b.setPengeluaran_kategori_nama(rs.getString("pengeluaran_kategori_nama"));
+                b.setPengeluaran_kategori_waktu(rs.getInt("pengeluaran_kategori_waktu"));
                 lb.add(b);
             }
         } catch (SQLException ex) {
@@ -148,8 +148,8 @@ public class DAOMySQLPengeluaranKategori implements implementPengeluaranKategori
             while (rs.next()) {
                 PengeluaranKategori b = new PengeluaranKategori();
                 b.setPengeluaran_kategori_id(rs.getInt("pengeluaran_kategori_id"));
-                b.setPengeluaran_kategori_nama(rs.getString("pengeluaran_nama"));
-                b.setPengeluaran_kategori_waktu(rs.getInt("pengeluaran_waktu"));
+                b.setPengeluaran_kategori_nama(rs.getString("pengeluaran_kategori_nama"));
+                b.setPengeluaran_kategori_waktu(rs.getInt("pengeluaran_kategori_waktu"));
                 lb.add(b);
             }
         } catch (SQLException ex) {

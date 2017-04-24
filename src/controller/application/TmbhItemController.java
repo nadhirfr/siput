@@ -61,12 +61,15 @@ public class TmbhItemController implements Initializable {
     public void btn_pengeluaranOnAction(ActionEvent event) throws IOException {
         //lblPathInfo.setText("Sells");
         lblView.setText("Tambah Item Pengeluaran");
-        TmbhItemPengeluaranController tmbhitemP = new TmbhItemPengeluaranController();
         //userNameMedia media = new userNameMedia();
-        FXMLLoader fXMLLoader = new FXMLLoader();
-        fXMLLoader.load(getClass().getResource("/view/Pengaturan/TmbhItemPengeluaran.fxml").openStream());
+//        FXMLLoader fXMLLoader = new FXMLLoader();
+//        fXMLLoader.load(getClass().getResource("/view/Pengaturan/TmbhItemPengeluaran.fxml").openStream());
         //media.setId(userId);
+        
+        FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("/view/Pengaturan/TmbhItemPengeluaran.fxml"));
+        fXMLLoader.load();
         TmbhItemPengeluaranController controller = fXMLLoader.getController();
+//        controller.notify();
         //controller.setNameMedia(nameMedia);
         //controller.viewDetails();
 //        controller.viewDetails();

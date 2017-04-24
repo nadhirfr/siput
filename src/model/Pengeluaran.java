@@ -12,24 +12,36 @@ package model;
 public class Pengeluaran {
 
     private int pengeluaran_id, pengeluaran_jenis_id, pengeluaran_kategori_id;
-    private String pengeluaran_nama;
+    private String pengeluaran_nama, pengeluaran_keterangan;
 
     public Pengeluaran() {
 
     }
 
-    public Pengeluaran(int pengeluaran_id, String pengeluaran_nama, int pengeluaran_jenis_id, int pengeluaran_kategori_id) {
-        this.pengeluaran_id = pengeluaran_id;
-        this.pengeluaran_nama = pengeluaran_nama;
+    public Pengeluaran(int pengeluaran_jenis_id, int pengeluaran_kategori_id, String pengeluaran_nama, String pengeluaran_keterangan) {
         this.pengeluaran_jenis_id = pengeluaran_jenis_id;
         this.pengeluaran_kategori_id = pengeluaran_kategori_id;
+        this.pengeluaran_nama = pengeluaran_nama;
+        this.pengeluaran_keterangan = pengeluaran_keterangan;
     }
 
-    public Pengeluaran(String pengeluaran_nama, int pengeluaran_jenis_id, int pengeluaran_kategori_id) {
-        this.pengeluaran_nama = pengeluaran_nama;
+    public Pengeluaran(int pengeluaran_id, int pengeluaran_jenis_id, int pengeluaran_kategori_id, String pengeluaran_nama, String pengeluaran_keterangan) {
+        this.pengeluaran_id = pengeluaran_id;
         this.pengeluaran_jenis_id = pengeluaran_jenis_id;
         this.pengeluaran_kategori_id = pengeluaran_kategori_id;
+        this.pengeluaran_nama = pengeluaran_nama;
+        this.pengeluaran_keterangan = pengeluaran_keterangan;
     }
+
+    public String getPengeluaran_keterangan() {
+        return pengeluaran_keterangan;
+    }
+
+    public void setPengeluaran_keterangan(String pengeluaran_keterangan) {
+        this.pengeluaran_keterangan = pengeluaran_keterangan;
+    }
+
+    
 
     public int getPengeluaran_id() {
         return pengeluaran_id;

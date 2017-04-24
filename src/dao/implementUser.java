@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface implementUser {
 
-    public void insert(User b);
+    public int insert(User b);
     
     public User getUser(String user_id);
 

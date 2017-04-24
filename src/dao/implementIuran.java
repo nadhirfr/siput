@@ -15,7 +15,7 @@ import model.KategoriIuran;
  * @author fachrul
  */
 public interface implementIuran {
-    public void insert(Iuran b);
+    public int insert(Iuran b);
     
     public Iuran get(String IuranId);
 
