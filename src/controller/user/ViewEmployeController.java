@@ -32,7 +32,7 @@ import model.IuranUser;
 import model.IuranUserModel;
 import model.User;
 import model.UserModel;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import javafx.scene.control.cell.CheckBoxListCell;
 
 //import List.ListEmployee;
@@ -41,9 +41,9 @@ import javafx.scene.control.cell.CheckBoxListCell;
 //import controller.RegistrationController;
 //import dataBase.DBProperties;
 //import java.util.Optional;
-=======
+//=======
 import org.controlsfx.control.CheckListView;
->>>>>>> b985927debe4a2e6039505e2afcafa29ac9aa7c2
+//>>>>>>> b985927debe4a2e6039505e2afcafa29ac9aa7c2
 
 /**
  * FXML Controller class

@@ -9,15 +9,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="553.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.application.TentangController">
+<AnchorPane id="AnchorPane" prefHeight="553.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.application.LaporanController">
    <children>
-      <HBox alignment="CENTER" prefHeight="553.0" prefWidth="735.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER" prefHeight="553.0" prefWidth="735.0" style="-fx-background-color: #f4f4f4f4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="498.0" prefWidth="647.0">
+            <AnchorPane prefHeight="553.0" prefWidth="734.0" style="-fx-background-color: #f4f4f4f4;">
                <children>
-                  <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="553.0" prefWidth="735.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+                  <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="553.0" prefWidth="735.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
                     <content>
-                      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="553.0" prefWidth="733.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="553.0" prefWidth="733.0" style="-fx-background-color: #f4f4f4f4;">
                            <children>
                               <Label layoutX="72.0" layoutY="52.0" text="Laporan Transaksi">
                                  <font>
@@ -32,7 +32,7 @@
                                     <TableColumn fx:id="clm_tipe" prefWidth="162.0" text="Tipe Transaksi" />
                                 </columns>
                               </TableView>
-                              <JFXButton fx:id="btn_cetak" layoutX="519.0" layoutY="459.0" onAction="#CetakLaporan" prefHeight="42.0" prefWidth="134.0" style="-fx-background-color: #3498db;" text="Cetak Laporan" textFill="WHITE" />
+                              <JFXButton fx:id="btnCetak" layoutX="519.0" layoutY="459.0" onAction="#CetakLaporan" prefHeight="42.0" prefWidth="134.0" style="-fx-background-color: #3498db;" text="Cetak Laporan" textFill="WHITE" />
                            </children>
                         </AnchorPane>
                     </content>

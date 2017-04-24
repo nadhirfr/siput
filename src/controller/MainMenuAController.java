@@ -327,7 +327,7 @@ public class MainMenuAController implements Initializable {
         try {
             AboutActive();
             FXMLLoader fXMLLoader = new FXMLLoader();
-            fXMLLoader.load(getClass().getResource("/view/Tentang.fxml").openStream());
+            fXMLLoader.load(getClass().getResource("/view/Laporan.fxml").openStream());
             AnchorPane anchorPane = fXMLLoader.getRoot();
             acContent.getChildren().clear();
             acContent.getChildren().add(anchorPane);

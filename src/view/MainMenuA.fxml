@@ -114,7 +114,7 @@
                                           <Image url="@../icon/btnBreak.png" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="btnAbout" contentDisplay="TOP" layoutY="496.0" mnemonicParsing="false" onAction="#btnAboutOnClick" prefHeight="78.0" prefWidth="127.0" text="Tentang">
+                                    <Button fx:id="btnAbout" contentDisplay="TOP" layoutY="496.0" mnemonicParsing="false" onAction="#btnAboutOnClick" prefHeight="78.0" prefWidth="127.0" text="Laporan">
                                        <graphic>
                                           <ImageView fx:id="imgAboutBtn" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
