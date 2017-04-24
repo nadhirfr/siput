@@ -28,7 +28,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -243,8 +245,6 @@ public class MainMenuAController implements Initializable {
     private void btnCashOutOnClick(ActionEvent event) {
         COActive();
         klikmenu=3;
-        MPengeluaranController controller = new MPengeluaranController();
-        //userNameMedia nm = new userNameMedia();
         try {
 
             FXMLLoader fXMLLoader = new FXMLLoader();
@@ -253,9 +253,6 @@ public class MainMenuAController implements Initializable {
             MPengeluaranController pengeluaranController = fXMLLoader.getController();
             pengeluaranController.setLoggedInUser(logedinUser);
             pengeluaranController.setTotalSaldo(String.valueOf(transaksiModel.getJumlahKas()));
-            //sellController.setNameMedia(usrNameMedia);
-            //pengeluaranController.acMainSells.getStylesheets().add("/style/MainStyle.css");
-            //pengeluaranController.tbtnSellOnAction(event);
             AnchorPane anchorPane = fXMLLoader.getRoot();
             acContent.getChildren().clear();
             acContent.getChildren().add(anchorPane);
@@ -267,16 +264,13 @@ public class MainMenuAController implements Initializable {
 
     @FXML
     private void btnUserOnClick(ActionEvent event) throws IOException {
+        if(!logedinUser.getUser_tipe().equals("admin")){
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Hanya Admin yang bisa akses!", ButtonType.OK);
+            alert.showAndWait();
+        } else{
         userActive();
 
-        klikmenu=4;
-        MySQLDAOFactory user = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
-        implementUser dAOUser = user.getUserMySQL();
-        List<User> UserList = dAOUser.getAll();
-        
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/view/beranda.fxml"));
-        loader.load();
+        klikmenu=4;    
         FXMLLoader fXMLLoader = new FXMLLoader(getClass().getResource("/view/User.fxml"));
         fXMLLoader.load();
 
@@ -287,37 +281,37 @@ public class MainMenuAController implements Initializable {
         AnchorPane acPane = fXMLLoader.getRoot();
         acContent.getChildren().clear();
         acContent.getChildren().add(acPane);
+        }
 
     }
 
     @FXML
     private void btnSettingsOnClick(ActionEvent event) throws IOException {
+        if(!logedinUser.getUser_tipe().equals("admin")){
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Hanya Admin yang bisa akses!", ButtonType.OK);
+            alert.showAndWait();
+        } else{
+            
          SettActive();
          klikmenu=5;
         //inithilize Setting Controller
         TmbhItemIuranController pengaturanController = new TmbhItemIuranController();
         //inithilize UserNameMedia
-        //userNameMedia usrMedia = new userNameMedia();
         // Define a loader to inithilize Settings.fxml controller
         FXMLLoader settingLoader = new FXMLLoader();
         //set the location of Settings.fxml by fxmlloader
         settingLoader.load(getClass().getResource("/view/TmbhItem.fxml").openStream());
-        //TmbhItemController.btn_iuranOnAction(event);
-        //Send id to userMedia
-        //usrMedia.setId(id);
+        
         //take control of settingController elements or node
          TmbhItemController pengaturanControl = settingLoader.getController();
-        //pengaturanControl.bpSettings.getStylesheets().add("/style/MainStyle.css");
-
-        //pengaturanControl.setUsrMedia(usrMedia);
-        //pengaturanControl.miMyASccountOnClick(event);
-        //pengaturanControl.settingPermission();
+        
 
         AnchorPane acPane = settingLoader.getRoot();
         //acContent clear and make useul for add next node
         acContent.getChildren().clear();
         //add a node call "acPane" to acContent
         acContent.getChildren().add(acPane);
+        }
 
     }
 
