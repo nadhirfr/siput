@@ -53,6 +53,7 @@ import model.Deposit;
 import model.DepositModel;
 import model.User;
 import model.UserModel;
+import javafx.scene.control.cell.CheckBoxListCell;
 
 //import List.ListEmployee;
 //
@@ -111,6 +112,14 @@ public class ViewEmployeController implements Initializable {
     private TableColumn<Map, ?> clmEmployeId;
     @FXML
     private TableColumn<Map, ?> clmEmployeName;
+    @FXML
+    private TableView<?> tbl_view;
+
+    @FXML
+    private TableColumn<?, ?> clm_cek;
+
+    @FXML
+    private TableColumn<?, ?> clm_iuran;
 
     Image usrImg = new Image("/img/siput-logo.png");
     
@@ -249,7 +258,8 @@ public class ViewEmployeController implements Initializable {
 
         }
     }
-
+    
+   
     private void clearAll() {
         tfUserName.clear();
         tfFullName.clear();

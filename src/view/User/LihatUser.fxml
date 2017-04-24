@@ -35,11 +35,11 @@
             </BorderPane>
          </left>
          <center>
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <HBox alignment="TOP_CENTER" prefHeight="604.0" prefWidth="611.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox alignment="CENTER" prefHeight="604.0" prefWidth="590.0">
+                  <VBox alignment="CENTER" prefHeight="604.0" prefWidth="379.0">
                      <children>
-                        <GridPane prefHeight="480.0" prefWidth="480.0">
+                        <GridPane prefHeight="480.0" prefWidth="414.0">
                            <children>
                               <Label text="User Name :" />
                               <Label text="Full Name :" GridPane.rowIndex="2" />
@@ -52,7 +52,6 @@
                               <TextField fx:id="tfTipeUser" GridPane.columnSpan="2" GridPane.rowIndex="7" />
                               <TextField fx:id="tfSaldo" GridPane.columnSpan="2" GridPane.rowIndex="9" />
                               <TextField fx:id="tfCreatedBy" disable="true" editable="false" visible="false" GridPane.columnSpan="2" GridPane.rowIndex="13" />
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowSpan="6" />
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="14" GridPane.rowSpan="3">
                                  <children>
                                     <Button fx:id="btnUpdate" layoutX="16.0" layoutY="19.0" mnemonicParsing="false" text="Update" />
@@ -62,8 +61,6 @@
                               <!--<TextField fx:id="tfCreatedBy" editable="false" GridPane.columnSpan="2" GridPane.rowIndex="13" />-->
                            </children>
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -90,6 +87,12 @@
                         </GridPane>
                      </children>
                   </VBox>
+                  <TableView fx:id="tbl_view" prefHeight="604.0" prefWidth="240.0">
+                    <columns>
+                      <TableColumn fx:id="clm_cek" prefWidth="58.0" text="Cek" />
+                        <TableColumn fx:id="clm_iuran" prefWidth="256.0" text="Jenis Iuran" />
+                    </columns>
+                  </TableView>
                </children>
             </HBox>
          </center>
