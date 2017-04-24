@@ -56,13 +56,10 @@
                               <TextField fx:id="tfTipeUser" GridPane.columnSpan="2" GridPane.rowIndex="7" />
                               <TextField fx:id="tfSaldo" GridPane.columnSpan="2" GridPane.rowIndex="9" />
                               <TextField fx:id="tfCreatedBy" disable="true" editable="false" visible="false" GridPane.columnSpan="2" GridPane.rowIndex="13" />
-<<<<<<< HEAD
-=======
                               <AnchorPane prefHeight="336.0" prefWidth="119.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="10">
                                  <children>
                                     <CheckListView fx:id="lvSelectedIuran" layoutX="-2.0" layoutY="-2.0" prefHeight="282.0" prefWidth="195.0" />
                                  </children></AnchorPane>
->>>>>>> b985927debe4a2e6039505e2afcafa29ac9aa7c2
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="14" GridPane.rowSpan="3">
                                  <children>
                                     <Button fx:id="btnUpdate" layoutX="16.0" layoutY="19.0" mnemonicParsing="false" text="Update" />
@@ -98,12 +95,6 @@
                         </GridPane>
                      </children>
                   </VBox>
-                  <TableView fx:id="tbl_view" prefHeight="604.0" prefWidth="240.0">
-                    <columns>
-                      <TableColumn fx:id="clm_cek" prefWidth="58.0" text="Cek" />
-                        <TableColumn fx:id="clm_iuran" prefWidth="256.0" text="Jenis Iuran" />
-                    </columns>
-                  </TableView>
                </children>
             </HBox>
          </center>
