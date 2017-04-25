@@ -94,5 +94,10 @@ public class TransaksiModel implements implementTransaksi{
     public int getJumlahTransaksi() {
         return dAOTransaksi.getJumlahTransaksi();
     }
+
+    @Override
+    public Transaksi getTransaksiPertama(String user_id, String iuran_id) {
+        return dAOTransaksi.getTransaksiPertama(user_id, iuran_id);
+    }
     
 }

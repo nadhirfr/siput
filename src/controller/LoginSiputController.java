@@ -35,70 +35,62 @@ import model.UserModel;
  * @author rheza
  */
 public class LoginSiputController implements Initializable {
-    
 
     /**
      * Initializes the controller class.
      */
-    
-   @FXML
-   private AnchorPane anchorPane;
-   
-   @FXML 
-   private Label statustext;
-   
-   @FXML
-   private JFXTextField usernametext;
-   
-   @FXML
-   private JFXPasswordField passtext;
-   
-   @FXML
-   private JFXButton btlbtn;
+    @FXML
+    private AnchorPane anchorPane;
+
+    @FXML
+    private Label statustext;
+
+    @FXML
+    private JFXTextField usernametext;
+
+    @FXML
+    private JFXPasswordField passtext;
+
+    @FXML
+    private JFXButton btlbtn;
     UserModel userModel = new UserModel();
-   
-   public void Login (ActionEvent event) throws Exception{
-       int loggedIn_user_id = Koneksi.isLogin(usernametext.getText(),passtext.getText());
-       if(loggedIn_user_id != 0){
+
+    public void Login(ActionEvent event) throws Exception {
+        int loggedIn_user_id = Koneksi.isLogin(usernametext.getText(), passtext.getText());
+        User loggedIn_user = userModel.getUser(Integer.toString(loggedIn_user_id));
+        if (loggedIn_user_id != 0 && !loggedIn_user.getUser_tipe().equals("anggota")) {
             statustext.setText("Login Sukses");
             //agar jendela login tertutup setelah berhasil login
-            ((Node)(event.getSource())).getScene().getWindow().hide();
-            
-            //ini mengambil data dengan DAOFactory user
-            User loggedIn_user = userModel.getUser(Integer.toString(loggedIn_user_id));    
-            
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+
             //memanggil jendela menu admins
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/MainMenuA.fxml"));
             loader.load();
             MainMenuAController aController = loader.getController();
-//            aController.setUserName(loggedIn_user.getUser_username(),
-//                                    loggedIn_user.getUser_displayname(),
-//                                    loggedIn_user.getUser_tipe());
             aController.setUserName(loggedIn_user);
             Parent parent = loader.getRoot();
             aController.btnHomeOnClick(event);
             Stage primaryStage = new Stage();
-//            Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenuA.fxml"));
             Scene scene = new Scene(parent);
             primaryStage.setScene(scene);
             primaryStage.setMaximized(true);
             primaryStage.setTitle("Menu Admin");
             primaryStage.show();
-       } else {
+        } else {
             statustext.setText("akun atau sandi salah");
-       }
-       }
-   
+        }
+    }
+
     @FXML
-    private void tutupBtn(ActionEvent event){
+    private void tutupBtn(ActionEvent event) {
         Stage stage = (Stage) btlbtn.getScene().getWindow();
         stage.close();
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }
