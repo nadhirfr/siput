@@ -113,7 +113,7 @@ public class DAORestPengeluaranJenis implements implementPengeluaranJenis {
         }
     }
 
-    public PengeluaranJenis getPengeluaranJenisId(String PengeluaranJenisId) {
+    public PengeluaranJenis get(String PengeluaranJenisId) {
         populatePengeluaranJenis();
         PengeluaranJenis pengeluaranjenis = null;
         for (PengeluaranJenis _pengeluaranjenis : listPengeluaranJenis) {
@@ -191,7 +191,8 @@ public class DAORestPengeluaranJenis implements implementPengeluaranJenis {
 
     @Override
     public List<PengeluaranJenis> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        populatePengeluaranJenis();
+        return listPengeluaranJenis;
     }
 
     @Override
@@ -201,13 +202,11 @@ public class DAORestPengeluaranJenis implements implementPengeluaranJenis {
 
     @Override
     public int getCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        populatePengeluaranJenis();
+        return listPengeluaranJenis.size();
     }
 
-    @Override
-    public PengeluaranJenis get(String PengeluaranJenisId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
     
     
    

@@ -167,12 +167,29 @@ public class DAORestPengeluaranPerubahan implements implementPengeluaranPerubaha
 
     @Override
     public void update(PengeluaranPerubahan b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            URL url = new URL(alamat+"?id="+b.getPengeluaran_perubahan_id());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            String input ="{"
+                    + "\"pengeluaran_perubahan_date\":\""+b.getPengeluaran_perubahan_date()
+                    +"\"pengeluaran_perubahan_nominal\":\""+b.getPengeluaran_perubahan_nominal()
+                    +"\"pengeluaran_id\":\""+b.getPengeluaran_id()
+                    +"\"}";
+        }catch(MalformedURLException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public List<PengeluaranPerubahan> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        populatePengeluaranPerubahan();
+        return listPengeluaranPerubahan;
     }
 
     @Override
@@ -182,7 +199,8 @@ public class DAORestPengeluaranPerubahan implements implementPengeluaranPerubaha
 
     @Override
     public int getCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        populatePengeluaranPerubahan();
+        return listPengeluaranPerubahan.size();
     }
 
   

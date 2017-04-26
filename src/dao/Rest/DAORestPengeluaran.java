@@ -118,7 +118,7 @@ public class DAORestPengeluaran implements implementPengeluaran {
         }
     }
 
-    public Pengeluaran getPengeluaran_id(String pengeluaran_id) {
+    public Pengeluaran get(String pengeluaran_id) {
         populatePengeluaran();
         Pengeluaran pengeluaran = null;
         for (Pengeluaran _pengeluaran : listPengeluaran) {
@@ -195,13 +195,9 @@ public class DAORestPengeluaran implements implementPengeluaran {
     }
 
     @Override
-    public Pengeluaran get(String PengeluaranId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<Pengeluaran> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        populatePengeluaran();
+        return listPengeluaran;
     }
 
     @Override
@@ -211,7 +207,8 @@ public class DAORestPengeluaran implements implementPengeluaran {
 
     @Override
     public int getCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        populatePengeluaran();
+        return listPengeluaran.size();
     }
     
  
