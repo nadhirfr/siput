@@ -21,6 +21,13 @@ public class IuranUser {
         this.IuranUserStatus = IuranUserStatus;
     }
 
+    public IuranUser(int IuranUserId, int UserId, int IuranId, int IuranUserStatus) {
+        this.IuranUserId = IuranUserId;
+        this.UserId = UserId;
+        this.IuranId = IuranId;
+        this.IuranUserStatus = IuranUserStatus;
+    }
+    
     public int getIuranUserId() {
         return IuranUserId;
     }
