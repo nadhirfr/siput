@@ -97,10 +97,10 @@ public class DAORestPengeluaranJenis implements implementPengeluaranJenis {
 
                 JSONObject jo = (JSONObject) jp.parse(json.get(i).toString());
                 //System.out.println(jo.get("pengeluaran_nama").toString());
-                listPengeluaranJenis.add(new PengeluaranJenis(Integer.valueOf(jo.get("pengeluaran_jenis_id").toString()),
-                        Integer.valueOf(jo.get("pengeluaran_nama").toString()),
-                        jo.get("pengeluaran_nama").toString(),
-                        Integer.valueOf(jo.get("pengeluaran_keterangan").toString())));
+                listPengeluaranJenis.add(new PengeluaranJenis(Integer.valueOf(jo.get("pengeluaran_jenis_id").toString()), 
+                        jo.get("pengeluaran_nama").toString(), 
+                        jo.get("pengeluaran_keterangan").toString()));
+                //new PengeluaranJenis(1, "kuda", "kuda");
 
             }
             conn.disconnect();
@@ -190,11 +190,6 @@ public class DAORestPengeluaranJenis implements implementPengeluaranJenis {
     }
 
     @Override
-    public PengeluaranJenis get(String PengeluaranJenisId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<PengeluaranJenis> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -206,6 +201,11 @@ public class DAORestPengeluaranJenis implements implementPengeluaranJenis {
 
     @Override
     public int getCount() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public PengeluaranJenis get(String PengeluaranJenisId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

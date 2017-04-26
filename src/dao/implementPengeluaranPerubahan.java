@@ -5,23 +5,23 @@
  */
 package dao;
 import java.util.List;
-import model.model_PengeluaranPerubahan;
+import model.PengeluaranPerubahan;
 /**
  *
  * @author rheza
  */
 public interface implementPengeluaranPerubahan {
-        public void insert(model_PengeluaranPerubahan b);
+        public void insert(PengeluaranPerubahan b);
     
-    public model_PengeluaranPerubahan get(String PengeluaranPerubahanId);
+    public PengeluaranPerubahan get(String PengeluaranPerubahanId);
 
-    public void update(model_PengeluaranPerubahan b);
+    public void update(PengeluaranPerubahan b);
 
     public void delete(String PengeluaranPerubahanId);
 
-    public List<model_PengeluaranPerubahan> getAll();
+    public List<PengeluaranPerubahan> getAll();
 
-    public List<model_PengeluaranPerubahan> getCari(String PengeluaranPerubahanNama);
+    public List<PengeluaranPerubahan> getCari(String PengeluaranPerubahanNama);
     
     public int getCount();
 }

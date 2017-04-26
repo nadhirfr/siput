@@ -31,7 +31,8 @@ import model.PengeluaranUser;
 public class DAORestPengeluaran implements implementPengeluaran {
 
     private List<Pengeluaran> listPengeluaran;
-    public static String alamat = "http://localhost/siput-server/index.php/Pengeluarans";
+
+    public static String alamat = "http://localhost/siput-server/index.php/pengeluarans";
 
     public DAORestPengeluaran() {
         populatePengeluaran();
@@ -104,7 +105,7 @@ public class DAORestPengeluaran implements implementPengeluaran {
                         Integer.valueOf(jo.get("pengeluaran_nama").toString()),
                         Integer.valueOf(jo.get("pengeluaran_jenis_id").toString()),
                         jo.get("pengeluaran_nama").toString(),
-                        Integer.valueOf(jo.get("pengeluaran_kategori_id").toString())));
+                        jo.get("pengeluaran_kategori_id").toString()));
                        
             }
             conn.disconnect();

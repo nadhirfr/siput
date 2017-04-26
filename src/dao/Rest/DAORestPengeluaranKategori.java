@@ -100,9 +100,8 @@ public class DAORestPengeluaranKategori implements implementPengeluaranKategori 
                 JSONObject jo = (JSONObject) jp.parse(json.get(i).toString());
                 System.out.println(jo.get("user_pengeluaran_kategori_nama").toString());
                 listPengeluaranKategori.add(new PengeluaranKategori(Integer.valueOf(jo.get("pengeluaran_kategori_id").toString()), 
-                        jo.get("pengeluaran_kategori_nama").toString(),
-                        
-                        jo.get("pengeluaran_kategori_waktu").toString()));
+
+                        jo.get("pengeluaran_kategori_nama").toString(), (int) jo.get("pengeluaran_kategori_waktu")));
             }
             conn.disconnect();
         } catch (MalformedURLException e) {

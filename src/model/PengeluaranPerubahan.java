@@ -11,23 +11,23 @@ import java.util.Date;
  *
  * @author rheza
  */
-public class model_PengeluaranPerubahan {
+public class PengeluaranPerubahan {
 
     private int pengeluaran_perubahan_id, pengeluaran_perubahan_nominal, pengeluaran_id;
-    private Date pengeluaran_perubahan_date;
+    private String pengeluaran_perubahan_date;
 
-    public model_PengeluaranPerubahan() {
+    public PengeluaranPerubahan() {
 
     }
 
-    public model_PengeluaranPerubahan(int pengeluaran_perubahan_id, int pengeluaran_perubahan_nominal, Date pengeluaran_perubahan_date, int pengeluaran_id) {
+    public PengeluaranPerubahan(int pengeluaran_perubahan_id, int pengeluaran_perubahan_nominal, String pengeluaran_perubahan_date, int pengeluaran_id) {
         this.pengeluaran_perubahan_id = pengeluaran_perubahan_id;
         this.pengeluaran_perubahan_nominal = pengeluaran_perubahan_nominal;
         this.pengeluaran_perubahan_date = pengeluaran_perubahan_date;
         this.pengeluaran_id = pengeluaran_id;
     }
 
-    public model_PengeluaranPerubahan(int pengeluaran_perubahan_nominal, Date pengeluaran_perubahan_date, int pengeluaran_id) {
+    public PengeluaranPerubahan(int pengeluaran_perubahan_nominal, String pengeluaran_perubahan_date, int pengeluaran_id) {
         this.pengeluaran_perubahan_nominal = pengeluaran_perubahan_nominal;
         this.pengeluaran_perubahan_date = pengeluaran_perubahan_date;
         this.pengeluaran_id = pengeluaran_id;
@@ -57,11 +57,11 @@ public class model_PengeluaranPerubahan {
         this.pengeluaran_id = pengeluaran_id;
     }
 
-    public Date getPengeluaran_perubahan_date() {
+    public String getPengeluaran_perubahan_date() {
         return pengeluaran_perubahan_date;
     }
 
-    public void setPengeluaran_perubahan_date(Date pengeluaran_perubahan_date) {
+    public void setPengeluaran_perubahan_date(String pengeluaran_perubahan_date) {
         this.pengeluaran_perubahan_date = pengeluaran_perubahan_date;
     }
 

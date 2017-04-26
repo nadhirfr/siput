@@ -151,8 +151,8 @@ public class DAORestTransaksi implements implementTransaksi {
                     + "\",\"transaksi_nominal\":\"" + b.getTransaksiNominal()
                     + "\",\"user_id\":\"" + b.getUserId()
                     + "\",\"transaksi_tipe\":\"" +b.getTransaksiTipe()
-                    + "\",\"pengeluaran_id\":\"" +b.getPengeluaranId()
-                    + "\",\"iuran_id\":\"" +b.getIuranId()
+                    +"\",\"pengeluaran_id\":\"" +b.getPengeluaranId()
+                    +"\",\"iuran_id\":\"" +b.getIuranId()
                     + "\"}";
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
@@ -210,32 +210,52 @@ public class DAORestTransaksi implements implementTransaksi {
 
     @Override
     public User getUser(Transaksi b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DAORestUser restUser = new DAORestUser();
+        Transaksi transaksi = get(String.valueOf(b.getTransaksiId()));
+        User user = restUser.getUser(String.valueOf(transaksi.getUserId()));
+        
+        return user;
     }
 
-    @Override
-    public Iuran getIuran(Transaksi b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public Iuran getIuran(Transaksi b) {
+//        DAORestIuran restIuran = new DAORestIuran();
+//        Transaksi transaksi = get(String.valueOf(b.getTransaksiId()));
+//        Iuran iuran = restIuran.get(String.valueOf(transaksi.getIuranId()));
+//        return iuran;
+//    }
 
     @Override
     public Pengeluaran getPengeluaran(Transaksi b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DAORestPengeluaran restPengeluaran = new DAORestPengeluaran();
+        Transaksi transaksi = get(String.valueOf(b.getTransaksiId()));
+        Pengeluaran pengeluaran = restPengeluaran.get(String.valueOf(transaksi.getPengeluaranId()));
+        return pengeluaran;
     }
 
     @Override
-    public Transaksi get(String transaksiId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Transaksi get(String transaksiId ) {
+        populateTransaksi();
+        Transaksi transaksi = null;
+        for (Transaksi _transaksi : listTransaksi) {
+            if (String.valueOf(_transaksi.getTransaksiId()).equals(transaksiId)) {
+                transaksi = _transaksi;
+            }
+        }
+        return transaksi;
+
     }
 
     @Override
     public List<Transaksi> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        populateTransaksi();
+        return listTransaksi;
     }
 
     @Override
     public int getCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        populateTransaksi();
+        return listTransaksi.size();
     }
 
     @Override
@@ -260,6 +280,12 @@ public class DAORestTransaksi implements implementTransaksi {
 
     @Override
     public Transaksi getTransaksiPertama(String user_id, String iuran_id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+    @Override
+    public Iuran getIuran(Transaksi b) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

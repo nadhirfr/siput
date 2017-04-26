@@ -20,22 +20,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.model_PengeluaranPerubahan;
+import model.PengeluaranPerubahan;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-
+import model.User;
 
 /**
  *
  * @author ROSANIA
  */
+
+
 public class DAORestPengeluaranPerubahan implements implementPengeluaranPerubahan{
     
     private List<PengeluaranPerubahan> listPengeluaranPerubahan;
-    public static String alamat = "http://localhost/siput-server/index.php/Pengeluaran_perubahans";
+    public static String alamat = "http://localhost/siput-server/index.php/pengeluaran_perubahans";
 
     public DAORestPengeluaranPerubahan() {
         populatePengeluaranPerubahan();
@@ -105,10 +106,11 @@ public class DAORestPengeluaranPerubahan implements implementPengeluaranPerubaha
                 JSONObject jo = (JSONObject) jp.parse(json.get(i).toString());
                 //System.out.println(jo.get("user_username").toString());
                 listPengeluaranPerubahan.add(new PengeluaranPerubahan(Integer.valueOf(jo.get("pengeluaran_perubahan_id").toString()), 
-                        jo.get("pengeluaran_perubahan_nominal").toString(),
-                        jo.get("pengeluaran_perubahan_date").toString(), 
+
+                        Integer.valueOf(jo.get("pengeluaran_perubahan_nominal").toString()),
+                        (jo.get("pengeluaran_perubahan_date").toString()), 
                          
-                        jo.get("pengeluaran_id").toString()));
+                        Integer.valueOf(jo.get("pengeluaran_id").toString())));
             }
             conn.disconnect();
         } catch (MalformedURLException e) {
@@ -121,53 +123,17 @@ public class DAORestPengeluaranPerubahan implements implementPengeluaranPerubaha
     }
 
     @Override
-    public PengeluaranPerubahan getPengeluaranPerubahan(String pengeluaran_perubahan_id) {
+    public PengeluaranPerubahan get(String pengeluaran_perubahan_id) {
         populatePengeluaranPerubahan();
         PengeluaranPerubahan pengeluaranperubahan = null;
         for (PengeluaranPerubahan _pengeluaranperubahan : listPengeluaranPerubahan) {
-            if (String.valueOf(_pengeluaranperubahan.getPengeluaran_perubahan_id()).equals(pengeluaran_perubahan_id) {
+            if (String.valueOf(_pengeluaranperubahan.getPengeluaran_perubahan_id()).equals(pengeluaran_perubahan_id)) {
                 pengeluaranperubahan = _pengeluaranperubahan;
             }
         }
         return pengeluaranperubahan;
     }
 
-    @Override
-    public void update(User b) {
-        try {
-            URL url = new URL(alamat+"?id="+b.getUser_id());
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setDoOutput(true);
-            conn.setRequestMethod("PUT");
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setRequestProperty("Accept", "application/json");
-            //conn.addRequestProperty("Authorization", LoginDAOREST.user);
-            String input = "{"
-                    + "\"username\":\"" + b.getUser_username()
-                    + "\",\"displayname\":\"" + b.getUser_displayname()
-                    + "\",\"password\":\"" + b.getUser_password()
-                    + "\",\"tipe\":\"" + b.getUser_tipe()
-                    + "\"}";
-            OutputStream os = conn.getOutputStream();
-            os.write(input.getBytes());
-            os.flush();
-            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
-            }
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String output;
-            System.out.println("Output from Server .... \n");
-            while ((output = br.readLine()) != null) {
-                System.out.println(output);
-            }
-            conn.disconnect();
-            populateUser();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void delete(String user_id) {
@@ -189,7 +155,7 @@ public class DAORestPengeluaranPerubahan implements implementPengeluaranPerubaha
                 System.out.println(output);
             }
             conn.disconnect();
-            populateUser();
+            populatePengeluaranPerubahan();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -197,24 +163,29 @@ public class DAORestPengeluaranPerubahan implements implementPengeluaranPerubaha
         }
     }
 
+
+
     @Override
-    public List<User> getAll() {
-        populateUser();
-        return listUser;
+    public void update(PengeluaranPerubahan b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<User> getCari(String displayname) {
+    public List<PengeluaranPerubahan> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<PengeluaranPerubahan> getCari(String PengeluaranPerubahanNama) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public int getCount() {
-        populateUser();
-        return listUser.size();
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+  
     
 
 }
