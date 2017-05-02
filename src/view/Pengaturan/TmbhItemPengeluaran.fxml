@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane  xmlns:fx="http://javafx.com/fxml/1"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111"  fx:controller="controller.application.TmbhItemPengeluaranController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.application.TmbhItemPengeluaranController">
    <children>
       <Pane prefHeight="525.0" prefWidth="222.0" style="-fx-background-color: #95a5a6;">
          <children>
-            <JFXListView layoutY="1.0" prefHeight="525.0" prefWidth="222.0" fx:id="lvPengeluaran" />
+            <JFXListView fx:id="lvPengeluaran" layoutY="1.0" prefHeight="525.0" prefWidth="222.0" />
          </children>
       </Pane>
       <Label layoutX="287.0" layoutY="7.0" text="Pilih Kategori :">
@@ -21,30 +21,30 @@
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <ComboBox layoutX="287.0" layoutY="25.0" prefHeight="34.0" prefWidth="368.0" style="-fx-background-radius: 5;" fx:id="cbKategori" />
+      <ComboBox fx:id="cbKategori" layoutX="287.0" layoutY="25.0" prefHeight="34.0" prefWidth="368.0" style="-fx-background-radius: 5;" />
       <Label layoutX="287.0" layoutY="72.0" text="Pilih Jenis :">
          <font>
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <ComboBox layoutX="287.0" layoutY="90.0" prefHeight="34.0" prefWidth="368.0" style="-fx-background-radius: 5;" fx:id="cbJenis" />
+      <ComboBox fx:id="cbJenis" layoutX="287.0" layoutY="90.0" prefHeight="34.0" prefWidth="368.0" style="-fx-background-radius: 5;" />
       <Label layoutX="287.0" layoutY="139.0" text="Nama :">
          <font>
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <TextField layoutX="287.0" layoutY="155.0" prefHeight="34.0" prefWidth="368.0" promptText="Nama" style="-fx-background-radius: 5;" fx:id="tfNama" />
+      <TextField fx:id="tfNama" layoutX="287.0" layoutY="155.0" prefHeight="34.0" prefWidth="368.0" promptText="Nama" style="-fx-background-radius: 5;" />
       <Label layoutX="287.0" layoutY="203.0" text="Keterangan :">
          <font>
             <Font name="Gadugi" size="12.0" />
          </font>
       </Label>
-      <TextField layoutX="287.0" layoutY="222.0" prefHeight="34.0" prefWidth="368.0" promptText="Keterangan" style="-fx-background-radius: 5;" fx:id="tfKeterangan" >
+      <TextField fx:id="tfKeterangan" layoutX="287.0" layoutY="222.0" prefHeight="34.0" prefWidth="368.0" promptText="Keterangan" style="-fx-background-radius: 5;">
          <font>
             <Font size="11.0" />
          </font>
       </TextField>
-      <Button layoutX="319.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" fx:id="btSimpan" />
-      <Button layoutX="480.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Batal" textFill="WHITE" fx:id="btBatal" />
+      <Button fx:id="btSimpan" layoutX="319.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" />
+      <Button fx:id="btHapus" layoutX="480.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Hapus" textFill="WHITE" />
    </children>
 </AnchorPane>
