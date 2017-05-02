@@ -6,8 +6,10 @@
 
 package dao.Rest;
 
+import static dao.Rest.DAORestJenisIuran.alamat;
 import dao.implementKategoriIuran;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -15,6 +17,7 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import model.KategoriIuran;
@@ -23,6 +26,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 /**
  *
@@ -39,28 +46,48 @@ public class DAORestKategoriIuran implements implementKategoriIuran{
     @Override 
     public void insert(KategoriIuran b) {
         try {
-            URL url = new URL(alamat+"?id="+b.getIuranKategoriId());
+            URL url = new URL(alamat);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            //conn.addRequestProperty("Authorization", LoginDAOREST.user);
-            String input = "{"
-                    + "\"iuran_kategori_nama\":\"" + b.getIuranKategoriNama()
-                    + "\",\"iuran_kategori_interval\":\"" + b.getIuranKategoriInterval()
-                    + "\"}";
-            OutputStream os = conn.getOutputStream();
-            os.write(input.getBytes());
-            os.flush();
+
+            String urlParameters = "iuran_kategori_nama=" + b.getIuranKategoriNama()
+                    + "&iuran_kategori_interval=" + b.getIuranKategoriInterval();
+            byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+            int postDataLength = postData.length;
+            conn.setDoOutput(true);
+            conn.setInstanceFollowRedirects(false);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("charset", "utf-8");
+            conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+            conn.setUseCaches(false);
+            try (DataOutputStream wr = new DataOutputStream(conn.getOutputStream())) {
+                wr.write(postData);
+            }
+
             if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
                 throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
             }
+
+            //ini ambil output data lalu dimasukkan ke string response
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String output;
+            String response = null;
             System.out.println("Output from Server .... \n");
             while ((output = br.readLine()) != null) {
                 System.out.println(output);
+                response = response + output;
             }
+
+            //ini parsing data output menggunakan jsoup, diambil id nya
+            Document d = Jsoup.parse(response);
+            Elements tables = d.select("table > tbody > tr > td");
+            Element e = tables.first();
+            System.out.println(e.text());
+            int id = Integer.valueOf(e.text());
+            System.out.println("id created:" + id);
+
             conn.disconnect();
             populateKategoriIuran();
         } catch (MalformedURLException e) {
@@ -100,7 +127,7 @@ public class DAORestKategoriIuran implements implementKategoriIuran{
                 //System.out.println(jo.get("iuran_nama").toString());
                 listKategoriIuran.add(new KategoriIuran(Integer.valueOf(jo.get("iuran_kategori_id").toString()), 
                         jo.get("iuran_kategori_nama").toString(), 
-                        Integer.valueOf(jo.get("iuran_kategori_interval").toString())));
+                        jo.get("iuran_kategori_interval") == null? 0 :Integer.valueOf(jo.get("iuran_kategori_interval").toString())));
             }
             conn.disconnect();
         } catch (MalformedURLException e) {

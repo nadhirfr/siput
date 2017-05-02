@@ -22,7 +22,7 @@ public class UserModel implements implementUser{
 
     public UserModel() {
          restFactory = (RESTDAOFactory) DAOFactory.getFactory(DAOFactory.REST);
-         dAOUser = restFactory.getUserREST();
+         dAOUser = restFactory.getUser();
          listUser = dAOUser.getAll(); 
     }
     

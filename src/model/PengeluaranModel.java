@@ -9,6 +9,7 @@ import dao.implementDeposit;
 import dao.implementPengeluaran;
 import factory.DAOFactory;
 import factory.MySQLDAOFactory;
+import factory.RESTDAOFactory;
 import java.util.List;
 
 /**
@@ -17,13 +18,13 @@ import java.util.List;
  */
 public class PengeluaranModel implements implementPengeluaran {
 
-    MySQLDAOFactory mysqlFactory;
+    RESTDAOFactory restFactory;
     implementPengeluaran dAOPengeluaran;
     List<Pengeluaran> listPegeluaran;
 
     public PengeluaranModel() {
-        mysqlFactory = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
-        dAOPengeluaran = mysqlFactory.getPengeluaranMySQL();
+        restFactory = (RESTDAOFactory) DAOFactory.getFactory(DAOFactory.REST);
+        dAOPengeluaran = restFactory.getPengeluaran();
         listPegeluaran = dAOPengeluaran.getAll();
 
     }

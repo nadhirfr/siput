@@ -5,8 +5,10 @@
  */
 
 package dao.Rest;
+import static dao.Rest.DAORestJenisIuran.alamat;
 import dao.implementPengeluaranJenis;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -14,6 +16,7 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.simple.JSONArray;
@@ -21,6 +24,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import model.PengeluaranJenis;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 
 /**
@@ -37,29 +44,50 @@ public class DAORestPengeluaranJenis implements implementPengeluaranJenis {
 
     @Override
     public void insert(PengeluaranJenis b) {
+        int id = 0;
         try {
-            URL url = new URL(alamat + "?id=" + b.getPengeluaran_jenis_id());
+            URL url = new URL(alamat);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            //conn.addRequestProperty("Authorization", LoginDAOREST.user);
-            String input = "{"
-                    + "\"pengeluaran_nama\":\"" + b.getPengeluaran_nama()
-                    + "\"pengeluaran_keterangan\"\":\"" + b.getPengeluaran_keterangan()
-                    + "\"}";
-            OutputStream os = conn.getOutputStream();
-            os.write(input.getBytes());
-            os.flush();
+
+            String urlParameters = "pengeluaran_nama=" + b.getPengeluaran_nama()
+                    + "&pengeluaran_keterangan=" + b.getPengeluaran_keterangan();
+            byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+            int postDataLength = postData.length;
+            conn.setDoOutput(true);
+            conn.setInstanceFollowRedirects(false);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("charset", "utf-8");
+            conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+            conn.setUseCaches(false);
+            try (DataOutputStream wr = new DataOutputStream(conn.getOutputStream())) {
+                wr.write(postData);
+            }
+
             if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
                 throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
             }
+
+            //ini ambil output data lalu dimasukkan ke string response
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String output;
+            String response = null;
             System.out.println("Output from Server .... \n");
             while ((output = br.readLine()) != null) {
                 System.out.println(output);
+                response = response + output;
             }
+
+            //ini parsing data output menggunakan jsoup, diambil id nya
+            Document d = Jsoup.parse(response);
+            Elements tables = d.select("table > tbody > tr > td");
+            Element e = tables.first();
+            System.out.println(e.text());
+            id = Integer.valueOf(e.text());
+            System.out.println("id created:" + id);
+
             conn.disconnect();
             populatePengeluaranJenis();
         } catch (MalformedURLException e) {

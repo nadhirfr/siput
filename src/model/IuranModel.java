@@ -6,9 +6,8 @@
 package model;
 
 import dao.implementIuran;
-import dao.implementTransaksi;
 import factory.DAOFactory;
-import factory.MySQLDAOFactory;
+import factory.RESTDAOFactory;
 import java.util.List;
 
 /**
@@ -17,13 +16,13 @@ import java.util.List;
  */
 public class IuranModel implements implementIuran{
 
-    MySQLDAOFactory mysqlFactory;
+    RESTDAOFactory restlFactory;
     implementIuran dAOIuran;
     List<Iuran> listIuran;
     
     public IuranModel() {
-        mysqlFactory = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
-        dAOIuran = mysqlFactory.getIuranMySQL();
+        restlFactory = (RESTDAOFactory) DAOFactory.getFactory(DAOFactory.REST);
+        dAOIuran = restlFactory.getIuran();
         listIuran = dAOIuran.getAll();
     }
 

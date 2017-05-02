@@ -6,9 +6,8 @@
 package model;
 
 import dao.implementPengeluaranJenis;
-import dao.implementPengeluaranKategori;
 import factory.DAOFactory;
-import factory.MySQLDAOFactory;
+import factory.RESTDAOFactory;
 import java.util.List;
 
 /**
@@ -16,13 +15,13 @@ import java.util.List;
  * @author fachrul
  */
 public class PengeluaranJenisModel implements implementPengeluaranJenis{
-    MySQLDAOFactory mysqlFactory;
+    RESTDAOFactory restFactory;
     implementPengeluaranJenis daoPengeluaranJenis;
     List<PengeluaranJenis> listPegeluaranJenis;
 
     public PengeluaranJenisModel() {
-        mysqlFactory = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
-        daoPengeluaranJenis = mysqlFactory.getPengeluaranJenisMySQL();
+        restFactory = (RESTDAOFactory) DAOFactory.getFactory(DAOFactory.REST);
+        daoPengeluaranJenis = restFactory.getPengeluaranJenis();
         listPegeluaranJenis = daoPengeluaranJenis.getAll();
 
     }

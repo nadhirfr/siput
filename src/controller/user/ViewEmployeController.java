@@ -158,11 +158,13 @@ public class ViewEmployeController implements Initializable {
                             deposit.getUserId(),
                             Integer.valueOf(tfSaldo.getText())));
                     for (Iuran iuran : lvSelectedIuran.getItems()){
-                        if(iuranUserModel.getByUserAndIuran(user, iuran).getIuranUserId() == 0 &&
+                        int iuranUserID = iuranUserModel.getByUserAndIuran(user, iuran) == null ? 0:
+                                iuranUserModel.getByUserAndIuran(user, iuran).getIuranUserId();
+                        if(iuranUserID == 0 &&
                                 lvSelectedIuran.getCheckModel().isChecked(iuran)){
                             System.out.println("pertama true");
                             iuranUserModel.insert(new IuranUser(user.getUser_id(), iuran.getIuranId(), 0));
-                        } else if(iuranUserModel.getByUserAndIuran(user, iuran).getIuranUserId() !=0 &&
+                        } else if(iuranUserID !=0 &&
                                 !lvSelectedIuran.getCheckModel().isChecked(iuran)){
                             System.out.println("kedua true");
                             iuranUserModel.delete(String.valueOf(iuranUserModel.getByUserAndIuran(user, iuran).getIuranUserId()));
@@ -256,7 +258,9 @@ public class ViewEmployeController implements Initializable {
             //usersGetway.selectedView(users);
             lvSelectedIuran.getCheckModel().clearChecks();
             for (Iuran iuran : lvSelectedIuran.getItems()) {
-                if(iuranUserModel.getByUserAndIuran(user, iuran).getIuranId() == iuran.getIuranId()){
+                int iuran_id = iuranUserModel.getByUserAndIuran(user, iuran) == null ? 0 :
+                        iuranUserModel.getByUserAndIuran(user, iuran).getIuranId();
+                if(iuran_id == iuran.getIuranId()){
                     lvSelectedIuran.getCheckModel().check(iuran);
                 } else{
                     lvSelectedIuran.getCheckModel().clearCheck(iuran);
@@ -267,7 +271,8 @@ public class ViewEmployeController implements Initializable {
             tfFullName.setText(user.getUser_displayname());
             tfPassword.setText(user.getUser_password());
             tfTipeUser.setText(user.getUser_tipe());
-            tfSaldo.setText(String.valueOf(depositModel.getByUser(user).getDepositJumlah()));
+            tfSaldo.setText(depositModel.getByUser(user) == null? "" : 
+                    String.valueOf(depositModel.getByUser(user).getDepositJumlah()));
 
         }
     }

@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package dao.Rest;
+
+import static dao.Rest.DAORestIuranUser.alamat;
 import dao.implementJenisIuran;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -14,6 +16,7 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import model.JenisIuran;
@@ -21,14 +24,17 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 /**
  *
  * @author ROSANIA
  */
 public class DAORestJenisIuran implements implementJenisIuran {
-    
-    
+
     private List<JenisIuran> listJenisIuran;
     public static String alamat = "http://localhost/siput-server/index.php/iuran_jeniss";
 
@@ -36,31 +42,52 @@ public class DAORestJenisIuran implements implementJenisIuran {
         populateJenisIuran();
     }
 
-    @Override 
+    @Override
     public void insert(JenisIuran b) {
+        int id = 0;
         try {
-            URL url = new URL(alamat+"?id="+b.getIuranJenisId());
+            URL url = new URL(alamat);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            //conn.addRequestProperty("Authorization", LoginDAOREST.user);
-            String input = "{"
-                    + "\"iuran_jenis_nama\":\"" + b.getIuranJenisNama()
-                    + "\",\"iuran_jenis_keterangan\":\"" + b.getIuranJenisKeterangan()
-                    + "\"}";
-            OutputStream os = conn.getOutputStream();
-            os.write(input.getBytes());
-            os.flush();
+
+            String urlParameters = "iuran_jenis_nama=" + b.getIuranJenisNama()
+                    + "&iuran_jenis_keterangan=" + b.getIuranJenisKeterangan();
+            byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+            int postDataLength = postData.length;
+            conn.setDoOutput(true);
+            conn.setInstanceFollowRedirects(false);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("charset", "utf-8");
+            conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+            conn.setUseCaches(false);
+            try (DataOutputStream wr = new DataOutputStream(conn.getOutputStream())) {
+                wr.write(postData);
+            }
+
             if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
                 throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
             }
+
+            //ini ambil output data lalu dimasukkan ke string response
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String output;
+            String response = null;
             System.out.println("Output from Server .... \n");
             while ((output = br.readLine()) != null) {
                 System.out.println(output);
+                response = response + output;
             }
+
+            //ini parsing data output menggunakan jsoup, diambil id nya
+            Document d = Jsoup.parse(response);
+            Elements tables = d.select("table > tbody > tr > td");
+            Element e = tables.first();
+            System.out.println(e.text());
+            id = Integer.valueOf(e.text());
+            System.out.println("id created:" + id);
+
             conn.disconnect();
             populateJenisIuran();
         } catch (MalformedURLException e) {
@@ -95,12 +122,11 @@ public class DAORestJenisIuran implements implementJenisIuran {
             JSONArray json = (JSONArray) jp.parse(sb.toString());
             listJenisIuran.clear();
             for (int i = 0; i < json.size(); i++) {
-                
+
                 JSONObject jo = (JSONObject) jp.parse(json.get(i).toString());
                 //System.out.println(jo.get("user_pengeluaran_kategori_nama").toString());
-                listJenisIuran.add(new JenisIuran(Integer.valueOf(jo.get("iuran_jenis_id").toString()), 
+                listJenisIuran.add(new JenisIuran(Integer.valueOf(jo.get("iuran_jenis_id").toString()),
                         jo.get("iuran_jenis_nama").toString(),
-                        
                         jo.get("iuran_jenis_keterangan").toString()));
             }
             conn.disconnect();
@@ -113,9 +139,9 @@ public class DAORestJenisIuran implements implementJenisIuran {
         }
     }
 
-        public JenisIuran getJenisIuran(String IuranJenisId) {
+    public JenisIuran getJenisIuran(String IuranJenisId) {
         populateJenisIuran();
-        JenisIuran jenisiuran= null;
+        JenisIuran jenisiuran = null;
         for (JenisIuran _jenisiuran : listJenisIuran) {
             if (String.valueOf(_jenisiuran.getIuranJenisId()).equals(IuranJenisId)) {
                 jenisiuran = _jenisiuran;
@@ -127,19 +153,19 @@ public class DAORestJenisIuran implements implementJenisIuran {
     @Override
     public void update(JenisIuran b) {
         try {
-            URL url = new URL(alamat+"?id="+b.getIuranJenisId());
+            URL url = new URL(alamat + "?id=" + b.getIuranJenisId());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
             //conn.addRequestProperty("Authorization", LoginDAOREST.user);
-            String input = 
-                    "{"
+            String input
+                    = "{"
                     + "\"iuran_jenis_nama\":\"" + b.getIuranJenisNama()
                     + "\",\"iuran_jenis_keterangan\":\"" + b.getIuranJenisKeterangan()
                     + "\"}";
-           
+
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
             os.flush();
@@ -164,13 +190,13 @@ public class DAORestJenisIuran implements implementJenisIuran {
     @Override
     public void delete(String JenisIuranId) {
         try {
-            URL url = new URL(alamat+"?id="+JenisIuranId);
+            URL url = new URL(alamat + "?id=" + JenisIuranId);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("DELETE");
             conn.setRequestProperty("Content-Type", "application/json");
             //conn.addRequestProperty("Authorization", LoginDAOREST.user);
-            System.out.println("alamat url : "+alamat+"?id="+JenisIuranId);
+            System.out.println("alamat url : " + alamat + "?id=" + JenisIuranId);
             if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
             }
@@ -218,5 +244,4 @@ public class DAORestJenisIuran implements implementJenisIuran {
         return listJenisIuran.size();
     }
 
-    
 }

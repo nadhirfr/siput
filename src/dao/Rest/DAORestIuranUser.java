@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package dao.Rest;
 
 import dao.implementIuranUser;
@@ -36,7 +35,7 @@ import org.jsoup.select.Elements;
  * @author ROSANIA
  */
 public class DAORestIuranUser implements implementIuranUser {
-    
+
     private List<IuranUser> listIuranUser;
     public static String alamat = "http://localhost/siput-server/index.php/iuran_users";
 
@@ -46,33 +45,33 @@ public class DAORestIuranUser implements implementIuranUser {
 
     @Override
     public void insert(IuranUser b) {
-            int id = 0;
+        int id = 0;
         try {
             URL url = new URL(alamat);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
 
-            String urlParameters  = "iuran_id="+b.getIuranId()+
-                    "&user_id="+b.getUserId()+
-                    "&iuran_user_status="+b.isIuranUserStatus();
-            byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
-            int    postDataLength = postData.length;   
-            conn.setDoOutput( true );
-            conn.setInstanceFollowRedirects( false );
-            conn.setRequestMethod( "POST" );
-            conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
-            conn.setRequestProperty( "charset", "utf-8");
-            conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
-            conn.setUseCaches( false );
-            try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
-               wr.write( postData );
+            String urlParameters = "iuran_id=" + b.getIuranId()
+                    + "&user_id=" + b.getUserId()
+                    + "&iuran_user_status=" + b.isIuranUserStatus();
+            byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+            int postDataLength = postData.length;
+            conn.setDoOutput(true);
+            conn.setInstanceFollowRedirects(false);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("charset", "utf-8");
+            conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+            conn.setUseCaches(false);
+            try (DataOutputStream wr = new DataOutputStream(conn.getOutputStream())) {
+                wr.write(postData);
             }
 
             if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
                 throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
             }
-            
+
             //ini ambil output data lalu dimasukkan ke string response
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String output;
@@ -80,17 +79,17 @@ public class DAORestIuranUser implements implementIuranUser {
             System.out.println("Output from Server .... \n");
             while ((output = br.readLine()) != null) {
                 System.out.println(output);
-                response = response+output;
+                response = response + output;
             }
-            
+
             //ini parsing data output menggunakan jsoup, diambil id nya
             Document d = Jsoup.parse(response);
             Elements tables = d.select("table > tbody > tr > td");
             Element e = tables.first();
             System.out.println(e.text());
             id = Integer.valueOf(e.text());
-            System.out.println("id created:"+id);
-            
+            System.out.println("id created:" + id);
+
             conn.disconnect();
             populateIuranUser();
         } catch (MalformedURLException e) {
@@ -98,7 +97,7 @@ public class DAORestIuranUser implements implementIuranUser {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    
+
     }
 
     @Override
@@ -115,13 +114,22 @@ public class DAORestIuranUser implements implementIuranUser {
 
     @Override
     public IuranUser getByUserAndIuran(User u, Iuran i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        populateIuranUser();
+        IuranUser iuranUser = null;
+        for (IuranUser _iuranUser : listIuranUser) {
+            if (_iuranUser.getUserId() == u.getUser_id()
+                    && _iuranUser.getIuranId() == i.getIuranId()) {
+//                System.out.println("True lik");
+                iuranUser = _iuranUser;
+            }
+        }
+        return iuranUser;
     }
 
     @Override
     public void update(IuranUser b) {
         try {
-            URL url = new URL(alamat+"?id="+b.getIuranUserId());
+            URL url = new URL(alamat + "?id=" + b.getIuranUserId());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
@@ -157,13 +165,13 @@ public class DAORestIuranUser implements implementIuranUser {
     @Override
     public void delete(String IuranUserId) {
         try {
-            URL url = new URL(alamat+"?id="+IuranUserId);
+            URL url = new URL(alamat + "?id=" + IuranUserId);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("DELETE");
             conn.setRequestProperty("Content-Type", "application/json");
             //conn.addRequestProperty("Authorization", LoginDAOREST.user);
-            System.out.println("alamat url : "+alamat+"?id="+IuranUserId);
+            System.out.println("alamat url : " + alamat + "?id=" + IuranUserId);
             if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
             }
@@ -198,7 +206,7 @@ public class DAORestIuranUser implements implementIuranUser {
         DAORestUser restUser = new DAORestUser();
         IuranUser iuranUser = get(String.valueOf(b.getIuranUserId()));
         User user = restUser.getUser(String.valueOf(iuranUser.getUserId()));
-        
+
         return user;
     }
 
@@ -207,7 +215,7 @@ public class DAORestIuranUser implements implementIuranUser {
         DAORestIuran restIuran = new DAORestIuran();
         IuranUser iuranUser = get(String.valueOf(b.getIuranUserId()));
         Iuran iuran = restIuran.get(String.valueOf(iuranUser.getIuranId()));
-        
+
         return iuran;
     }
 
@@ -240,14 +248,14 @@ public class DAORestIuranUser implements implementIuranUser {
             }
             JSONParser jp = new JSONParser();
             JSONArray json = (JSONArray) jp.parse(sb.toString());
+//            System.out.println(json.toString());
             listIuranUser.clear();
             for (int i = 0; i < json.size(); i++) {
-                
                 JSONObject jo = (JSONObject) jp.parse(json.get(i).toString());
-                System.out.println(jo.get("user_username").toString());
-                listIuranUser.add(new IuranUser(Integer.valueOf(jo.get("iuran_user_d").toString()), 
-                        Integer.valueOf(jo.get("user_id").toString()), 
-                        Integer.valueOf(jo.get("iuran_id").toString()), 
+//                System.out.println(jo.toString());
+                listIuranUser.add(new IuranUser(Integer.valueOf(jo.get("iuran_user_id").toString()),
+                        Integer.valueOf(jo.get("user_id").toString()),
+                        Integer.valueOf(jo.get("iuran_id").toString()),
                         Integer.valueOf(jo.get("iuran_user_status").toString())));
             }
             conn.disconnect();
@@ -259,7 +267,5 @@ public class DAORestIuranUser implements implementIuranUser {
             e.printStackTrace();
         }
     }
-
-    
 
 }

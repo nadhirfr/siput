@@ -121,7 +121,9 @@ public class MPemasukanController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
                 if (newValue != null) {
-                    lbSisaSaldo.setText(String.valueOf(depositModel.getByUser(newValue).getDepositJumlah()));
+                    String depositJumlah = depositModel.getByUser(cb_namaAnggota.getValue()) == null ? 
+                            "Jumlah Saldo" : String.valueOf(depositModel.getByUser(cb_namaAnggota.getValue()).getDepositJumlah());
+                    lbSisaSaldo.setText(depositJumlah);
                     //cb_Pembayaran.setItems(generateDataIuranInMap());
                     System.out.println("Selected : " + newValue.getUser_displayname());
                     cb_Pembayaran.getItems().clear();
@@ -144,11 +146,13 @@ public class MPemasukanController implements Initializable {
                             if (newValue != null) {
                                 
                                 listTransaksi = transaksiModel.getAll();
-                                int total = 0;
+                                int total;
                                 int tampilanKurang = 0;
-                                int iuranRutin = kategoriIuranModel.get(String.valueOf(newValue.getIuranKategoriId())).getIuranKategoriInterval();
+                                int iuranRutin = kategoriIuranModel.get(String.valueOf(newValue.getIuranKategoriId())) == null ? 
+                                        0 : kategoriIuranModel.get(String.valueOf(newValue.getIuranKategoriId())).getIuranKategoriInterval();
                                 String firstDate = transaksiModel.getTransaksiPertama(String.valueOf(selectedUser.getUser_id()),
                                         String.valueOf(newValue.getIuranId())).getTransaksiDate();
+//                                System.out.println("First date :"+firstDate);
                                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                                 int diffMonth = 0;
                                 int diffWeek = 0;
@@ -158,13 +162,15 @@ public class MPemasukanController implements Initializable {
                                     case 30:
                                         try {
                                             total = getTotal();
-                                            System.out.println(firstDate);
+//                                            System.out.println(firstDate);
                                             if (firstDate != null) {
                                                 DateTime startDate = new DateTime(dateFormat.parse(firstDate));
                                                 DateTime endDate = new DateTime(new Date());
                                                 diffMonth = Months.monthsBetween(startDate, endDate).getMonths();
-                                                System.out.println("Beda bulan : "+diffMonth);
+//                                                System.out.println("Beda bulan : "+diffMonth);
                                                 total_harus_bayar = diffMonth * newValue.getIuranNominal();
+//                                                System.out.println("total_harus_bayar:"+total_harus_bayar);
+//                                                System.out.println("totalnya:"+total);
                                                 tampilanKurang = total_harus_bayar - total;
                                             } else {
                                                 tampilanKurang = newValue.getIuranNominal() - total;
@@ -176,12 +182,12 @@ public class MPemasukanController implements Initializable {
                                     case 7:
                                         try {
                                             total = getTotal();
-                                            System.out.println(firstDate);
+//                                            System.out.println(firstDate);
                                             if (firstDate != null) {
                                                 DateTime startDate = new DateTime(dateFormat.parse(firstDate));
                                                 DateTime endDate = new DateTime(new Date());
                                                 diffWeek = Weeks.weeksBetween(startDate, endDate).getWeeks();
-                                                System.out.println("Beda minggu : "+diffWeek);
+//                                                System.out.println("Beda minggu : "+diffWeek);
                                                 total_harus_bayar = diffWeek * newValue.getIuranNominal();
                                                 tampilanKurang = total_harus_bayar - total;
                                             }  else {
@@ -196,12 +202,14 @@ public class MPemasukanController implements Initializable {
                                         tampilanKurang = newValue.getIuranNominal() - total;
                                         break;
                                 }
-                                System.out.println(iuranUserModel.getByUserAndIuran(selectedUser, cb_Pembayaran.getValue()).getUserId());
+//                                System.out.println(iuranUserModel.getByUserAndIuran(selectedUser, cb_Pembayaran.getValue()).getUserId());
 
                                 nom_jns_pembayaranP.setText(String.valueOf(tampilanKurang));
                                 nom_pembayaranP.setText("0");
                                 nom_saldo_DP.setText("0");
 //                                }
+                            } else{
+                                nom_jns_pembayaranP.setText(null);
                             }
                         }
                     });
@@ -221,17 +229,17 @@ public class MPemasukanController implements Initializable {
                 if (nom_saldo_DP.getText().equals("") || nom_saldo_DP.getText().equals("0")) {
                     kurang = Integer.valueOf(nom_jns_pembayaranP.getText())
                             - (Integer.valueOf(nom_pembayaranP.getText()));
-
+                    
+                    int depositJumlah = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem()) == null ?
+                                0 : depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem()).getDepositJumlah();
                     // besar dari nominal yang harus dibayarkan maka sisanya akan masuk ke deposit
                     if (kurang < 0) {
                         status = 0;
-                        saldo = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
-                                .getDepositJumlah() + (Math.abs(kurang));
+                        saldo = depositJumlah + (Math.abs(kurang));
                         System.out.println("saldo nambah: " + saldo);
                     } else {
                         status = kurang;
-                        saldo = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
-                                .getDepositJumlah();
+                        saldo = depositJumlah;
                     }
                 } else {
                     status = kurang;
@@ -265,7 +273,7 @@ public class MPemasukanController implements Initializable {
                         saldo = depositModel.getByUser(cb_namaAnggota.getSelectionModel().getSelectedItem())
                                 .getDepositJumlah();
                         kurang = Integer.valueOf(nom_jns_pembayaranP.getText()) - Integer.valueOf(nom_pembayaranP.getText());
-//                
+                
                     } else if (nom_pembayaranP.getText().equals("0")
                             || nom_pembayaranP.getText().equals("")) {
                         kurang = Integer.valueOf(nom_jns_pembayaranP.getText()) - Integer.valueOf(nom_saldo_DP.getText());
@@ -313,7 +321,7 @@ public class MPemasukanController implements Initializable {
                         jumlahTransaksiIuran = Integer.valueOf(nom_jns_pembayaranP.getText());
                         System.out.println("true lebih besar");
                     } else {
-                        System.out.println("true lebih besar");
+                        System.out.println("not true lebih besar");
                         jumlahTransaksiIuran = Integer.valueOf(nom_pembayaranP.getText())
                                 + Integer.valueOf(nom_saldo_DP.getText());
                     }
@@ -333,16 +341,18 @@ public class MPemasukanController implements Initializable {
                     listTransaksi = transaksiModel.getAll();
                     //menghitung total transaksi yang dibayarkan (dicek pada tabel transaksi)
                     for (Transaksi transaksi : listTransaksi) {
-                        System.out.println(iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getUserId());
+                        String transaksi_iuran_id = transaksi.getIuranId() == null ? "0" : transaksi.getIuranId();
+                        int iuran_id = iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran) == null? 0 :
+                                iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getIuranId();
                         if (transaksi.getUserId() == iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getUserId()
-                                && Integer.valueOf(transaksi.getIuranId()) == iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getIuranId()) {
+                                && Integer.valueOf(transaksi_iuran_id) == iuran_id) {
                             total = total + transaksi.getTransaksiNominal();
                         }
                     }
                     System.out.println("Total : " + total);
                     //ketika jumlah total lebih dari sama dengan nominal iuran yang dibayarkan maka mengubah statusnya menjadi 1 (artinya sudah lunas)
-                    System.out.println("Sebelum : " + iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus());
-                    if (total >= selectedIuran.getIuranNominal()) {
+//                    System.out.println("Sebelum : " + iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus());
+                    if (total >= Integer.valueOf(nom_jns_pembayaranP.getText())) {
                         System.out.println(iuran_user.getIuranId());
                         iuran_user.setIuranUserStatus(1);
                         iuranUserModel.update(iuran_user);
@@ -392,13 +402,21 @@ public class MPemasukanController implements Initializable {
     }
 
     private int getTotal() {
+//        System.out.println("Get total dipanggil");
         int total = 0;
+        transaksiModel = new TransaksiModel();
+        listTransaksi = transaksiModel.getAll();
+//        System.out.println("Jumlah transaksi:"+listTransaksi.size());
         //ngecek setiap transaksi, jika ditabel transaksi ada pembayaran yg telah dibayar maka nominal dikurangi dgn yg telah dibayar
         for (Transaksi transaksi : listTransaksi) {
-//                                        System.out.println(transaksi.getUserId()+":"+selectedUser.getUser_id());
-            System.out.println(transaksi.getUserId() + ":" + iuranUserModel.getByUserAndIuran(cb_namaAnggota.getValue(), cb_Pembayaran.getValue()).getUserId());
-            if (transaksi.getUserId() == iuranUserModel.getByUserAndIuran(selectedUser, cb_Pembayaran.getValue()).getUserId()
-                    && Integer.valueOf(transaksi.getIuranId()) == iuranUserModel.getByUserAndIuran(selectedUser, cb_Pembayaran.getValue()).getIuranId()) {
+            String  transaksi_iuranID = transaksi.getIuranId() == null ? "0" :transaksi.getIuranId();
+            int iuranUser_userID = iuranUserModel.getByUserAndIuran(cb_namaAnggota.getValue(), cb_Pembayaran.getValue()) == null?
+                    0 : iuranUserModel.getByUserAndIuran(cb_namaAnggota.getValue(), cb_Pembayaran.getValue()).getUserId();
+            int iuranUser_iuranID = iuranUserModel.getByUserAndIuran(selectedUser, cb_Pembayaran.getValue()) == null ?
+                    0 : iuranUserModel.getByUserAndIuran(selectedUser, cb_Pembayaran.getValue()).getIuranId();
+
+            if (transaksi.getUserId() == iuranUser_userID
+                    && Integer.valueOf(transaksi_iuranID) == iuranUser_iuranID) {
                 total = total + transaksi.getTransaksiNominal();
 //                                            pr biikin yg iuran rutin
             }
@@ -539,12 +557,9 @@ public class MPemasukanController implements Initializable {
 
     @FXML
     private void batalBtnOnClick(ActionEvent event) {
-        cb_namaAnggota.valueProperty().set(null);
-        nom_pembayaranP.clear();
-        cb_Pembayaran.valueProperty().set(null);
-        nom_saldo_DP.clear();
-        cb_Pembayaran.valueProperty().setValue(null);
-        //cb_Pembayaran.getItems().remove(saldo);
+        //cb_namaAnggota.valueProperty().set(null);
+        cb_namaAnggota.getSelectionModel().clearSelection();
+//        cb_Pembayaran.getSelectionModel().clearSelection();
     }
 
     public void setLoggedInUser(User logedinUser) {

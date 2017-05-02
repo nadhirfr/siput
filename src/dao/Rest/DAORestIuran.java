@@ -1,6 +1,7 @@
 
 package dao.Rest;
 
+import static dao.Rest.DAORestUser.alamat;
 import dao.implementIuran;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import dao.implementIuran;
+import java.io.DataOutputStream;
+import java.nio.charset.StandardCharsets;
 import model.JenisIuran;
 import model.KategoriIuran;
 import org.jsoup.Jsoup;
@@ -39,32 +42,43 @@ public class DAORestIuran implements implementIuran{
     public int insert(Iuran b) {
         int id = 0;
         try {
-            URL url = new URL(alamat+"?id="+b.getIuranId());
+            URL url = new URL(alamat);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            //conn.addRequestProperty("Authorization", LoginDAOREST.user);
-            String input = "{"
-                    + "\"iuran_nama\":\"" + b.getIuranNama()
-                    + "\",\"iuran_nominal\":\"" + b.getIuranNominal()
-                    + "\",\"iuran_jenis_id\":\"" + b.getIuranJenisId()
-                    + "\",\"iuran_kategori_id\":\"" + b.getIuranKategoriId()
-                    + "\"}";
-            OutputStream os = conn.getOutputStream();
-            os.write(input.getBytes());
-            os.flush();
+
+            String urlParameters  = "iuran_nama="+b.getIuranId()+
+                    "&iuran_nominal="+b.getIuranNominal()+
+                    "&iuran_nama="+b.getIuranNama()+
+                    "&iuran_jenis_id="+b.getIuranJenisId()+
+                    "&iuran_kategori_id="+b.getIuranKategoriId();
+            byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
+            int    postDataLength = postData.length;   
+            conn.setDoOutput( true );
+            conn.setInstanceFollowRedirects( false );
+            conn.setRequestMethod( "POST" );
+            conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
+            conn.setRequestProperty( "charset", "utf-8");
+            conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+            conn.setUseCaches( false );
+            try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
+               wr.write( postData );
+            }
+
             if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
                 throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
             }
+            
+            //ini ambil output data lalu dimasukkan ke string response
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String output;
             String response = null;
             System.out.println("Output from Server .... \n");
             while ((output = br.readLine()) != null) {
                 System.out.println(output);
+                response = response+output;
             }
-            
+            System.out.println("respone :"+response);
             //ini parsing data output menggunakan jsoup, diambil id nya
             Document d = Jsoup.parse(response);
             Elements tables = d.select("table > tbody > tr > td");

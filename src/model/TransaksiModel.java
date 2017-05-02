@@ -8,6 +8,7 @@ package model;
 import dao.implementTransaksi;
 import factory.DAOFactory;
 import factory.MySQLDAOFactory;
+import factory.RESTDAOFactory;
 import java.util.List;
 
 /**
@@ -15,13 +16,13 @@ import java.util.List;
  * @author fachrul
  */
 public class TransaksiModel implements implementTransaksi{
-    MySQLDAOFactory mysqlFactory;
+    RESTDAOFactory restFactory;
     implementTransaksi dAOTransaksi;
     List<Transaksi> listTransaksi;
         
     public TransaksiModel() {
-        mysqlFactory = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
-        dAOTransaksi = mysqlFactory.getTransaksiMySQL();
+        restFactory = (RESTDAOFactory) DAOFactory.getFactory(DAOFactory.REST);
+        dAOTransaksi = restFactory.getTransaksi();
         listTransaksi = dAOTransaksi.getAll();
     }
 

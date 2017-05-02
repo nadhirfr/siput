@@ -8,6 +8,7 @@ package model;
 import dao.implementDeposit;
 import factory.DAOFactory;
 import factory.MySQLDAOFactory;
+import factory.RESTDAOFactory;
 import java.util.List;
 
 /**
@@ -16,13 +17,13 @@ import java.util.List;
  */
 public class DepositModel implements implementDeposit{
 
-    MySQLDAOFactory mysqlFactory;
+    RESTDAOFactory mysqlFactory;
     implementDeposit dAODeposit;
     List<Deposit> listDeposit;
 
     public DepositModel() {
-        mysqlFactory = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
-        dAODeposit = mysqlFactory.getDepositMySQL();
+        mysqlFactory = (RESTDAOFactory) DAOFactory.getFactory(DAOFactory.REST);
+        dAODeposit = mysqlFactory.getDeposit();
         listDeposit = dAODeposit.getAll();
 
     }

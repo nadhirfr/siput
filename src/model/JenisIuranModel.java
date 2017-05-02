@@ -9,6 +9,7 @@ import dao.implementJenisIuran;
 import dao.implementKategoriIuran;
 import factory.DAOFactory;
 import factory.MySQLDAOFactory;
+import factory.RESTDAOFactory;
 import java.util.List;
 
 /**
@@ -16,13 +17,13 @@ import java.util.List;
  * @author fachrul
  */
 public class JenisIuranModel implements implementJenisIuran{
-    MySQLDAOFactory mysqlFactory;
+    RESTDAOFactory restFactory;
     implementJenisIuran dAOJenisIuran;
     List<JenisIuran> listJenisIuran;
     
     public JenisIuranModel() {
-        mysqlFactory = (MySQLDAOFactory) DAOFactory.getFactory(DAOFactory.MySQL);
-        dAOJenisIuran = mysqlFactory.getJenisIuran();
+        restFactory = (RESTDAOFactory) DAOFactory.getFactory(DAOFactory.REST);
+        dAOJenisIuran = restFactory.getJenisIuran();
         listJenisIuran = dAOJenisIuran.getAll();
     }
     @Override

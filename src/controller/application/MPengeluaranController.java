@@ -35,7 +35,6 @@ import model.Iuran;
 import model.IuranModel;
 import model.Pengeluaran;
 import model.PengeluaranModel;
-import model.SessionModel;
 import model.Transaksi;
 import model.TransaksiModel;
 import model.User;
@@ -63,7 +62,6 @@ public class MPengeluaranController implements Initializable {
     TransaksiModel transaksiModel = new TransaksiModel();
     IuranModel iuranModel = new IuranModel();
     PengeluaranModel pengeluaranModel = new PengeluaranModel();
-    SessionModel sessionModel = new SessionModel();
     User logedinUser;
     
     Pengeluaran selectedPengeluaran;
