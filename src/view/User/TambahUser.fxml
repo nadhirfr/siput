@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import org.controlsfx.control.*?>
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import org.controlsfx.control.CheckListView?>
 
-<AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.user.TambahUserController">
+<AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="713.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.user.TambahUserController">
    <children>
       <HBox alignment="CENTER" layoutX="300.0" layoutY="167.0" prefHeight="481.0" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -58,9 +53,12 @@
                                  <children>
                                     <Label text="Nama User :" GridPane.columnSpan="2" />
                                     <Label text="Nama Lengkap" GridPane.rowIndex="2" />
-                                    <Label text="Password :" GridPane.rowIndex="4" />
-                                    <Label text="Tipe User :" GridPane.rowIndex="6" />
-                                    <Label text="Saldo" GridPane.rowIndex="8" />
+                                    <Label text="Password :" GridPane.rowIndex="10" />
+                                    <Label layoutX="10.0" layoutY="257.0" text="No KTP " GridPane.rowIndex="4" />
+                                    <Label layoutX="10.0" layoutY="137.0" text="Alamat" GridPane.rowIndex="6" />
+                                    <Label layoutX="10.0" layoutY="197.0" text="Tanggal Lahir" GridPane.rowIndex="8" />
+                                    <Label text="Tipe User :" GridPane.rowIndex="12" />
+                                    <Label text="Saldo" GridPane.rowIndex="14" />
                                     <AnchorPane prefHeight="456.0" prefWidth="252.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="10">
                                        <children>
                                           <CheckListView fx:id="lvIuran" layoutX="3.0" prefHeight="301.0" prefWidth="248.0" />
@@ -73,9 +71,12 @@
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="13" GridPane.rowSpan="2" />
                                     <TextField fx:id="tfUserName" GridPane.columnSpan="3" GridPane.rowIndex="1" />
                                     <TextField fx:id="tfFullName" GridPane.columnSpan="3" GridPane.rowIndex="3" />
-                                    <TextField fx:id="tfPassword" GridPane.columnSpan="3" GridPane.rowIndex="5" />
-                                    <JFXComboBox fx:id="cbTipeUser" focusColor="WHITE" prefHeight="25.0" prefWidth="334.0" unFocusColor="#f5efef" GridPane.columnSpan="3" GridPane.rowIndex="7" />
-                                    <TextField fx:id="tfSaldo" prefHeight="25.0" prefWidth="256.0" GridPane.columnSpan="3" GridPane.rowIndex="9" />
+                                    <TextField fx:id="tfPassword" GridPane.columnSpan="3" GridPane.rowIndex="11" />
+                                    <TextField fx:id="tfKTP" layoutX="10.0" layoutY="163.0" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+                                    <TextField fx:id="tfAlamat" layoutX="10.0" layoutY="163.0" GridPane.columnSpan="3" GridPane.rowIndex="7" />
+                                    <JFXDatePicker fx:id="dpTglLahir" defaultColor="#3498db" GridPane.columnSpan="3" GridPane.rowIndex="9" />
+                                    <TextField fx:id="tfSaldo" prefHeight="25.0" prefWidth="256.0" GridPane.columnSpan="3" GridPane.rowIndex="15" />
+                                    <JFXComboBox fx:id="cbTipeUser" focusColor="WHITE" prefHeight="25.0" prefWidth="334.0" unFocusColor="#f5efef" GridPane.columnSpan="3" GridPane.rowIndex="13" />
                                  </children>
                               </GridPane>
                            </children>

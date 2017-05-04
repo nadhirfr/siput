@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="siput-report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6cf4d4a2-5064-46d9-ae55-092f37fb6bde">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="siput-report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Error" uuid="6cf4d4a2-5064-46d9-ae55-092f37fb6bde">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
-		<![CDATA[select * from transaksi;]]>
+	<parameter name="tgl1" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tgl2" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from transaksi where transaksi_date between $P{tgl1} and $P{tgl2};]]>
 	</queryString>
 	<field name="transaksi_date" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -83,6 +89,14 @@
 					</textElement>
 					<text><![CDATA[Laporan Keuangan ]]></text>
 				</staticText>
+				<textField>
+					<reportElement x="244" y="57" width="100" height="20" uuid="2a810f2b-01a3-4988-8663-b6ef5c7d8abf"/>
+					<textFieldExpression><![CDATA[$P{tgl1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="361" y="57" width="100" height="20" uuid="d26130ad-6867-42bf-9a7a-7426d89d21ee"/>
+					<textFieldExpression><![CDATA[$P{tgl2}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</title>
