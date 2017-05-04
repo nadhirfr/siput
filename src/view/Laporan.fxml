@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.DatePicker?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -33,9 +33,19 @@
                                     <TableColumn fx:id="clm_tipe" prefWidth="162.0" text="Tipe Transaksi" />
                                 </columns>
                               </TableView>
-                              <DatePicker fx:id="cbtgl1" layoutX="79.0" layoutY="480.0" prefHeight="25.0" prefWidth="132.0" />
-                              <DatePicker fx:id="cbtgl12" layoutX="231.0" layoutY="480.0" prefHeight="25.0" prefWidth="132.0" />
                               <JFXButton fx:id="btnCetak" layoutX="519.0" layoutY="459.0" onAction="#CetakLaporan" prefHeight="42.0" prefWidth="134.0" style="-fx-background-color: #3498db;" text="Cetak Laporan" textFill="WHITE" />
+                              <Label layoutX="83.0" layoutY="453.0" text="Tanggal Awal">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="259.0" layoutY="453.0" text="Tanggal Akhir">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <JFXDatePicker fx:id="cbtgl1" defaultColor="#3498db" layoutX="81.0" layoutY="479.0" prefHeight="28.0" prefWidth="134.0" />
+                              <JFXDatePicker fx:id="cbtgl12" defaultColor="#3498db" layoutX="244.0" layoutY="479.0" prefHeight="28.0" prefWidth="134.0" />
                            </children>
                         </AnchorPane>
                     </content>
