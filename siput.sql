@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2017 at 02:23 PM
+-- Generation Time: May 05, 2017 at 06:24 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -287,29 +287,32 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`transaksi_id`, `transaksi_date`, `transaksi_nama`, `transaksi_nominal`, `user_id`, `transaksi_tipe`, `iuran_id`, `pengeluaran_id`) VALUES
-(00055, '2017-02-24', 'Iuran Pokok', 20000, 00001, 'iuran', 00002, NULL),
-(00056, '2017-04-24', 'Iuran Pokok', 3000, 00001, 'iuran', 00002, NULL),
-(00059, '2017-04-24', 'Iuran 17-an', 15000, 00001, 'iuran', 00005, NULL),
-(00060, '2017-04-25', 'Iuran Coba', 10000, 00001, 'iuran', 00008, NULL),
+(00055, '2016-02-24', 'Iuran Pokok', 20000, 00001, 'iuran', 00002, NULL),
 (00062, '2017-02-25', 'Iuran Coba', 5000, 00001, 'iuran', 00008, NULL),
 (00079, '2017-02-24', 'kuda', 20000, 00001, 'iuran', 00002, NULL),
-(00082, '2017-04-26', 'Iuran 17-an', 5000, 00001, 'iuran', 00005, NULL),
-(00083, '2017-05-01', 'Pembayaran Sampah', 20000, 00001, 'pengeluaran', NULL, 00001),
-(00085, '2017-05-01', 'Pembayaran Iuran RW', 2000, 00001, 'pengeluaran', NULL, 00002),
-(00094, '2017-05-02', 'Iuran Sosial', 10000, 00001, 'iuran', 00003, NULL),
-(00095, '2017-05-02', 'Iuran Sosial', 10000, 00002, 'iuran', 00003, NULL),
-(00096, '2017-05-02', 'Iuran Pokok', 10000, 00002, 'iuran', 00002, NULL),
-(00097, '2017-05-02', 'Iuran Pokok', 5000, 00043, 'iuran', 00002, NULL),
-(00098, '2017-05-02', 'Iuran Pokok', 50000, 00002, 'iuran', 00002, NULL),
-(00100, '2017-05-02', 'Iuran Sosial', 10000, 00004, 'iuran', 00003, NULL),
-(00101, '2017-05-02', 'Ini coba', 10000, 00004, 'iuran', 00009, NULL),
-(00103, '2017-05-02', 'Ini coba', 20000, 00039, 'iuran', 00009, NULL),
-(00104, '2017-05-04', 'Iuran Syawalan', 10000, 00001, 'iuran', 00004, NULL),
-(00105, '2017-05-05', 'Iuran 17-an', 10000, 00002, 'iuran', 00005, NULL),
-(00106, '2017-05-05', 'Iuran 17-an', 2000, 00002, 'iuran', 00005, NULL),
-(00107, '2017-05-05', 'Iuran Pokok', 10000, 00043, 'iuran', 00002, NULL),
-(00108, '2017-05-05', 'Iuran Pokok', 10000, 00043, 'iuran', 00002, NULL),
-(00109, '2017-05-05', 'Ini coba', 10000, 00004, 'iuran', 00009, NULL);
+(00083, '2017-01-01', 'Pembayaran Sampah', 20000, 00001, 'pengeluaran', NULL, 00001),
+(00085, '2017-02-01', 'Pembayaran Iuran RW', 2000, 00001, 'pengeluaran', NULL, 00002),
+(00094, '2017-07-02', 'Iuran Sosial', 10000, 00001, 'iuran', 00003, NULL),
+(00095, '2017-08-02', 'Iuran Sosial', 10000, 00002, 'iuran', 00003, NULL),
+(00096, '2017-09-02', 'Iuran Pokok', 10000, 00002, 'iuran', 00002, NULL),
+(00097, '2017-10-02', 'Iuran Pokok', 5000, 00043, 'iuran', 00002, NULL),
+(00098, '2017-11-02', 'Iuran Pokok', 50000, 00002, 'iuran', 00002, NULL),
+(00100, '2017-12-02', 'Iuran Sosial', 10000, 00004, 'iuran', 00003, NULL),
+(00104, '2017-06-04', 'Iuran Syawalan', 10000, 00001, 'iuran', 00004, NULL),
+(00105, '2017-01-05', 'Iuran 17-an', 10000, 00002, 'iuran', 00005, NULL),
+(00106, '2017-02-05', 'Iuran 17-an', 2000, 00002, 'iuran', 00005, NULL),
+(00107, '2017-03-05', 'Iuran Pokok', 10000, 00043, 'iuran', 00002, NULL),
+(00108, '2017-04-05', 'Iuran Pokok', 10000, 00043, 'iuran', 00002, NULL),
+(00109, '2017-05-05', 'Ini coba', 10000, 00004, 'iuran', 00009, NULL),
+(00110, '2017-03-05', 'Pembayaran Sampah', 100000, 00001, 'pengeluaran', NULL, 00001),
+(00111, '2017-04-05', 'Pembayaran Iuran RW', 20000, 00001, 'pengeluaran', NULL, 00002),
+(00112, '2017-05-05', 'Pembayaran Bersih Makam', 300000, 00001, 'pengeluaran', NULL, 00003),
+(00113, '2017-06-05', 'Pembayaran Bersih Makam', 80000, 00001, 'pengeluaran', NULL, 00003),
+(00114, '2017-07-05', 'Pembayaran Bersih Makam', 20000, 00001, 'pengeluaran', NULL, 00003),
+(00115, '2017-08-05', 'Pembayaran Bersih Makam', 30000, 00001, 'pengeluaran', NULL, 00003),
+(00116, '2017-09-05', 'Pembayaran Bersih Makam', 40000, 00001, 'pengeluaran', NULL, 00003),
+(00117, '2017-10-05', 'Pembayaran Bersih Makam', 90000, 00001, 'pengeluaran', NULL, 00003),
+(00118, '2017-11-05', 'Pembayaran Bersih Makam', 90000, 00001, 'pengeluaran', NULL, 00003);
 
 -- --------------------------------------------------------
 
@@ -498,7 +501,7 @@ ALTER TABLE `session`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `transaksi_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `transaksi_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 --
 -- AUTO_INCREMENT for table `user`
 --
