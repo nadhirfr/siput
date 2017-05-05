@@ -61,5 +61,10 @@ public class UserModel implements implementUser{
     public int getCount() {
         return dAOUser.getCount();
     }
+
+    @Override
+    public int getValidLogin(String username, String password) {
+        return dAOUser.getValidLogin(username, password);
+    }
     
 }

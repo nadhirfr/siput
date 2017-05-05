@@ -174,4 +174,9 @@ public class DAOMySQLUser implements implementUser {
         }
         return lb;
     }
+
+    @Override
+    public int getValidLogin(String username, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

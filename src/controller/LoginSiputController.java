@@ -51,7 +51,7 @@ public class LoginSiputController implements Initializable {
     UserModel userModel = new UserModel();
 
     public void Login(ActionEvent event) throws Exception {
-        int loggedIn_user_id = Koneksi.isLogin(usernametext.getText(), passtext.getText());
+        int loggedIn_user_id = userModel.getValidLogin(usernametext.getText(), passtext.getText());
         User loggedIn_user = userModel.getUser(Integer.toString(loggedIn_user_id));
         if (loggedIn_user_id != 0 && !loggedIn_user.getUser_tipe().equals("anggota")) {
             statustext.setText("Login Sukses");
