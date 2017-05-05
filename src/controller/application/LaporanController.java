@@ -54,10 +54,10 @@ public class LaporanController implements Initializable {
     private JFXButton btn_cetak;
     
     @FXML
-    private DatePicker cbtgl1;
+    private JFXDatePicker cbtgl1;
     
     @FXML
-    private DatePicker cbtgl12;
+    private JFXDatePicker cbtgl12;
     /**
      * Initializes the controller class.
      */
