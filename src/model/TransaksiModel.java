@@ -5,6 +5,10 @@
  */
 package model;
 
+import object.Pengeluaran;
+import object.Iuran;
+import object.Transaksi;
+import object.User;
 import dao.implementTransaksi;
 import factory.DAOFactory;
 import factory.RESTDAOFactory;

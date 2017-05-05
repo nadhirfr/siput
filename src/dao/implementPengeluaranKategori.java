@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package dao;
-import model.PengeluaranKategori;
+import object.PengeluaranKategori;
 import java.util.List;
 /**
  *

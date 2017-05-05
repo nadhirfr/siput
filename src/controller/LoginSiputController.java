@@ -8,7 +8,7 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import dao.DAOMySQLUser;
+import dao.mysql.DAOMySQLUser;
 import dao.implementUser;
 import factory.DAOFactory;
 import factory.MySQLDAOFactory;
@@ -26,7 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import koneksi.Koneksi;
-import model.User;
+import object.User;
 import model.UserModel;
 
 /**

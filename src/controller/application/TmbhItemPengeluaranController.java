@@ -24,10 +24,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-import model.Pengeluaran;
-import model.PengeluaranJenis;
+import object.Pengeluaran;
+import object.PengeluaranJenis;
 import model.PengeluaranJenisModel;
-import model.PengeluaranKategori;
+import object.PengeluaranKategori;
 import model.PengeluaranKategoriModel;
 import model.PengeluaranModel;
 

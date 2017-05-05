@@ -49,7 +49,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.TransaksiModel;
-import model.User; 
+import object.User; 
 import model.UserModel;
 
 /**

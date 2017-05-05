@@ -5,16 +5,16 @@
  */
 package factory;
 
-import dao.DAOMySQLDeposit;
-import dao.DAOMySQLIuran;
-import dao.DAOMySQLIuranUser;
-import dao.DAOMySQLJenisIuran;
-import dao.DAOMySQLKategoriIuran;
-import dao.DAOMySQLPengeluaran;
-import dao.DAOMySQLPengeluaranJenis;
-import dao.DAOMySQLPengeluaranKategori;
-import dao.DAOMySQLTransaksi;
-import dao.DAOMySQLUser;
+import dao.mysql.DAOMySQLDeposit;
+import dao.mysql.DAOMySQLIuran;
+import dao.mysql.DAOMySQLIuranUser;
+import dao.mysql.DAOMySQLJenisIuran;
+import dao.mysql.DAOMySQLKategoriIuran;
+import dao.mysql.DAOMySQLPengeluaran;
+import dao.mysql.DAOMySQLPengeluaranJenis;
+import dao.mysql.DAOMySQLPengeluaranKategori;
+import dao.mysql.DAOMySQLTransaksi;
+import dao.mysql.DAOMySQLUser;
 import dao.implementDeposit;
 import dao.implementIuran;
 import dao.implementIuranUser;

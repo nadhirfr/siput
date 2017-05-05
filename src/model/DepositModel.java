@@ -5,6 +5,8 @@
  */
 package model;
 
+import object.Deposit;
+import object.User;
 import dao.implementDeposit;
 import factory.DAOFactory;
 import factory.MySQLDAOFactory;

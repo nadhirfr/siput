@@ -6,8 +6,8 @@
 package dao;
 
 import java.util.List;
-import model.Deposit;
-import model.User;
+import object.Deposit;
+import object.User;
 
 /**
  *

@@ -5,6 +5,7 @@
  */
 package model;
 
+import object.PengeluaranKategori;
 import dao.implementPengeluaranKategori;
 import factory.DAOFactory;
 import factory.MySQLDAOFactory;

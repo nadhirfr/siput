@@ -24,13 +24,13 @@ import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import model.Deposit;
+import object.Deposit;
 import model.DepositModel;
-import model.Iuran;
+import object.Iuran;
 import model.IuranModel;
-import model.IuranUser;
+import object.IuranUser;
 import model.IuranUserModel;
-import model.User;
+import object.User;
 import model.UserModel;
 //<<<<<<< HEAD
 import javafx.scene.control.cell.CheckBoxListCell;

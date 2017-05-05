@@ -5,6 +5,9 @@
  */
 package model;
 
+import object.Iuran;
+import object.JenisIuran;
+import object.KategoriIuran;
 import dao.implementIuran;
 import factory.DAOFactory;
 import factory.RESTDAOFactory;

@@ -5,6 +5,7 @@
  */
 package model;
 
+import object.Pengeluaran;
 import dao.implementDeposit;
 import dao.implementPengeluaran;
 import factory.DAOFactory;

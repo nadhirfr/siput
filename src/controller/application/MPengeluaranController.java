@@ -31,13 +31,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-import model.Iuran;
+import object.Iuran;
 import model.IuranModel;
-import model.Pengeluaran;
+import object.Pengeluaran;
 import model.PengeluaranModel;
-import model.Transaksi;
+import object.Transaksi;
 import model.TransaksiModel;
-import model.User;
+import object.User;
 
 /**
  * FXML Controller class

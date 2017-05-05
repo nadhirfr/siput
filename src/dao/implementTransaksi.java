@@ -6,10 +6,10 @@
 package dao;
 
 import java.util.List;
-import model.Iuran;
-import model.Pengeluaran;
-import model.Transaksi;
-import model.User;
+import object.Iuran;
+import object.Pengeluaran;
+import object.Transaksi;
+import object.User;
 
 /**
  *

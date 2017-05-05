@@ -21,13 +21,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.image.ImageView;
-import model.Deposit;
+import object.Deposit;
 import model.DepositModel;
-import model.Iuran;
+import object.Iuran;
 import model.IuranModel;
-import model.IuranUser;
+import object.IuranUser;
 import model.IuranUserModel;
-import model.User;
+import object.User;
 import model.UserModel;
 import org.controlsfx.control.CheckListView;
 

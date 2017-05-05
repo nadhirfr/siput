@@ -37,16 +37,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-import model.Deposit;
+import object.Deposit;
 import model.DepositModel;
-import model.Iuran;
+import object.Iuran;
 import model.IuranModel;
-import model.IuranUser;
+import object.IuranUser;
 import model.IuranUserModel;
 import model.KategoriIuranModel;
-import model.Transaksi;
+import object.Transaksi;
 import model.TransaksiModel;
-import model.User;
+import object.User;
 import model.UserModel;
 
 /**

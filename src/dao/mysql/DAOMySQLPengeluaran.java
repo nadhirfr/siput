@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package dao.mysql;
 
+import dao.implementPengeluaran;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,9 +16,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import koneksi.Koneksi;
-import model.Pengeluaran;
-import model.PengeluaranJenis;
-import model.PengeluaranKategori;
+import object.Pengeluaran;
+import object.PengeluaranJenis;
+import object.PengeluaranKategori;
 
 /**
  *

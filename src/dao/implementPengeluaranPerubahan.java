@@ -5,7 +5,7 @@
  */
 package dao;
 import java.util.List;
-import model.PengeluaranPerubahan;
+import object.PengeluaranPerubahan;
 /**
  *
  * @author rheza

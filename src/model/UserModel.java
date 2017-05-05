@@ -5,6 +5,7 @@
  */
 package model;
 
+import object.User;
 import dao.implementUser;
 import factory.DAOFactory;
 import factory.RESTDAOFactory;

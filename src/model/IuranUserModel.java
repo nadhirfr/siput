@@ -5,6 +5,9 @@
  */
 package model;
 
+import object.Iuran;
+import object.IuranUser;
+import object.User;
 import dao.implementIuranUser;
 import factory.DAOFactory;
 import factory.MySQLDAOFactory;

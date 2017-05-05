@@ -5,6 +5,7 @@
  */
 package model;
 
+import object.PengeluaranJenis;
 import dao.implementPengeluaranJenis;
 import factory.DAOFactory;
 import factory.RESTDAOFactory;
