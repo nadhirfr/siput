@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="acMainItem" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="955.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.application.TmbhItemController">
+<AnchorPane id="AnchorPane" fx:id="acMainItem" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="955.0" stylesheets="@../style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.application.TmbhItemController">
    <children>
       <BorderPane prefHeight="699.0" prefWidth="955.0">
          <top>

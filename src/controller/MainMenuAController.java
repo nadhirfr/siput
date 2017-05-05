@@ -11,10 +11,7 @@ import controller.application.TmbhItemController;
 import controller.user.EmployeController;
 import controller.application.TmbhItemIuranController;
 import controller.application.beranda.berandaController;
-import dao.implementUser;
-import factory.DAOFactory;
-import factory.MySQLDAOFactory;
-import factory.RESTDAOFactory;
+import controller.application.LaporanController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -26,6 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -51,6 +49,7 @@ import javafx.util.Duration;
 import model.TransaksiModel;
 import model.User; 
 import model.UserModel;
+import view.MainClass;
 
 /**
  * FXML Controller class
@@ -90,15 +89,7 @@ public class MainMenuAController implements Initializable {
     @FXML
     private ImageView imgAboutBtn;
     @FXML
-    private BorderPane appContent;
-    @FXML
     private AnchorPane acHead;
-    @FXML
-    private MenuButton mbtnUsrInfoBox;
-    @FXML
-    private MenuItem miPopOver;
-    @FXML
-    private Circle circleImgUsr;
     @FXML
     private Label lblUsrNamePopOver;
     @FXML
@@ -316,12 +307,14 @@ public class MainMenuAController implements Initializable {
     }
 
     @FXML
-    private void btnAboutOnClick(ActionEvent event) {
+    private void btnLaporanOnClick(ActionEvent event) {
         klikmenu=6;
         try {
             AboutActive();
             FXMLLoader fXMLLoader = new FXMLLoader();
             fXMLLoader.load(getClass().getResource("/view/Laporan.fxml").openStream());
+            LaporanController lpController = fXMLLoader.getController();
+            lpController.spp1.getStyleClass().clear();
             AnchorPane anchorPane = fXMLLoader.getRoot();
             acContent.getChildren().clear();
             acContent.getChildren().add(anchorPane);
@@ -348,8 +341,17 @@ public class MainMenuAController implements Initializable {
             btnSettingsOnClick(event);
         }
         else if(klikmenu==6){
-            btnAboutOnClick(event);
+            btnLaporanOnClick(event);
         }        
+    }
+    
+    @FXML
+    private void btnLogOut(ActionEvent event) throws IOException {
+        Stage stage = (Stage) acMain.getScene().getWindow();
+        stage.close();
+        FXMLLoader fXMLLoader = new FXMLLoader();
+        MainClass mc = fXMLLoader.getController();
+        mc.start(stage);
     }
 
     private void homeActive() {

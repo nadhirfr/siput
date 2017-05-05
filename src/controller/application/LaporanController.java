@@ -28,6 +28,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ScrollPane;
 
 /**
  * FXML Controller class
@@ -51,18 +52,20 @@ public class LaporanController implements Initializable {
     private TableColumn<?, ?> clm_tipe;
 
     @FXML
-    private JFXButton btn_cetak;
+    private JFXButton btnCetak;
     
     @FXML
     private JFXDatePicker cbtgl1;
     
     @FXML
     private JFXDatePicker cbtgl12;
+    
+    @FXML
+    public ScrollPane spp1;
     /**
      * Initializes the controller class.
      */
     
-
     @FXML
     private void CetakLaporan(ActionEvent event) throws IOException {
 
@@ -76,7 +79,6 @@ public class LaporanController implements Initializable {
             hash.put("tgl1", date1);
             hash.put("tgl2", date2);
 
-            System.out.println("kuda");
             File report_file = new File(namafile);
             JasperReport jasperReport = (JasperReport) JRLoader.loadObject(report_file.getPath());
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, hash, objKoneksi.connection());
