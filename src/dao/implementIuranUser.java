@@ -34,5 +34,7 @@ public interface implementIuranUser {
     
     public Iuran getIuran(IuranUser b);
         
+    public List<IuranUser> getBelumLunas(User b);
+        
     public int getCount();
 }

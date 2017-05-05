@@ -75,5 +75,10 @@ public class IuranUserModel implements implementIuranUser{
     public IuranUser getByUserAndIuran(User u, Iuran i) {
         return dAOIuranUser.getByUserAndIuran(u, i);
     }
+
+    @Override
+    public List<IuranUser> getBelumLunas(User b) {
+        return dAOIuranUser.getBelumLunas(b);
+    }
     
 }

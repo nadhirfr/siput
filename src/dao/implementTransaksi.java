@@ -42,6 +42,12 @@ public interface implementTransaksi {
     
     public int getJumlahTransaksi();
     
+    public int getUtang(int user_id, int iuran_id);
+    
+    public int getTotalBayar(int user_id, int iuran_id);
+    
+    public int getTotalDibayar(int user_id, int iuran_id);
+    
     public Transaksi getTransaksiPertama(String user_id, String iuran_id);
     
     public int getCount();

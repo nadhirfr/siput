@@ -7,7 +7,6 @@ package model;
 
 import dao.implementTransaksi;
 import factory.DAOFactory;
-import factory.MySQLDAOFactory;
 import factory.RESTDAOFactory;
 import java.util.List;
 
@@ -99,6 +98,21 @@ public class TransaksiModel implements implementTransaksi{
     @Override
     public Transaksi getTransaksiPertama(String user_id, String iuran_id) {
         return dAOTransaksi.getTransaksiPertama(user_id, iuran_id);
+    }
+
+    @Override
+    public int getUtang(int user_id, int iuran_id) {
+        return dAOTransaksi.getUtang(user_id, iuran_id);
+    }
+
+    @Override
+    public int getTotalBayar(int user_id, int iuran_id) {
+        return dAOTransaksi.getTotalBayar(user_id, iuran_id);
+    }
+
+    @Override
+    public int getTotalDibayar(int user_id, int iuran_id) {
+        return dAOTransaksi.getTotalDibayar(user_id, iuran_id);
     }
     
 }

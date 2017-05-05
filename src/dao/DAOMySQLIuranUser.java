@@ -263,5 +263,10 @@ public class DAOMySQLIuranUser implements implementIuranUser{
         }    
         return iuranUser;
     }
+
+    @Override
+    public List<IuranUser> getBelumLunas(User b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

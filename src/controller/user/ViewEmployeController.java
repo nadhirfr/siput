@@ -281,6 +281,5 @@ public class ViewEmployeController implements Initializable {
     private void clearAll() {
         tfUserName.clear();
         tfFullName.clear();
-        tfCreatedBy.clear();
     }
 }
