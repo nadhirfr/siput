@@ -6,8 +6,13 @@
 package controller.user;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import controller.MainMenuAController;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -55,12 +60,19 @@ public class TambahUserController implements Initializable {
     IuranModel iuranModel = new IuranModel();
     IuranUserModel iuranUserModel = new IuranUserModel();
     List<Iuran> listIuran;
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     @FXML
     private JFXComboBox<String> cbTipeUser;
     @FXML
     private TextField tfSaldo;
     @FXML
     private CheckListView<Iuran> lvIuran;
+    @FXML
+    private TextField tfKTP;
+    @FXML
+    private TextField tfAlamat;
+    @FXML
+    private JFXDatePicker dpTglLahir;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -94,10 +106,15 @@ public class TambahUserController implements Initializable {
     @FXML
     private void btnSaveOnAction(ActionEvent event) {
         userModel = new UserModel();
-        int insert_id = userModel.insert(new User(tfUserName.getText(),
-                tfFullName.getText(),
-                tfPassword.getText(),
-                cbTipeUser.getValue()));
+        Date date = Date.from(dpTglLahir.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()) ;
+        String tanggal = dateFormat.format(date);
+        int insert_id = userModel.insert(new User(tfUserName.getText(), 
+                            tfFullName.getText(), 
+                            tfPassword.getText(), 
+                            cbTipeUser.getValue(), 
+                            tfKTP.getText(), 
+                            tfAlamat.getText(), 
+                            tanggal));
         if (insert_id > 0) {
             depositModel = new DepositModel();
             depositModel.insert(new Deposit(insert_id, Integer.valueOf(tfSaldo.getText())));
@@ -122,6 +139,9 @@ public class TambahUserController implements Initializable {
         tfUserName.setText("");
         tfFullName.setText("");
         tfPassword.setText("");
+        tfAlamat.setText("");
+        tfKTP.setText("");
+        dpTglLahir.setValue(null);
         cbTipeUser.getItems().clear();
         tfSaldo.setText("0");
         lvIuran.getCheckModel().clearChecks();

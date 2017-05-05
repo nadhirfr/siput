@@ -58,6 +58,9 @@ public class DAORestUser implements implementUser {
             String urlParameters  = "username="+b.getUser_username()+
                     "&displayname="+b.getUser_displayname()+
                     "&password="+b.getUser_password()+
+                    "&alamat="+b.getUser_alamat()+
+                    "&ktp="+b.getUser_ktp()+
+                    "&tgl_lahir="+b.getUser_tgl_lahir()+
                     "&tipe="+b.getUser_tipe();
             byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
             int    postDataLength = postData.length;   
@@ -136,7 +139,10 @@ public class DAORestUser implements implementUser {
                         jo.get("user_username").toString(),
                         jo.get("user_displayname").toString(), 
                         jo.get("user_password").toString(), 
-                        jo.get("user_tipe").toString()));
+                        jo.get("user_tipe").toString(),
+                        jo.get("user_ktp").toString(),
+                        jo.get("user_alamat").toString(),
+                        jo.get("user_tgl_lahir").toString()));
             }
             conn.disconnect();
         } catch (MalformedURLException e) {
@@ -175,6 +181,9 @@ public class DAORestUser implements implementUser {
                     + "\",\"displayname\":\"" + b.getUser_displayname()
                     + "\",\"password\":\"" + b.getUser_password()
                     + "\",\"tipe\":\"" + b.getUser_tipe()
+                    + "\",\"alamat\":\"" + b.getUser_alamat()
+                    + "\",\"ktp\":\"" + b.getUser_ktp()
+                    + "\",\"tgl_lahir\":\"" + b.getUser_tgl_lahir()
                     + "\"}";
             OutputStream os = conn.getOutputStream();
             os.write(input.getBytes());
