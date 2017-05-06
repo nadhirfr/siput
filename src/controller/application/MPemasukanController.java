@@ -133,6 +133,7 @@ public class MPemasukanController implements Initializable {
                         @Override
                         public void changed(ObservableValue<? extends Iuran> observable, Iuran oldValue, Iuran newValue) {
                             selectedUser = cb_namaAnggota.getSelectionModel().getSelectedItem();
+                            lbStatus.setText("Status");
 //                            Iuran selectedIuran = cb_Pembayaran.getValue();
 //                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                             if (newValue != null) {

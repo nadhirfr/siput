@@ -7,16 +7,14 @@ package dao.Rest;
 
 import dao.implementUser;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -46,6 +44,43 @@ public class DAORestUser implements implementUser {
         populateUser();
     }
 
+    @Override
+    public int getValidLogin(String username, String password){
+        int jumlah = 0;
+        try {
+            URL url = new URL(alamat + "?param=getLogin&username="+username+"&password="+password);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection(); 
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+            //conn.addRequestProperty("Authorization", LoginDAOREST.user);
+//            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+//                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+//            }
+
+            //ini ambil output data lalu dimasukkan ke string response
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String output;
+            String response = null;
+            System.out.println("Output from Server .... \n");
+            while ((output = br.readLine()) != null) {
+                System.out.println(output);
+                response = output;
+            }
+
+            jumlah = Integer.valueOf(response.replace(" ", ""));
+            //System.out.println("Jumlah utang: "+jumlah);
+
+            conn.disconnect();
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(DAORestTransaksi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ProtocolException ex) {
+            Logger.getLogger(DAORestTransaksi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DAORestTransaksi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return jumlah;
+    }
     @Override 
     public int insert(User b) {
         int id = 0;

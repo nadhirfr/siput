@@ -19,4 +19,6 @@ public interface implementUser {
     public List<User> getCari(String displayname);
     
     public int getCount();
+    
+    public int getValidLogin(String username, String password);
 }
