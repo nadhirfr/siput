@@ -47,7 +47,7 @@ public class DAORestIuran implements implementIuran{
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
 
-            String urlParameters  = "iuran_nama="+b.getIuranId()+
+            String urlParameters  = 
                     "&iuran_nominal="+b.getIuranNominal()+
                     "&iuran_nama="+b.getIuranNama()+
                     "&iuran_jenis_id="+b.getIuranJenisId()+
@@ -158,28 +158,38 @@ public class DAORestIuran implements implementIuran{
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
-            conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-            //conn.addRequestProperty("Authorization", LoginDAOREST.user);
-            String input = "{"
-                    + "\",\"iuran_nama\":\"" + b.getIuranNama()
-                    + "\",\"iuran_nominal\":\"" + b.getIuranNominal()
-                    + "\",\"iuran_jenis_id\":\"" + b.getIuranJenisId()
-                    + "\",\"iuran_kategori_id\":\"" + b.getIuranKategoriId()
-                    + "\"}";
-          
-            OutputStream os = conn.getOutputStream();
-            os.write(input.getBytes());
-            os.flush();
+            
+            String urlParameters  = 
+                    "&iuran_nominal="+b.getIuranNominal()+
+                    "&iuran_nama="+b.getIuranNama()+
+                    "&iuran_jenis_id="+b.getIuranJenisId()+
+                    "&iuran_kategori_id="+b.getIuranKategoriId();
+            byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
+            int    postDataLength = postData.length;   
+            conn.setInstanceFollowRedirects( false );
+            conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
+            conn.setRequestProperty( "charset", "utf-8");
+            conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+            conn.setUseCaches( false );
+            try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
+               wr.write( postData );
+            }
+
             if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
             }
+            
+            //ini ambil output data lalu dimasukkan ke string response
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String output;
+            String response = null;
             System.out.println("Output from Server .... \n");
             while ((output = br.readLine()) != null) {
                 System.out.println(output);
+                response = response+output;
             }
+            System.out.println("respone :"+response);
             conn.disconnect();
             populateIuran();
         } catch (MalformedURLException e) {

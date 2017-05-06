@@ -22,6 +22,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import object.Pengeluaran;
@@ -58,11 +61,11 @@ public class TmbhItemPengeluaranController implements Initializable {
     @FXML
     private TextField tfKeterangan;
     @FXML
-    private TextField tfNominal;
-    @FXML
     private Button btSimpan;
     @FXML
-    private Button btBatal;
+    private Button btHapus;
+    @FXML
+    private Button btUpdate;
     /**
      * Initializes the controller class.
      */
@@ -79,6 +82,23 @@ public class TmbhItemPengeluaranController implements Initializable {
         cbJenis.setConverter(converter_cbJenis);
 //        cbJenis.getItems().add("kuda");
 
+        lvPengeluaran.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                 if (event.getCode().equals(KeyCode.UP)) {
+                    setselectedView();
+                } else if (event.getCode().equals(KeyCode.DOWN)) {
+                    setselectedView();
+                }
+            }
+        });
+        lvPengeluaran.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                setselectedView();
+            }
+        });
+        
         btSimpan.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -89,6 +109,30 @@ public class TmbhItemPengeluaranController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Data disimpan !", ButtonType.OK);
                 alert.showAndWait();
 //                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        btHapus.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                pengeluaranModel.delete(String.valueOf(lvPengeluaran.getSelectionModel().getSelectedItem().getPengeluaran_id()));
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Data Dihapus! \n Silahkan klik refresh", ButtonType.OK);
+                alert.showAndWait();
+            }
+        });
+        btUpdate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Pengeluaran pengeluaranSelected = lvPengeluaran.getSelectionModel().getSelectedItem();
+                if(pengeluaranSelected!=null){
+                    pengeluaranModel.update(new Pengeluaran(pengeluaranSelected.getPengeluaran_id(),
+                            cbJenis.getSelectionModel().getSelectedItem().getPengeluaran_jenis_id(), 
+                            cbKategori.getSelectionModel().getSelectedItem().getPengeluaran_kategori_id(), 
+                            tfNama.getText(), 
+                            tfKeterangan.getText()));
+                    
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Data telah di update!\nSilahkan klik refresh untuk memperbarui data!", ButtonType.OK);
+                    alert.showAndWait();
+                }
             }
         });
     }
@@ -198,6 +242,26 @@ public class TmbhItemPengeluaranController implements Initializable {
         }
     };
    
+    public void setselectedView() {
+        clearAll();
+        Pengeluaran pengeluaranSelected = lvPengeluaran.getSelectionModel().getSelectedItem();
+        if (pengeluaranSelected != null) {
+            cbJenis.getSelectionModel().select(pengeluaranJenisModel.get(String.valueOf(pengeluaranSelected.getPengeluaran_jenis_id())));
+            cbKategori.getSelectionModel().select(pengeluaranKategoriModel.get(String.valueOf(pengeluaranSelected.getPengeluaran_kategori_id())));
+            tfNama.setText(pengeluaranSelected.getPengeluaran_nama());
+            tfKeterangan.setText(String.valueOf(pengeluaranSelected.getPengeluaran_keterangan()));
+            //ini buat ngeset checkcombobox berdasarkan yg diselect
+           
+
+        }
+    }
+
+    private void clearAll() {
+        tfNama.setText("");
+        tfKeterangan.setText("");
+        cbJenis.getSelectionModel().clearSelection();
+        cbKategori.getSelectionModel().clearSelection();
+    }
     
 }
 

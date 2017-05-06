@@ -6,9 +6,16 @@
 package controller.application;
 
 import com.jfoenix.controls.JFXListView;
+import controller.user.ViewEmployeController;
+import static controller.user.ViewEmployeController.Column0MapKey;
 import java.net.URL;
+import java.text.ParseException;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +29,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
@@ -56,8 +66,6 @@ public class TmbhItemIuranController implements Initializable {
     @FXML
     private TextField tfNama;
     @FXML
-    private TextField tfKeterangan;
-    @FXML
     private TextField tfNominal;
 
     UserModel userModel = new UserModel();
@@ -72,7 +80,9 @@ public class TmbhItemIuranController implements Initializable {
     @FXML
     private Button btSimpan;
     @FXML
-    private Button btBatal;
+    private Button btHapus;
+    @FXML
+    private Button btUpdate;
     
     /**
      * Initializes the controller class.
@@ -102,7 +112,7 @@ public class TmbhItemIuranController implements Initializable {
         lvIuran.setCellFactory(callback_lvIuran);
         
         //action button save
-        btSimpan.setOnAction(new EventHandler<ActionEvent>() {
+        btSimpan.setOnAction(new EventHandler<ActionEvent>() { 
             @Override
             public void handle(ActionEvent event) {
                 int inserted_id = iuranModel.insert(new Iuran(cbJenis.getValue().getIuranJenisId(), 
@@ -118,6 +128,71 @@ public class TmbhItemIuranController implements Initializable {
                 alert.showAndWait();
             }
         });
+        
+        //action button hapus
+        btHapus.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                iuranModel.delete(String.valueOf(lvIuran.getSelectionModel().getSelectedItem().getIuranId()));
+                
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Data Dihapus! \n Silahkan klik refresh", ButtonType.OK);
+                alert.showAndWait();
+            }
+        });
+        
+        //action button update
+        btUpdate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Iuran selectedIuran = lvIuran.getSelectionModel().getSelectedItem();
+                List<User> selectedUsers = ccbUser.getItems();
+                iuranModel.update(new Iuran(selectedIuran.getIuranId(),
+                        cbJenis.getSelectionModel().getSelectedItem().getIuranJenisId(), 
+                        cbKategori.getSelectionModel().getSelectedItem().getIuranKategoriId(), 
+                        tfNama.getText(), 
+                        Integer.valueOf(tfNominal.getText())));
+                if(selectedIuran != null){
+                    for (User user : selectedUsers){
+                        int iuranUserID = iuranUserModel.getByUserAndIuran(user, selectedIuran) == null ? 0:
+                                iuranUserModel.getByUserAndIuran(user, selectedIuran).getIuranUserId();
+                        int index = ccbUser.getCheckModel().getItemIndex(user);
+                            //ccbUser.getCheckModel().check(index);
+                        if(iuranUserID == 0 &&
+                                ccbUser.getCheckModel().isChecked(index)){
+                            System.out.println("pertama true");
+                            iuranUserModel.insert(new IuranUser(user.getUser_id(), 
+                                    selectedIuran.getIuranId(), 
+                                    0));
+                        } else if(iuranUserID !=0 &&
+                                !ccbUser.getCheckModel().isChecked(index)){
+                            System.out.println("kedua true");
+                            iuranUserModel.delete(String.valueOf(iuranUserModel.getByUserAndIuran(user, selectedIuran).getIuranUserId()));
+                        }
+                    }
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Data telah di update!\nSilahkan klik refresh untuk memperbarui data!", ButtonType.OK);
+                    alert.showAndWait();
+                }
+            }
+        });
+        
+        //action buat ngisi data berdasarkan iuran yg dipilih
+        lvIuran.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.UP)) {
+                    setselectedView();
+                } else if (event.getCode().equals(KeyCode.DOWN)) {
+                    setselectedView();
+                }
+            }
+        });
+        lvIuran.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                setselectedView();
+            }
+        });
+        
     }    
     
     private ObservableList<KategoriIuran> cbKategoriData(){
@@ -244,5 +319,41 @@ public class TmbhItemIuranController implements Initializable {
                 };
                 return cell;
     };
+    
+    public void setselectedView() {
+        clearAll();
+        Iuran iuranSelected = lvIuran.getSelectionModel().getSelectedItem();
+        if (iuranSelected != null) {
+            cbJenis.getSelectionModel().select(jenisIuranModel.get(String.valueOf(iuranSelected.getIuranJenisId())));
+            cbKategori.getSelectionModel().select(kategoriIuranModel.get(String.valueOf(iuranSelected.getIuranKategoriId())));
+            tfNama.setText(iuranSelected.getIuranNama());
+            tfNominal.setText(String.valueOf(iuranSelected.getIuranNominal()));
+            //ini buat ngeset checkcombobox berdasarkan yg diselect
+            ccbUser.getCheckModel().clearChecks();
+            List<IuranUser> iuranUsers = iuranUserModel.getAll();
+            List<User> users = ccbUser.getItems();
+            for(IuranUser iuranUser : iuranUsers){
+                if(iuranUser.getIuranId() == iuranSelected.getIuranId()){
+                    User u = userModel.getUser(String.valueOf(iuranUser.getUserId()));
+                    for(User user : users){
+                        if(user.getUser_id() == u.getUser_id()){
+                            int index = ccbUser.getCheckModel().getItemIndex(user);
+                            ccbUser.getCheckModel().check(index);
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    private void clearAll() {
+        tfNama.setText("");
+        tfNominal.setText("");
+        cbJenis.getSelectionModel().clearSelection();
+        cbKategori.getSelectionModel().clearSelection();
+        ccbUser.getCheckModel().clearChecks();
+    }
+    
         
 }
