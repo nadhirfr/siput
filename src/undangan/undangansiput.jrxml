@@ -176,10 +176,8 @@ Wassalamu’alaikum wr.wb.
 				<reportElement x="343" y="236" width="148" height="20" uuid="32eb9483-b07b-4daf-9cad-9b4e64ebd61d"/>
 				<textFieldExpression><![CDATA[$F{user_user_displayname}]]></textFieldExpression>
 			</textField>
-		</band>
-		<band height="50">
 			<textField>
-				<reportElement x="205" y="11" width="100" height="21" uuid="ba182200-2fbc-4587-8465-fd505323a4f4"/>
+				<reportElement x="178" y="223" width="100" height="21" uuid="ba182200-2fbc-4587-8465-fd505323a4f4"/>
 				<textFieldExpression><![CDATA[$F{iuran_iuran_nama}]]></textFieldExpression>
 			</textField>
 		</band>
