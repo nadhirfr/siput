@@ -350,7 +350,6 @@ public class MainMenuAController implements Initializable {
         Stage stage = (Stage) acMain.getScene().getWindow();
         stage.close();
         Stage stageNew = new Stage();
-        FXMLLoader fXMLLoader = new FXMLLoader();
         MainClass mc = new MainClass();
         mc.start(stageNew);
     }

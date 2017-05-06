@@ -49,6 +49,7 @@ public class DAORestPengeluaran implements implementPengeluaran {
 
             String urlParameters = "pengeluaran_nama=" + b.getPengeluaran_nama()
                     + "&pengeluaran_jenis_id=" + b.getPengeluaran_jenis_id()
+                    + "&pengeluaran_keterangan=" + b.getPengeluaran_keterangan()
                     + "&pengeluaran_kategori_id=" + b.getPengeluaran_kategori_id();
             byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
             int postDataLength = postData.length;
@@ -125,7 +126,7 @@ public class DAORestPengeluaran implements implementPengeluaran {
                         Integer.valueOf(jo.get("pengeluaran_jenis_id").toString()),
                         Integer.valueOf(jo.get("pengeluaran_kategori_id").toString()),
                         jo.get("pengeluaran_nama").toString(),
-                        jo.get("pengeluaran_kategori_id").toString()));
+                        jo.get("pengeluaran_keterangan") != null ? jo.get("pengeluaran_keterangan").toString():""));
 
             }
             conn.disconnect();
@@ -163,6 +164,7 @@ public class DAORestPengeluaran implements implementPengeluaran {
                     = "{"
                     + "\"pengeluaran_nama\":\"" + b.getPengeluaran_nama()
                     + "\",\"pengeluaran_jenis_id\":\"" + b.getPengeluaran_jenis_id()
+                    + "\",\"pengeluaran_keterangan\":\"" + b.getPengeluaran_keterangan()
                     + "\",\"pengeluaran_kategori_id\":\"" + b.getPengeluaran_kategori_id()
                     + "\"}";
             OutputStream os = conn.getOutputStream();
