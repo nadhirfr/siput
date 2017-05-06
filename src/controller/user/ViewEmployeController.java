@@ -5,7 +5,14 @@
  */
 package controller.user;
 
+import com.jfoenix.controls.JFXDatePicker;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -17,6 +24,8 @@ import javafx.scene.input.KeyCode;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -24,13 +33,13 @@ import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import model.Deposit;
+import object.Deposit;
 import model.DepositModel;
-import model.Iuran;
+import object.Iuran;
 import model.IuranModel;
-import model.IuranUser;
+import object.IuranUser;
 import model.IuranUserModel;
-import model.User;
+import object.User;
 import model.UserModel;
 //<<<<<<< HEAD
 import javafx.scene.control.cell.CheckBoxListCell;
@@ -63,27 +72,15 @@ public class ViewEmployeController implements Initializable {
     @FXML
     private TextField tfFullName;
     @FXML
-    private TextField tfSearch;
-    @FXML
     private Button btnUpdate;
     @FXML
     private Button btnDelete;
-    @FXML
-    private TextField tfCreatedBy;
     @FXML
     private TableView<Map> tblEmoyeeList;
     @FXML
     private TableColumn<Map, ?> clmEmployeId;
     @FXML
     private TableColumn<Map, ?> clmEmployeName;
-    @FXML
-    private TableView<?> tbl_view;
-
-    @FXML
-    private TableColumn<?, ?> clm_cek;
-
-    @FXML
-    private TableColumn<?, ?> clm_iuran;
 
     Image usrImg = new Image("/img/siput-logo.png");
     
@@ -98,6 +95,7 @@ public class ViewEmployeController implements Initializable {
     List<Iuran> listIuran;
     List<IuranUser> listIuranUser;
     List<User> listUser;
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     
     @FXML
     private TextField tfPassword;
@@ -107,6 +105,12 @@ public class ViewEmployeController implements Initializable {
     private TextField tfSaldo;
     @FXML
     private CheckListView<Iuran> lvSelectedIuran;
+    @FXML
+    private TextField tfKTP;
+    @FXML
+    private TextField tfFAlamat;
+    @FXML
+    private JFXDatePicker dpTglLahir;
     /**
      * Initializes the controller class.
      */
@@ -149,11 +153,16 @@ public class ViewEmployeController implements Initializable {
                 if (employeeList != null) {
                     User user = userModel.getUser(employeeList.get(Column0MapKey).toString());
                     Deposit deposit = depositModel.getByUser(user);
+                    Date date = Date.from(dpTglLahir.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()) ;
+                    String tanggal = dateFormat.format(date);
                     userModel.update(new User(user.getUser_id(), 
                             tfUserName.getText(), 
                             tfFullName.getText(), 
                             tfPassword.getText(), 
-                            tfTipeUser.getText()));
+                            tfTipeUser.getText(), 
+                            tfKTP.getText(), 
+                            tfFAlamat.getText(), 
+                            tanggal));
                     depositModel.update(new Deposit(deposit.getDepositId(),
                             deposit.getUserId(),
                             Integer.valueOf(tfSaldo.getText())));
@@ -225,10 +234,6 @@ public class ViewEmployeController implements Initializable {
         return allData;
     }
 
-    @FXML
-    private void tfSearchOnAction(ActionEvent event) {
-
-    }
 
 
     @FXML
@@ -254,25 +259,33 @@ public class ViewEmployeController implements Initializable {
         Map employeeList = tblEmoyeeList.getSelectionModel().getSelectedItem();
         User user = null;
         if (employeeList != null) {
-            user = userModel.getUser(employeeList.get(Column0MapKey).toString());
-            //usersGetway.selectedView(users);
-            lvSelectedIuran.getCheckModel().clearChecks();
-            for (Iuran iuran : lvSelectedIuran.getItems()) {
-                int iuran_id = iuranUserModel.getByUserAndIuran(user, iuran) == null ? 0 :
-                        iuranUserModel.getByUserAndIuran(user, iuran).getIuranId();
-                if(iuran_id == iuran.getIuranId()){
-                    lvSelectedIuran.getCheckModel().check(iuran);
-                } else{
-                    lvSelectedIuran.getCheckModel().clearCheck(iuran);
+            try {
+                user = userModel.getUser(employeeList.get(Column0MapKey).toString());
+                //usersGetway.selectedView(users);
+                lvSelectedIuran.getCheckModel().clearChecks();
+                for (Iuran iuran : lvSelectedIuran.getItems()) {
+                    int iuran_id = iuranUserModel.getByUserAndIuran(user, iuran) == null ? 0 :
+                            iuranUserModel.getByUserAndIuran(user, iuran).getIuranId();
+                    if(iuran_id == iuran.getIuranId()){
+                        lvSelectedIuran.getCheckModel().check(iuran);
+                    } else{
+                        lvSelectedIuran.getCheckModel().clearCheck(iuran);
+                    }
                 }
+                id = String.valueOf(user.getUser_id());
+                tfUserName.setText(user.getUser_username());
+                tfFAlamat.setText(user.getUser_alamat());
+                tfKTP.setText(user.getUser_ktp());
+                dpTglLahir.setValue(dateFormat.parse(user.getUser_tgl_lahir()).toInstant().
+                                    atZone(ZoneId.systemDefault()).toLocalDate());
+                tfFullName.setText(user.getUser_displayname());
+                tfPassword.setText(user.getUser_password());
+                tfTipeUser.setText(user.getUser_tipe());
+                tfSaldo.setText(depositModel.getByUser(user) == null? "" :
+                        String.valueOf(depositModel.getByUser(user).getDepositJumlah()));
+            } catch (ParseException ex) {
+                Logger.getLogger(ViewEmployeController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            id = String.valueOf(user.getUser_id());
-            tfUserName.setText(user.getUser_username());
-            tfFullName.setText(user.getUser_displayname());
-            tfPassword.setText(user.getUser_password());
-            tfTipeUser.setText(user.getUser_tipe());
-            tfSaldo.setText(depositModel.getByUser(user) == null? "" : 
-                    String.valueOf(depositModel.getByUser(user).getDepositJumlah()));
 
         }
     }
@@ -281,6 +294,5 @@ public class ViewEmployeController implements Initializable {
     private void clearAll() {
         tfUserName.clear();
         tfFullName.clear();
-        tfCreatedBy.clear();
     }
 }

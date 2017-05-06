@@ -47,7 +47,8 @@
          </font>
       </Label>
       <CheckComboBox fx:id="ccbUser" layoutX="287.0" layoutY="295.0" prefHeight="35.0" prefWidth="368.0" />
-      <Button fx:id="btSimpan" layoutX="318.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" />
-      <Button fx:id="btHapus" layoutX="480.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Hapus" textFill="WHITE" />
+      <Button fx:id="btSimpan" layoutX="285.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" />
+      <Button fx:id="btHapus" layoutX="537.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: #3498db;" text="Hapus" textFill="WHITE" />
+      <Button fx:id="btUpdate" layoutX="413.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: #3498db;" text="Update" textFill="WHITE" />
    </children>
 </AnchorPane>

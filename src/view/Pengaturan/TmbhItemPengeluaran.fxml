@@ -44,7 +44,8 @@
             <Font size="11.0" />
          </font>
       </TextField>
-      <Button fx:id="btSimpan" layoutX="319.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" />
-      <Button fx:id="btHapus" layoutX="480.0" layoutY="474.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" style="-fx-background-color: #3498db;" text="Hapus" textFill="WHITE" />
+      <Button fx:id="btSimpan" layoutX="287.0" layoutY="463.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: #3498db;" text="Simpan" textFill="WHITE" />
+      <Button fx:id="btHapus" layoutX="548.0" layoutY="463.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: #3498db;" text="Hapus" textFill="WHITE" />
+      <Button fx:id="btUpdate" layoutX="417.0" layoutY="463.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" style="-fx-background-color: #3498db;" text="Update" textFill="WHITE" />
    </children>
 </AnchorPane>

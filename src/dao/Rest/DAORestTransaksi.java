@@ -16,15 +16,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Iuran;
-import model.Pengeluaran;
+import object.Iuran;
+import object.Pengeluaran;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 //import dao.implementDeposit;
-import model.Transaksi;
-import model.User;
+import object.Transaksi;
+import object.User;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -456,6 +456,120 @@ public class DAORestTransaksi implements implementTransaksi {
             e.printStackTrace();
         }
         return transaksi;
+    }
+
+    @Override
+    public int getUtang(int user_id, int iuran_id) {
+         int jumlah = 0;
+        try {
+            URL url = new URL(alamat + "?param=getUtang&user_id="+user_id+"&iuran_id="+iuran_id);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+            //conn.addRequestProperty("Authorization", LoginDAOREST.user);
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+            }
+
+            //ini ambil output data lalu dimasukkan ke string response
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String output;
+            String response = null;
+            System.out.println("Output from Server .... \n");
+            while ((output = br.readLine()) != null) {
+                System.out.println(output);
+                response = output;
+            }
+
+            jumlah = Integer.valueOf(response.replace(" ", ""));
+            //System.out.println("Jumlah utang: "+jumlah);
+
+            conn.disconnect();
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(DAORestTransaksi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ProtocolException ex) {
+            Logger.getLogger(DAORestTransaksi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DAORestTransaksi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return jumlah;
+    }
+
+    @Override
+    public int getTotalBayar(int user_id, int iuran_id) {
+    int jumlah = 0;
+        try {
+            URL url = new URL(alamat + "?param=getTotalBayar&user_id="+user_id+"&iuran_id="+iuran_id);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+            //conn.addRequestProperty("Authorization", LoginDAOREST.user);
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+            }
+
+            //ini ambil output data lalu dimasukkan ke string response
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String output;
+            String response = null;
+            System.out.println("Output from Server .... \n");
+            while ((output = br.readLine()) != null) {
+                System.out.println(output);
+                response = output;
+            }
+
+            jumlah = Integer.valueOf(response.replace(" ", ""));
+            //System.out.println("Jumlah utang: "+jumlah);
+
+            conn.disconnect();
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(DAORestTransaksi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ProtocolException ex) {
+            Logger.getLogger(DAORestTransaksi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DAORestTransaksi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return jumlah;
+    }
+
+    @Override
+    public int getTotalDibayar(int user_id, int iuran_id) {
+        int jumlah = 0;
+        try {
+            URL url = new URL(alamat + "?param=getTotalDibayar&user_id="+user_id+"&iuran_id="+iuran_id);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+            //conn.addRequestProperty("Authorization", LoginDAOREST.user);
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+            }
+
+            //ini ambil output data lalu dimasukkan ke string response
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String output;
+            String response = null;
+            System.out.println("Output from Server .... \n");
+            while ((output = br.readLine()) != null) {
+                System.out.println(output);
+                response = output;
+            }
+
+            jumlah = Integer.valueOf(response.replace(" ", ""));
+            //System.out.println("Jumlah utang: "+jumlah);
+
+            conn.disconnect();
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(DAORestTransaksi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ProtocolException ex) {
+            Logger.getLogger(DAORestTransaksi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DAORestTransaksi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return jumlah;
     }
 
 }

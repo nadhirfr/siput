@@ -6,9 +6,9 @@
 package dao;
 
 import java.util.List;
-import model.Iuran;
-import model.JenisIuran;
-import model.KategoriIuran;
+import object.Iuran;
+import object.JenisIuran;
+import object.KategoriIuran;
 
 /**
  *

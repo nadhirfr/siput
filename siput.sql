@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2017 at 06:28 PM
+-- Generation Time: May 05, 2017 at 02:23 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -37,10 +37,11 @@ CREATE TABLE `deposit` (
 --
 
 INSERT INTO `deposit` (`deposit_id`, `user_id`, `deposit_jumlah`) VALUES
-(00001, 00004, 90000),
-(00002, 00002, 4000),
-(00004, 00001, 205000),
-(00006, 00039, 10000);
+(00001, 00004, 85000),
+(00002, 00002, 2000),
+(00004, 00001, 500),
+(00006, 00039, 20000),
+(00008, 00043, 10000);
 
 -- --------------------------------------------------------
 
@@ -68,7 +69,8 @@ INSERT INTO `iuran` (`iuran_id`, `iuran_nama`, `iuran_nominal`, `iuran_jenis_id`
 (00005, 'Iuran 17-an', 20000, 00001, 00002),
 (00006, 'Pembangunan Infrastruktur', 30000, 00001, 00002),
 (00007, 'Sumbangan warga baru', 200000, 00001, 00002),
-(00008, 'Iuran Coba', 20000, 00001, 00003);
+(00008, 'Iuran Coba', 20000, 00001, 00003),
+(00009, 'Ini coba', 20000, 00001, 00001);
 
 -- --------------------------------------------------------
 
@@ -88,7 +90,8 @@ CREATE TABLE `iuran_jenis` (
 
 INSERT INTO `iuran_jenis` (`iuran_jenis_id`, `iuran_jenis_nama`, `iuran_jenis_keterangan`) VALUES
 (00001, 'Iuran Wajib', 'Merupakan iuran yang wajib dibayar oleh semua anggota'),
-(00002, 'Iuran tidak wajib', 'Merupakan iuran yang tidak wajib dibayar oleh semua anggota');
+(00002, 'Iuran tidak wajib', 'Merupakan iuran yang tidak wajib dibayar oleh semua anggota'),
+(00003, 'Iuran cek', 'cek dhdkwe');
 
 -- --------------------------------------------------------
 
@@ -142,19 +145,25 @@ CREATE TABLE `iuran_user` (
 --
 
 INSERT INTO `iuran_user` (`iuran_user_id`, `iuran_user_status`, `user_id`, `iuran_id`) VALUES
-(00002, 0, 00001, 00002),
+(00002, 1, 00001, 00002),
 (00005, 0, 00001, 00004),
-(00006, 0, 00001, 00005),
-(00024, 0, 00001, 00003),
-(00030, 0, 00002, 00002),
-(00031, 0, 00002, 00003),
-(00032, 0, 00002, 00005),
+(00006, 1, 00001, 00005),
+(00024, 1, 00001, 00003),
+(00030, 1, 00002, 00002),
+(00031, 1, 00002, 00003),
+(00032, 1, 00002, 00005),
 (00034, 0, 00039, 00001),
-(00035, 0, 00004, 00002),
-(00036, 0, 00004, 00003),
+(00035, 1, 00004, 00002),
+(00036, 1, 00004, 00003),
 (00037, 0, 00004, 00004),
-(00038, 0, 00004, 00005),
-(00039, 0, 00001, 00008);
+(00039, 0, 00039, 00002),
+(00391, 0, 00043, 00001),
+(00392, 1, 00043, 00002),
+(00393, 0, 00043, 00003),
+(00397, 1, 00004, 00009),
+(00398, 0, 00039, 00009),
+(00399, 0, 00043, 00009),
+(00400, 0, 00043, 00008);
 
 -- --------------------------------------------------------
 
@@ -181,7 +190,8 @@ INSERT INTO `pengeluaran` (`pengeluaran_id`, `pengeluaran_nama`, `pengeluaran_ke
 (00004, 'Pembayaran Konsum Rapat', NULL, 00001, 00001),
 (00005, 'Gaji Pengelola Lampu', NULL, 00001, 00001),
 (00006, 'Pembangunan Infrastruktur', NULL, 00002, 00002),
-(00007, 'Iuran Coba', 'Ini ya hanya iuran coba coba aja lah gausah dipikirkan', 00001, 00001);
+(00007, 'Iuran Coba', 'Ini ya hanya iuran coba coba aja lah gausah dipikirkan', 00001, 00001),
+(00008, 'coba aja', NULL, 00001, 00001);
 
 -- --------------------------------------------------------
 
@@ -236,6 +246,13 @@ CREATE TABLE `pengeluaran_perubahan` (
   `pengeluaran_id` int(5) UNSIGNED ZEROFILL NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pengeluaran_perubahan`
+--
+
+INSERT INTO `pengeluaran_perubahan` (`pengeluaran_perubahan_id`, `pengeluaran_perubahan_nominal`, `pengeluaran_perubahan_date`, `pengeluaran_id`) VALUES
+(00001, 90900, '2017-09-09', 00002);
+
 -- --------------------------------------------------------
 
 --
@@ -272,10 +289,27 @@ CREATE TABLE `transaksi` (
 INSERT INTO `transaksi` (`transaksi_id`, `transaksi_date`, `transaksi_nama`, `transaksi_nominal`, `user_id`, `transaksi_tipe`, `iuran_id`, `pengeluaran_id`) VALUES
 (00055, '2017-02-24', 'Iuran Pokok', 20000, 00001, 'iuran', 00002, NULL),
 (00056, '2017-04-24', 'Iuran Pokok', 3000, 00001, 'iuran', 00002, NULL),
-(00057, '2017-02-24', 'Iuran Pokok', 10000, 00002, 'iuran', 00002, NULL),
 (00059, '2017-04-24', 'Iuran 17-an', 15000, 00001, 'iuran', 00005, NULL),
 (00060, '2017-04-25', 'Iuran Coba', 10000, 00001, 'iuran', 00008, NULL),
-(00062, '2017-02-25', 'Iuran Coba', 5000, 00001, 'iuran', 00008, NULL);
+(00062, '2017-02-25', 'Iuran Coba', 5000, 00001, 'iuran', 00008, NULL),
+(00079, '2017-02-24', 'kuda', 20000, 00001, 'iuran', 00002, NULL),
+(00082, '2017-04-26', 'Iuran 17-an', 5000, 00001, 'iuran', 00005, NULL),
+(00083, '2017-05-01', 'Pembayaran Sampah', 20000, 00001, 'pengeluaran', NULL, 00001),
+(00085, '2017-05-01', 'Pembayaran Iuran RW', 2000, 00001, 'pengeluaran', NULL, 00002),
+(00094, '2017-05-02', 'Iuran Sosial', 10000, 00001, 'iuran', 00003, NULL),
+(00095, '2017-05-02', 'Iuran Sosial', 10000, 00002, 'iuran', 00003, NULL),
+(00096, '2017-05-02', 'Iuran Pokok', 10000, 00002, 'iuran', 00002, NULL),
+(00097, '2017-05-02', 'Iuran Pokok', 5000, 00043, 'iuran', 00002, NULL),
+(00098, '2017-05-02', 'Iuran Pokok', 50000, 00002, 'iuran', 00002, NULL),
+(00100, '2017-05-02', 'Iuran Sosial', 10000, 00004, 'iuran', 00003, NULL),
+(00101, '2017-05-02', 'Ini coba', 10000, 00004, 'iuran', 00009, NULL),
+(00103, '2017-05-02', 'Ini coba', 20000, 00039, 'iuran', 00009, NULL),
+(00104, '2017-05-04', 'Iuran Syawalan', 10000, 00001, 'iuran', 00004, NULL),
+(00105, '2017-05-05', 'Iuran 17-an', 10000, 00002, 'iuran', 00005, NULL),
+(00106, '2017-05-05', 'Iuran 17-an', 2000, 00002, 'iuran', 00005, NULL),
+(00107, '2017-05-05', 'Iuran Pokok', 10000, 00043, 'iuran', 00002, NULL),
+(00108, '2017-05-05', 'Iuran Pokok', 10000, 00043, 'iuran', 00002, NULL),
+(00109, '2017-05-05', 'Ini coba', 10000, 00004, 'iuran', 00009, NULL);
 
 -- --------------------------------------------------------
 
@@ -287,6 +321,9 @@ CREATE TABLE `user` (
   `user_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `user_username` varchar(8) NOT NULL,
   `user_displayname` varchar(30) NOT NULL,
+  `user_ktp` varchar(16) NOT NULL,
+  `user_alamat` varchar(50) NOT NULL,
+  `user_tgl_lahir` date NOT NULL,
   `user_password` varchar(10) NOT NULL,
   `user_tipe` enum('admin','operator','anggota') NOT NULL DEFAULT 'anggota'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -295,11 +332,12 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `user_username`, `user_displayname`, `user_password`, `user_tipe`) VALUES
-(00001, 'admin', 'Administrator', 'admin', 'admin'),
-(00002, 'op1', 'Operator-1', 'op1', 'operator'),
-(00004, 'anggota1', 'Anggota 1', 'anggota1', 'anggota'),
-(00039, 'coba', 'Coba User', '123', 'admin');
+INSERT INTO `user` (`user_id`, `user_username`, `user_displayname`, `user_ktp`, `user_alamat`, `user_tgl_lahir`, `user_password`, `user_tipe`) VALUES
+(00001, 'admin', 'Administrator', '3404020607960001', 'Gatak IX', '2017-05-09', 'admin', 'admin'),
+(00002, 'op1', 'Operator-1', '3404020607960002', 'ASAS', '2017-05-29', 'op1', 'operator'),
+(00004, 'anggota1', 'Anggota 1', '3404020607960003', 'klkl', '1978-11-22', 'anggota1', 'anggota'),
+(00039, 'coba', 'Coba User', '3404020607960005', 'jhjh', '2017-05-01', '123', 'admin'),
+(00043, 'ini suda', 'sudah bisa', '3404020607960006', 'qwerw', '2017-02-01', 'bisa', 'anggota');
 
 --
 -- Indexes for dumped tables
@@ -405,12 +443,17 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `deposit`
 --
 ALTER TABLE `deposit`
-  MODIFY `deposit_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `deposit_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `iuran`
 --
 ALTER TABLE `iuran`
-  MODIFY `iuran_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `iuran_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `iuran_jenis`
+--
+ALTER TABLE `iuran_jenis`
+  MODIFY `iuran_jenis_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `iuran_kategori`
 --
@@ -425,12 +468,12 @@ ALTER TABLE `iuran_perubahan`
 -- AUTO_INCREMENT for table `iuran_user`
 --
 ALTER TABLE `iuran_user`
-  MODIFY `iuran_user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `iuran_user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=406;
 --
 -- AUTO_INCREMENT for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `pengeluaran_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `pengeluaran_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `pengeluaran_jenis`
 --
@@ -445,7 +488,7 @@ ALTER TABLE `pengeluaran_kategori`
 -- AUTO_INCREMENT for table `pengeluaran_perubahan`
 --
 ALTER TABLE `pengeluaran_perubahan`
-  MODIFY `pengeluaran_perubahan_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+  MODIFY `pengeluaran_perubahan_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `session`
 --
@@ -455,12 +498,12 @@ ALTER TABLE `session`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `transaksi_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `transaksi_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- Constraints for dumped tables
 --

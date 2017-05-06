@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package dao.mysql;
 
+import dao.implementKategoriIuran;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,32 +16,32 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import koneksi.Koneksi;
-import model.PengeluaranKategori;
+import object.KategoriIuran;
 
 /**
  *
  * @author fachrul
  */
-public class DAOMySQLPengeluaranKategori implements implementPengeluaranKategori{
+public class DAOMySQLKategoriIuran implements implementKategoriIuran{
 
     Connection connection;
-    final String insert = "INSERT INTO pengeluaran_kategori (pengeluaran_kategori_id,pengeluaran_nama,pengeluaran_waktu) VALUES (NULL,?,?);";
-    final String update = "UPDATE pengeluaran_kategori SET pengeluaran_kategori_id=?, pengeluaran_nama=?, pengeluaran_waktu=? WHERE pengeluaran_kategori_id=?;";
-    final String delete = "DELETE FROM pengeluaran_kategori WHERE pengeluaran_kategori_id=?;";
-    final String select = "SELECT * FROM pengeluaran_kategori;";
-    final String get = "SELECT * FROM pengeluaran_kategori WHERE pengeluaran_kategori_id=?;";
-    final String cari = "SELECT * FROM pengeluaran_kategori WHERE pengeluaran_nama LIKE ?;";
+    final String insert = "INSERT INTO iuran_kategori (iuran_kategori_id,iuran_kategori_nama,iuran_kategori_interval) VALUES (NULL,?,?);";
+    final String update = "UPDATE iuran_kategori SET iuran_kategori_id=?, iuran_kategori_nama=?, iuran_kategori_interval=? WHERE iuran_kategori_id=?;";
+    final String delete = "DELETE FROM iuran_kategori WHERE iuran_kategori_id=?;";
+    final String select = "SELECT * FROM iuran_kategori;";
+    final String get = "SELECT * FROM iuran_kategori WHERE iuran_kategori_id=?;";
+    final String cari = "SELECT * FROM iuran_kategori WHERE iuran_kategori_nama LIKE ?;";
 
-    public DAOMySQLPengeluaranKategori() {
+    public DAOMySQLKategoriIuran() {
         connection = Koneksi.connection();
     }
     @Override
-    public void insert(PengeluaranKategori b) {
+    public void insert(KategoriIuran b) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(insert);
-            statement.setString(1, b.getPengeluaran_kategori_nama());
-            statement.setString(2, Integer.toString(b.getPengeluaran_kategori_waktu()));
+            statement.setString(1, b.getIuranKategoriNama());
+            statement.setInt(2, b.getIuranKategoriInterval());
             statement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -54,17 +55,17 @@ public class DAOMySQLPengeluaranKategori implements implementPengeluaranKategori
     }
 
     @Override
-    public PengeluaranKategori get(String PengeluaranKategoriId) {
+    public KategoriIuran get(String KategoriIuranId) {
         PreparedStatement statement = null;
-        PengeluaranKategori kategoriIuran = new PengeluaranKategori();
+        KategoriIuran kategoriIuran = new KategoriIuran();
         try {
             statement = connection.prepareStatement(get);
-            statement.setString(1, PengeluaranKategoriId);
+            statement.setString(1, KategoriIuranId);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-               kategoriIuran.setPengeluaran_kategori_id(rs.getInt("pengeluaran_kategori_id"));
-               kategoriIuran.setPengeluaran_kategori_nama(rs.getString("pengeluaran_kategori_nama"));
-               kategoriIuran.setPengeluaran_kategori_waktu(rs.getInt("pengeluaran_kategori_waktu"));
+               kategoriIuran.setIuranKategoriId(rs.getInt("iuran_kategori_id"));
+               kategoriIuran.setIuranKategoriNama(rs.getString("iuran_kategori_nama"));
+               kategoriIuran.setIuranKategoriInterval(rs.getInt("iuran_kategori_interval"));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -79,13 +80,13 @@ public class DAOMySQLPengeluaranKategori implements implementPengeluaranKategori
     }
 
     @Override
-    public void update(PengeluaranKategori b) {
+    public void update(KategoriIuran b) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(update);
-            statement.setString(1, b.getPengeluaran_kategori_nama());
-            statement.setString(2, Integer.toString(b.getPengeluaran_kategori_waktu()));
-            statement.setString(3, Integer.toString(b.getPengeluaran_kategori_id()));
+            statement.setString(1, b.getIuranKategoriNama());
+            statement.setInt(2, b.getIuranKategoriInterval());
+            statement.setString(3, Integer.toString(b.getIuranKategoriId()));
             statement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -99,11 +100,11 @@ public class DAOMySQLPengeluaranKategori implements implementPengeluaranKategori
     }
 
     @Override
-    public void delete(String PengeluaranKategoriId) {
+    public void delete(String KategoriIuranId) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(delete);
-            statement.setString(1, PengeluaranKategoriId);
+            statement.setString(1, KategoriIuranId);
             statement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -114,21 +115,20 @@ public class DAOMySQLPengeluaranKategori implements implementPengeluaranKategori
                 ex.printStackTrace();
             }
         }
-    
     }
 
     @Override
-    public List<PengeluaranKategori> getAll() {
-        List<PengeluaranKategori> lb = null;
+    public List<KategoriIuran> getAll() {
+        List<KategoriIuran> lb = null;
         try {
-            lb = new ArrayList<PengeluaranKategori>();
+            lb = new ArrayList<KategoriIuran>();
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(select);
             while (rs.next()) {
-                PengeluaranKategori b = new PengeluaranKategori();
-                b.setPengeluaran_kategori_id(rs.getInt("pengeluaran_kategori_id"));
-                b.setPengeluaran_kategori_nama(rs.getString("pengeluaran_kategori_nama"));
-                b.setPengeluaran_kategori_waktu(rs.getInt("pengeluaran_kategori_waktu"));
+                KategoriIuran b = new KategoriIuran();
+                b.setIuranKategoriId(rs.getInt("iuran_kategori_id"));
+                b.setIuranKategoriNama(rs.getString("iuran_kategori_nama"));
+                b.setIuranKategoriInterval(rs.getInt("iuran_kategori_interval"));
                 lb.add(b);
             }
         } catch (SQLException ex) {
@@ -138,18 +138,18 @@ public class DAOMySQLPengeluaranKategori implements implementPengeluaranKategori
     }
 
     @Override
-    public List<PengeluaranKategori> getCari(String PengeluaranKategoriNama) {
-        List<PengeluaranKategori> lb = null;
+    public List<KategoriIuran> getCari(String KategoriIuranNama) {
+        List<KategoriIuran> lb = null;
         try {
             lb = new ArrayList<>();
             PreparedStatement st = connection.prepareStatement(cari);
-            st.setString(1, "%" + PengeluaranKategoriNama + "%");
+            st.setString(1, "%" + KategoriIuranNama + "%");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                PengeluaranKategori b = new PengeluaranKategori();
-                b.setPengeluaran_kategori_id(rs.getInt("pengeluaran_kategori_id"));
-                b.setPengeluaran_kategori_nama(rs.getString("pengeluaran_kategori_nama"));
-                b.setPengeluaran_kategori_waktu(rs.getInt("pengeluaran_kategori_waktu"));
+                KategoriIuran b = new KategoriIuran();
+                b.setIuranKategoriId(rs.getInt("iuran_kategori_id"));
+                b.setIuranKategoriNama(rs.getString("iuran_kategori_nama"));
+                b.setIuranKategoriInterval(rs.getInt("iuran_kategori_interval"));
                 lb.add(b);
             }
         } catch (SQLException ex) {

@@ -6,10 +6,10 @@
 package dao;
 
 import java.util.List;
-import model.Iuran;
-import model.Pengeluaran;
-import model.Transaksi;
-import model.User;
+import object.Iuran;
+import object.Pengeluaran;
+import object.Transaksi;
+import object.User;
 
 /**
  *
@@ -41,6 +41,12 @@ public interface implementTransaksi {
     public int getJumlahPengeluaran();
     
     public int getJumlahTransaksi();
+    
+    public int getUtang(int user_id, int iuran_id);
+    
+    public int getTotalBayar(int user_id, int iuran_id);
+    
+    public int getTotalDibayar(int user_id, int iuran_id);
     
     public Transaksi getTransaksiPertama(String user_id, String iuran_id);
     

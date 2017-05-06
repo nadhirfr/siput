@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7985a777-2c2e-4f41-845a-37b71def411b">
-	<property name="ireport.zoom" value="1.0000000000000004"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="undangansiput" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7985a777-2c2e-4f41-845a-37b71def411b">
+	<property name="ireport.zoom" value="1.3310000000000017"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="542"/>
 	<parameter name="tglh" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -13,6 +13,10 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="nama" class="java.lang.String"/>
+	<parameter name="acara" class="java.lang.String"/>
+	<parameter name="userid" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      user.`user_id` AS user_user_id,
@@ -31,7 +35,8 @@
      iuran.`iuran_kategori_id` AS iuran_iuran_kategori_id
 FROM
      `user` user INNER JOIN `iuran_user` iuran_user ON user.`user_id` = iuran_user.`user_id`
-     INNER JOIN `iuran` iuran ON iuran_user.`iuran_id` = iuran.`iuran_id`]]>
+     INNER JOIN `iuran` iuran ON iuran_user.`iuran_id` = iuran.`iuran_id`
+where user.user_id = $P{userid}]]>
 	</queryString>
 	<field name="user_user_displayname" class="java.lang.String"/>
 	<field name="iuran_iuran_nama" class="java.lang.String"/>
@@ -94,11 +99,8 @@ Bapak/Ibu
 Di tempat]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="134" y="84" width="100" height="20" uuid="c907693c-732f-47fd-8ce6-cd5424965b9e"/>
-				<textElement>
-					<font fontName="Times New Roman" size="13"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{nama}]]></textFieldExpression>
+				<reportElement x="305" y="80" width="100" height="20" uuid="05e15f8c-d2d9-4518-8365-e83d4e48fbc4"/>
+				<textFieldExpression><![CDATA[$P{userid}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -120,13 +122,14 @@ Sehubungan dengan akan dioptimalkan kepengurusan dan program-program kerja tamba
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="80" y="155" width="96" height="79" isPrintInFirstWholeBand="true" uuid="892562c1-9c08-4bb4-b214-5adfc64d03ac"/>
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="80" y="155" width="96" height="89" isPrintInFirstWholeBand="true" uuid="892562c1-9c08-4bb4-b214-5adfc64d03ac"/>
 				<textElement>
 					<font fontName="Times New Roman" size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Hari/Tanggal 	: 
 Waktu 	: 
-Tempat 	: 
+Tempat 	:
+Acara             : 
 Catatan	:]]></text>
 			</staticText>
 			<staticText>
@@ -149,7 +152,7 @@ Wassalamu’alaikum wr.wb.
 				<textFieldExpression><![CDATA[new SimpleDateFormat("EEEE, dd MMMMM yyyy",new java.util.Locale("id")).format($P{tglh})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="178" y="172" width="100" height="15" uuid="293f7d37-7b8a-4e37-b209-28082b8edf15"/>
+				<reportElement x="178" y="173" width="100" height="15" uuid="293f7d37-7b8a-4e37-b209-28082b8edf15"/>
 				<textElement>
 					<font fontName="Times New Roman" size="13"/>
 				</textElement>
@@ -161,6 +164,23 @@ Wassalamu’alaikum wr.wb.
 					<font fontName="Times New Roman" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{tmpt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="178" y="205" width="100" height="15" uuid="f1d3e9b3-f029-4cbb-ae05-739f7b84a458"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{acara}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="343" y="236" width="148" height="20" uuid="32eb9483-b07b-4daf-9cad-9b4e64ebd61d"/>
+				<textFieldExpression><![CDATA[$F{user_user_displayname}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="50">
+			<textField>
+				<reportElement x="205" y="11" width="100" height="21" uuid="ba182200-2fbc-4587-8465-fd505323a4f4"/>
+				<textFieldExpression><![CDATA[$F{iuran_iuran_nama}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

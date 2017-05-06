@@ -5,7 +5,10 @@
         <group>
             <file>file:/D:/Pro/siput-master/siput/src/controller/user/EmployeController.java</file>
             <file>file:/D:/Pro/siput-master/siput/src/controller/LoginSiputController.java</file>
+            <file>file:/D:/Pro/siput-master/siput/src/laporan/siput-report.jrxml</file>
             <file>file:/D:/Pro/siput-master/siput/src/view/MainClass.java</file>
+            <file>file:/D:/Pro/siput-master/siput/src/model/UserModel.java</file>
+            <file>file:/D:/Pro/siput-master/siput/src/undangan/undangansiput.jrxml</file>
             <file>file:/D:/Pro/siput-master/siput/src/controller/application/LaporanController.java</file>
             <file>file:/D:/Pro/siput-master/siput/src/style/MainStyle.css</file>
             <file>file:/D:/Pro/siput-master/siput/src/controller/MainMenuAController.java</file>

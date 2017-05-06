@@ -25,15 +25,15 @@ import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
-import model.Iuran;
+import object.Iuran;
 import model.IuranModel;
-import model.IuranUser;
+import object.IuranUser;
 import model.IuranUserModel;
-import model.JenisIuran;
+import object.JenisIuran;
 import model.JenisIuranModel;
-import model.KategoriIuran;
+import object.KategoriIuran;
 import model.KategoriIuranModel;
-import model.User;
+import object.User;
 import model.UserModel;
 
 

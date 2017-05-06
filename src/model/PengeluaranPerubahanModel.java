@@ -5,6 +5,7 @@
  */
 package model;
 
+import object.PengeluaranPerubahan;
 import dao.implementPengeluaran;
 import dao.implementPengeluaranPerubahan;
 import factory.DAOFactory;

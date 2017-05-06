@@ -1,7 +1,8 @@
-package dao;
+package dao.mysql;
 
+import dao.implementUser;
 import koneksi.Koneksi;
-import model.User;
+import object.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

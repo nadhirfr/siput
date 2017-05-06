@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package dao.mysql;
 
+import dao.implementPengeluaranJenis;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,32 +16,32 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import koneksi.Koneksi;
-import model.JenisIuran;
+import object.PengeluaranJenis;
 
 /**
  *
  * @author fachrul
  */
-public class DAOMySQLJenisIuran implements implementJenisIuran{
+public class DAOMySQLPengeluaranJenis implements implementPengeluaranJenis{
 
     Connection connection;
-    final String insert = "INSERT INTO iuran_jenis (iuran_jenis_id,iuran_jenis_nama,iuran_jenis_keterangan) VALUES (NULL,?,?);";
-    final String update = "UPDATE iuran_jenis SET iuran_jenis_id=?, iuran_jenis_nama=?, iuran_jenis_keterangan=? WHERE iuran_jenis_id=?;";
-    final String delete = "DELETE FROM iuran_jenis WHERE iuran_jenis_id=?;";
-    final String select = "SELECT * FROM iuran_jenis;";
-    final String get = "SELECT * FROM iuran_jenis WHERE iuran_jenis_id=?;";
-    final String cari = "SELECT * FROM iuran_jenis WHERE iuran_jenis_nama LIKE ?;";
+    final String insert = "INSERT INTO pengeluaran_jenis (pengeluaran_jenis_id,pengeluaran_nama,pengeluaran_keterangan) VALUES (NULL,?,?);";
+    final String update = "UPDATE pengeluaran_jenis SET pengeluaran_jenis_id=?, pengeluaran_nama=?, pengeluaran_keterangan=? WHERE pengeluaran_jenis_id=?;";
+    final String delete = "DELETE FROM pengeluaran_jenis WHERE pengeluaran_jenis_id=?;";
+    final String select = "SELECT * FROM pengeluaran_jenis;";
+    final String get = "SELECT * FROM pengeluaran_jenis WHERE pengeluaran_jenis_id=?;";
+    final String cari = "SELECT * FROM pengeluaran_jenis WHERE pengeluaran_nama LIKE ?;";
 
-    public DAOMySQLJenisIuran() {
+    public DAOMySQLPengeluaranJenis() {
         connection = Koneksi.connection();
     }
     @Override
-    public void insert(JenisIuran b) {
+    public void insert(PengeluaranJenis b) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(insert);
-            statement.setString(1, b.getIuranJenisNama());
-            statement.setString(2, b.getIuranJenisKeterangan());
+            statement.setString(1, b.getPengeluaran_nama());
+            statement.setString(2, b.getPengeluaran_keterangan());
             statement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -54,17 +55,17 @@ public class DAOMySQLJenisIuran implements implementJenisIuran{
     }
 
     @Override
-    public JenisIuran get(String JenisIuranId) {
+    public PengeluaranJenis get(String PengeluaranJenisId) {
         PreparedStatement statement = null;
-        JenisIuran jenisIuran = new JenisIuran();
+        PengeluaranJenis jenisIuran = new PengeluaranJenis();
         try {
             statement = connection.prepareStatement(get);
-            statement.setString(1, JenisIuranId);
+            statement.setString(1, PengeluaranJenisId);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-               jenisIuran.setIuranJenisId(rs.getInt("iuran_jenis_id"));
-               jenisIuran.setIuranJenisNama(rs.getString("iuran_jenis_nama"));
-               jenisIuran.setIuranJenisKeterangan(rs.getString("iuran_jenis_keterangan"));
+               jenisIuran.setPengeluaran_jenis_id(rs.getInt("pengeluaran_jenis_id"));
+               jenisIuran.setPengeluaran_nama(rs.getString("pengeluaran_nama"));
+               jenisIuran.setPengeluaran_keterangan(rs.getString("pengeluaran_keterangan"));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -79,13 +80,13 @@ public class DAOMySQLJenisIuran implements implementJenisIuran{
     }
 
     @Override
-    public void update(JenisIuran b) {
+    public void update(PengeluaranJenis b) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(update);
-            statement.setString(1, b.getIuranJenisNama());
-            statement.setString(2, b.getIuranJenisKeterangan());
-            statement.setString(3, Integer.toString(b.getIuranJenisId()));
+            statement.setString(1, b.getPengeluaran_nama());
+            statement.setString(2, b.getPengeluaran_keterangan());
+            statement.setString(3, Integer.toString(b.getPengeluaran_jenis_id()));
             statement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -99,11 +100,11 @@ public class DAOMySQLJenisIuran implements implementJenisIuran{
     }
 
     @Override
-    public void delete(String JenisIuranId) {
+    public void delete(String PengeluaranJenisId) {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(delete);
-            statement.setString(1, JenisIuranId);
+            statement.setString(1, PengeluaranJenisId);
             statement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -118,17 +119,17 @@ public class DAOMySQLJenisIuran implements implementJenisIuran{
     }
 
     @Override
-    public List<JenisIuran> getAll() {
-        List<JenisIuran> lb = null;
+    public List<PengeluaranJenis> getAll() {
+        List<PengeluaranJenis> lb = null;
         try {
-            lb = new ArrayList<JenisIuran>();
+            lb = new ArrayList<PengeluaranJenis>();
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(select);
             while (rs.next()) {
-                JenisIuran b = new JenisIuran();
-                b.setIuranJenisId(rs.getInt("iuran_jenis_id"));
-                b.setIuranJenisNama(rs.getString("iuran_jenis_nama"));
-                b.setIuranJenisKeterangan(rs.getString("iuran_jenis_keterangan"));
+                PengeluaranJenis b = new PengeluaranJenis();
+                b.setPengeluaran_jenis_id(rs.getInt("pengeluaran_jenis_id"));
+                b.setPengeluaran_nama(rs.getString("pengeluaran_nama"));
+                b.setPengeluaran_keterangan(rs.getString("pengeluaran_keterangan"));
                 lb.add(b);
             }
         } catch (SQLException ex) {
@@ -138,18 +139,18 @@ public class DAOMySQLJenisIuran implements implementJenisIuran{
     }
 
     @Override
-    public List<JenisIuran> getCari(String JenisIuranNama) {
-        List<JenisIuran> lb = null;
+    public List<PengeluaranJenis> getCari(String PengeluaranJenisNama) {
+        List<PengeluaranJenis> lb = null;
         try {
             lb = new ArrayList<>();
             PreparedStatement st = connection.prepareStatement(cari);
-            st.setString(1, "%" + JenisIuranNama + "%");
+            st.setString(1, "%" + PengeluaranJenisNama + "%");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                JenisIuran b = new JenisIuran();
-                b.setIuranJenisId(rs.getInt("iuran_jenis_id"));
-                b.setIuranJenisNama(rs.getString("iuran_jenis_nama"));
-                b.setIuranJenisKeterangan(rs.getString("iuran_jenis_keterangan"));
+                PengeluaranJenis b = new PengeluaranJenis();
+                b.setPengeluaran_jenis_id(rs.getInt("pengeluaran_jenis_id"));
+                b.setPengeluaran_nama(rs.getString("pengeluaran_nama"));
+                b.setPengeluaran_keterangan(rs.getString("pengeluaran_keterangan"));
                 lb.add(b);
             }
         } catch (SQLException ex) {

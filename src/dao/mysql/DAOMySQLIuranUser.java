@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package dao.mysql;
 
+import dao.implementIuranUser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,9 +16,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import koneksi.Koneksi;
-import model.Iuran;
-import model.IuranUser;
-import model.User;
+import object.Iuran;
+import object.IuranUser;
+import object.User;
 
 /**
  *
@@ -262,6 +263,11 @@ public class DAOMySQLIuranUser implements implementIuranUser{
             }
         }    
         return iuranUser;
+    }
+
+    @Override
+    public List<IuranUser> getBelumLunas(User b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

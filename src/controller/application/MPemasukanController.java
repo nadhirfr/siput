@@ -12,15 +12,10 @@ import controller.MainMenuAController;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -39,25 +34,20 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-import model.Deposit;
+import object.Deposit;
 import model.DepositModel;
-import model.Iuran;
+import object.Iuran;
 import model.IuranModel;
-import model.IuranUser;
+import object.IuranUser;
 import model.IuranUserModel;
 import model.KategoriIuranModel;
-import model.Transaksi;
+import object.Transaksi;
 import model.TransaksiModel;
-import model.User;
+import object.User;
 import model.UserModel;
-import org.joda.time.DateTime;
-import org.joda.time.Months;
-import org.joda.time.Weeks;
 
 /**
  * FXML Controller class
@@ -124,16 +114,18 @@ public class MPemasukanController implements Initializable {
                     String depositJumlah = depositModel.getByUser(cb_namaAnggota.getValue()) == null ? 
                             "Jumlah Saldo" : String.valueOf(depositModel.getByUser(cb_namaAnggota.getValue()).getDepositJumlah());
                     lbSisaSaldo.setText(depositJumlah);
+                    lbStatus.setText("Status");
                     //cb_Pembayaran.setItems(generateDataIuranInMap());
                     System.out.println("Selected : " + newValue.getUser_displayname());
                     cb_Pembayaran.getItems().clear();
-                    listIuranUser = iuranUserModel.getAll();
+                    listIuranUser = iuranUserModel.getBelumLunas(cb_namaAnggota.getValue());
                     for (int i = 0; i < listIuranUser.size(); i++) {
-                        if (listIuranUser.get(i).isIuranUserStatus() == 0
-                                && listIuranUser.get(i).getUserId() == cb_namaAnggota.getValue().getUser_id()) {
+//                        if (listIuranUser.get(i).isIuranUserStatus() == 0
+//                                && listIuranUser.get(i).getUserId() == cb_namaAnggota.getValue().getUser_id()) {
                             cb_Pembayaran.getItems().add(iuranModel.get(String.valueOf(listIuranUser.get(i).getIuranId())));
-                        }
+//                        }
                     }
+                    System.out.println("Setelah for");
 
                     cb_Pembayaran.setConverter(converter_cbIuran);
                     cb_Pembayaran.setCellFactory(callback_cbIuran);
@@ -146,62 +138,13 @@ public class MPemasukanController implements Initializable {
                             if (newValue != null) {
                                 
                                 listTransaksi = transaksiModel.getAll();
-                                int total;
                                 int tampilanKurang = 0;
-                                int iuranRutin = kategoriIuranModel.get(String.valueOf(newValue.getIuranKategoriId())) == null ? 
-                                        0 : kategoriIuranModel.get(String.valueOf(newValue.getIuranKategoriId())).getIuranKategoriInterval();
-                                String firstDate = transaksiModel.getTransaksiPertama(String.valueOf(selectedUser.getUser_id()),
-                                        String.valueOf(newValue.getIuranId())).getTransaksiDate();
-//                                System.out.println("First date :"+firstDate);
-                                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                                int diffMonth = 0;
-                                int diffWeek = 0;
-                                int total_harus_bayar = 0;
-                                
-                                switch (iuranRutin) {
-                                    case 30:
-                                        try {
-                                            total = getTotal();
-//                                            System.out.println(firstDate);
-                                            if (firstDate != null) {
-                                                DateTime startDate = new DateTime(dateFormat.parse(firstDate));
-                                                DateTime endDate = new DateTime(new Date());
-                                                diffMonth = Months.monthsBetween(startDate, endDate).getMonths();
-//                                                System.out.println("Beda bulan : "+diffMonth);
-                                                total_harus_bayar = diffMonth * newValue.getIuranNominal();
-//                                                System.out.println("total_harus_bayar:"+total_harus_bayar);
-//                                                System.out.println("totalnya:"+total);
-                                                tampilanKurang = total_harus_bayar - total;
-                                            } else {
-                                                tampilanKurang = newValue.getIuranNominal() - total;
-                                            }
-                                        } catch (ParseException ex) {
-                                            Logger.getLogger(MPemasukanController.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
-                                        break;
-                                    case 7:
-                                        try {
-                                            total = getTotal();
-//                                            System.out.println(firstDate);
-                                            if (firstDate != null) {
-                                                DateTime startDate = new DateTime(dateFormat.parse(firstDate));
-                                                DateTime endDate = new DateTime(new Date());
-                                                diffWeek = Weeks.weeksBetween(startDate, endDate).getWeeks();
-//                                                System.out.println("Beda minggu : "+diffWeek);
-                                                total_harus_bayar = diffWeek * newValue.getIuranNominal();
-                                                tampilanKurang = total_harus_bayar - total;
-                                            }  else {
-                                                tampilanKurang = newValue.getIuranNominal() - total;
-                                            }
-                                        } catch (ParseException ex) {
-                                            Logger.getLogger(MPemasukanController.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
-                                        break;
-                                    case 0:
-                                        total = getTotal();
-                                        tampilanKurang = newValue.getIuranNominal() - total;
-                                        break;
+                                if(cb_Pembayaran.getValue()!= null){
+                                tampilanKurang = transaksiModel.getUtang(cb_namaAnggota.getValue().getUser_id(), 
+                                        cb_Pembayaran.getValue().getIuranId());
+                                    
                                 }
+                                
 //                                System.out.println(iuranUserModel.getByUserAndIuran(selectedUser, cb_Pembayaran.getValue()).getUserId());
 
                                 nom_jns_pembayaranP.setText(String.valueOf(tampilanKurang));
@@ -315,8 +258,9 @@ public class MPemasukanController implements Initializable {
 
                 int total = 0;
                 int jumlahTransaksiIuran = 0;
+                int totalBayar = 0;
 
-                if (!nom_jns_pembayaranP.getText().equals("0")) {
+                if (!nom_jns_pembayaranP.getText().equals("0")) { 
                     if (Integer.valueOf(nom_pembayaranP.getText()) > Integer.valueOf(nom_jns_pembayaranP.getText())) {
                         jumlahTransaksiIuran = Integer.valueOf(nom_jns_pembayaranP.getText());
                         System.out.println("true lebih besar");
@@ -339,20 +283,15 @@ public class MPemasukanController implements Initializable {
                             Integer.valueOf(lbSisaSaldo.getText())));
                     transaksiModel = new TransaksiModel();
                     listTransaksi = transaksiModel.getAll();
-                    //menghitung total transaksi yang dibayarkan (dicek pada tabel transaksi)
-                    for (Transaksi transaksi : listTransaksi) {
-                        String transaksi_iuran_id = transaksi.getIuranId() == null ? "0" : transaksi.getIuranId();
-                        int iuran_id = iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran) == null? 0 :
-                                iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getIuranId();
-                        if (transaksi.getUserId() == iuranUserModel.getByUserAndIuran(selectedUser, selectedIuran).getUserId()
-                                && Integer.valueOf(transaksi_iuran_id) == iuran_id) {
-                            total = total + transaksi.getTransaksiNominal();
-                        }
-                    }
+                    
+                    total = transaksiModel.getTotalDibayar(cb_namaAnggota.getValue().getUser_id(), 
+                            cb_Pembayaran.getValue().getIuranId());
+                    totalBayar = transaksiModel.getTotalBayar(cb_namaAnggota.getValue().getUser_id(), 
+                            cb_Pembayaran.getValue().getIuranId());
                     System.out.println("Total : " + total);
                     //ketika jumlah total lebih dari sama dengan nominal iuran yang dibayarkan maka mengubah statusnya menjadi 1 (artinya sudah lunas)
 //                    System.out.println("Sebelum : " + iuranUserModel.get(String.valueOf(iuran_user.getIuranId())).isIuranUserStatus());
-                    if (total >= Integer.valueOf(nom_jns_pembayaranP.getText())) {
+                    if (total >= totalBayar) {
                         System.out.println(iuran_user.getIuranId());
                         iuran_user.setIuranUserStatus(1);
                         iuranUserModel.update(iuran_user);
@@ -401,28 +340,6 @@ public class MPemasukanController implements Initializable {
         });
     }
 
-    private int getTotal() {
-//        System.out.println("Get total dipanggil");
-        int total = 0;
-        transaksiModel = new TransaksiModel();
-        listTransaksi = transaksiModel.getAll();
-//        System.out.println("Jumlah transaksi:"+listTransaksi.size());
-        //ngecek setiap transaksi, jika ditabel transaksi ada pembayaran yg telah dibayar maka nominal dikurangi dgn yg telah dibayar
-        for (Transaksi transaksi : listTransaksi) {
-            String  transaksi_iuranID = transaksi.getIuranId() == null ? "0" :transaksi.getIuranId();
-            int iuranUser_userID = iuranUserModel.getByUserAndIuran(cb_namaAnggota.getValue(), cb_Pembayaran.getValue()) == null?
-                    0 : iuranUserModel.getByUserAndIuran(cb_namaAnggota.getValue(), cb_Pembayaran.getValue()).getUserId();
-            int iuranUser_iuranID = iuranUserModel.getByUserAndIuran(selectedUser, cb_Pembayaran.getValue()) == null ?
-                    0 : iuranUserModel.getByUserAndIuran(selectedUser, cb_Pembayaran.getValue()).getIuranId();
-
-            if (transaksi.getUserId() == iuranUser_userID
-                    && Integer.valueOf(transaksi_iuranID) == iuranUser_iuranID) {
-                total = total + transaksi.getTransaksiNominal();
-//                                            pr biikin yg iuran rutin
-            }
-        }
-        return total;
-    }
 
     private StringConverter<User> converter_cbAnggota
             = new StringConverter<User>() {

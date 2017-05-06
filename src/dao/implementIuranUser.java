@@ -6,10 +6,10 @@
 package dao;
 
 import java.util.List;
-import model.Iuran;
-import model.IuranUser;
-import model.Transaksi;
-import model.User;
+import object.Iuran;
+import object.IuranUser;
+import object.Transaksi;
+import object.User;
 
 /**
  *
@@ -33,6 +33,8 @@ public interface implementIuranUser {
     public User getUser(IuranUser b);
     
     public Iuran getIuran(IuranUser b);
+        
+    public List<IuranUser> getBelumLunas(User b);
         
     public int getCount();
 }

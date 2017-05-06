@@ -18,9 +18,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import model.Iuran;
-import model.IuranUser;
-import model.User;
+import object.Iuran;
+import object.IuranUser;
+import object.User;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -266,6 +266,51 @@ public class DAORestIuranUser implements implementIuranUser {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<IuranUser> getBelumLunas(User b) {
+    listIuranUser = new ArrayList<>();
+        try {
+            URL url = new URL(alamat+"?param=getBelumLunas&user_id="+b.getUser_id());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+            //conn.addRequestProperty("Authorization", LoginDAOREST.user);
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+            }
+            char[] buffer = new char[1024];
+            StringBuilder sb = new StringBuilder();
+            Reader in = new InputStreamReader(conn.getInputStream());
+            while (true) {
+                int rsz = in.read(buffer, 0, buffer.length);
+                if (rsz < 0) {
+                    break;
+                }
+                sb.append(buffer, 0, rsz);
+            }
+            JSONParser jp = new JSONParser();
+            JSONArray json = (JSONArray) jp.parse(sb.toString());
+//            System.out.println(json.toString());
+            listIuranUser.clear();
+            for (int i = 0; i < json.size(); i++) {
+                JSONObject jo = (JSONObject) jp.parse(json.get(i).toString());
+//                System.out.println(jo.toString());
+                listIuranUser.add(new IuranUser(Integer.valueOf(jo.get("iuran_user_id").toString()),
+                        Integer.valueOf(jo.get("user_id").toString()),
+                        Integer.valueOf(jo.get("iuran_id").toString()),
+                        Integer.valueOf(jo.get("iuran_user_status").toString())));
+            }
+            conn.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return listIuranUser;
     }
 
 }
