@@ -5,14 +5,10 @@
  */
 package dao.Rest;
 
-import static dao.Rest.DAORestTransaksi.alamat;
 import dao.implementUser;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
@@ -53,13 +49,13 @@ public class DAORestUser implements implementUser {
         int jumlah = 0;
         try {
             URL url = new URL(alamat + "?param=getLogin&username="+username+"&password="+password);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection(); 
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
             //conn.addRequestProperty("Authorization", LoginDAOREST.user);
-            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
-            }
+//            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+//                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+//            }
 
             //ini ambil output data lalu dimasukkan ke string response
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
