@@ -349,9 +349,10 @@ public class MainMenuAController implements Initializable {
     private void btnLogOut(ActionEvent event) throws IOException {
         Stage stage = (Stage) acMain.getScene().getWindow();
         stage.close();
+        Stage stageNew = new Stage();
         FXMLLoader fXMLLoader = new FXMLLoader();
-        MainClass mc = fXMLLoader.getController();
-        mc.start(stage);
+        MainClass mc = new MainClass();
+        mc.start(stageNew);
     }
 
     private void homeActive() {
