@@ -145,19 +145,7 @@ public class MainMenuAController implements Initializable {
 
     public void start(Stage primaryStage) throws IOException {
 
-//        Parent root = FXMLLoader.load(getClass().getResource("/view/MainMenuA.fxml"));
-//        primaryStage.setScene(new Scene(root));
-//        primaryStage.setMaximized(true);
-//        primaryStage.show();
     }
-//
-//    @FXML
-//    private void acMain(KeyEvent event) {
-//        if (event.getCode() == KeyCode.F11) {
-//            Stage stage = (Stage) acMain.getScene().getWindow();
-//            stage.setFullScreen(true);
-//        }
-//    }
 
     @FXML
     private void sideMenuToogleBtnOnCLick(ActionEvent event) throws IOException {
@@ -215,16 +203,9 @@ public class MainMenuAController implements Initializable {
     private void btnCashInOnClick(ActionEvent event) throws IOException {
         CIActive();
         klikmenu=2;
-        //MPemasukanController sc = new MPemasukanController();
-        //userNameMedia nm = new userNameMedia();
         FXMLLoader fXMLLoader = new FXMLLoader();
         fXMLLoader.load(getClass().getResource("/view/mPemasukan.fxml").openStream());
-        //nm.setId(id);
         MPemasukanController pemasukanController = fXMLLoader.getController();
-        //pemasukanController.bpPemasukan.getStylesheets().add("/style/MainStyle.css");
-        //stockController.setUserId(usrNameMedia);
-        //pemasukanController.btnStockOnAction(event);
-        //pemasukanController.settingPermission();
         AnchorPane acPane = fXMLLoader.getRoot();
 
         acContent.getChildren().clear();
@@ -240,7 +221,6 @@ public class MainMenuAController implements Initializable {
 
             FXMLLoader fXMLLoader = new FXMLLoader();
             fXMLLoader.load(getClass().getResource("/view/mPengeluaran.fxml").openStream());
-            //nm.setId(id);
             MPengeluaranController pengeluaranController = fXMLLoader.getController();
             pengeluaranController.setLoggedInUser(logedinUser);
             pengeluaranController.setTotalSaldo(String.valueOf(transaksiModel.getJumlahKas()));
@@ -312,9 +292,9 @@ public class MainMenuAController implements Initializable {
         try {
             AboutActive();
             FXMLLoader fXMLLoader = new FXMLLoader();
-            fXMLLoader.load(getClass().getResource("/view/Laporan.fxml").openStream());
-            LaporanController lpController = fXMLLoader.getController();
-            lpController.spp1.getStyleClass().clear();
+            fXMLLoader.load(getClass().getResource("/view/mCetak.fxml").openStream());
+//            LaporanController lpController = fXMLLoader.getController();
+//            lpController.spp1.getStyleClass().clear();
             AnchorPane anchorPane = fXMLLoader.getRoot();
             acContent.getChildren().clear();
             acContent.getChildren().add(anchorPane);

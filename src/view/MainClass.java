@@ -39,7 +39,6 @@ public class MainClass extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/LoginSiput.fxml"));
         primaryStage.setScene(new Scene(root));
-        //primaryStage.setTitle("Login");
         //agar stage button hilang
         primaryStage.initStyle(StageStyle.UNDECORATED); 
         //agar scene dapat di drag

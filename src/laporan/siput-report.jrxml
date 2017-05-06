@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="siput-report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Error" uuid="6cf4d4a2-5064-46d9-ae55-092f37fb6bde">
 	<property name="ireport.zoom" value="1.3310000000000008"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="208"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="tgl1" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -47,14 +47,14 @@ ORDER BY
 				<textField isStretchWithOverflow="true">
 					<reportElement mode="Opaque" x="120" y="0" width="455" height="25" backcolor="#CCCCCC" uuid="24dd9a18-fba7-4142-8560-444223283cb8"/>
 					<textElement verticalAlignment="Middle">
-						<font size="14"/>
+						<font fontName="Arial" size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{transaksi_tipe}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement mode="Opaque" x="-20" y="0" width="140" height="25" forecolor="#666666" backcolor="#CCCCCC" uuid="83e07b38-1ac0-4e22-ac9e-3fd5d1b3bb60"/>
 					<textElement verticalAlignment="Middle">
-						<font size="12"/>
+						<font fontName="Arial" size="12"/>
 					</textElement>
 					<text><![CDATA[        Rincian untuk]]></text>
 				</staticText>
@@ -65,21 +65,21 @@ ORDER BY
 				<textField>
 					<reportElement x="71" y="16" width="100" height="20" uuid="f6437460-654c-43fb-8f19-619bd262cd2f"/>
 					<textElement>
-						<font size="11" isBold="true"/>
+						<font fontName="Arial" size="11" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{transaksi_tipe}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="12" y="16" width="64" height="20" uuid="b3310a6c-1d92-40b0-a6cb-7a154a09b106"/>
 					<textElement>
-						<font size="11" isBold="true"/>
+						<font fontName="Arial" size="11" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Total Dana ]]></text>
 				</staticText>
 				<textField pattern="Rp #,##0">
 					<reportElement x="161" y="16" width="100" height="20" uuid="a0163779-1ced-4a38-917b-ebd884f8d123"/>
 					<textElement>
-						<font size="11" isBold="true"/>
+						<font fontName="Arial" size="11" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{totIuran}]]></textFieldExpression>
 				</textField>
@@ -108,35 +108,35 @@ ORDER BY
 				<staticText>
 					<reportElement positionType="Float" x="122" y="14" width="381" height="43" forecolor="#FFFFFF" uuid="88432c15-b322-4b27-a618-acfd2e6eade4"/>
 					<textElement>
-						<font size="24" isBold="true"/>
+						<font fontName="Arial" size="24" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Laporan Keuangan RT.01/RW.02  ]]></text>
 				</staticText>
 				<textField pattern="dd MMMMM yyyy">
 					<reportElement x="172" y="57" width="164" height="20" forecolor="#FFFFFF" uuid="2a810f2b-01a3-4988-8663-b6ef5c7d8abf"/>
 					<textElement>
-						<font size="14" isBold="false" isUnderline="true"/>
+						<font fontName="Arial" size="14" isBold="false" isUnderline="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[new SimpleDateFormat("EEEE, dd MMMMM yyyy",new java.util.Locale("id")).format($P{tgl1})]]></textFieldExpression>
 				</textField>
 				<textField pattern="dd MMMMM yyyy">
 					<reportElement x="372" y="57" width="166" height="20" forecolor="#FFFFFF" uuid="d26130ad-6867-42bf-9a7a-7426d89d21ee"/>
 					<textElement>
-						<font size="14" isBold="false" isUnderline="true"/>
+						<font fontName="Arial" size="14" isBold="false" isUnderline="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[new SimpleDateFormat("EEEE, dd MMMMM yyyy",new java.util.Locale("id")).format($P{tgl2})]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="311" y="57" width="78" height="20" forecolor="#FFFFFF" uuid="0129f335-4f85-42a0-9643-9bb56bb2eabe"/>
 					<textElement textAlignment="Justified">
-						<font size="14" isBold="false"/>
+						<font fontName="Arial" size="14" isBold="false"/>
 					</textElement>
 					<text><![CDATA[sampai]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="108" y="57" width="54" height="20" forecolor="#FFFFFF" uuid="559e6479-6157-4e25-9d3d-8cbfd067080f"/>
 					<textElement textAlignment="Justified">
-						<font size="14" isBold="false"/>
+						<font fontName="Arial" size="14" isBold="false"/>
 					</textElement>
 					<text><![CDATA[Periode]]></text>
 				</staticText>
@@ -148,35 +148,35 @@ ORDER BY
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement mode="Transparent" x="355" y="6" width="203" height="20" forecolor="#006699" uuid="33c7cb96-5425-4853-8b45-e7bb9d6dfbeb"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("EEEE, dd MMMMM yyyy",new java.util.Locale("id")).format($F{transaksi_date})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="5" y="6" width="100" height="20" forecolor="#666666" uuid="38d89246-8d12-4956-bf24-a3e9e9318db4"/>
 				<textElement>
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<text><![CDATA[Nama Iuran]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="105" y="4" width="189" height="22" forecolor="#006699" uuid="fdc8ee72-612b-4821-8c37-95a670d300d9"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{transaksi_nama}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="Rp #,##0">
 				<reportElement x="105" y="23" width="177" height="20" uuid="5257dc1a-6bbb-468e-9e49-0e113f9e67b7"/>
 				<textElement>
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{transaksi_nominal}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Transparent" x="268" y="6" width="120" height="20" forecolor="#666666" uuid="c98da7e9-1539-4f16-a63e-2ec76101a122"/>
 				<textElement>
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<text><![CDATA[       Tanggal ]]></text>
 			</staticText>
@@ -186,7 +186,7 @@ ORDER BY
 			<staticText>
 				<reportElement x="5" y="23" width="100" height="20" forecolor="#666666" uuid="06ad1543-e319-4813-80ce-c7fb1e79e66f"/>
 				<textElement>
-					<font size="12"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Nominal]]></text>
 			</staticText>
@@ -200,11 +200,16 @@ ORDER BY
 			<elementGroup/>
 			<textField evaluationTime="Report">
 				<reportElement mode="Opaque" x="517" y="0" width="40" height="13" backcolor="#E6E6E6" uuid="6f60a6f3-a918-44fe-aad4-d1e860f21b93"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="2" y="0" width="515" height="13" backcolor="#E6E6E6" uuid="ae7ee74c-89a4-4be0-ba0e-873693707093"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Halaman "+$V{PAGE_NUMBER}+" dari"]]></textFieldExpression>
 			</textField>
 		</band>

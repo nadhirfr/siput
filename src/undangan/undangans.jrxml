@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="undangans" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7985a777-2c2e-4f41-845a-37b71def411b">
+	<property name="ireport.zoom" value="1.6105100000000048"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="329"/>
+	<subDataset name="New Dataset 1" uuid="2dca0b71-7659-425b-8547-5f59fdd1592f">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     user.`user_id` AS user_user_id,
+     user.`user_username` AS user_user_username,
+     user.`user_displayname` AS user_user_displayname,
+     iuran_user.`iuran_user_id` AS iuran_user_iuran_user_id,
+     iuran_user.`iuran_user_status` AS iuran_user_iuran_user_status,
+     iuran_user.`user_id` AS iuran_user_user_id,
+     iuran_user.`iuran_id` AS iuran_user_iuran_id,
+     iuran.`iuran_id` AS iuran_iuran_id,
+     iuran.`iuran_nama` AS iuran_iuran_nama,
+     iuran.`iuran_nominal` AS iuran_iuran_nominal,
+     iuran.`iuran_jenis_id` AS iuran_iuran_jenis_id,
+     iuran.`iuran_kategori_id` AS iuran_iuran_kategori_id
+FROM
+     `user` user INNER JOIN `iuran_user` iuran_user ON user.`user_id` = iuran_user.`user_id`
+     INNER JOIN `iuran` iuran ON iuran_user.`iuran_id` = iuran.`iuran_id`]]>
+		</queryString>
+		<field name="iuran_iuran_nama" class="java.lang.String"/>
+		<field name="iuran_iuran_nominal" class="java.lang.Integer"/>
+		<group name="iuran_iuran_nama">
+			<groupExpression><![CDATA[$F{iuran_iuran_nama}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="tglh" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="wkt" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tmpt" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="acara" class="java.lang.String"/>
+	<parameter name="perihal" class="java.lang.String"/>
+	<parameter name="lampiran" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     user.`user_id` AS user_user_id,
+     user.`user_username` AS user_user_username,
+     user.`user_displayname` AS user_user_displayname,
+     user.`user_password` AS user_user_password,
+     user.`user_tipe` AS user_user_tipe,
+     iuran_user.`iuran_user_id` AS iuran_user_iuran_user_id,
+     iuran_user.`iuran_user_status` AS iuran_user_iuran_user_status,
+     iuran_user.`user_id` AS iuran_user_user_id,
+     iuran_user.`iuran_id` AS iuran_user_iuran_id,
+     iuran.`iuran_id` AS iuran_iuran_id,
+     iuran.`iuran_nama` AS iuran_iuran_nama,
+     iuran.`iuran_nominal` AS iuran_iuran_nominal,
+     iuran.`iuran_jenis_id` AS iuran_iuran_jenis_id,
+     iuran.`iuran_kategori_id` AS iuran_iuran_kategori_id
+FROM
+     `user` user INNER JOIN `iuran_user` iuran_user ON user.`user_id` = iuran_user.`user_id`
+     INNER JOIN `iuran` iuran ON iuran_user.`iuran_id` = iuran.`iuran_id`
+order by user_user_id]]>
+	</queryString>
+	<field name="user_user_displayname" class="java.lang.String"/>
+	<field name="iuran_iuran_nama" class="java.lang.String"/>
+	<field name="iuran_iuran_nominal" class="java.lang.Integer"/>
+	<field name="user_user_id" class="java.lang.Long"/>
+	<group name="userasd">
+		<groupExpression><![CDATA[$F{user_user_id}]]></groupExpression>
+		<groupHeader>
+			<band height="438">
+				<staticText>
+					<reportElement x="94" y="16" width="393" height="29" uuid="c3a89ba7-e931-470b-8a19-aa0c7f32cea3"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Times New Roman" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[KECAMATAN UMBULHARJO - DESA DABAG]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="210" y="45" width="132" height="29" uuid="48a06b6d-847d-4c7f-98d2-6cccbfc7ca8f"/>
+					<textElement>
+						<font fontName="Times New Roman" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[RT.01 / RW.02]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="56" y="74" width="464" height="18" uuid="0f3c8172-435d-4912-b6de-6f65896c05e9"/>
+					<textElement>
+						<font fontName="Times New Roman" size="12" isBold="false"/>
+					</textElement>
+					<text><![CDATA[====================================================================]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="62" y="105" width="59" height="20" uuid="527eab1e-a300-40bc-9c12-f4f876912565"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Perihal     : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="62" y="124" width="59" height="20" uuid="4985c708-608b-43c8-bc69-1c421a8b59f2"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Lampiran : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="62" y="157" width="74" height="59" uuid="ba56004c-57b8-4ad0-9a7b-49a3e2c03aaf"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Kepada Yth,
+Bapak/Ibu
+Di tempat]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="111" y="169" width="148" height="15" uuid="32eb9483-b07b-4daf-9cad-9b4e64ebd61d"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{user_user_displayname}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="72" y="225" width="446" height="124" uuid="46e9ac29-97d5-470d-898c-994b3a43f3ab"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Assalamu’alaikum wr.wb.
+
+Segala puji dan syukur kepada Tuhan yang Maha Esa karena atas rahmat-Nyalah kita berada dalam keadaan sehat dan selalu mendapat perlindungan dari-Nya.
+
+Sehubungan dengan akan dioptimalkan kepengurusan dan program-program kerja tambahan RT.01 RW.02 Dusun Dabag, Kami mengundang seluruh warga RT.01 untuk menghadiri rapat pada:
+]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="191" y="391" width="325" height="15" uuid="f1d3e9b3-f029-4cbb-ae05-739f7b84a458"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{acara}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="191" y="381" width="325" height="15" uuid="93baffe0-6311-4679-bf72-be3290355c64"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{tmpt}]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="false">
+					<reportElement x="192" y="357" width="324" height="15" uuid="1e00f00e-4807-46c8-be5a-dcca2a366272"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("EEEE, dd MMMMM yyyy",new java.util.Locale("id")).format($P{tglh})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="191" y="369" width="325" height="15" uuid="293f7d37-7b8a-4e37-b209-28082b8edf15"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{wkt}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="122" y="105" width="396" height="15" uuid="2619782b-a075-4834-b344-362cedcfe49d"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{perihal}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="122" y="124" width="396" height="15" uuid="7e4b783f-df30-412f-826f-cb091f86d20a"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{lampiran}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="94" y="356" width="96" height="81" uuid="892562c1-9c08-4bb4-b214-5adfc64d03ac"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Hari/Tanggal	: 
+Waktu		: 
+Tempat		:
+Acara		: 
+Catatan		:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="191" y="403" width="325" height="15" uuid="ecdf8933-db32-4f30-8170-65c6195f9650"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13"/>
+					</textElement>
+					<text><![CDATA[Membawa uang iuran, dengan rincian sebagai berikut]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="170">
+				<staticText>
+					<reportElement positionType="Float" isPrintRepeatedValues="false" mode="Transparent" x="72" y="13" width="446" height="103" isPrintInFirstWholeBand="true" uuid="dea7aa77-5ea4-4a88-9f06-f293f5a794a1"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="13" isBold="false" isStrikeThrough="false"/>
+					</textElement>
+					<text><![CDATA[Demikian undangan ini kami sampaikan, mengingat pentingnya acara ini maka kami berharap Bapak/Ibu, untuk dapat hadir tepat pada waktunya. 
+
+Atas perhatiannya, kami ucapkan terima kasih.
+
+Wassalamu’alaikum wr.wb.
+]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="192" y="0" width="166" height="15" uuid="d02c9c8e-76d5-40bf-b944-7a012b34a97d"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{iuran_iuran_nama}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0">
+				<reportElement x="324" y="0" width="135" height="15" uuid="563785e4-624b-43d4-ba0f-e75bd756c876"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{iuran_iuran_nominal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="397" y="0" width="57" height="15" uuid="c6552b78-3a64-4d6f-a87a-078ed9669daa"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<text><![CDATA[@iuran]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
