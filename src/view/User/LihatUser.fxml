@@ -52,7 +52,7 @@
                               <TextField fx:id="tfFullName" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                               <TextField fx:id="tfKTP" layoutX="10.0" layoutY="85.0" GridPane.columnSpan="2" GridPane.rowIndex="5" />
                               <TextField fx:id="tfFAlamat" layoutX="10.0" layoutY="135.0" GridPane.columnSpan="2" GridPane.rowIndex="7" />
-                              <JFXDatePicker fx:id="dpTglLahir" GridPane.columnSpan="2" GridPane.rowIndex="9" />
+                              <JFXDatePicker fx:id="dpTglLahir" defaultColor="#3498db" GridPane.columnSpan="2" GridPane.rowIndex="9" />
                               <TextField fx:id="tfPassword" GridPane.columnSpan="2" GridPane.rowIndex="11" />
                               <TextField fx:id="tfTipeUser" GridPane.columnSpan="2" GridPane.rowIndex="13" />
                               <TextField fx:id="tfSaldo" GridPane.columnSpan="2" GridPane.rowIndex="15" />

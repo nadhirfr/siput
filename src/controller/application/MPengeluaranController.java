@@ -27,6 +27,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
@@ -70,6 +71,8 @@ public class MPengeluaranController implements Initializable {
     List<Transaksi> listTransaksi;
     List<Iuran> listIuran;
     List<Pengeluaran> listPengeluaran;
+    @FXML
+    private TextArea tfKet;
     /**
      * Initializes the controller class.
      */
@@ -79,13 +82,13 @@ public class MPengeluaranController implements Initializable {
         cb_kategori.setItems(generateDataUserInMap());
         cb_kategori.setConverter(converter_cbKategori);
         cb_kategori.setCellFactory(callback_cbKategori);
-//        cb_kategori.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Pengeluaran>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Pengeluaran> observable, Pengeluaran oldValue, Pengeluaran newValue) {
-//                selectedPengeluaran = cb_kategori.getValue();
-////                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//            }
-//        });
+        cb_kategori.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Pengeluaran>() {
+            @Override
+            public void changed(ObservableValue<? extends Pengeluaran> observable, Pengeluaran oldValue, Pengeluaran newValue) {
+                selectedPengeluaran = cb_kategori.getValue();
+                tfKet.setText(selectedPengeluaran.getPengeluaran_keterangan());
+            }
+        });
 
         bt_simpan.setOnAction(new EventHandler<ActionEvent>() {
             @Override

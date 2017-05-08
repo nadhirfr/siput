@@ -37,6 +37,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.cell.MapValueFactory;
 import model.TransaksiModel;
+import model.UserModel;
 
 /**
  * FXML Controller class
@@ -59,8 +60,6 @@ public class LaporanController implements Initializable {
     @FXML
     private TableColumn<Map, ?> clm_tipe;
 
-    @FXML
-    private JFXButton btn_cetak;
     
     @FXML
     private JFXDatePicker cbtgl1;
@@ -78,9 +77,15 @@ public class LaporanController implements Initializable {
     public static String Column1MapKey = "nama";
     public static String Column2MapKey = "nominal";
     public static String Column3MapKey = "tipe";
+    public static String Column4MapKey = "user";
     
     TransaksiModel transaksiModel = new TransaksiModel();
+    UserModel userModel = new UserModel();
     List<Transaksi> listTransaksi;
+    @FXML
+    private TableColumn<Map, ?> clm_nmuser;
+    @FXML
+    private JFXButton btnCetak;
     
 
     @FXML
@@ -127,6 +132,7 @@ public class LaporanController implements Initializable {
         clm_nom.setCellValueFactory(new MapValueFactory(Column2MapKey));
 //        clm_nom.setMinWidth(160);
         clm_tipe.setCellValueFactory(new MapValueFactory(Column3MapKey));
+        clm_nmuser.setCellValueFactory(new MapValueFactory(Column4MapKey));
 //        clm_tipe.setMinWidth(160);
         
         tbl_trans.setItems(generateDataInMap());
@@ -146,10 +152,13 @@ public class LaporanController implements Initializable {
             String value1 = listTransaksi.get(i).getTransaksiNama();
             String value2 = String.valueOf(listTransaksi.get(i).getTransaksiNominal());
             String value3 = listTransaksi.get(i).getTransaksiTipe();
+            String value4 = userModel.getUser(String.valueOf(listTransaksi.get(i).getUserId())).getUser_displayname();
             dataRow.put(Column0MapKey, value0);
             dataRow.put(Column1MapKey, value1);
             dataRow.put(Column2MapKey, value2);
+            System.out.println("User :"+value4);
             dataRow.put(Column3MapKey, value3);
+            dataRow.put(Column4MapKey, value4);
             allData.add(dataRow);
         }
         return allData;

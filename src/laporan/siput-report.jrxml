@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="siput-report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Error" uuid="6cf4d4a2-5064-46d9-ae55-092f37fb6bde">
 	<property name="ireport.zoom" value="1.3310000000000008"/>
-	<property name="ireport.x" value="208"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="tgl1" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -11,13 +11,28 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     *
+     user.`user_id` AS user_user_id,
+     user.`user_username` AS user_user_username,
+     user.`user_displayname` AS user_user_displayname,
+     user.`user_ktp` AS user_user_ktp,
+     user.`user_alamat` AS user_user_alamat,
+     user.`user_tgl_lahir` AS user_user_tgl_lahir,
+     user.`user_password` AS user_user_password,
+     user.`user_tipe` AS user_user_tipe,
+     transaksi.`transaksi_id` AS transaksi_transaksi_id,
+     transaksi.`transaksi_date` AS transaksi_transaksi_date,
+     transaksi.`transaksi_nama` AS transaksi_transaksi_nama,
+     transaksi.`transaksi_nominal` AS transaksi_transaksi_nominal,
+     transaksi.`user_id` AS transaksi_user_id,
+     transaksi.`transaksi_tipe` AS transaksi_transaksi_tipe,
+     transaksi.`iuran_id` AS transaksi_iuran_id,
+     transaksi.`pengeluaran_id` AS transaksi_pengeluaran_id
 FROM
-     `transaksi` transaksi
+     `user` user INNER JOIN `transaksi` transaksi ON user.`user_id` = transaksi.`user_id`
 WHERE
      transaksi_date BETWEEN $P{tgl1}and$P{tgl2}
-ORDER BY
-     transaksi_tipe ASC]]>
+order by
+transaksi_transaksi_tipe asc]]>
 	</queryString>
 	<field name="transaksi_date" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -31,6 +46,7 @@ ORDER BY
 	<field name="transaksi_tipe" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="user_displayname" class="java.lang.String"/>
 	<variable name="transaksi_nominal_1" class="java.lang.Integer" resetType="Page" calculation="Sum">
 		<variableExpression><![CDATA[$F{transaksi_nominal}]]></variableExpression>
 	</variable>
@@ -189,6 +205,20 @@ ORDER BY
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Nominal]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="356" y="26" width="200" height="15" uuid="c28bf135-73a4-4a81-814f-81e8d4863af7"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{user_displayname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="291" y="26" width="49" height="20" forecolor="#666666" uuid="938abd8a-2ea3-41e6-aaed-639e006b2b32"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Nama]]></text>
 			</staticText>
 		</band>
 	</detail>

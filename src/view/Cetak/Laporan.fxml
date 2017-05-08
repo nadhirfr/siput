@@ -20,12 +20,13 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="457.0" prefWidth="706.0" style="-fx-background-color: #f4f4f4;">
                            <children>
-                              <TableView fx:id="tbl_trans" layoutX="69.0" layoutY="27.0" prefHeight="338.0" prefWidth="581.0">
+                              <TableView fx:id="tbl_trans" layoutX="69.0" layoutY="27.0" prefHeight="338.0" prefWidth="627.0">
                                 <columns>
                                   <TableColumn fx:id="clm_tgl" prefWidth="75.0" text="Tanggal" />
-                                  <TableColumn fx:id="clm_nama" prefWidth="194.0" text="Nama Transaksi" />
-                                    <TableColumn fx:id="clm_nom" prefWidth="149.0" text="Nominal Transaksi" />
-                                    <TableColumn fx:id="clm_tipe" prefWidth="162.0" text="Tipe Transaksi" />
+                                  <TableColumn fx:id="clm_nama" prefWidth="150.3333282470703" text="Nama Transaksi" />
+                                    <TableColumn fx:id="clm_nom" prefWidth="130.66665649414062" text="Nominal Transaksi" />
+                                    <TableColumn fx:id="clm_tipe" prefWidth="121.33334350585938" text="Tipe Transaksi" />
+                                    <TableColumn fx:id="clm_nmuser" prefWidth="149.0" text="Nama User" />
                                 </columns>
                               </TableView>
                               <JFXButton fx:id="btnCetak" layoutX="516.0" layoutY="386.0" onAction="#CetakLaporan" prefHeight="42.0" prefWidth="134.0" style="-fx-background-color: #3498db;" text="Cetak Laporan" textFill="WHITE" />
