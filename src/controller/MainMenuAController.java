@@ -186,6 +186,7 @@ public class MainMenuAController implements Initializable {
         loader.setLocation(getClass().getResource("/view/beranda.fxml"));
         loader.load();
         berandaController Berandacontroller = loader.getController();
+        Berandacontroller.setUserName(this.logedinUser.getUser_displayname());
         Berandacontroller.setLbBerandaTotalUser(totalUser);
         Berandacontroller.setTotalPemasukkan(String.valueOf(transaksiModel.getJumlahIuran()));
         Berandacontroller.setTotalPengeluaran(String.valueOf(transaksiModel.getJumlahPengeluaran()));
